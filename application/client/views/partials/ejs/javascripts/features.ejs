@@ -1,0 +1,86 @@
+<%if (environment == 'dev') { %>
+	<!-- configuration -->
+	<script src="/javascripts/modules/config/core.js"></script>
+	<script src="/javascripts/modules/config/constants/configConstants.js"></script>
+	<script src="/javascripts/modules/config/factories/countryFactory.js"></script>
+	<script src="/javascripts/modules/config/factories/countryFactory.js"></script>
+	<!-- configuration -->
+
+	<!-- websocket -->
+	<script src="/javascripts/modules/websocket/core.js"></script>
+	<script src="/javascripts/modules/websocket/factories/websocketFactory.js"></script>
+	<!-- websocket -->
+
+	<!-- tools -->
+	<script src="/javascripts/modules/tools/core.js"></script>
+	<script src="/javascripts/modules/tools/services/classService.js"></script>
+	<script src="/javascripts/modules/tools/services/formatSizeService.js"></script>
+	<script src="/javascripts/modules/tools/directives/select2Directive.js"></script>
+	<script src="/javascripts/modules/tools/directives/select2TagsDirective.js"></script>
+	<script src="/javascripts/modules/tools/directives/rightClickDirective.js"></script>
+	<script src="/javascripts/modules/tools/directives/focusDirective.js"></script>
+	<script src="/javascripts/modules/tools/directives/progressBarDirective.js"></script>
+	<script src="/javascripts/modules/tools/directives/scrollBarDirective.js"></script>
+	<script src="/javascripts/modules/tools/directives/modalDirective.js"></script>
+	<script src="/javascripts/modules/tools/filters/itemSizeFilter.js"></script>
+	<!-- tools -->
+
+	<!-- breadcrumb -->
+	<script src="/javascripts/modules/breadcrumb/core.js"></script>
+	<script src="/javascripts/modules/breadcrumb/controllers/breacrumbController.js"></script>
+	<!-- breadcrumb -->
+
+	<!-- authentication -->
+	<script src="/javascripts/modules/authentication/core.js"></script>
+	<script src="/javascripts/modules/authentication/controllers/authenticationController.js"></script>
+	<script src="/javascripts/modules/authentication/controllers/loginController.js"></script>
+	<script src="/javascripts/modules/authentication/controllers/registerController.js"></script>
+	<script src="/javascripts/modules/authentication/factories/userFactory.js"></script>
+	<script src="/javascripts/modules/authentication/factories/authenticationFactory.js"></script>
+	<script src="/javascripts/modules/authentication/directives/datePickerDirective.js"></script>
+	<!-- authentication -->
+
+	<!-- file manager -->
+	<script src="/javascripts/modules/filemanager/core.js"></script>
+	<script src="/javascripts/modules/filemanager/providers/itemProvider.js"></script>
+	<script src="/javascripts/modules/filemanager/providers/folderProvider.js"></script>
+	<script src="/javascripts/modules/filemanager/providers/fileProvider.js"></script>
+	<script src="/javascripts/modules/filemanager/factories/uploaderFactory.js"></script>
+	<script src="/javascripts/modules/filemanager/factories/fileExtensionFactory.js"></script>
+	<script src="/javascripts/modules/filemanager/factories/itemFactory.js"></script>
+	<script src="/javascripts/modules/filemanager/factories/sharingFactory.js"></script>
+	<script src="/javascripts/modules/filemanager/controllers/fileManagerController.js"></script>
+	<script src="/javascripts/modules/filemanager/controllers/previewController.js"></script>
+	<script src="/javascripts/modules/filemanager/controllers/sharingController.js"></script>
+	<script src="/javascripts/modules/filemanager/directives/uploaderDirective.js"></script>
+	<script src="/javascripts/modules/filemanager/directives/itemDirective.js"></script>
+	<script src="/javascripts/modules/filemanager/directives/buttonUploaderDirective.js"></script>
+	<script src="/javascripts/modules/filemanager/directives/highlightDirective.js"></script>
+	<script src="/javascripts/modules/filemanager/directives/formPostDownloaderDirective.js"></script>
+	<!-- file manager
+
+	<!-- navigation -->
+	<script src="/javascripts/modules/navigation/core.js"></script>
+	<script src="/javascripts/modules/navigation/controllers/navigationController.js"></script>
+	<!-- navigation -->
+
+	<!-- overlay -->
+	<script src="/javascripts/modules/overlay/core.js"></script>
+	<script src="/javascripts/modules/overlay/controllers/overlayController.js"></script>
+	<!-- overlay -->
+
+	<!-- annyang -->
+	<script src="/javascripts/modules/annyang/core.js"></script>
+	<script src="/javascripts/modules/annyang/configs/annyangConfig.js"></script>
+	<script src="/javascripts/modules/annyang/controllers/annyangController.js"></script>
+	<script src="/javascripts/modules/annyang/factories/configFactory.js"></script>
+	<script src="/javascripts/modules/annyang/services/annyangService.js"></script>
+	<script src="/javascripts/modules/annyang/services/formatService.js"></script>
+	<!-- annyang -->
+
+<% } %>
+<% if(environment == 'prod') { %>
+
+	<script src="/minified/javascripts/common.js"></script>
+
+<% } %>

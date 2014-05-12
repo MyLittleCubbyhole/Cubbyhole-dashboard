@@ -1,0 +1,12 @@
+<% layout('./layout/core') %>
+
+<section id="container" class="preview-sharing" ng-controller="FileManagerController" ng-cloak>
+    <article class="preview-sharing-name">{{Sharing.file.name}} {{Sharing.file.size | ItemSizeFilter}}</article>
+
+    <section class="manager-bloc" ng-controller="PreviewController">
+        <%- include partials/ejs/component/preview.ejs %>
+    </section>
+    <section class="preview-sharing-download" ng-show="Sharing.file.name !== undefined">
+        <button class="share-button" ng-click="Sharing.download()">Télécharger</button>
+    </section>
+</section>

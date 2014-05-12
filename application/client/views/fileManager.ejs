@@ -1,0 +1,116 @@
+<% layout('./layout/core') %>
+
+<section id="container">
+
+    <section id="container" ng-controller="FileManagerController" ng-cloak>
+        <section id="manager">
+            <section id="manager-container" ng-class="{ preview: FileManager.previewActivated }">
+                <section class="manager-bloc">
+                    <section id="toolbar">
+                        <section id="breadcrumb" class="pull-left google-font big-font" ng-controller="BreadcrumbController">
+                            <span class="path-part" ng-repeat="(index, part) in Breadcrumb.path track by $index">
+                                <span ng-if="index != Breadcrumb.path.length - 1" ng-click="Breadcrumb.load(index)">{{part.name}}</span>
+                                <span ng-if="index == Breadcrumb.path.length - 1" class="active">{{part.name}}</span>
+                                <span ng-if="index != Breadcrumb.path.length - 1" ><img src="/images/design/blue-arrow.png" alt="/"></span>
+                            </span>
+                        </section>
+                        <section class="tb-container pull-right">
+                            <article class="tb-option" ng-click="FileManager.refresh()">
+                                <article class="tb-option-container">
+                                    <article class="tb-icon refresh"><i class="icon-refresh"></i></article>
+                                </article>
+                            </article>
+                            <article class="tb-option">
+                                <input type="file" class="input-file" />
+                                <article class="tb-option-container" button-uploader ng-click="_buttonUploader.selectFile()">
+                                    <article class="tb-icon upload"><i class="icon-cloud-upload"></i></article>
+                                </article>
+                            </article>
+                            <article class="tb-option">
+                                <article class="tb-option-container" ng-click="FileManager.download();">
+                                    <article class="tb-icon download"><i class="icon-cloud-download"></i></article>
+                                </article>
+                            </article>
+                            <article class="tb-option">
+                                <article class="tb-option-container" ng-click="FileManager.createFolder();">
+                                    <article class="tb-icon"><i class="icon-folder"></i></article>
+                                </article>
+                            </article>
+                            <article class="tb-option">
+                                <article class="tb-option-container" ng-click="FileManager.delete();">
+                                    <article class="tb-icon"><i class="icon-times"></i></article>
+                                </article>
+                            </article>
+                            <article class="tb-option">
+                                <article class="tb-option-container" ng-click="FileManager.rename();">
+                                    <article class="tb-icon small"><i class="icon-pencil"></i></article>
+                                </article>
+                            </article>
+                        </section>
+                    </section>
+                    <article class="manager-bloc-container" scroll-bar>
+                        <section id="list-file-container">
+                            <article class="list-file">
+                                <table class="listing">
+                                    <thead>
+                                        <tr class="list-header big-font google-font">
+                                            <th class="item-label"></th>
+                                            <th ng-click="predicate = 'name'; reverse=!reverse" >Name</th>
+                                            <th ng-click="predicate = 'category'; reverse=!reverse" class="information type">Type</th>
+                                            <th ng-click="predicate = 'creator'; reverse=!reverse" class="information owner">Owner</th>
+                                            <th ng-click="predicate = 'size'; reverse=!reverse" class="information size hidden-xs">size</th>
+                                            <th ng-click="predicate = 'lastUpdate'; reverse=!reverse" class="information update hidden-xs">Last Update</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="{{item.getFullPath()}}" class="item item-file-manager big-font google-font" ng-class="{selected: _item.selected, special: _item.item.unselectable}" item item-id={{index}} ng-dblclick="_item.open();" ng-click="_item.select($event);" ng-right-click="_item.preview($event);" file-uploader file-path={{item.getPath()}} ng-repeat="(index, item) in FileManager.items | orderBy:predicate:reverse" draggable="{{!_item.item.unselectable}}" dropzone="move">
+                                            <td class="item-label" ng-class="_item.item.category"></td>
+                                            <td ng-class="{bold: _item.item.category == 'folder'}" class="limit-text">
+                                                <article>
+                                                    <span ng-hide="_item.item.editMode">{{_item.item.name}}</span>
+                                                    <article class="edit" ng-if="_item.item.editMode">
+                                                        <input type="text" ng-model="_item.item.name" placeholder="{{_item.oldName}}" ng-keyup="_item.validEdit($event)" ng-auto-focus>
+                                                        <i class="icon-check" ng-click="_item.validEdit();"></i>
+                                                        <i class="icon-times" ng-click="_item.cancelEdit();"></i>
+                                                    </article>
+                                                </article>
+                                            </td>
+                                            <td class="information">{{_item.item.category}}</td>
+                                            <td class="information">{{_item.item.creator}}</td>
+                                            <td class="information hidden-xs">{{_item.item.size | ItemSizeFilter}}</td>
+                                            <td class="information hidden-xs">{{_item.item.lastUpdate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+                <section class="manager-bloc" ng-controller="PreviewController">
+                    <article class="manager-bloc-container google-font preview-container" ng-if="FileManager.selectedItems.length == 1">
+                        <section class="preview-infos row">
+                            <article class="preview-name col-sm-6">{{FileManager.selectedItems[0].name}}</article>
+                            <article class="size col-sm-6">
+                                <progress-bar ng-if="FileManager.previewActivated" />
+                            </article>
+                        </section>
+                        <%- include partials/ejs/component/preview.ejs %>
+                        <section class="preview-share">
+                            <article class="share-button" ng-click="FileManager.shareItem()">
+                                <section class="button-text">
+                                    <span class="share-icon"></span>SHARE
+                                </section>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+            </section>
+        </section>
+
+        <%- include partials/ejs/component/modalPublicSharing.ejs %>
+
+        <%- include partials/ejs/component/modalSharing.ejs %>
+
+        <form-post-downloader></form-post-downloader>
+    </section>
+</section>

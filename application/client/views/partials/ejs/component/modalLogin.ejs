@@ -1,0 +1,76 @@
+<section class="md-modal md-effect-1 google-font" id="modal-login" ng-controller="LoginController" ng-class="{'md-show': CubbyHome.showModalLogin === true}" ng-cloak modal>
+    <section class="md-content">
+        <article>
+            <section>
+                <section class="corner-panel" ng-click="CubbyHome.showRegisterModal()">
+                    <article class="corner-panel-text big-font">SIGN IN</article>
+                </section>
+                <i class="close-icon icon-cross" ng-click="_modal.close()"></i>
+                <section class="login-container" scroll-bar>
+                    <form name="form" ng-submit="Login.authenticate(form.$valid)" class="form" novalidate>
+
+                        <header>LOGIN</header>
+
+                        <article class="user-picture">
+                            <article class="border-circle-blue">
+                                <article class="img-circle">
+                                    <i class="icon-profile-male"></i>
+                                </article>
+                            </article>
+                        </article>
+
+                        <fieldset>
+                            <section>
+                                <article class="row">
+                                    <label for="input-email-login" class="label col col-4">E-mail</label>
+                                    <article class="col col-8">
+                                        <label class="input">
+                                            <input id="input-email-login" type="email" name="email" class="form-control" ng-model="Login.user.email" autofocus required />
+                                            <i class="icon-append icon-envelope" ng-class="{'state-error': ((form.email.$dirty || Login.isFormSubmited) && form.email.$invalid)}"></i>
+                                        </label>
+                                        <section ng-show="(form.email.$dirty || Login.isFormSubmited) && form.email.$invalid" class="error-form">
+                                            <article class="note note-error" ng-show="form.email.$error.required">Fill your e-mail.</article>
+                                            <article class="note note-error" ng-show="form.email.$error.email">Invalid e-mail.</article>
+                                        </section>
+                                    </article>
+                                </article>
+                            </section>
+
+                            <section>
+                                <article class="row">
+                                    <label for="input-password-login" class="label col col-4">Password</label>
+                                    <article class="col col-8">
+                                        <label class="input">
+                                            <input id="input-password-login" type="password" name="password" class="form-control" ng-model="Login.user.password" required />
+                                            <i class="icon-append icon-lock" ng-class="{'state-error': ((form.password.$dirty || Login.isFormSubmited) && form.password.$invalid)}"></i>
+                                        </label>
+                                        <section ng-show="(form.password.$dirty || Login.isFormSubmited) && form.password.$invalid" class="error-form">
+                                            <article class="note note-error" ng-show="form.password.$error.required">Renseignez votre mot de passe.</article>
+                                        </section>
+                                    </article>
+                                </article>
+                            </section>
+
+                            <section>
+                                <article class="row">
+                                    <article class="col col-4"></article>
+                                    <article class="col col-8">
+                                        <label class="checkbox"><input type="checkbox" name="checkbox-inline" ng-model="Login.rememberMe" checked=""><i></i>Remember me</label>
+                                    </article>
+                                </article>
+                            </section>
+
+                            <section>
+                                <article class="note note-error message" ng-show="Login.errorLogin">Bad credentials.</article>
+                            </section>
+
+                        </fieldset>
+                        <section class="buttons">
+                            <button class="button green register google-font" type="submit"><i class="icon-user"></i>LOGIN</button>
+                        </section>
+                    </form>
+                </section>
+            </section>
+        </article>
+    </section>
+</section>

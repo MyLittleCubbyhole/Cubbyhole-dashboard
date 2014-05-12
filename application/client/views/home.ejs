@@ -1,0 +1,14 @@
+<% layout('./layout/core') %>
+
+<!-- <section id="bloc-container">
+	<article class="bloc" id="home">home</article>
+	<article class="bloc" id="discover">discover</article>
+	<article class="bloc" id="plan">plan</article>
+	<article class="bloc" id="contact">contact</article>
+</section>  -->
+
+<button class="button" ng-click="CubbyHome.showRegisterModal()">Sign In</button>
+
+<%- include partials/ejs/component/modalRegister.ejs %>
+<%- include partials/ejs/component/modalLogin.ejs %>
+<%- include partials/ejs/component/modalConfirmation.ejs %>

@@ -1,0 +1,11 @@
+<%if (environment == 'dev') { %>
+	<!-- module principal -->
+	<script src="/javascripts/modules/cubbyhome/core.js"></script>
+	<script src="/javascripts/modules/cubbyhome/controllers/cubbyhomeController.js"></script>
+	<!-- module principal -->
+<% } %>
+<% if(environment == 'prod') { %>
+
+	<script src="/minified/javascripts/home.js"></script>
+
+<% } %>

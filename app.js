@@ -5,7 +5,7 @@ var path    = require('path')
 ,   server  = http.createServer(app)
 ,   environment = ( typeof process.argv[2] != 'undefined' ? process.argv[2] : 'dev')
 ,   developer = ( typeof process.argv[3] != 'undefined' ? process.argv[3] : '')
-,   link = {'prod':'config-prod.json', 'dev':'config-dev.json', 'julien': 'config-julien.json', 'nicolas': 'config-nicolas.json'};
+,   link = {'prod':'config-prod.json', 'dev':'config-dev.json', 'julien': 'config-julien.json', 'julienbis': 'config-julienbis.json', 'nicolas': 'config-nicolas.json'};
 
 global.configFile = {};
 global.configFile.env = typeof link[environment] != 'undefined' ? link[environment] : link['dev'];
@@ -16,7 +16,7 @@ var config = require(global.paths.server + '/config/core').init();
 
 module.exports = { app: app, server: server };
 
-var allowCorssDomain = function(request, response, next) {
+var allowCrossDomain = function(request, response, next) {
 
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Methods', config['headers_access_control'].allow_methods);
@@ -33,7 +33,8 @@ app.configure(function(){
     app.use(express.urlencoded());
     app.use(express.methodOverride());
     app.use(express.cookieParser());
-    app.use(allowCorssDomain);
+    app.use(express.compress());
+    app.use(allowCrossDomain);
 });
 
 app.configure('production', function () {
@@ -44,8 +45,11 @@ app.configure('development', function () {
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-require(global.paths.server + '/dependencies')(server, app);
+if(app.settings.env == 'prod')
+    for(var i in console)
+        console[i] = function() {};
 
+require(global.paths.server + '/dependencies')(server, app);
 if (!module.parent)
     server.listen(config['node_config'].port, function () {
         console.log('Dashboard server listening on port %d in %s mode - [%s] - [%s]', this.address().port, app.settings.env, environment, developer);
