@@ -1,4 +1,4 @@
-#body > header {
+header {
 	position: relative;
 	background: #fff;
 	width: 100%;
@@ -116,6 +116,17 @@ section#global-nav .menu article.option.authentication {
 	color: rgba(242, 242, 242, 1);
 }
 
+.authentication .button-profile .img-circle i {
+	font-size: 38px;
+}
+
+#user-card .img-circle i {
+	font-size: 90px;
+	color: #8A8A8A;
+	display: block;
+	margin-top: 11px;
+}
+
 section#global-nav .menu article.option.authentication .button-profile {
 	padding-right: 10px;
 	padding-left: 10px;
@@ -138,9 +149,14 @@ section#global-nav .img-circle {
 
 section#global-nav .img-circle img {
 	height: 40px;
+	width: auto;
 	margin: auto;
 	display: block;
 	background-color: black;
+}
+section#global-nav .img-circle img {
+	height: auto;
+	width: 40px;
 }
 
 section#global-nav  #logo-container {

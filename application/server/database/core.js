@@ -23,8 +23,9 @@ database.init = function() {
 		db.mongo = new database(config['mongodb_auth'].database, server, config['mongodb_auth']['database_options']);
 
 		db.mongo.open(function(error, db) {
-			if(!error)
+			if(!error) {
 				console.log('mongodb connected')
+			}
 			else
 				console.error('unable to connect - mongodb');
 		})

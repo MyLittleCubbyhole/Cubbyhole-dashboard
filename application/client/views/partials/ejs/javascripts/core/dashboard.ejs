@@ -1,0 +1,11 @@
+<%if (environment == 'dev') { %>
+
+	<script src="/javascripts/modules/dashboard/core.js"></script>
+	<script src="/javascripts/modules/dashboard/controllers/dashboardController.js"></script>
+
+<% } %>
+<% if(environment == 'prod') { %>
+
+	<script src="/minified/javascripts/filemanager.js"></script>
+
+<% } %>
