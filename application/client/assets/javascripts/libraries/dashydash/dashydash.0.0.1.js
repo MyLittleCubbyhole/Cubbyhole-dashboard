@@ -2691,7 +2691,7 @@ isDragged = false;
 
         this.container_height = height;
         this.$node.css('height', this.container_height);
-        $('#body').css('height',document.body.offsetHeight+"px");
+        // $('#body').css('height',document.body.offsetHeight+"px");
         // console.log(document.body.offsetHeight)
         // $('#body').css('height', 
         //     this.container_height + 
@@ -2717,6 +2717,7 @@ isDragged = false;
 
         cols = Math.min(this.options.max_cols,
             Math.max(cols, this.options.min_cols));
+        console.log(this.options.max_cols, this.options.min_cols, cols, this.min_widget_width)
         this.container_width = cols * this.min_widget_width;
         this.$node.css('width', this.container_width);
         return this;

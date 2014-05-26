@@ -1,4 +1,5 @@
 var MysqlTools = { query: {} }
+,	_ = require('lodash')
 ,	queryBuilder = require(global.paths.server + '/config/core').get()['query-builder'];
 
 
