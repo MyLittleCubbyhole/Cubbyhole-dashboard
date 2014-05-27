@@ -1,5 +1,5 @@
 angular.module('Dashboard').
-	constant('WIDGET_DEFAULT_SETTINGS', {
+	constant('WIDGET_DEFAULT_DEFINITION', {
 		title: 'new widget',
 		size: { width: 1, height: 1 },
 		position: { x: 1, y: 1 },

@@ -933,7 +933,7 @@ isDragged = false;
         this.last_rows = [];
 
         this.collision_api = this.$helper.collision(colliders, this.options.collision);
-        console.log(coords)
+        // console.log(coords)
         // console.log(coords)
         this.$preview_holder = $('<' + this.$player.get(0).tagName + ' />', {
               'class': 'preview-holder',
@@ -2717,7 +2717,7 @@ isDragged = false;
 
         cols = Math.min(this.options.max_cols,
             Math.max(cols, this.options.min_cols));
-        console.log(this.options.max_cols, this.options.min_cols, cols, this.min_widget_width)
+        // console.log(this.options.max_cols, this.options.min_cols, cols, this.min_widget_width)
         this.container_width = cols * this.min_widget_width;
         this.$node.css('width', this.container_width);
         return this;
@@ -3039,7 +3039,7 @@ isDragged = false;
         this.$node.removeAttr('style');
 
         if(widgets !== false) {
-            console.log('delete widgets')
+            // console.log('delete widgets')
             this.$widgets.each(function(){ 
                 var $this = $(this);
                 delete $this.data().coords;

@@ -3,26 +3,29 @@ var MysqlTools = { query: {} }
 ,	queryBuilder = require(global.paths.server + '/config/core').get()['query-builder'];
 
 
-MysqlTools.query.generate = function(queryConfig) {
+MysqlTools.query.generate = function(options) {
 	var request = 'SELECT '
 	,	tables = []
 	,	name = '';
 
-	queryConfig.operator = queryConfig.operator || 'AND';
+	if(!options.metrics || !options.segments)
+		throw 'invalid configuration';
 
-	for(var i = 0; i < queryConfig.metrics.length; i++) {
-		name = queryConfig.metrics[i].name;
+	options.operator = options.operator || 'AND';
+
+	for(var i = 0; i < options.metrics.length; i++) {
+		name = options.metrics[i].name;
 		if(i > 0)
 			request += ',';
 		request += queryBuilder['kpi_definition'][name].apply + ' as ' + queryBuilder['kpi_definition'][name].alias + ' ';
 		tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
 	}
 
-	if(queryConfig.metrics.length > 0 && queryConfig.segments.length > 0)
+	if(options.metrics.length > 0 && options.segments.length > 0)
 		request += ',';
 
-	for(var i = 0; i < queryConfig.segments.length; i++) {
-		name = queryConfig.segments[i].name;
+	for(var i = 0; i < options.segments.length; i++) {
+		name = options.segments[i].name;
 		if(i > 0)
 			request += ',';
 		request += queryBuilder['kpi_definition'][name].apply + ' as ' + queryBuilder['kpi_definition'][name].alias + ' ';
@@ -33,28 +36,29 @@ MysqlTools.query.generate = function(queryConfig) {
 	,	having = []
 	,	filter = ""
 	,	value = "";
-	for(var i = 0; i<queryConfig.filters.length; i++) {
-		name = queryConfig.filters[i].name;
+	if(options.filters)
+	for(var i = 0; i<options.filters.length; i++) {
+		name = options.filters[i].name;
 
-		switch(queryConfig.filters[i].operator.toLowerCase()) {
+		switch(options.filters[i].operator.toLowerCase()) {
 			case 'BETWEEN': 
 			case 'NOT BETWEEN': 
-				value = queryConfig.filters[i].value.join(' AND ');
+				value = options.filters[i].value.join(' AND ');
 			break;
 			case 'IN':
 			case 'NOT IN': 
-				value = '(' + queryConfig.filters[i].value.join(',') + ')';
+				value = '(' + options.filters[i].value.join(',') + ')';
 			break;
 			default: 
-				value = queryConfig.filters[i].value;
+				value = options.filters[i].value;
 			break;
 		}
 
 
 		if(queryBuilder['kpi_definition'][name].group)
-			having.push(queryBuilder['kpi_definition'][name].alias + ' ' + queryConfig.filters[i].operator + ' ' + value);
+			having.push(queryBuilder['kpi_definition'][name].alias + ' ' + options.filters[i].operator + ' ' + value);
 		else
-			where.push(queryBuilder['kpi_definition'][name].apply + ' ' + queryConfig.filters[i].operator + ' "' + value);
+			where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' "' + value);
 
 		tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
 	}
@@ -63,27 +67,27 @@ MysqlTools.query.generate = function(queryConfig) {
 		request += MysqlTools.query.makeJoin(tables);
 
 	if(where.length > 0)
-		request += 'WHERE ' + where.join(' ' + queryConfig.operator + ' ') + ' ';
+		request += 'WHERE ' + where.join(' ' + options.operator + ' ') + ' ';
 
-	if(queryConfig.metrics.length > 0 && queryConfig.segments.length > 0) {
+	if(options.metrics.length > 0 && options.segments.length > 0) {
 		request += 'GROUP BY ';	
-		for(var i = 0; i < queryConfig.segments.length; i++) {
+		for(var i = 0; i < options.segments.length; i++) {
 			if(i > 0)
 				request += ',';
-			name = queryConfig.segments[i].name;
+			name = options.segments[i].name;
 			request +=  queryBuilder['kpi_definition'][name].apply + ' ';
 		}
 	}
 
 	if(having.length > 0)
-		request += 'HAVING ' + having.join(' ' + queryConfig.operator + ' ') + ' ';
+		request += 'HAVING ' + having.join(' ' + options.operator + ' ') + ' ';
 
 	return request;
 }
 
 MysqlTools.query.makeJoin = function(tables) {
 	var tables_done = {}
-	,	tableDefinition = config['query-builder']['table_definition'][tables.pop()]
+	,	tableDefinition = queryBuilder['table_definition'][tables.pop()]
 	,	joinTableDefinition = {}
 	,	joinTable = ''
 	,	request = 'FROM ' + tableDefinition.name + ' ' + tableDefinition.alias + ' '
@@ -92,10 +96,10 @@ MysqlTools.query.makeJoin = function(tables) {
 
 	while(tables.length>0) {
 		joinTable = tables.pop();
-		joinTableDefinition = config['query-builder']['table_definition'][joinTable];
+		joinTableDefinition = queryBuilder['table_definition'][joinTable];
 
 		if(tableDefinition.join[joinTableDefinition.name].dependency) {
-			dependencyDefinition = config['query-builder']['table_definition'][tableDefinition.join[joinTableDefinition.name].dependency];
+			dependencyDefinition = queryBuilder['table_definition'][tableDefinition.join[joinTableDefinition.name].dependency];
 			if(!tables_done[dependencyDefinition.name]) {
 				request += 'INNER JOIN ' + dependencyDefinition.name + ' ' + dependencyDefinition.alias + ' ';
 				tables_done[dependencyDefinition.name] = {};
@@ -132,8 +136,26 @@ MysqlTools.query.makeJoin = function(tables) {
 	return request;
 }
 
-MysqlTools.query.compare = function(base, compare) {
-	
+MysqlTools.query.compare = function(base, compare) {}
+
+MysqlTools.format = function(widget) {
+
+	var definition = {};
+	definition.id = widget.id;
+	definition.config = JSON.parse(widget.config);
+	definition.title = widget.title;
+	definition.backgroundcolor = widget.backgroundcolor;
+	definition.fontcolor = widget.fontcolor;
+	definition.size = {};
+	definition.size.height = widget.height;
+	definition.size.width = widget.width;
+	definition.position = {};
+	definition.position.x = widget.positionx;
+	definition.position.y = widget.positiony;
+	definition.type = widget.type;
+	definition.dashboardid = widget.dashboardid;
+
+	return definition;
 }
 
 module.exports = MysqlTools;

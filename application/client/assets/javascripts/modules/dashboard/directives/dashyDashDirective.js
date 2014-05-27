@@ -11,8 +11,8 @@ angular.module('Dashboard').
 			+		'<section class="dd-board"></section>'
 			+		'<section class="dd-pool"></section>'
 			+ 	'</section>',
-			controller: ['$scope', '$compile', 'DASHYDASH_SETTINGS', 'WIDGET_DEFAULT_SETTINGS', 'WIDGET_TEMPLATES',
-			function($scope, $compile, DASHYDASH_SETTINGS, WIDGET_DEFAULT_SETTINGS, WIDGET_TEMPLATES) {
+			controller: ['$scope', '$compile', 'DASHYDASH_SETTINGS', 'WIDGET_DEFAULT_DEFINITION', 'WIDGET_TEMPLATES',
+			function($scope, $compile, DASHYDASH_SETTINGS, WIDGET_DEFAULT_DEFINITION, WIDGET_TEMPLATES) {
 
 				var $local = $scope._dashydash = {}
 				,	self = this
@@ -30,14 +30,11 @@ angular.module('Dashboard').
 					self.dashydash.remove_widget($node);
 				}
 
-				window.addW = function() {
-					self.addWidget();
-				}
 				self.addWidget = function(definition, callback) {
 					var options = {};
 					definition = definition || {};
 
-					_.merge(options, WIDGET_DEFAULT_SETTINGS, definition);
+					_.merge(options, WIDGET_DEFAULT_DEFINITION, definition);
 					
 					if(!$local.widgets[ options.id ])
 						$local.widgets[ options.id ] = options;
@@ -65,7 +62,7 @@ angular.module('Dashboard').
 			link: function($scope, $node, attributes, self) {
 				var $local = $scope._dashydash
 				,	$board = $node.find('.dd-board')
-				,	$pool = $node.find('.dd-pool')
+				,	$pool = $node.find('.dd-pool');
 
 				self.options = { 
 					width: 0,
@@ -75,14 +72,22 @@ angular.module('Dashboard').
 				if(!attributes.dashydash)
 					throw 'dashydash property cannot be empty';
 
-				$scope.$watch(attributes.dashydash, function(definition) { self.dashboardDefinition = definition; })
+				$scope.$watch(attributes.dashydash, function(definition) { 
+					self.dashboardDefinition = definition;
+					if(self.dashboardDefinition.id)
+						WidgetFactory($scope).getByDashboardId(self.dashboardDefinition.id, function(widgets) {
+							for(var i = 0; i<widgets.length; i++)
+								self.addWidget(widgets[i]);
+							// WidgetFactory($scope).create(self.dashboardDefinition.id, data[0], function(definition) {console.log(definition, 'created')})
+						});
+				})
 
 
 				$window.onresize = _.throttle(buildDelayed, 240);
 
 				build();
 
-				//**************** widget management ****************//
+				//**************** widgets management ****************//
 
 				function destroy() { self.dashydash && self.dashydash.destroy(true, true, false); }
 
@@ -97,7 +102,6 @@ angular.module('Dashboard').
 					var width = DashboardOptimizeService.widgetWidth(self.options.width, self.options.col, DASHYDASH_SETTINGS.margin);
 					destroy();
 
-					console.log(width, self.options.width, self.options.col)
 					self.dashydash = $board.dashyDash({
 						draggable: { stop: angular.noop },
 						margin: [DASHYDASH_SETTINGS.margin, DASHYDASH_SETTINGS.margin],

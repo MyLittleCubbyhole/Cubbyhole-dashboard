@@ -8,4 +8,15 @@ angular.module('Dashboard').
 			sm: 4,
 			xs: 1
 		}
+	}).constant('WIDGET_DEFAULT_SETTINGS', {
+		title: 'new widget',
+		size: { width: 1, height: 1 },
+		position: { x: 1, y: 1 },
+		backgroundcolor: 'white',
+		fontcolor: 'black',
+		type: 'singlenumber',
+		filters: [],
+		metrics: [],
+		segments: [],
+		operator: 'AND'
 	});
