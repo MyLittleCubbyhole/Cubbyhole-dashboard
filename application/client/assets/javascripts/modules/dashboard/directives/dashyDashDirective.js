@@ -11,15 +11,15 @@ angular.module('Dashboard').
 			+		'<section class="dd-board"></section>'
 			+		'<section class="dd-pool"></section>'
 			+ 	'</section>',
-			controller: ['$scope', '$compile', 'DASHYDASH_SETTINGS', 'WIDGET_DEFAULT_DEFINITION', 'WIDGET_TEMPLATES',
-			function($scope, $compile, DASHYDASH_SETTINGS, WIDGET_DEFAULT_DEFINITION, WIDGET_TEMPLATES) {
+			controller: ['$scope', '$compile', 'DASHYDASH_SETTINGS', 'WIDGET_DEFAULT_DEFINITION', 'WIDGET_TEMPLATES', 'DashboardOptimizeService',
+			function($scope, $compile, DASHYDASH_SETTINGS, WIDGET_DEFAULT_DEFINITION, WIDGET_TEMPLATES, DashboardOptimizeService) {
 
 				var $local = $scope._dashydash = {}
 				,	self = this
 				,	dashboardDefinition = null
 				,	throttleTimer;
 
-				$local.widgets = [];
+				$local.widgets = {};
 
 				self.dashydash = null;
 				self.options = {};
@@ -31,7 +31,8 @@ angular.module('Dashboard').
 				}
 
 				self.addWidget = function(definition, callback) {
-					var options = {};
+					var options = {}
+					,	currentAmountOfColumn = DashboardOptimizeService.amountOfColumn();
 					definition = definition || {};
 
 					_.merge(options, WIDGET_DEFAULT_DEFINITION, definition);
@@ -43,7 +44,7 @@ angular.module('Dashboard').
 					$widget.attr('widget-id', options.id);
 
 					var compiled = $compile($widget)($scope)
-					,	configuration = [compiled, options.size.width, options.size.height];
+					,	configuration = DASHYDASH_SETTINGS.columns.xl == currentAmountOfColumn ? [compiled, options.size.width, options.size.height] : [compiled, 1, options.size.height];
 
 					if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
 						$widget.attr('dd-col', options.position.x);
@@ -138,7 +139,7 @@ angular.module('Dashboard').
 						,	widgetId = $this.attr('widget-id')
 						,	dashydashWidth = parseInt($this.attr('dd-width'), 10)
 						,	dashydashHeight = parseInt($this.attr('dd-height'), 10)
-						,	widgetWidth = $local.widgets[widgetId].width ? $local.widgets[widgetId].width : dashydashWidth
+						,	widgetWidth = $local.widgets[widgetId].size.width ? $local.widgets[widgetId].size.width : dashydashWidth
 						,	parameters = [ $this, ( widgetWidth > self.options.col ? 1 : widgetWidth ), dashydashHeight ];
 
 						if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
@@ -152,6 +153,7 @@ angular.module('Dashboard').
 						}
 
 						self.dashydash.add_widget.apply(self.dashydash, parameters);
+						$scope.$broadcast('widget_refresh');
 					})
 
 

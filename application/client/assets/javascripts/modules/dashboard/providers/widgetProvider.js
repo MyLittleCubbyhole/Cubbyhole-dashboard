@@ -35,11 +35,17 @@ angular.module('Dashboard').
 
 				if(self.options.config.metrics)
 				for(var i = 0; i<self.options.config.metrics.length; i++)
-					self.metrics.push(QUERY_BUILDER[self.options.config.metrics[i].name]);
+					self.metrics.push({
+						kpi: QUERY_BUILDER[self.options.config.metrics[i].name],
+						options: self.options.config.metrics[i]
+					});
 
 				if(self.options.config.segments)
 				for(var i = 0; i<self.options.config.segments.length; i++)
-					self.segments.push(QUERY_BUILDER[self.options.config.segments[i].name]);
+					self.segments.push({
+						kpi: QUERY_BUILDER[self.options.config.segments[i].name],
+						options: self.options.config.segments[i]
+					});
 
 				if(self.options.config.filters)
 				for(var i = 0; i<self.options.config.filters.length; i++)
@@ -48,6 +54,8 @@ angular.module('Dashboard').
 						operator: self.options.config.filters[i].operator,
 						value: self.options.config.filters[i].value
 					});
+
+				self.scope.$on('widget_refresh', function() { self.refresh(); })
 			};
 
 			Widget.prototype.init = function() { throw 'init method must be overriden'; };
@@ -56,6 +64,8 @@ angular.module('Dashboard').
 				var self = this;
 				WidgetFactory(self.scope).getData(self.dashboardId, self.id, function(data) { self.init(data); })
 			};
+
+			Widget.prototype.refresh = function() { };
 
 			Widget.prototype.toString = function() {
 				return 'Widget';
