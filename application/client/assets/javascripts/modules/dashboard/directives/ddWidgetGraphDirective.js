@@ -1,14 +1,16 @@
 angular.module('Dashboard').
-	directive('ddWidgetGraph', ['WidgetProvider', function(WidgetProvider){
+	directive('ddWidgetGraph', ['WidgetGraphProvider', function(WidgetGraphProvider){
 		return {
 			scope: true,
-			replace: true,
+			replace: false,
 			require: 'ddWidgetGraph',
-			restrict: 'E',
-			template: '<section class="dd-widget">bouh</section>',
+			restrict: 'A',
+			templateUrl: '/templates/widgets/widgetGraph',
 			controller: ['$scope', '$attrs', function($scope, $attrs) {
 				var $local = $scope._ddWidgetGraph = {}
 				,	self = this;
+
+				$local.widget = {};
 				
 				self.id  = parseInt($attrs.widgetId, 10);
 
@@ -20,8 +22,8 @@ angular.module('Dashboard').
 				var $local = $scope._ddWidgetGraph;
 
 
-				var t = new WidgetProvider($scope._dashydash.widgets[self.id], {scope: $scope, node: $node});
-				t.load()
+				$local.widget = new WidgetGraphProvider($scope._dashydash.widgets[self.id], {scope: $scope, node: $node});
+				$local.widget.load()
 			}
 		};
 	}]);

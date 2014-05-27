@@ -29,6 +29,22 @@ navigation.get.dashboard = function(request, response) {
 	response.render('dashboard', options);
 }
 
+navigation.get.partial = function(request, response) {
+	var path = 'partials/ejs/' + request.params[0] + '.ejs';
+	var fullpath = global.paths.views + '/' + path;
+	path = fs.existsSync(fullpath) ? path : '404.ejs';
+	response.render(path);
+}
+
+navigation.get.template = function(request, response) {
+	var path = 'partials/angular/' + request.params[0] + '.ejs';
+	var fullpath = global.paths.views + '/' + path;
+	path = fs.existsSync(fullpath) ? path : '404.ejs';
+    var options = {}
+
+	response.render(path, options);
+}
+
 /********************************[   POST   ]********************************/
 /********************************[   PUT    ]********************************/
 /********************************[  DELETE  ]********************************/

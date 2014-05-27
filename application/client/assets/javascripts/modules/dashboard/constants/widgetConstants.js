@@ -8,6 +8,6 @@ angular.module('Dashboard').
 		type: 'singlenumber'
 	}).
 	constant('WIDGET_TEMPLATES', {
-		graph: '<dd-widget-graph></dd-widget-graph>',
-		singlenumber: '<dd-widget-singlenumber></dd-widget-singlenumber>'
+		graph: '<section dd-widget-graph class="dd-widget"></section>',
+		singlenumber: '<section dd-widget-singlenumber class="dd-widget"></section>'
 	});

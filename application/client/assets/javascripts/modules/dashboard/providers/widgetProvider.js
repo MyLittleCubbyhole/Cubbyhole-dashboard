@@ -4,6 +4,9 @@ angular.module('Dashboard').
 		this.$get = ['WIDGET_DEFAULT_SETTINGS', 'QUERY_BUILDER', 'WidgetFactory', '$window', function(WIDGET_DEFAULT_SETTINGS, QUERY_BUILDER, WidgetFactory, $window) {
 
 			var Widget = function(options, context) {
+				if(!options || !context)
+					return false;
+
 				var self = this;
 				self.options = {};
 				_.merge(self.options, WIDGET_DEFAULT_SETTINGS, options);

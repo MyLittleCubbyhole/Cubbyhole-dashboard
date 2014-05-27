@@ -21,6 +21,9 @@ routing.init = function(app) {
 
     app.delete('/api/dashboards/:id', dashboard.delete.byId);
     app.delete('/api/dashboards/:dashboardid/widgets/:id', widget.delete.byId);
+    
+    app.get(/partials\/(.+)/, navigation.get.partial);
+    app.get(/templates\/(.+)/, navigation.get.template);
 }
 
 
