@@ -22,6 +22,7 @@
 		<link rel="stylesheet" href="/styles/core.css">
 		<link rel="stylesheet" href="/styles/components/header.css">
 		<link rel="stylesheet" href="/styles/libraries/dashydash.css">
+		<link rel="stylesheet" href="/styles/libraries/bootstrap/bootstrap.min.css">
 		<% } %>
 		<%if (environment == 'prod') { %>
 		<link rel="stylesheet" href="/minified/styles/style.min.css">
@@ -55,7 +56,70 @@
 
 			<section id="overlay" ng-class="{ activated: Overlay.activated || Overlay.pusherOpen }" ng-click="Overlay.clickout();"></section>
 
-			<section id="overlay-pusher"></section>
+			<section id="overlay-pusher">
+				
+				<section id="widget-menu">
+					<h2 class="switch"><span class="widget_menu"><i class="fa fa-cog"></i></span> Choisissez votre widget</h2>
+					<ul class="container">
+
+						<li>
+							<span class="btn">
+								<img src="/images/widget-icons/icosinglenumber.png" alt="">
+								<span>Single Number</span>
+							</span>
+							<span class="widgsize">
+								<span> Taille du widget </span>
+								<button class="btn btn-danger">25%</button>
+							</span>
+						</li>
+
+						<li>
+							<span class="btn">
+								<img src="/images/widget-icons/icotable.png" alt="">
+								<span>Table</span>
+							</span>
+							<span class="widgsize">
+								<span> Taille du widget </span>
+								<button class="btn btn-danger">25%</button>
+								<button class="btn btn-danger">50%</button>
+								<button class="btn btn-danger">75%</button>
+								<button class="btn btn-danger">100%</button>
+							</span>
+						</li>
+
+						<li>
+							<span class="btn">
+								<img src="/images/widget-icons/icopie.png" alt="">
+								<span>Pie Chart</span>
+							</span>
+							<span class="widgsize">
+								<span> Taille du widget </span>
+								<button class="btn btn-danger">25%</button>
+								<button class="btn btn-danger">50%</button>
+								<button class="btn btn-danger">75%</button>
+								<button class="btn btn-danger">100%</button>
+							</span>
+						</li>
+
+						<li>
+							<span class="btn">
+								<img src="/images/widget-icons/icochart.png" alt="">
+								<span>Graph</span>
+							</span>
+							<span class="widgsize">
+								<span> Taille du widget </span>
+								<button class="btn btn-danger">25%</button>
+								<button class="btn btn-danger">50%</button>
+								<button class="btn btn-danger">75%</button>
+								<button class="btn btn-danger">100%</button>
+							</span>
+						</li>
+
+
+					</ul>
+				</section>
+
+			</section>
 		</section>
 
 		<!-- scripts -->
