@@ -2,11 +2,13 @@
 
 <section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController">
 	<article class="widget-front-head">
+		{{_ddWidgetSingleNumber.widget.title}}
+
 		<article class="corner edit" ng-click="_flip.active = !_flip.active">
 			<article class="corner-text">EDIT</article>
 		</article>
 	</article>
-	<article class="widget-front-body">front</article>
+	<article class="widget-front-body">{{_ddWidgetSingleNumber.widget.value}}</article>
 </section>
 <section class="widget-side widget-backside" ng-controller="WidgetBackSideController">
 	<article class="widget-back-head">

@@ -6,7 +6,24 @@
 			<article class="corner-text">EDIT</article>
 		</article>
 	</article>
-	<article class="widget-front-body">front</article>
+	<article class="widget-front-body">
+		<table>
+			<thead>
+				<tr>
+					<th ng-repeat="col in _ddWidgetTable.widget.head">
+						{{col}}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in _ddWidgetTable.widget.body">
+					<td ng-repeat="col in row">
+						{{col}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
 </section>
 <section class="widget-side widget-backside" ng-controller="WidgetBackSideController">
 	<article class="widget-back-head">

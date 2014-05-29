@@ -60,15 +60,6 @@ section#body {
     display: block;
 }
 
-section#widget-toolbar {
-    height: 57px;
-    width: 100%;
-    background-color: #e3e3e3;
-    z-index: 5;
-    background-image: url(/images/design/toolbar-background.png);
-}
-
-
 /**gestion du flip widget**/
 section.widget-content {
     width: 100%;
@@ -125,9 +116,91 @@ section.widget-content .widget-side.widget-backside {
     z-index: 5;
 }
 /**gestion du flip widget**/
+section.widget-content .widget-side {
+    overflow: hidden;
+}
 
 section.widget-content .widget-side .widget-front-body {
     width: 100%;
     height: 100%;
     position: absolute;
 }
+
+/** corner **/
+.dd-widget article.corner {
+    color: #000;
+    position: absolute;
+    right: 0;
+    width: 100px;  
+    height: 95px;
+    cursor: pointer;
+    z-index: 1;
+}
+.dd-widget article.corner.edit {
+    top: 0;
+    background-color: #9ad6f2;  
+    -webkit-transform: rotate(40deg) translateX(0px) translateY(-80px);
+       -moz-transform: rotate(40deg) translateX(0px) translateY(-80px);
+        -ms-transform: rotate(40deg) translateX(0px) translateY(-80px);
+         -o-transform: rotate(40deg) translateX(0px) translateY(-80px);
+            transform: rotate(40deg) translateX(0px) translateY(-80px);
+}
+.dd-widget article.corner.del {
+    bottom: 0;
+    background-color: #F14242;  
+    -webkit-transform: rotate(-40deg) translateX(0px) translateY(80px);
+       -moz-transform: rotate(-40deg) translateX(0px) translateY(80px);
+        -ms-transform: rotate(-40deg) translateX(0px) translateY(80px);
+         -o-transform: rotate(-40deg) translateX(0px) translateY(80px);
+            transform: rotate(-40deg) translateX(0px) translateY(80px);
+}
+.dd-widget article.corner article.corner-text {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-left: 3px;
+    color: white;
+}
+.dd-widget article.corner.edit article.corner-text {
+    bottom: 0px;
+}
+.dd-widget article.corner.del article.corner-text {
+    top: 0px;
+}
+
+/** corner **/
+
+.dd-widget {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/** table **/
+section[dd-widget-table] .widget-front-body table {
+    width: 100%;
+    color: #333;
+    text-align: center;
+}
+
+section[dd-widget-table] .widget-front-body table thead {
+    width: 100%;
+}
+
+section[dd-widget-table] .widget-front-body table th {
+    height: 60px;
+    line-height: 30px;
+    vertical-align: bottom;
+}
+
+section[dd-widget-table] .widget-front-body table td {
+    border-top: 1px solid #ddd;
+    line-height: 40px;
+    height: 40px;
+}
+
+section[dd-widget-single-number] .widget-front-body {
+    font-size: 60px;
+    text-align: center;
+}
+
+/** table **/

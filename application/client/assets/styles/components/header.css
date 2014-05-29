@@ -166,7 +166,7 @@ section#global-nav  #logo-container {
 
 section#global-nav  #logo-container article#logo {
     display: block;
-    margin: 7px 10px 5px 10px;
+    margin: 16px 10px 5px 10px;
     float: left;
 }
 
@@ -174,10 +174,11 @@ section#global-nav  #logo-container article#logo-title {
     float: left;
     color: rgba(242, 242, 242, 1);
 	line-height: 70px;
-	font-size: 25px;
+	
+    font-size: 19px;
     text-transform: uppercase;
 }
 
 #logo-container #logo img {
-	height: 57px;
+	height: 38px;
 }

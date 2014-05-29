@@ -9,6 +9,8 @@ angular.module('Dashboard').
 	}).
 	constant('WIDGET_TEMPLATES', {
 		graph: '<section dd-widget-graph class="dd-widget"></section>',
-		singlenumber: '<section dd-widget-singlenumber class="dd-widget"></section>'
+		singlenumber: '<section dd-widget-single-number class="dd-widget"></section>',
+		pie: '<section dd-widget-pie class="dd-widget"></section>',
+		table: '<section dd-widget-table class="dd-widget"></section>'
 	}).
 	constant('WIDGET_GRAPH_TYPES', ['area','line','column']);
