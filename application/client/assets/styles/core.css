@@ -131,14 +131,14 @@ section.widget-content .widget-side .widget-front-body {
     color: #000;
     position: absolute;
     right: 0;
-    width: 100px;  
+    width: 100px;
     height: 95px;
     cursor: pointer;
     z-index: 1;
 }
 .dd-widget article.corner.edit {
     top: 0;
-    background-color: #9ad6f2;  
+    background-color: #9ad6f2;
     -webkit-transform: rotate(40deg) translateX(0px) translateY(-80px);
        -moz-transform: rotate(40deg) translateX(0px) translateY(-80px);
         -ms-transform: rotate(40deg) translateX(0px) translateY(-80px);
@@ -147,7 +147,7 @@ section.widget-content .widget-side .widget-front-body {
 }
 .dd-widget article.corner.del {
     bottom: 0;
-    background-color: #F14242;  
+    background-color: #F14242;
     -webkit-transform: rotate(-40deg) translateX(0px) translateY(80px);
        -moz-transform: rotate(-40deg) translateX(0px) translateY(80px);
         -ms-transform: rotate(-40deg) translateX(0px) translateY(80px);
@@ -445,8 +445,8 @@ section#body-scroller {
   padding-right: 11px;
 }
 aside#left-panel {
-  width: 210px;        
-  position: absolute;  
+  width: 210px;
+  position: absolute;
   top: 70px;
   left: 10px;
   min-height: 50px;
@@ -490,17 +490,23 @@ article.strap:hover {
 }
 
 nav.dashboard-list article.dashboard-option {
-  cursor: pointer;
-  line-height: normal;
-  font-size: 14px;
-  padding: 10px 10px 10px 11px;
-  color: #222222;
-  display: block;
-  position: relative;
-  font-weight: normal;
-  text-decoration: none !important;
-  border-radius: 4px;
-  padding-left: 35px;
+    cursor: pointer;
+    line-height: normal;
+    font-size: 14px;
+    padding: 10px 10px 10px 11px;
+    color: #222222;
+    display: block;
+    position: relative;
+    font-weight: normal;
+    text-decoration: none !important;
+    border-radius: 4px;
+    padding-left: 35px;
+    height: 40px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 nav.dashboard-list {
@@ -544,21 +550,49 @@ article.btn.cubby-btn {
 }
 
 article.btn.cubby-btn:hover {
-  background-color: rgb(124, 181, 236);
-  color: white;
+    background-color: rgb(124, 181, 236);
+    color: white;
 }
 article.btn.cubby-btn.tiny {
-  width: 130px;
+    width: 130px;
 }
 
 .dashboard-ribbon {
-  padding-top: 35px;
+    padding-top: 35px;
 }
 
 .dashboard-option i {
     position: absolute;
     left: 9px;
     top: 11px;
+}
+
+.dashboard-option .edit input {
+    background: transparent;
+    border: none;
+    border: 1px solid #9E9E9E;
+    height: 25px;
+    margin-left: -4px;
+    padding-left: 3px;
+    margin-top: -3px;
+    padding-bottom: 4px;
+    width: 130px;
+}
+.dashboard-option .edit input:focus {
+    outline: none;
+}
+
+.dashboard-option .edit .icon-checkmark {
+    font-size: 17px;
+    left: auto;
+    right: 28px;
+    top: 11px;
+}
+.dashboard-option .edit .icon-cross {
+    font-size: 21px;
+    left: auto;
+    right: 7px;
+    top: 9px;
 }
 
 @media screen and (max-width: 775px) {

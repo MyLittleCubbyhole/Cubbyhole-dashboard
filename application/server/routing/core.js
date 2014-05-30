@@ -19,11 +19,12 @@ routing.init = function(app) {
     app.post('/api/dashboards/', dashboard.post.create);
     app.post('/api/dashboards/:id/widgets', widget.post.create);
 
+    app.put('/api/dashboards/:id', dashboard.put.update);
     app.put('/api/dashboards/:id/widgets/position', widget.put.updatePosition);
 
     app.delete('/api/dashboards/:id', dashboard.delete.byId);
     app.delete('/api/dashboards/:dashboardid/widgets/:id', widget.delete.byId);
-    
+
     app.get(/partials\/(.+)/, navigation.get.partial);
     app.get(/templates\/(.+)/, navigation.get.template);
 }

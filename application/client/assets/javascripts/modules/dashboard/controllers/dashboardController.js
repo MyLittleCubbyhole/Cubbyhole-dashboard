@@ -2,15 +2,15 @@ angular.module('Dashboard').
 	controller('DashboardController', ['$scope', '$location', '$routeParams', 'DashboardFactory', function($scope, $location, $routeParams, DashboardFactory){
 		var $local = $scope.Dashboard = {}
 
-		$local.dashboards = {};
+		$local.dashboards = [];
 		$local.currentDashboard = {};
 
 		$local.getDashboards = function(callback) {
 			DashboardFactory($scope).all(function(data) {
-				for(var i = 0; i<data.length; i++)
-					$local.dashboards[data[i].id] = data[i];
+				for(var i = 0; i < data.length; i++)
+					$local.dashboards.push(data[i]);
 
-				$local.currentDashboard = $local.dashboards[data[0].id];
+				$local.currentDashboard = $local.dashboards[0];
 				callback.call(this);
 			})
 		}
@@ -19,30 +19,33 @@ angular.module('Dashboard').
 
 			var next = function() {
 
-				var firstDashboard = null;
-				for(var dashboard in $local.dashboards) {
-					firstDashboard = $local.dashboards[dashboard];
-					break;
-				}
+				if($location.path() == '/add') {
+					var dashboard = {
+						id: 0,
+						title: '',
+						icon: 'icon-earth',
+						editMode: true
+					};
+					$local.dashboards.push(dashboard);
+					$local.currentDashboard = dashboard;
+				} else {
+					var idToFound = $routeParams.id || null;
 
-				var dashboardFound = false;
-				if($routeParams.id) {
-					var dashboard = $local.dashboards[$routeParams.id];
-					if(dashboard) {
-						$local.currentDashboard = dashboard;
-						dashboardFound = true;
+					for(var i = 0; i < $local.dashboards.length; i++) {
+						if(idToFound == $local.dashboards[i].id || idToFound == null) {
+							$local.currentDashboard = $local.dashboards[i];
+							break;
+						}
 					}
+
+					if($local.currentDashboard && !idToFound)
+						$location.path('/' + $local.currentDashboard.id);
 				}
 
-				if(!dashboardFound) {
-					$local.currentDashboard = firstDashboard;
-					$location.path('/' + firstDashboard.id);
-				}
-
-			}
+			};
 
 			$local.currentDashboard = {};
-			if($local.dashboards === null || !$local.dashboards.length)
+			if($local.dashboards === null || $local.dashboards.length == 0)
 				$local.getDashboards(function() { next(); });
 			else
 				next();

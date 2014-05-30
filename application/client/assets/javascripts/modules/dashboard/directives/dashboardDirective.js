@@ -1,28 +1,89 @@
-/*angular.module('Dashboard').
-    directive('ddWidgetGraph', ['WidgetGraphProvider', function(WidgetGraphProvider){
+angular.module('Dashboard').
+    directive('dashboard', ['DashboardFactory', function(DashboardFactory){
         return {
             scope: true,
             replace: false,
-            require: 'ddWidgetGraph',
+            require: 'dashboard',
             restrict: 'A',
-            templateUrl: '/templates/widgets/widgetGraph',
             controller: ['$scope', '$attrs', function($scope, $attrs) {
-                var $local = $scope._ddWidgetGraph = {}
+                var $local = $scope._dashboard = {}
                 ,   self = this;
 
-                $local.widget = {};
+                $local.edit = function() {
+                    if($local.isSelected) {
+                        $local.dashboard.editMode = true;
+                        $local.oldTitle = $local.dashboard.title;
+                        $local.oldIcon = $local.dashboard.icon;
+                    }
+                }
 
-                self.id  = parseInt($attrs.widgetId, 10);
+                $local.isSelected = function() {
+                    return $scope.Dashboard.currentDashboard.id == $local.dashboard.id
+                }
+
+                $local.validEdit = function(event) {
+                    var keyCode = event ? event.keyCode : -1;
+                    if(keyCode == 13 || keyCode == -1) {
+                        $local.dashboard.editMode = false;
+                        if($local.dashboard.title != '' && $local.dashboard.title.indexOf('/') == -1 && $local.dashboard.title.indexOf('\\') == -1) {
+                            if($local.dashboard.id == 0) {
+                                DashboardFactory($scope).create($local.dashboard, function(data) {
+                                    if(data && data.dashboard && data.dashboard.id) {
+                                        $local.dashboard.id = data.dashboard.id;
+                                        $scope.DashboardMenu.location(data.dashboard.id);
+                                    }
+                                    else {
+                                        $scope.Dashboard.dashboards.pop();
+                                        $scope.DashboardMenu.location($scope.Dashboard.dashboards[0].id);
+                                    }
+                                })
+                            } else {
+                                DashboardFactory($scope).update($local.dashboard, function(data) {
+                                    if(!data || !data.dashboard || !data.dashboard.id) {
+                                        $local.dashboard.title = $local.oldTitle;
+                                        $local.dashboard.icon = $local.oldIcon;
+                                    }
+                                })
+                            }
+                        } else
+                            $local.cancelEdit();
+                    }
+                };
+
+                $local.cancelEdit = function() {
+                    $local.dashboard.editMode = false;
+                    $local.dashboard.title = $local.oldTitle;
+                    if($local.dashboard.id == 0) {
+                        $scope.Dashboard.dashboards.pop();
+                        $scope.DashboardMenu.location($scope.Dashboard.dashboards[0].id);
+                    }
+                };
 
                 $scope.toString = function() {
-                    return '_ddWidgetGraph';
+                    return '_dashboard';
                 }
             }],
             link: function($scope, $node, attributes, self) {
-                var $local = $scope._ddWidgetGraph;
+                var $local = $scope._dashboard;
 
-                $local.widget = new WidgetGraphProvider($scope._dashydash.widgets[self.id], {scope: $scope, node: $node});
-                $local.widget.load()
+                for(var i = 0; i < $scope.Dashboard.dashboards.length; i++)
+                    if($scope.Dashboard.dashboards[i].id == attributes.dashboardId) {
+                        $local.dashboard = $scope.Dashboard.dashboards[i];
+                        $local.oldTitle = $local.dashboard.title;
+                        $local.oldIcon = $local.dashboard.icon;
+                        break;
+                    }
+
+                $scope.$watch('Dashboard.currentDashboard', function() {
+                    if(!$local.isSelected() && $local.dashboard.editMode) {
+                        $local.dashboard.editMode = false;
+                        $local.dashboard.title = $local.oldTitle;
+                        $local.dashboard.icon = $local.oldIcon;
+                    }
+                    if(!$local.isSelected() && $local.dashboard.id == 0)
+                        $scope.Dashboard.dashboards.pop();
+                })
+
             }
         };
-    }]);*/
+    }]);

@@ -11,32 +11,40 @@ angular.module('Dashboard').
 			,	$node = context.node || {}
 			,	$local = context.local || {}
 			,	controller = context.controller || {};
-		
+
 			prototype.create = function(dashboard, callback) {
 
-				$http({	method: 'POST', url: '/api/dashboards', data: dashboard }).
+				$http({	method: 'POST', url: '/api/dashboards/', data: dashboard }).
 					success(function(dashboards) { callback.call(this, dashboards); }).
-					error(function() { console.error('an error occured during the dashboard creation'); });
+					error(function() { callback.call(this, null); console.error('an error occured during the dashboard creation'); });
 			};
+
+			prototype.update = function(dashboard, callback) {
+
+				$http({	method: 'PUT', url: '/api/dashboards/' + dashboard.id, data: dashboard }).
+					success(function(dashboards) { callback.call(this, dashboards); }).
+					error(function() { callback.call(this, null); console.error('an error occured during the dashboard update'); });
+			};
+
 			prototype.remove = function(dashboardId, callback) {
 
 				$http({	method: 'DELETE', url: '/api/dashboards/' + dashboardId }).
 					success(function() { callback.call(this); }).
-					error(function() { console.error('an error occured during the dashboard deletion'); });
+					error(function() { callback.call(this, null); console.error('an error occured during the dashboard deletion'); });
 			};
 
 			prototype.get = function(dashboardId, callback) {
 
 				$http({	method: 'GET', url: '/api/dashboards/' + dashboardId }).
 					success(function(dashboard) { callback.call(this, dashboard); }).
-					error(function() { console.error('an error occured during the dashboard recuperation'); });
+					error(function() { callback.call(this, null); console.error('an error occured during the dashboard recuperation'); });
 			};
 
 			prototype.all = function(callback) {
 
 				$http({	method: 'GET', url: '/api/dashboards' }).
 					success(function(dashboards) { callback.call(this, dashboards); }).
-					error(function() { console.error('an error occured during the dashboards recuperation'); });
+					error(function() { callback.call(this, null); console.error('an error occured during the dashboards recuperation'); });
 			};
 
 			return prototype;
