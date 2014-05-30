@@ -114,10 +114,14 @@ section.widget-content .widget-side.widget-backside {
     transform: rotateY(180deg) translateZ(1px);
     position: absolute;
     z-index: 5;
+    min-height: 100%;
+    height: auto;
 }
 /**gestion du flip widget**/
 section.widget-content .widget-side {
     overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px rgba(189, 189, 189, 0.27);
 }
 
 section.widget-content .widget-side .widget-front-body {
@@ -172,7 +176,7 @@ section.widget-content .widget-side .widget-front-body {
 
 .dd-widget {
     border-radius: 5px;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 /** table **/
@@ -458,6 +462,7 @@ section#ribbon {
 }
 
 article.dashboard-title {
+  cursor: default;
   height: 100%;
   line-height: 45px;
   font-size: 40px;

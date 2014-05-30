@@ -1,4 +1,17 @@
 <% layout('./layout/overlay-core') %>
+
+<aside id="left-panel">
+	<nav class="dashboard-list" ng-controller="DashboardMenuController">
+		<article class="dashboard-option" ng-click="DashboardMenu.location(dashboard.id)" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: dashboard.id==Dashboard.currentDashboard.id}">
+			<i class="{{dashboard.icon}}" ></i>
+			{{dashboard.title}}
+		</article>
+	</nav>
+	<section>
+		<article class="btn cubby-btn">ADD</article>
+	</section>
+</aside>
+
 <section id="body-content">
 	<section id="body-scroller">
 		<section id="ribbon" class="row">
@@ -24,14 +37,3 @@
 		<section ng-view></section>
 	</section>
 </section>
-<aside id="left-panel">
-	<nav class="dashboard-list" ng-controller="DashboardMenuController">
-		<article class="dashboard-option" ng-click="DashboardMenu.location(dashboard.id)" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: dashboard.id==Dashboard.currentDashboard.id}">
-			<i class="{{dashboard.icon}}" ></i>
-			{{dashboard.title}}
-		</article>
-	</nav>
-	<section>
-		<article class="btn cubby-btn">ADD</article>
-	</section>
-</aside>
