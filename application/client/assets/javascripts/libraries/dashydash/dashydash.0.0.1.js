@@ -2693,10 +2693,10 @@ isDragged = false;
         this.$node.css('height', this.container_height);
         // $('#body').css('height',document.body.offsetHeight+"px");
         // console.log(document.body.offsetHeight)
-        // $('#body').css('height', 
-        //     this.container_height + 
-        //     document.getElementById('subMenu').clientHeight + 
-        //     document.getElementsByTagName('header')[0].clientHeight + 
+        // $('#body').css('height',
+        //     this.container_height +
+        //     document.getElementById('subMenu').clientHeight +
+        //     document.getElementsByTagName('header')[0].clientHeight +
         //     document.getElementById('ribbon').clientHeight
         // );
         return this;
@@ -3040,7 +3040,7 @@ isDragged = false;
 
         if(widgets !== false) {
             // console.log('delete widgets')
-            this.$widgets.each(function(){ 
+            this.$widgets.each(function(){
                 var $this = $(this);
                 delete $this.data().coords;
                 $this.removeClass('dd-widget').removeClass('player-revert');//.removeAttr('dd-col').removeAttr('dd-row');
