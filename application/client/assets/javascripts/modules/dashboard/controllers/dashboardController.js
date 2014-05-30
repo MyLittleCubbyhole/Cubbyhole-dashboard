@@ -36,7 +36,7 @@ angular.module('Dashboard').
 
 				if(!dashboardFound) {
 					$local.currentDashboard = firstDashboard;
-					$location.path('/' + firstDashboard);
+					$location.path('/' + firstDashboard.id);
 				}
 
 			}
