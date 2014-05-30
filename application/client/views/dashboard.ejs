@@ -1,24 +1,5 @@
 <% layout('./layout/overlay-core') %>
-<section id="body-content">
-	<section id="body-scroller">
-		<section id="ribbon" class="row">
-			<article class="dashboard-title col-sm-3">
-				<span grumpy-ui grumpy-position="bottom" grumpy-align="right">
-					{{Dashboard.currentDashboard.title}}
-					<grumpy-virgin>
-						bijour
-					</grumpy-virgin>
-				</span>
-			</article>
-			<article class="col-sm-3 dashboard-ribbon">
-				<article class="btn cubby-btn tiny">EXPORT</article>
-			</article>
-			<article class="strap" ng-click="Overlay.pusherOpen = true"><i class="icon-plus-circle"></i></article>
-		</section>
 
-		<section ng-view></section>
-	</section>
-</section>
 <aside id="left-panel" ng-controller="DashboardMenuController">
 	<nav class="dashboard-list">
 		<article dashboard dashboard-id={{dashboard.id}} class="dashboard-option" ng-click="DashboardMenu.location(_dashboard.dashboard.id);" ng-dblclick="_dashboard.edit();" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: _dashboard.isSelected()}">
@@ -38,3 +19,29 @@
 		<article class="btn cubby-btn" ng-click="DashboardMenu.location('add')">ADD</article>
 	</section>
 </aside>
+
+<section id="body-content">
+	<section id="body-scroller">
+		<section id="ribbon" class="row">
+			<article class="dashboard-title col-xs-12 col-sm-8 col-md-5">
+				<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+					{{Dashboard.currentDashboard.title}}
+					<grumpy-virgin class="bounceIn">
+						<section id="dashboard-selector" ng-controller="DashboardMenuController">
+							<article class="dashboard-option" ng-click="_grumpyUi.close();DashboardMenu.location(dashboard.id);" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: dashboard.id==Dashboard.currentDashboard.id}">
+								<i class="{{dashboard.icon}}" ></i>
+								{{dashboard.title}}
+							</article>
+						</section>
+					</grumpy-virgin>
+				</span>
+			</article>
+			<article class="col-sm-3 hidden-xs dashboard-ribbon">
+				<article class="btn cubby-btn tiny">EXPORT</article>
+			</article>
+			<article class="strap" ng-click="Overlay.pusherOpen = true"><i class="icon-plus-circle"></i></article>
+		</section>
+
+		<section ng-view></section>
+	</section>
+</section>

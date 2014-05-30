@@ -14,6 +14,7 @@ section#grumpy-overlay-clickout.active {
 }
 
 section.grumpy-ui {
+    border-radius: 2px;
 	width: auto;
 	background-color: white;
 	position: absolute;
@@ -26,6 +27,14 @@ section.grumpy-ui {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    -webkit-animation-duration: .4s;
+    -moz-animation-duration: .4s;
+    -o-animation-duration: .4s;
+    animation-duration: .4s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
 
 section.grumpy-ui.active {

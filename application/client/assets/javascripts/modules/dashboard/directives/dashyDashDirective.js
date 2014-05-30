@@ -90,7 +90,10 @@ angular.module('Dashboard').
 			link: function($scope, $node, attributes, self) {
 				var $local = $scope._dashydash
 				,	$board = $node.find('.dd-board')
-				,	$pool = $node.find('.dd-pool');
+				,	$pool = $node.find('.dd-pool')
+				,	linked = false;
+
+				$local.locked = false;
 
 				self.options = {
 					width: 0,
@@ -140,6 +143,11 @@ angular.module('Dashboard').
 					});
 
 					reloadFromPool();
+
+					$local.locked = !( DASHYDASH_SETTINGS.columns.xl == self.options.col );
+
+					linked && $scope.$apply();
+					linked = true;
 				}
 
 				function buildDelayed() {
@@ -162,7 +170,7 @@ angular.module('Dashboard').
 				}
 
 				function reloadFromPool() {
-
+					
 					$pool.find('.dd-widget').each(function() {
 						var $this = angular.element(this)
 						,	widgetId = $this.attr('widget-id')
@@ -172,6 +180,8 @@ angular.module('Dashboard').
 						,	parameters = [ $this, ( widgetWidth > self.options.col ? 1 : widgetWidth ), dashydashHeight ];
 
 						if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
+							console.log('passage')
+							$local.locked = false;
 							parameters.push(
 								parseInt($this.attr('dd-col-saved'), 10),
 								parseInt($this.attr('dd-row-saved'), 10)
@@ -183,9 +193,7 @@ angular.module('Dashboard').
 
 						self.dashydash.add_widget.apply(self.dashydash, parameters);
 						$scope.$broadcast('widget_refresh');
-					})
-
-
+					});
 				}
 			}
 		};

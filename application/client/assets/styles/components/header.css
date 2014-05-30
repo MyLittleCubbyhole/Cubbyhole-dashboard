@@ -1,4 +1,4 @@
-header {
+#body > header {
 	position: relative;
 	background: #fff;
 	width: 100%;
@@ -31,6 +31,11 @@ section#global-nav nav.navigation {
 	text-align: left;
 }
 
+section#global-nav .nav {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400 !important;
+}
+
 section#global-nav article.option {
 	color: rgb(102, 117, 127);
 }
@@ -43,7 +48,7 @@ section#global-nav article.option.nav {
 	padding-left: 10px;
 	line-height: 70px;
 	padding-right: 10px;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 }
 
@@ -166,7 +171,7 @@ section#global-nav  #logo-container {
 
 section#global-nav  #logo-container article#logo {
     display: block;
-    margin: 16px 10px 5px 10px;
+    margin: 15px 10px 5px 10px;
     float: left;
 }
 
@@ -174,8 +179,8 @@ section#global-nav  #logo-container article#logo-title {
     float: left;
     color: rgba(242, 242, 242, 1);
 	line-height: 70px;
-	
-    font-size: 19px;
+
+    font-size: 18px;
     text-transform: uppercase;
 }
 
