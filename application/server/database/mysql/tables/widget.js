@@ -61,10 +61,19 @@ provider.update.widget = function(widget, callback) {
 	query += '`width` = ' + parseInt(widget.width, 10) + ',';
 	query += '`positionx` = ' + parseInt(widget.x, 10) + ',';
 	query += '`positiony` = ' + parseInt(widget.y, 10) + ',';
-	query += '`type` = "' + widget.type + '",';
-	query += '`dashboardid` = "' + widget.dashboardid + '" where id = ' + widget.id + ';';
+	query += '`type` = "' + widget.type + '"';
+	query += 'where `dashboardid` = "' + widget.dashboardid + '" and id = ' + widget.id + ';';
 	Mysql.query(query, callback);
 }
 
+provider.update.position = function(widget, callback) {
+	var query = 'update `widget` set ';
+	query += '`height` = ' + parseInt(widget.height, 10) + ',';
+	query += '`width` = ' + parseInt(widget.width, 10) + ',';
+	query += '`positionx` = ' + parseInt(widget.x, 10) + ',';
+	query += '`positiony` = ' + parseInt(widget.y, 10) + ' ';
+	query += 'where `dashboardid` = ' + widget.dashboardid + ' and id = ' + widget.id + ';';
+	Mysql.query(query, callback);
+}
 
 module.exports = provider;

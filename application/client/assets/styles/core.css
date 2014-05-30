@@ -442,6 +442,7 @@ section#body-scroller {
   max-height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-right: 11px;
 }
 aside#left-panel {
   width: 210px;        
@@ -469,10 +470,10 @@ article.strap {
   line-height: 38px;
   padding-left: 5px;
   height: 34px;
-  width: 40px;
+  width: 50px;
   background-color: #333;
   position: absolute;
-  right: 5px;
+  right: -15px;
   top: 25px;
   cursor: pointer;
   -webkit-transition: right .15s linear;
@@ -485,7 +486,7 @@ article.strap {
 }
 
 article.strap:hover {
-  right: 15px;
+  right: -5px;
 }
 
 nav.dashboard-list article.dashboard-option {

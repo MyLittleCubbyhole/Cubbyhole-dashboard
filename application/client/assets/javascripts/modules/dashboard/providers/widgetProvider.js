@@ -67,6 +67,14 @@ angular.module('Dashboard').
 
 			Widget.prototype.refresh = function() { };
 
+			Widget.prototype.delete = function() {
+				var self = this;
+				
+				WidgetFactory(self.scope).remove(self.dashboardId, self.id, function() {
+					self.scope.$emit('delete_widget', { id: self.id, node: self.node });
+				})
+			};
+
 			Widget.prototype.toString = function() {
 				return 'Widget';
 			};
