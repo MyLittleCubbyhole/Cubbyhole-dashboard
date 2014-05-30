@@ -6,7 +6,7 @@ angular.module('Dashboard').
 			replace: true,
 			require: 'dashydash',
 			restrict: 'A',
-			template: 
+			template:
 				'<section class="dashydash">'
 			+		'<section class="dd-board"></section>'
 			+		'<section class="dd-pool"></section>'
@@ -53,7 +53,7 @@ angular.module('Dashboard').
 				}
 
 				self.deleteWidget = function($node) {
-					self.dashydash.remove_widget($node);					
+					self.dashydash.remove_widget($node);
 					self.serialize();
 				}
 
@@ -63,7 +63,7 @@ angular.module('Dashboard').
 					definition = definition || {};
 
 					_.merge(options, WIDGET_DEFAULT_DEFINITION, definition);
-					
+
 					if(!$local.widgets[ options.id ])
 						$local.widgets[ options.id ] = options;
 
@@ -92,7 +92,7 @@ angular.module('Dashboard').
 				,	$board = $node.find('.dd-board')
 				,	$pool = $node.find('.dd-pool');
 
-				self.options = { 
+				self.options = {
 					width: 0,
 					col: DashboardOptimizeService.amountOfColumn()
 				};
@@ -101,6 +101,9 @@ angular.module('Dashboard').
 					throw 'dashydash property cannot be empty';
 
 				$scope.$watch(attributes.dashydash, function(definition) {
+					if(!definition.id)
+						return false;
+
 					self.dashboardDefinition = definition;
 					if(self.dashboardDefinition.id)
 						WidgetFactory($scope).getByDashboardId(self.dashboardDefinition.id, function(widgets) {
@@ -125,7 +128,7 @@ angular.module('Dashboard').
 					copyWidgetInPool();
 					self.options.width = $node.width();
 					self.options.col = DashboardOptimizeService.amountOfColumn();
-					
+
 					var width = DashboardOptimizeService.widgetWidth(self.options.width, self.options.col, DASHYDASH_SETTINGS.margin);
 					destroy();
 

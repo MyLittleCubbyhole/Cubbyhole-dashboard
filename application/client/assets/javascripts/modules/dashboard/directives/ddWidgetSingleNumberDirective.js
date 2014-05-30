@@ -11,7 +11,7 @@ angular.module('Dashboard').
 				,	self = this;
 
 				$local.widget = {};
-				
+
 				self.id  = parseInt($attrs.widgetId, 10);
 
 				$scope.toString = function() {
@@ -20,7 +20,6 @@ angular.module('Dashboard').
 			}],
 			link: function($scope, $node, attributes, self) {
 				var $local = $scope._ddWidgetSingleNumber;
-
 
 				$local.widget = new WidgetSingleNumberProvider($scope._dashydash.widgets[self.id], {scope: $scope, node: $node});
 				$local.widget.load()

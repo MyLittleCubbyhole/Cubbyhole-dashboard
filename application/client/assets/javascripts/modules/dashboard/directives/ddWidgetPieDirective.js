@@ -20,7 +20,6 @@ angular.module('Dashboard').
 			link: function($scope, $node, attributes, self) {
 				var $local = $scope._ddWidgetPie;
 
-
 				$local.widget = new WidgetPieProvider($scope._dashydash.widgets[self.id], {scope: $scope, node: $node});
 				$local.widget.load()
 			}
