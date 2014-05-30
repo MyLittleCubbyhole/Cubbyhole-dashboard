@@ -561,6 +561,21 @@ article.btn.cubby-btn.tiny {
     top: 11px;
 }
 
+#dashboard-selector article.dashboard-option {
+    height: 40px;
+    position: relative;
+    line-height: 40px;
+    padding-left: 30px;
+    cursor: pointer;
+}
+section#dashboard-selector {
+    min-width: 200px; 
+    min-height: 50px;
+    max-height: 200px;
+    padding: 5px;
+}
+
+
 @media screen and (max-width: 775px) {
 
   aside#left-panel {

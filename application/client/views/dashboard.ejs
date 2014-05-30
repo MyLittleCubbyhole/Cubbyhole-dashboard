@@ -2,15 +2,20 @@
 <section id="body-content">
 	<section id="body-scroller">
 		<section id="ribbon" class="row">
-			<article class="dashboard-title col-sm-3">
-				<span grumpy-ui grumpy-position="bottom" grumpy-align="right">
+			<article class="dashboard-title col-xs-12 col-sm-8 col-md-5">
+				<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
 					{{Dashboard.currentDashboard.title}}
-					<grumpy-virgin>
-						bijour
+					<grumpy-virgin class="bounceIn">
+						<section id="dashboard-selector" ng-controller="DashboardMenuController">
+							<article class="dashboard-option" ng-click="_grumpyUi.close();DashboardMenu.location(dashboard.id);" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: dashboard.id==Dashboard.currentDashboard.id}">
+								<i class="{{dashboard.icon}}" ></i>
+								{{dashboard.title}}
+							</article>
+						</section>
 					</grumpy-virgin>
 				</span>
 			</article>
-			<article class="col-sm-3 dashboard-ribbon">
+			<article class="col-sm-3 hidden-xs dashboard-ribbon">
 				<article class="btn cubby-btn tiny">EXPORT</article>
 			</article>
 			<article class="strap" ng-click="Overlay.pusherOpen = true"><i class="icon-plus-circle"></i></article>

@@ -64,6 +64,10 @@ angular.module('Grumpy-ui').
 				$local.position = attributes.grumpyPosition || 'bottom';
 				self.stopScroll = attributes.grumpyStopScroll ? true : false;
 
+				$local.close = function() {
+					$local.scrolling(true);
+					$scope.$parent.$broadcast('grumpy-ui-hide-child');
+				}
 
 				$scope.$on('grumpy-ui-hide-child', function() {
 					!self.initiator && self.display(false);
