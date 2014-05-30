@@ -568,6 +568,11 @@ article.btn.cubby-btn.tiny {
     padding-left: 30px;
     cursor: pointer;
 }
+
+#dashboard-selector article.dashboard-option:hover {
+  color: rgb(0, 135, 241);
+}
+
 section#dashboard-selector {
     min-width: 200px; 
     min-height: 50px;
