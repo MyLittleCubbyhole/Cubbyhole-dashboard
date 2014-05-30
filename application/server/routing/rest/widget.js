@@ -73,6 +73,34 @@ widget.post.create = function(request, response) {
 	});
 }
 
+/********************************[  PUT   ]********************************/
+
+widget.put.updatePosition = function(request, response) {
+	var id = request.params.id
+	,	body = request.body
+	,	options;
+
+	for(var i = 0; i<body.length; i++) {
+		options = {
+			id: body[i].id,
+			x: body[i].col,
+			y: body[i].row,
+			width: body[i].width,
+			height: body[i].height,
+			dashboardid: id
+		}
+		provider.update.position(options, function(error, data) {
+			if(!error && data)
+				response.send({'information': 'Position updated' });
+			else
+				response.send({'information': 'An error has occurred - ' + error });
+			response.end();
+		})
+		
+	}
+
+
+}
 
 /********************************[  DELETE   ]********************************/
 

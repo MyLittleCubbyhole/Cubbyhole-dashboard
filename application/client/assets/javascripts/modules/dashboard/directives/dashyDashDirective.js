@@ -24,10 +24,37 @@ angular.module('Dashboard').
 				self.dashydash = null;
 				self.options = {};
 
+
+				//**************** gestion d'event ****************//
+
+				$scope.$on('create_widget', function(scope, definition) {
+					var options = {};
+					_.merge(options, WIDGET_DEFAULT_DEFINITION, definition);
+
+					WidgetFactory($scope).create(self.dashboardDefinition.id, options, function(definition) {
+						self.addWidget(definition, function() { self.serialize(); })
+					})
+				});
+
+				$scope.$on('delete_widget', function(scope, options) {
+					delete $local.widgets[options.id];
+					self.deleteWidget(options.node);
+				});
+
 				//**************** dashydash management ****************//
 
+				self.serialize = function() {
+					var currentAmountOfColumn = DashboardOptimizeService.amountOfColumn()
+					if(DASHYDASH_SETTINGS.columns.xs != currentAmountOfColumn) {
+						var serialization = self.dashydash.serialize();
+
+						WidgetFactory($scope).updatePosition(self.dashboardDefinition.id, serialization, angular.noop);
+					}
+				}
+
 				self.deleteWidget = function($node) {
-					self.dashydash.remove_widget($node);
+					self.dashydash.remove_widget($node);					
+					self.serialize();
 				}
 
 				self.addWidget = function(definition, callback) {
@@ -73,13 +100,12 @@ angular.module('Dashboard').
 				if(!attributes.dashydash)
 					throw 'dashydash property cannot be empty';
 
-				$scope.$watch(attributes.dashydash, function(definition) { 
+				$scope.$watch(attributes.dashydash, function(definition) {
 					self.dashboardDefinition = definition;
 					if(self.dashboardDefinition.id)
 						WidgetFactory($scope).getByDashboardId(self.dashboardDefinition.id, function(widgets) {
 							for(var i = 0; i<widgets.length; i++)
 								self.addWidget(widgets[i]);
-							// WidgetFactory($scope).create(self.dashboardDefinition.id, data[0], function(definition) {console.log(definition, 'created')})
 						});
 				})
 
@@ -104,7 +130,7 @@ angular.module('Dashboard').
 					destroy();
 
 					self.dashydash = $board.dashyDash({
-						draggable: { stop: angular.noop },
+						draggable: { stop: self.serialize },
 						margin: [DASHYDASH_SETTINGS.margin, DASHYDASH_SETTINGS.margin],
 						max_cols: self.options.col,
 						dimensions: [ width, DASHYDASH_SETTINGS.height]
