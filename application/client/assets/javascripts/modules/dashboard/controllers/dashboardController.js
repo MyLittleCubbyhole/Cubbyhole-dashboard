@@ -2,11 +2,15 @@ angular.module('Dashboard').
 	controller('DashboardController', ['$scope', 'DashboardFactory', function($scope, DashboardFactory){
 		var $local = $scope.Dashboard = {}
 
-		$local.dashboards = [];
+		$local.dashboards = {};
 		$local.currentDashboard = {};
 
-		DashboardFactory($scope).get(1, function(data) { $local.currentDashboard = data; })
-		// DashboardFactory($scope).all(function(data) {console.log(data)})
+		DashboardFactory($scope).all(function(data) {
+			for(var i = 0; i<data.length; i++)
+				$local.dashboards[data[i].id] = data[i];
+
+			$local.currentDashboard = $local.dashboards[data[0].id];
+		})
 
 		$scope.toString = function() {
 			return 'Dashboard';

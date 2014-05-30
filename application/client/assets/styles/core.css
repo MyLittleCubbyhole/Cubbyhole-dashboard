@@ -23,7 +23,7 @@ html, body {
     display: none;
 }
 section#body {
-    /*overflow: hidden;*/
+    overflow: hidden;
     width: 100%;
     height: 100%;
     position: relative;
@@ -187,7 +187,7 @@ section[dd-widget-table] .widget-front-body table thead {
 }
 
 section[dd-widget-table] .widget-front-body table th {
-    height: 60px;
+    height: 70px;
     line-height: 30px;
     vertical-align: bottom;
 }
@@ -198,6 +198,10 @@ section[dd-widget-table] .widget-front-body table td {
     height: 40px;
 }
 
+section[dd-widget-table]  .widget-front-body {
+  padding-left: 10px;
+  padding-right: 10px;
+}
 section[dd-widget-single-number] .widget-front-body {
     font-size: 60px;
     text-align: center;
@@ -416,7 +420,155 @@ body {
   padding: 2px;
   height: 37px;
   width: 40px;
+  outline: none;
 }
 #widget-menu .container .widgsize .btn:hover {
-  background: #b23629;
+  background: #2970B2;
+}
+
+/**widget menu **/
+
+/** dashboard menu + archi base **/
+section#body-content {
+  display: block;
+  position: relative;
+  margin-left: 230px;
+  padding: 0;
+  height: 100%;
+  padding-bottom: 70px;
+  overflow: hidden;
+}
+section#body-scroller {
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+aside#left-panel {
+  width: 210px;        
+  position: absolute;  
+  top: 70px;
+  left: 10px;
+  min-height: 50px;
+}
+/** dashboard menu **/
+section#ribbon {
+  height: 80px;
+  position: relative;
+}
+
+article.dashboard-title {
+  height: 100%;
+  line-height: 45px;
+  font-size: 40px;
+  padding: 30px 0px 0px 30px;
+}
+
+article.strap {
+  color: rgb(189, 189, 189);
+  font-size: 23px;
+  line-height: 38px;
+  padding-left: 5px;
+  height: 34px;
+  width: 40px;
+  background-color: #333;
+  position: absolute;
+  right: 5px;
+  top: 25px;
+  cursor: pointer;
+  -webkit-transition: right .15s linear;
+     -moz-transition: right .15s linear;
+      -ms-transition: right .15s linear;
+       -o-transition: right .15s linear;
+          transition: right .15s linear;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+article.strap:hover {
+  right: 15px;
+}
+
+nav.dashboard-list article.dashboard-option {
+  cursor: pointer;
+  line-height: normal;
+  font-size: 14px;
+  padding: 10px 10px 10px 11px;
+  color: #222222;
+  display: block;
+  position: relative;
+  font-weight: normal;
+  text-decoration: none !important;
+  border-radius: 4px;
+  padding-left: 35px;
+}
+
+nav.dashboard-list {
+    padding-top: 10px;
+}
+
+article.dashboard-option.active {
+    background: #333333;
+    color: white!important;
+}
+
+article.dashboard-option.active::after {
+    content: '';
+    border: 7px solid transparent;
+    border-right-color: #eaedf1;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    right: 0px;
+    top: 12px;
+}
+
+nav.dashboard-list article.dashboard-option:hover {
+    color: rgb(0, 135, 241);
+}
+
+article.btn.cubby-btn {
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  margin: 5px;
+  border-right: 5px;
+  border: 1px solid #ccc;
+  color: #333;
+  cursor: pointer;
+  -webkit-transition: all .15s linear;
+     -moz-transition: all .15s linear;
+      -ms-transition: all .15s linear;
+       -o-transition: all .15s linear;
+          transition: all .15s linear;
+}
+
+article.btn.cubby-btn:hover {
+  background-color: rgb(124, 181, 236);
+  color: white;
+}
+article.btn.cubby-btn.tiny {
+  width: 130px;
+}
+
+.dashboard-ribbon {
+  padding-top: 35px;
+}
+
+.dashboard-option i {
+    position: absolute;
+    left: 9px;
+    top: 11px;
+}
+
+@media screen and (max-width: 775px) {
+
+  aside#left-panel {
+    display: none;
+  }
+
+  section#body-content {
+    margin-left: 0px;
+  }
+
+
 }
