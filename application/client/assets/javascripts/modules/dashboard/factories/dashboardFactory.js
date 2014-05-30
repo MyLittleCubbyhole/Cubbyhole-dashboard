@@ -29,7 +29,7 @@ angular.module('Dashboard').
 			prototype.remove = function(dashboardId, callback) {
 
 				$http({	method: 'DELETE', url: '/api/dashboards/' + dashboardId }).
-					success(function() { callback.call(this); }).
+					success(function(data) { callback.call(this, data); }).
 					error(function() { callback.call(this, null); console.error('an error occured during the dashboard deletion'); });
 			};
 

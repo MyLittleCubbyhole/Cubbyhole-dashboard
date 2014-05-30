@@ -52,6 +52,23 @@ angular.module('Dashboard').
 
 		})
 
+		$local.delete = function($event) {
+			if($event) {
+				$event.stopPropagation();
+				$event.preventDefault();
+			}
+			DashboardFactory($scope).remove($local.currentDashboard.id, function(data) {
+				if(data.information && data.information.indexOf('error') == -1) {
+
+					var index = $local.dashboards.indexOf($local.currentDashboard);
+					if(index > -1)
+						$local.dashboards.splice(index, 1);
+
+					$local.currentDashboard = $local.dashboards[0];
+				}
+			})
+		}
+
 		$scope.toString = function() {
 			return 'Dashboard';
 		}
