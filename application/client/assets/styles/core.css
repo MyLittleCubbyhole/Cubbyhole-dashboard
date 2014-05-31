@@ -634,7 +634,7 @@ section#dashboard-selector {
 }
 
 section.list-icons {
-    padding: 3px 1px 0px 3px;
+    padding: 15px;
 }
 .list-icons i {
     font-size: 17px;
