@@ -1,11 +1,11 @@
 <header ng-class="{ preventClick: Overlay.activated }">
-	<section id="global-nav" du-scroll-container="bloc-container">
-		<section id="logo-container" class="pull-left" >
+	<section id="global-nav" ng-controller="NavigationController" du-scroll-container="bloc-container">
+		<section id="logo-container" class="pull-left" ng-click="Navigation.goto('/home')">
 			<article id="logo"><img src="/images/design/logo.png" alt="logo"></article>
 			<article id="logo-title" class="google-font hidden-xs">Cubbyhole</article>
 		</section>
 		<section class="menu pull-right" ng-controller="AuthenticationController" ng-cloak>
-			<article class="option nav" ng-if="!Authentication.user.firstname" ng-click="CubbyHome.showLoginModal()">
+			<article class="option nav" ng-if="!Authentication.user.firstname" ng-click="Home.showLoginModal()">
 				<span class="label">LOG IN</span>
 			</article>
 			<article class="option authentication" ng-if="Authentication.user.firstname">
@@ -45,13 +45,13 @@
 		</section>
 
 		<nav class="navigation pull-left hidden-xs hidden-sm">
-			<article class="option nav google-font big-font">
+			<article class="option nav google-font big-font" ng-class="{ selected: Navigation.isSelected('/home') }" ng-click="Navigation.goto('/home')">
 				<span class="label">HOME</span>
 			</article>
 		</nav>
 
 		<section class="redirect-zone pull-left">
-			<article class="option nav">
+			<article class="option nav" ng-class="{ selected: Navigation.isSelected('/dashboard') }" ng-click="Navigation.goto('/dashboard')">
 				<span class="label">DASHBOARD</span>
 			</article>
 		</section>

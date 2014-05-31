@@ -2,7 +2,7 @@
 
 <aside id="left-panel" ng-controller="DashboardMenuController">
 	<nav class="dashboard-list">
-		<article dashboard dashboard-id={{dashboard.id}} class="dashboard-option" ng-click="DashboardMenu.location(_dashboard.dashboard.id);" ng-dblclick="_dashboard.edit();" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: _dashboard.isSelected()}">
+		<article dashboard dashboard-id={{dashboard.id}} class="dashboard-option" ng-click="DashboardMenu.location(_dashboard.dashboard.id);" ng-dblclick="_dashboard.edit();" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: _dashboard.isSelected()}" ng-cloak>
 			<section class="menu" ng-hide="_dashboard.dashboard.editMode">
 				<i class="{{_dashboard.dashboard.icon}}" ></i>
 				{{_dashboard.dashboard.title}}
@@ -13,7 +13,6 @@
 						<article ng-repeat="icon in DashboardMenu.icons">
 							<i class="{{icon}}" ng-click="_dashboard.dashboard.icon = icon; _grumpyUi.close();">
 							</i>
-							<div ng-if="($index + 1) % 5 == 0 && $index < DashboardMenu.icons.length - 1"></div>
 						</article>
 					</section>
 				</grumpy-virgin>
@@ -35,7 +34,7 @@
 		<section id="ribbon" class="row">
 			<article class="dashboard-title col-xs-12 col-sm-8 col-md-5">
 				<span grumpy-ui grumpy-position="bottom" grumpy-align="center">
-					<span class="title-text">
+					<span class="title-text" ng-cloak>
 						{{Dashboard.currentDashboard.title}}
 						<i class="icon-cross hidden-xs" ng-click="Dashboard.delete($event)"></i>
 					</span>
