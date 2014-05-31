@@ -32,7 +32,21 @@
 					<article class="bloc-title">Abscisse</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option">
-							<span>inscription date<i class="icon-cross"></i></span>
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+								<span>INSCRIPTION DATE<i class="icon-cross"></i></span>
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-kpi-box" scroll-bar>
+										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index">
+											<article class="kpi-category">{{category}}</article>
+											<section class="kpi-list">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+													{{kpi.alias}}
+												</article>
+											</section>
+										</section>
+									</section>
+								</grumpy-virgin>
+							</span>
 						</article>
 					</article>
 				</section>
@@ -40,7 +54,21 @@
 					<article class="bloc-title">Ordinate</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option">
-							<span>user amount<i class="icon-cross"></i></span>
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+								<span>INSCRIPTION DATE<i class="icon-cross"></i></span>
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-kpi-box" scroll-bar>
+										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index">
+											<article class="kpi-category">{{category}}</article>
+											<section class="kpi-list">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+													{{kpi.alias}}
+												</article>
+											</section>
+										</section>
+									</section>
+								</grumpy-virgin>
+							</span>
 							<section class="graph-selector">
 								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
 								<article class="graph-type active"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
@@ -48,7 +76,21 @@
 							</section>
 						</article>
 						<article class="bloc-content-option">
-							<span>user amount<i class="icon-cross"></i></span>
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+								<span>INSCRIPTION DATE<i class="icon-cross"></i></span>
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-kpi-box" scroll-bar>
+										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index">
+											<article class="kpi-category">{{category}}</article>
+											<section class="kpi-list">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+													{{kpi.alias}}
+												</article>
+											</section>
+										</section>
+									</section>
+								</grumpy-virgin>
+							</span>
 							<section class="graph-selector">
 								<article class="graph-type active"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
 								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
@@ -61,7 +103,21 @@
 					<article class="bloc-title">Segment</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option disabled">
-							<span>country<i class="icon-cross"></i></span>
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+								<span>INSCRIPTION DATE<i class="icon-cross"></i></span>
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-kpi-box" scroll-bar>
+										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index">
+											<article class="kpi-category">{{category}}</article>
+											<section class="kpi-list">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+													{{kpi.alias}}
+												</article>
+											</section>
+										</section>
+									</section>
+								</grumpy-virgin>
+							</span>
 						</article>
 					</article>
 				</section>
@@ -77,21 +133,41 @@
 					</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option filter">
-							<span>user amount</span>
-							<span>></span>							
-							<span>1993</span>
-							<article class="del-btn"><i class="icon-cross"></i></article>
-						</article>
-						<article class="bloc-content-option filter">
-							<span>user amount</span>
-							<span>></span>							
-							<span>1993</span>
-							<article class="del-btn"><i class="icon-cross"></i></article>
-						</article>
-						<article class="bloc-content-option filter">
-							<span>user amount</span>
-							<span>></span>							
-							<span>1993</span>
+
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+								AMOUNT_USER
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-kpi-box" scroll-bar>
+										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index">
+											<article class="kpi-category">{{category}}</article>
+											<section class="kpi-list">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+													{{kpi.alias}}
+												</article>
+											</section>
+										</section>
+									</section>
+								</grumpy-virgin>
+							</span>
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="center">
+								GREATER THAN
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-box">
+										<article ng-repeat="operator in WidgetBackSide.operators track by $index" ng-class="{ active: $index == 0 }">
+											{{operator.name}}
+										</article>
+									</section>
+								</grumpy-virgin>
+							</span>
+
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="right">
+								value
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-value-box">
+										<input type="text" placeholder="value">
+									</section>
+								</grumpy-virgin>
+							</span>
 							<article class="del-btn"><i class="icon-cross"></i></article>
 						</article>
 					</article>

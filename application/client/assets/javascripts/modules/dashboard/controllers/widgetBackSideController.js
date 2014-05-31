@@ -1,10 +1,42 @@
 angular.module('Dashboard').
-	controller('WidgetBackSideController', ['$scope', function($scope){
+	controller('WidgetBackSideController', ['$scope', 'QUERY_BUILDER', 'OPERATORS',  function($scope, QUERY_BUILDER, OPERATORS){
 		var $local = $scope.WidgetBackSide = {}
 		,	widgetScopeName = $scope.$parent.toString()
 		,	$widgetScope = $scope[widgetScopeName];
 
+		$local.operators = OPERATORS;
 		$local.tab = 'data';
+		$local.kpis = {};
+		$local.segments = {};
+		$local.metrics = {};
+
+		var kpi;
+		for(var i in QUERY_BUILDER) {
+
+			kpi = {
+				alias: QUERY_BUILDER[i].alias,
+				index: QUERY_BUILDER[i].index,
+				datatype: QUERY_BUILDER[i].datatype
+			}
+
+			if(!$local.kpis[QUERY_BUILDER[i].category])
+				$local.kpis[QUERY_BUILDER[i].category] = [];
+
+			$local.kpis[QUERY_BUILDER[i].category].push(kpi);
+
+			if(QUERY_BUILDER[i].type == 'segment') {
+				if(!$local.segments[QUERY_BUILDER[i].category])
+					$local.segments[QUERY_BUILDER[i].category] = [];
+				$local.segments[QUERY_BUILDER[i].category].push(kpi);
+			}
+
+			if(QUERY_BUILDER[i].type == 'metric') {
+				if(!$local.metrics[QUERY_BUILDER[i].category])
+					$local.metrics[QUERY_BUILDER[i].category] = [];
+				$local.metrics[QUERY_BUILDER[i].category].push(kpi);
+			}
+
+		}
 
 		$local.delete = function() {
 			$widgetScope.widget.delete();

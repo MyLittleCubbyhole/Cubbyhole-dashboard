@@ -73,13 +73,13 @@ section.grumpy-ui[grumpy-position='right']::before{
 
 section.grumpy-ui.force-position-top::before {
     border: 10px solid transparent;  
-    border-bottom-color: white;
+    border-top-color: white;
     bottom: initial;
     top: -20px;
 }
 section.grumpy-ui.force-position-bottom::before {
     border: 10px solid transparent;  
-    border-top-color: white;
+    border-bottom-color: white;
     top: initial;
     bottom: -20px;
 }
