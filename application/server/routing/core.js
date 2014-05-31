@@ -6,7 +6,8 @@ var filters = require(global.paths.server + '/routing/filters/core')
 
 routing.init = function(app) {
 
-    app.get('/', navigation.get.index);
+    app.get('/', navigation.redirect.home);
+    app.get('/home', navigation.get.index);
     app.get('/dashboard', navigation.get.dashboard);
 
     app.get('/api/dashboards', dashboard.get.all);

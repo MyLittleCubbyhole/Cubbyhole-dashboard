@@ -622,6 +622,7 @@ section#dashboard-selector {
 	min-height: 50px;
 	max-height: 200px;
 	padding: 5px;
+    overflow: auto;
 }
 
 .dashboard-option .menu {

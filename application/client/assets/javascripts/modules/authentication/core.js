@@ -1,1 +1,1 @@
-angular.module('Authentication', []);
+angular.module('Authentication', ['Navigation', 'Config']);

@@ -50,4 +50,9 @@ navigation.get.template = function(request, response) {
 /********************************[  DELETE  ]********************************/
 
 
+navigation.redirect.home = function(request, response) {
+	response.redirect('/home');
+}
+
+
 module.exports = navigation;

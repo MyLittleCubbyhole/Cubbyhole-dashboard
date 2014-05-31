@@ -7,6 +7,7 @@ angular.module('Dashboard').
 
 		$local.getDashboards = function(callback) {
 			DashboardFactory($scope).all(function(data) {
+				$local.dashboards = [];
 				for(var i = 0; i < data.length; i++)
 					$local.dashboards.push(data[i]);
 
