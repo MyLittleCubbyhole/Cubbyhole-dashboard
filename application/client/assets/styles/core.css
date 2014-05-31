@@ -467,19 +467,30 @@ section#ribbon {
 }
 
 article.dashboard-title {
-  cursor: default;
-  height: 100%;
-  line-height: 45px;
-  font-size: 40px;
-  padding: 30px 0px 0px 30px;
+    cursor: default;
+    height: 100%;
+    line-height: 45px;
+    font-size: 40px;
+    padding: 30px 0px 0px 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+article.dashboard-title .title-text {
+    position: relative;
 }
 
 article.dashboard-title i {
-    font-size: 27px;
+    font-size: 21px;
+    color: #9E9E9E;
     position: absolute;
-    top: 16px;
-    left: 8px;
+    top: -10px;
+    right: -25px;
     cursor: pointer;
+}
+article.dashboard-title i:hover {
+    color: black;
 }
 
 article.strap {
@@ -592,6 +603,14 @@ article.btn.cubby-btn.tiny {
     line-height: 40px;
     padding-left: 30px;
     cursor: pointer;
+    max-width: 240px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-right: 13px;
+}
+#dashboard-selector article.dashboard-option.active::after {
+    border-right-color: white;
 }
 
 #dashboard-selector article.dashboard-option:hover {
@@ -603,6 +622,14 @@ section#dashboard-selector {
     min-height: 50px;
     max-height: 200px;
     padding: 5px;
+}
+
+.dashboard-option .menu {
+    height: 17px;
+    width: 165px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .dashboard-option .edit input {
@@ -634,17 +661,35 @@ section#dashboard-selector {
 }
 
 section.list-icons {
-    padding: 15px;
+    padding: 6px 16px;
 }
+.grumpy-icons {
+    background-color: #F1F1F1 !important;
+}
+.grumpy-icons[grumpy-position='bottom']::before {
+    border-bottom-color: #F1F1F1 !important;
+}
+.list-icons > article {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+}
+.list-icons > article:nth-child(5n+0) {
+
+}
+.list-icons > article:hover {
+    background-color: #D5D5D5;
+}
+
 .list-icons i {
     font-size: 17px;
-    padding: 1px;
     cursor: pointer;
+    line-height: 26px;
+    padding: 4px 0px 4px 8px;
 }
 .list-icons i:nth-child(5n+0) {
 
 }
-
 
 /****backs widget ****/
 article.widget-back-head {
@@ -882,13 +927,13 @@ article.del-btn {
   display: inline-block;
 }
 
-@media screen and (min-width: 1750px) {  
+@media screen and (min-width: 1750px) {
   section[dd-width="1"] .nav-pills .pill span.pill-name {
       display: block;
   }
 }
 
-@media screen and (max-width: 1050px) {  
+@media screen and (max-width: 1050px) {
   section[dd-width="2"] .nav-pills .pill span.pill-name {
       display: none;
   }
