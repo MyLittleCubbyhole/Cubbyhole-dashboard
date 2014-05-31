@@ -1,14 +1,30 @@
 <% layout('./layout/overlay-core') %>
 
-<aside id="left-panel">
-	<nav class="dashboard-list" ng-controller="DashboardMenuController">
-		<article class="dashboard-option" ng-click="DashboardMenu.location(dashboard.id)" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: dashboard.id==Dashboard.currentDashboard.id}">
-			<i class="{{dashboard.icon}}" ></i>
-			{{dashboard.title}}
+<aside id="left-panel" ng-controller="DashboardMenuController">
+	<nav class="dashboard-list">
+		<article dashboard dashboard-id={{dashboard.id}} class="dashboard-option" ng-click="DashboardMenu.location(_dashboard.dashboard.id);" ng-dblclick="_dashboard.edit();" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: _dashboard.isSelected()}">
+			<section ng-hide="_dashboard.dashboard.editMode">
+				<i class="{{_dashboard.dashboard.icon}}" ></i>
+				{{_dashboard.dashboard.title}}
+			</section>
+				<i class="{{_dashboard.dashboard.icon}}" grumpy-ui grumpy-position="bottom" grumpy-align="left" ng-if="_dashboard.dashboard.editMode">
+				<grumpy-virgin class="bounceIn">
+					<section class="list-icons">
+						<i class="{{icon}}" ng-click="_dashboard.dashboard.icon = icon; _grumpyUi.close();" ng-repeat="icon in DashboardMenu.icons">
+							<div ng-if="($index + 1) % 5 == 0 && $index < DashboardMenu.icons.length - 1"></div>
+						</i>
+					</section>
+				</grumpy-virgin>
+				</i>
+			<section class="edit" ng-if="_dashboard.dashboard.editMode">
+                <input type="text" ng-model="_dashboard.dashboard.title" ng-keyup="_dashboard.validEdit($event)" ng-auto-focus>
+                <i class="icon-checkmark" ng-click="_dashboard.validEdit();"></i>
+                <i class="icon-cross" ng-click="_dashboard.cancelEdit();"></i>
+			</section>
 		</article>
 	</nav>
 	<section>
-		<article class="btn cubby-btn">ADD</article>
+		<article class="btn cubby-btn" ng-click="DashboardMenu.location('add')">ADD</article>
 	</section>
 </aside>
 
@@ -16,10 +32,11 @@
 	<section id="body-scroller">
 		<section id="ribbon" class="row">
 			<article class="dashboard-title col-xs-12 col-sm-8 col-md-5">
+				<i class="icon-cross hidden-xs" ng-click="Dashboard.delete($event)"></i>
 				<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
 					{{Dashboard.currentDashboard.title}}
 					<grumpy-virgin class="bounceIn">
-						<section id="dashboard-selector" ng-controller="DashboardMenuController">
+						<section id="dashboard-selector" ng-controller="DashboardMenuController" scroll-bar>
 							<article class="dashboard-option" ng-click="_grumpyUi.close();DashboardMenu.location(dashboard.id);" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: dashboard.id==Dashboard.currentDashboard.id}">
 								<i class="{{dashboard.icon}}" ></i>
 								{{dashboard.title}}

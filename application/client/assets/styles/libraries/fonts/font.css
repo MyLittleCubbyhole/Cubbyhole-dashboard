@@ -29,6 +29,15 @@
 .icon-cogs:before {
 	content: "\e601";
 }
+.icon-pin:before {
+	content: "\e608";
+}
+.icon-bolt:before {
+	content: "\e609";
+}
+.icon-layers:before {
+	content: "\e60a";
+}
 .icon-checkmark:before {
 	content: "\e603";
 }
@@ -49,4 +58,37 @@
 }
 .icon-plus-circle:before {
 	content: "\f055";
+}
+.icon-group:before {
+	content: "\f0c0";
+}
+.icon-info:before {
+	content: "\e60b";
+}
+.icon-star:before {
+	content: "\e60c";
+}
+.icon-heart:before {
+	content: "\e60d";
+}
+.icon-sunny:before {
+	content: "\e60e";
+}
+.icon-pacman:before {
+	content: "\e60f";
+}
+.icon-locked:before {
+	content: "\e611";
+}
+.icon-spaceinvaders:before {
+	content: "\e612";
+}
+.icon-diamond:before {
+	content: "\e613";
+}
+.icon-moneybag:before {
+	content: "\e614";
+}
+.icon-rocket:before {
+	content: "\e610";
 }

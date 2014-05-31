@@ -24,7 +24,51 @@ dashboard.get.byId = function(request, response) {
 /********************************[  POST   ]********************************/
 
 dashboard.post.create = function(request, response) {
-	console.log(request.body);
+	var body = request.body
+	,	witness = true
+	,	dashboard = {
+		title: body.title,
+		icon: body.icon
+	};
+
+	for(var i in dashboard)
+		witness = typeof dashboard[i] == 'undefined' ? false : witness;
+
+	if(!witness)
+		response.send({'information': 'An error has occurred - missing information', 'dashboard' : dashboard });
+	else {
+		provider.create.dashboard(dashboard, function(error, data) {
+			dashboard.id = data && data.insertId ? data.insertId : null;
+			response.send({'information': (!error ? 'dashboard created' : 'An error has occurred - ' + error), 'dashboard': dashboard });
+			response.end();
+		})
+	}
+}
+
+
+/********************************[  PUT   ]********************************/
+
+dashboard.put.update = function(request, response) {
+	var body = request.body
+	,	witness = true
+	, 	id = request.params.id
+	,	dashboard = {
+		title: body.title,
+		icon: body.icon
+	};
+
+	for(var i in dashboard)
+		witness = typeof dashboard[i] == 'undefined' ? false : witness;
+
+	if(!witness)
+		response.send({'information': 'An error has occurred - missing information', 'dashboard' : dashboard });
+	else {
+		dashboard.id = id;
+		provider.update.dashboard(dashboard, function(error, data) {
+			response.send({'information': (!error ? 'dashboard updated' : 'An error has occurred - ' + error), 'dashboard': dashboard });
+			response.end();
+		})
+	}
 }
 
 

@@ -170,7 +170,7 @@ angular.module('Dashboard').
 				}
 
 				function reloadFromPool() {
-					
+
 					$pool.find('.dd-widget').each(function() {
 						var $this = angular.element(this)
 						,	widgetId = $this.attr('widget-id')
@@ -180,7 +180,6 @@ angular.module('Dashboard').
 						,	parameters = [ $this, ( widgetWidth > self.options.col ? 1 : widgetWidth ), dashydashHeight ];
 
 						if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
-							console.log('passage')
 							$local.locked = false;
 							parameters.push(
 								parseInt($this.attr('dd-col-saved'), 10),
