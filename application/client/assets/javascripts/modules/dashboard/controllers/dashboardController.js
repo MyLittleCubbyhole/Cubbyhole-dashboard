@@ -4,10 +4,10 @@ angular.module('Dashboard').
 
 		$local.dashboards = [];
 		$local.currentDashboard = {};
+		$local.lockRouteChange = false;
 
-		$local.getDashboards = function(callback) {
+		function getDashboards(callback) {
 			DashboardFactory($scope).all(function(data) {
-				$local.dashboards = [];
 				for(var i = 0; i < data.length; i++)
 					$local.dashboards.push(data[i]);
 
@@ -45,11 +45,14 @@ angular.module('Dashboard').
 
 			};
 
-			$local.currentDashboard = {};
-			if($local.dashboards === null || $local.dashboards.length == 0)
-				$local.getDashboards(function() { next(); });
-			else
-				next();
+			if(!$local.lockRouteChange) {
+				$local.lockRouteChange = true;
+				$local.currentDashboard = {};
+				if($local.dashboards === null || $local.dashboards.length == 0)
+					getDashboards(function() { next(); });
+				else
+					next();
+			}
 
 		})
 

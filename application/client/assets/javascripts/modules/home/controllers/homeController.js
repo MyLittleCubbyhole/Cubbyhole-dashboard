@@ -10,9 +10,7 @@ angular.module('Home').
 
         $local.showLoginModal = function() {
             $scope.Overlay.activated = true;
-            $local.showModalRegister = false;
             $local.showModalLogin = true;
-            $local.showModalConfirmation = false;
         }
 
         if($location.path() == '/login') {

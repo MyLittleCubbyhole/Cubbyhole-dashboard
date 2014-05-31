@@ -62,6 +62,9 @@
 .icon-group:before {
 	content: "\f0c0";
 }
+.icon-check:before {
+	content: "\f00c";
+}
 .icon-info:before {
 	content: "\e60b";
 }
@@ -91,4 +94,7 @@
 }
 .icon-rocket:before {
 	content: "\e610";
+}
+.icon-profile-male:before {
+	content: "\e040";
 }

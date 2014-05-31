@@ -16,7 +16,7 @@
 					<article class="label hidden-xs">{{Authentication.user.firstname}}</article>
 				</section>
 
-				<section id="user-card" class="bounceIn animated" ng-class="{ open: Authentication.opened }">
+				<section id="user-card" class="bounceIn animated" ng-class="{ open: Authentication.opened }" user-card>
 					<article class="card-arrow"></article>
 					<section id="user-profile">
 						<article class="user-picture">
@@ -30,12 +30,6 @@
 							<article class="user-firstname google-font">{{Authentication.user.firstname}}</article>
 							<article class="user-lastname google-font">{{Authentication.user.lastname}}</article>
 						</article>
-					</section>
-					<section id="user-navigation">
-						<article class="user-nav-options" ><span class="user-icon icon-user"></span></article>
-						<article class="user-nav-options" ><span class="user-icon icon-bars"></span></article>
-						<article class="user-nav-options" ng-if="Authentication.user.roleid == 1"><span class="user-icon icon-credit-card"></span></article>
-						<article class="user-nav-options"  ng-if="Authentication.user.roleid == 2"><span class="user-icon icon-equalizer"></span></article>
 					</section>
 					<section id="user-disconnect" class="big-font google-font" ng-click="Authentication.logout()">
 						<span>Log out</span>

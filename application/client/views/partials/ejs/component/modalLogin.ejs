@@ -2,10 +2,7 @@
     <section class="md-content">
         <article>
             <section>
-                <section class="corner-panel" ng-click="Home.showRegisterModal()">
-                    <article class="corner-panel-text big-font">SIGN IN</article>
-                </section>
-                <i class="close-icon icon-cross" ng-click="_modal.close()"></i>
+                <i class="close-icon icon-cross" ng-click="Overlay.clickout()"></i>
                 <section class="login-container" scroll-bar>
                     <form name="form" ng-submit="Login.authenticate(form.$valid)" class="form" novalidate>
 

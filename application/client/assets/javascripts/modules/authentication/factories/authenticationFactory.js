@@ -3,15 +3,17 @@ angular.module('Authentication').
         return {
             request: function(config) {
 
-                config.url += config.url.indexOf('?') > -1 ? '&' : '?';
+                if(config.url.indexOf('token') == -1) {
+                    config.url += config.url.indexOf('?') > -1 ? '&' : '?';
 
-                config.url += "token=";
+                    config.url += "token=";
 
-                var user = localStorage.getItem('user');
-                if(!user)
-                    user = sessionStorage.getItem('user');
-                if(user)
-                    config.url += JSON.parse(user).token || "";
+                    var user = localStorage.getItem('user');
+                    if(!user)
+                        user = sessionStorage.getItem('user');
+                    if(user)
+                        config.url += JSON.parse(user).token || "";
+                }
 
                 return config || $q.when(config);
             },
