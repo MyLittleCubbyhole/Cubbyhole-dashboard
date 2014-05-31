@@ -7,8 +7,16 @@
 				<i class="{{_dashboard.dashboard.icon}}" ></i>
 				{{_dashboard.dashboard.title}}
 			</section>
+				<i class="{{_dashboard.dashboard.icon}}" grumpy-ui grumpy-position="bottom" grumpy-align="left" ng-if="_dashboard.dashboard.editMode">
+				<grumpy-virgin class="bounceIn">
+					<section class="list-icons">
+						<i class="{{icon}}" ng-click="_dashboard.dashboard.icon = icon; _grumpyUi.close();" ng-repeat="icon in DashboardMenu.icons">
+							<div ng-if="($index + 1) % 5 == 0 && $index < DashboardMenu.icons.length - 1"></div>
+						</i>
+					</section>
+				</grumpy-virgin>
+				</i>
 			<section class="edit" ng-if="_dashboard.dashboard.editMode">
-				<i class="{{_dashboard.dashboard.icon}}" ></i>
                 <input type="text" ng-model="_dashboard.dashboard.title" ng-keyup="_dashboard.validEdit($event)" ng-auto-focus>
                 <i class="icon-checkmark" ng-click="_dashboard.validEdit();"></i>
                 <i class="icon-cross" ng-click="_dashboard.cancelEdit();"></i>

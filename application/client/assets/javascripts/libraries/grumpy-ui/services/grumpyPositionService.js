@@ -2,7 +2,7 @@ angular.module('Grumpy-ui').
 	service('GrumpyPosition', ['$window', function($window){
 
 		return function($scope, context) {
-			
+
 
 			if(!$scope)
 				throw 'a scope must be defined';
@@ -23,8 +23,8 @@ angular.module('Grumpy-ui').
 
 				if(position == 'top' || position == 'bottom')
 					switch($local.align) {
-						case 'left': 
-							left = $node.offset().left;
+						case 'left':
+							left = $node.offset().left - 13;
 						break;
 						case 'center':
 							left = $node.offset().left + ($node[0].offsetWidth - $grumpyNode.width())/2;
@@ -32,7 +32,7 @@ angular.module('Grumpy-ui').
 						case 'right':
 							left = $node.offset().left + $node[0].offsetWidth - $grumpyNode.width();
 						break;
-						default: 
+						default:
 							throw 'Grumpy-Accordion - unknow align type';
 						break;
 					}
@@ -47,7 +47,7 @@ angular.module('Grumpy-ui').
 							}
 						break;
 						case 'left':
-							left = $node.offset().left - $grumpyNode.width() - 15;
+							left = $node.offset().left - $grumpyNode.width() - 1;
 							if(left < 0 && !recursive) {
 								recursive = true;
 								left = prototype.left($grumpyNode, $node, 'right');
@@ -91,7 +91,7 @@ angular.module('Grumpy-ui').
 					}
 				else
 					switch($local.align) {
-						case 'top': 
+						case 'top':
 							top = $node.offset().top;
 						break;
 						case 'center':
@@ -100,11 +100,11 @@ angular.module('Grumpy-ui').
 						case 'bottom':
 							top = $node.offset().top + $node[0].offsetHeight - $grumpyNode.height();
 						break;
-						default: 
+						default:
 							throw 'Grumpy-Accordion - unknow align type';
 						break;
-					}			
-					
+					}
+
 				return top;
 			};
 

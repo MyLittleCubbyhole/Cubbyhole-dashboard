@@ -627,6 +627,18 @@ section#dashboard-selector {
     top: 9px;
 }
 
+section.list-icons {
+    padding: 3px 1px 0px 3px;
+}
+.list-icons i {
+    font-size: 17px;
+    padding: 1px;
+    cursor: pointer;
+}
+.list-icons i:nth-child(5n+0) {
+
+}
+
 @media screen and (max-width: 775px) {
 
   aside#left-panel {
