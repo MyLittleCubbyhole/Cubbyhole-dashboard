@@ -47,4 +47,17 @@ angular.module('Dashboard').
 		pie: '<section dd-widget-pie class="dd-widget"></section>',
 		table: '<section dd-widget-table class="dd-widget"></section>'
 	}).
-	constant('WIDGET_GRAPH_TYPES', ['area','line','column']);
+	constant('WIDGET_GRAPH_TYPES', [
+		{ 
+			type: 'area',
+			icon: '/images/widget-icons/tiny-icochart-area.png'
+		},
+		{ 
+			type: 'line',
+			icon: '/images/widget-icons/tiny-icochart-line.png'
+		},
+		{ 
+			type: 'column',
+			icon: '/images/widget-icons/tiny-icochart-bar.png'
+		}
+	]);

@@ -10,12 +10,97 @@
 </section>
 <section class="widget-side widget-backside" ng-controller="WidgetBackSideController">
 	<article class="widget-back-head">
+		<nav class="nav-pills">
+			<article ng-click="WidgetBackSide.tab = 'data'" ng-class="{active: WidgetBackSide.tab == 'data'}" class="pill">
+				<i class="icon-earth"></i><span class="pill-name">DATA</span>
+			</article>
+			<article ng-click="WidgetBackSide.tab = 'filters'" ng-class="{active: WidgetBackSide.tab == 'filters'}" class="pill">
+				<i class="icon-earth"></i><span class="pill-name">FILTERS</span>
+			</article>
+			<article ng-click="WidgetBackSide.tab = 'configuration'" ng-class="{active: WidgetBackSide.tab == 'configuration'}" class="pill">
+				<i class="icon-cogs"></i><span class="pill-name">CONFIGURATION</span>
+			</article>
+		</nav>
 		<article class="corner edit" ng-click="_flip.active = !_flip.active">
 			<article class="corner-text">SAVE</article>
 		</article>
-		<article class="corner del" ng-click="WidgetBackSide.delete();">
-			<article class="corner-text" >DEL</article>
-		</article>
 	</article>
-	<article class="widget-back-body">back</article>
+	<article class="widget-back-body">
+		<section id="widget-back-switch" ng-switch on="WidgetBackSide.tab">
+			<article class="widget-back-tab" ng-switch-when="data">
+				<section class="bloc-tab">
+					<article class="bloc-title">Abscisse</article>
+					<article class="bloc-content">
+						<article class="bloc-content-option">
+							<span>inscription date<i class="icon-cross"></i></span>
+						</article>
+					</article>
+				</section>
+				<section class="bloc-tab">
+					<article class="bloc-title">Ordinate</article>
+					<article class="bloc-content">
+						<article class="bloc-content-option">
+							<span>user amount<i class="icon-cross"></i></span>
+							<section class="graph-selector">
+								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
+								<article class="graph-type active"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
+								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
+							</section>
+						</article>
+						<article class="bloc-content-option">
+							<span>user amount<i class="icon-cross"></i></span>
+							<section class="graph-selector">
+								<article class="graph-type active"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
+								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
+								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
+							</section>
+						</article>
+					</article>
+				</section>
+				<section class="bloc-tab">
+					<article class="bloc-title">Segment</article>
+					<article class="bloc-content">
+						<article class="bloc-content-option disabled">
+							<span>country<i class="icon-cross"></i></span>
+						</article>
+					</article>
+				</section>
+			</article>
+			<article class="widget-back-tab" ng-switch-when="filters">
+				<section class="bloc-tab">
+					<article class="bloc-title">
+						Filters
+						<label class="toggle float-right">
+							<input type="checkbox" name="checkbox-toggle">
+							<i data-swchon-text="OR" data-swchoff-text="AND"></i>
+						</label>
+					</article>
+					<article class="bloc-content">
+						<article class="bloc-content-option filter">
+							<span>user amount</span>
+							<span>></span>							
+							<span>1993</span>
+							<article class="del-btn"><i class="icon-cross"></i></article>
+						</article>
+						<article class="bloc-content-option filter">
+							<span>user amount</span>
+							<span>></span>							
+							<span>1993</span>
+							<article class="del-btn"><i class="icon-cross"></i></article>
+						</article>
+						<article class="bloc-content-option filter">
+							<span>user amount</span>
+							<span>></span>							
+							<span>1993</span>
+							<article class="del-btn"><i class="icon-cross"></i></article>
+						</article>
+					</article>
+				</section>
+				<section class="bloc-tab">
+					<article class="add-filter btn cubby-btn">ADD</article>
+				</section>
+			</article>
+			<article class="widget-back-tab" ng-switch-when="configuration">config</article>
+		</section>
+	</article>
 </section>

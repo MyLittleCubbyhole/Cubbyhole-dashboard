@@ -4,6 +4,8 @@ angular.module('Dashboard').
 		,	widgetScopeName = $scope.$parent.toString()
 		,	$widgetScope = $scope[widgetScopeName];
 
+		$local.tab = 'data';
+
 		$local.delete = function() {
 			$widgetScope.widget.delete();
 		}
