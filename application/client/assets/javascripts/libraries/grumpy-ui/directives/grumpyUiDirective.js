@@ -1,6 +1,7 @@
 angular.module('Grumpy-ui').
 	directive('grumpyUi', function(){
 		return {
+			scope: true,
 			restrict: 'A',
 			priority: 1,
 			require: 'grumpyUi',
@@ -63,6 +64,10 @@ angular.module('Grumpy-ui').
 				$local.align = attributes.grumpyAlign || 'center';
 				$local.position = attributes.grumpyPosition || 'bottom';
 				self.stopScroll = attributes.grumpyStopScroll ? true : false;
+
+				$scope.$on('$destroy', function() {
+					$grumpyNode.remove();
+				});
 
 				$local.close = function() {
 					$local.scrolling(true);

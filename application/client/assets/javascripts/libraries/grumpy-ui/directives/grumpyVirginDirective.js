@@ -1,6 +1,7 @@
 angular.module('Grumpy-ui').
 	directive('grumpyVirgin', ['GrumpyPosition', function(GrumpyPosition){
 		return {
+			scope: true,
 			template: '<section class="grumpy-ui grumpy-virgin" ng-click="_grumpyUi.closeChildren($event);" grumpy-align="{{_grumpyUi.align}}" grumpy-position="{{_grumpyUi.position}}" ng-transclude></section>',
 			transclude: true,
 			require: '^grumpyUi',
@@ -22,7 +23,12 @@ angular.module('Grumpy-ui').
 					,	$grumpyNode = $node
 					,	displayStatus = false;
 
-					var options = {}
+					var options = {};
+
+
+					$scope.$on('$destroy', function() {
+						$grumpyNode.remove();
+					});
 
 					self.display = function(enable) {
 						enable = typeof enable == 'boolean' ? enable : !displayStatus;
