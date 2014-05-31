@@ -107,14 +107,11 @@ angular.module('Dashboard').
 					if(!definition.id)
 						return false;
 
-					console.log(definition.id);
-
 					self.dashydash.remove_all_widgets();
 
 					self.dashboardDefinition = definition;
 					if(self.dashboardDefinition.id)
 						WidgetFactory($scope).getByDashboardId(self.dashboardDefinition.id, function(widgets) {
-							console.log(widgets.length)
 							for(var i = 0; i<widgets.length; i++)
 								self.addWidget(widgets[i]);
 						});

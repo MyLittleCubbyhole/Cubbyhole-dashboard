@@ -39,24 +39,33 @@ angular.module('Dashboard').
 			width: [1,2,3,4],
 			height: 3,
 			config: {"metrics":[{"name":"count.user", "shape": "column"}],"segments":[{"name":"user.country"},{"name":"user.inscriptiondate", "axis":"abs"}], "order": "user.inscriptiondate", "stacked": true}
+		},
+		map: {
+			type: 'map',
+			name: 'Map',
+			icon: '/images/widget-icons/icochart.png',
+			width: [1,2,3,4],
+			height: 3,
+			config: {"metrics":[{"name":"count.user"}],"segments":[{"name":"user.countrycode"},{"name":"user.country"}]}
 		}
 	}).
 	constant('WIDGET_TEMPLATES', {
 		graph: '<section dd-widget-graph class="dd-widget"></section>',
 		singlenumber: '<section dd-widget-single-number class="dd-widget"></section>',
 		pie: '<section dd-widget-pie class="dd-widget"></section>',
-		table: '<section dd-widget-table class="dd-widget"></section>'
+		table: '<section dd-widget-table class="dd-widget"></section>',
+		map: '<section dd-widget-map class="dd-widget"></section>'
 	}).
 	constant('WIDGET_GRAPH_TYPES', [
-		{ 
+		{
 			type: 'area',
 			icon: '/images/widget-icons/tiny-icochart-area.png'
 		},
-		{ 
+		{
 			type: 'line',
 			icon: '/images/widget-icons/tiny-icochart-line.png'
 		},
-		{ 
+		{
 			type: 'column',
 			icon: '/images/widget-icons/tiny-icochart-bar.png'
 		}
