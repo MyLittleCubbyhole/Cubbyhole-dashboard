@@ -1,7 +1,7 @@
 <% layout('./layout/overlay-core') %>
 
 <aside id="left-panel" ng-controller="DashboardMenuController">
-	<nav class="dashboard-list">
+	<nav class="dashboard-list"  ng-cloak>
 		<article dashboard dashboard-id={{dashboard.id}} class="dashboard-option" ng-click="DashboardMenu.location(_dashboard.dashboard.id);" ng-dblclick="_dashboard.edit();" ng-repeat="dashboard in Dashboard.dashboards" ng-class="{active: _dashboard.isSelected()}">
 			<section class="menu" ng-hide="_dashboard.dashboard.editMode">
 				<i class="{{_dashboard.dashboard.icon}}" ></i>
@@ -34,7 +34,7 @@
 	<section id="body-scroller">
 		<section id="ribbon" class="row">
 			<article class="dashboard-title col-xs-12 col-sm-8 col-md-5">
-				<span grumpy-ui grumpy-position="bottom" grumpy-align="center">
+				<span grumpy-ui grumpy-position="bottom" grumpy-align="center" ng-cloak>
 					<span class="title-text">
 						{{Dashboard.currentDashboard.title}}
 						<i class="icon-cross hidden-xs" ng-click="Dashboard.delete($event)"></i>

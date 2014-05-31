@@ -996,33 +996,33 @@ section[dd-width="1"] .add-filter.btn.cubby-btn {
 }
 
 @media screen and (max-width: 1050px) {
-	section[dd-width="2"] .nav-pills .pill span.pill-name {
-		display: none;
-	}
+    section[dd-width="2"] .nav-pills .pill span.pill-name {
+        display: none;
+    }
 
-	section[dd-width="2"] section.graph-selector {
-	margin-left: 10px;
-	margin-bottom: 20px;
-	}
-	section[dd-width="2"] .bloc-content-option span {
-		display: block;
-		margin-bottom: 4px;
-		text-align: center;
-	}
-	section[dd-width="2"] .bloc-content-option {
-		position: relative;
-	}
-	section[dd-width="2"] .bloc-content-option article.del-btn {
-		position: absolute;
-		top: -8px;
-		right: -4px;
-	}
-	section[dd-width="2"] .bloc-content {
-		margin-top: 4px;
-	}
-	section[dd-width="2"] .add-filter.btn.cubby-btn {
-	margin: auto;
-	}
+    section[dd-width="2"] section.graph-selector, section[dd-width="1"] section.graph-selector {
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+    section[dd-width="2"] .bloc-content-option span, section[dd-width="1"] .bloc-content-option span {
+        display: block;
+        margin-bottom: 4px;
+        text-align: center;
+    }
+    section[dd-width="2"] .bloc-content-option, section[dd-width="1"] .bloc-content-option {
+        position: relative;
+    }
+    section[dd-width="2"] .bloc-content-option article.del-btn, section[dd-width="1"] .bloc-content-option article.del-btn {
+        position: absolute;
+        top: -8px;
+        right: -4px;
+    }
+    section[dd-width="2"] .bloc-content, section[dd-width="1"] .bloc-content {
+        margin-top: 4px;
+    }
+    section[dd-width="2"] .add-filter.btn.cubby-btn, section[dd-width="1"] .add-filter.btn.cubby-btn {
+        margin: auto;
+    }
 }
 
 @media screen and (max-width: 775px) {
