@@ -1,7 +1,45 @@
 var MysqlTools = { query: {} }
+,	crypto = require('crypto')
 ,	_ = require('lodash')
 ,	queryBuilder = require(global.paths.server + '/config/core').get()['query-builder'];
 
+function encrypt(string, salt) {
+    var hash = crypto.createHash('sha512');
+
+    hash.update(string);
+    hash.update(salt);
+
+    return hash.digest('base64');
+};
+
+MysqlTools.generateRandomBytes = function(numberOfBytes, callback) {
+    crypto.randomBytes(numberOfBytes, function(exception, bytes) {
+        if(exception)
+            throw exception;
+
+        callback(bytes.toString('base64'));
+    });
+}
+
+MysqlTools.generatePassword = function(password, callback){
+    var data = {};
+
+    if(!password || password.length<8)
+        console.warn('invalid password - password length must be greater than 8');
+
+    MysqlTools.generateRandomBytes(256, function(salt) {
+        data.salt = salt;
+
+        data.password = encrypt(password, data.salt);
+
+        callback.call(this, data);
+    });
+}
+
+MysqlTools.checkPassword = function(userPassword, bddPassword, salt){
+    var encryptedPassword = encrypt(userPassword, salt);
+    return encryptedPassword === bddPassword;
+}
 
 MysqlTools.query.generate = function(options) {
 	var request = 'SELECT '
@@ -41,15 +79,15 @@ MysqlTools.query.generate = function(options) {
 		name = options.filters[i].name;
 
 		switch(options.filters[i].operator.toLowerCase()) {
-			case 'BETWEEN': 
-			case 'NOT BETWEEN': 
+			case 'BETWEEN':
+			case 'NOT BETWEEN':
 				value = options.filters[i].value.join(' AND ');
 			break;
 			case 'IN':
-			case 'NOT IN': 
+			case 'NOT IN':
 				value = '(' + options.filters[i].value.join(',') + ')';
 			break;
-			default: 
+			default:
 				value = options.filters[i].value;
 			break;
 		}
@@ -70,7 +108,7 @@ MysqlTools.query.generate = function(options) {
 		request += 'WHERE ' + where.join(' ' + options.operator + ' ') + ' ';
 
 	if(options.metrics.length > 0 && options.segments.length > 0) {
-		request += 'GROUP BY ';	
+		request += 'GROUP BY ';
 		for(var i = 0; i < options.segments.length; i++) {
 			if(i > 0)
 				request += ',';
@@ -110,7 +148,7 @@ MysqlTools.query.makeJoin = function(tables) {
 			if(!tables_done[dependencyDefinition.name][tableDefinition.name]) {
 				request += 'ON ' + dependencyDefinition.alias + '.' + dependencyDefinition.join[tableDefinition.name].on[0] + ' = ' + tableDefinition.alias + '.' + dependencyDefinition.join[tableDefinition.name].on[1] + ' ';
 				tables_done[dependencyDefinition.name][tableDefinition.name] = true;
-			}			
+			}
 			if(!tables_done[joinTableDefinition.name]) {
 				request += 'INNER JOIN ' + joinTableDefinition.name + ' ' + joinTableDefinition.alias + ' ';
 				tables_done[joinTableDefinition.name] = {};

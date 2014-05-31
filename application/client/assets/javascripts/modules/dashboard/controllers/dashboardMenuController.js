@@ -21,6 +21,7 @@ angular.module('Dashboard').
         ];
 
         $local.location = function(location) {
+            $scope.Dashboard.lockRouteChange = false;
             $location.path('/' + location);
         };
 

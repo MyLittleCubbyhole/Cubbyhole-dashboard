@@ -1,0 +1,396 @@
+.md-modal {
+    max-width: 700px;
+    width: 500px;
+}
+.md-content {
+    background-color: #f5f5f5;
+    border-radius: 0;
+    overflow: hidden;
+}
+.md-content a {
+    color: #FFF;
+}
+.md-content .corner-panel {
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 126px;
+    height: 107px;
+    background-color: #9ad6f2;
+    -webkit-transform: rotate(-40deg) translateX(-10px) translateY(-80px);
+       -moz-transform: rotate(-40deg) translateX(-10px) translateY(-80px);
+        -ms-transform: rotate(-40deg) translateX(-10px) translateY(-80px);
+         -o-transform: rotate(-40deg) translateX(-10px) translateY(-80px);
+            transform: rotate(-40deg) translateX(-10px) translateY(-80px);
+    cursor: pointer;
+    z-index: 1;
+}
+.md-content .corner-panel .corner-panel-text {
+    position: absolute;
+    font-size: 18px;
+    top: 80px;
+    left: 40px;
+    color: #F0F0F0;
+}
+#modal-login .md-content .corner-panel .corner-panel-text {
+    left: 33px;
+}
+.md-content .close-icon {
+    color: rgb(155, 155, 155);
+    font-size: 21px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+.md-content > article {
+    padding: 9px 0px 9px;
+}
+#modal-sharing-folder .md-content > article,
+#modal-sharing-file .md-content > article {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.md-content .url {
+    position: relative;
+    width: 100%;
+    height: 311px;
+    text-align: center;
+}
+.md-content .url.copy-zone>section {
+    height: 177px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.md-content .url .icon-cloud-download {
+    font-size: 177px;
+    height: 177px;
+    color: #D5D5D5;
+    text-shadow: 0px 0px 4px rgb(133, 133, 133);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.md-content .url.copy-zone:hover .icon-cloud-download {
+    color: #75c8ef;
+    text-shadow: 0px 0px 4px #2B7597;
+}
+.md-content .url.copy-zone.zeroclipboard-is-hover .icon-cloud-download {
+    color: #75c8ef;
+    text-shadow: 0px 0px 4px #2B7597;
+}
+/*.md-content .url.copy-zone:active .icon-cloud-download {
+
+    -webkit-backface-visibility: visible;
+    -ms-backface-visibility: visible;
+    backface-visibility: visible;
+    -webkit-animation-name: flip;
+    animation-name: flip;
+}
+.md-content .url.copy-zone.zeroclipboard-is-active .icon-cloud-download {
+
+    -webkit-backface-visibility: visible;
+    -ms-backface-visibility: visible;
+    backface-visibility: visible;
+    -webkit-animation-name: flip;
+    animation-name: flip;
+}*/
+.md-content .url span {
+    font-size: 20px;
+    height: 16px;
+    color: #BDBDBD;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.md-content .url.copy-zone:hover span {
+    color: #75c8ef;
+}
+.md-content .url.copy-zone.zeroclipboard-is-hover span {
+    color: #75c8ef;
+}
+
+.scroll-bar-container {
+    overflow: auto;
+}
+
+
+.input-share input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #C9C9C9;
+    width: 100%;
+    height: 33px;
+    color: #8B8B8B;
+    font-size: 18px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.input-share input:focus {
+    outline: none;
+}
+
+.users-container {
+    height: 370px;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.users-share {
+    margin-bottom: 25px;
+}
+
+.users-share .user-share:last-child {
+    border-bottom: 0;
+}
+
+.users-share .user-share {
+    height: 44px;
+    margin-top: 4px;
+    margin-bottom: 3px;
+    position: relative;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.users-share .user-share .user-icon {
+    display: inline-block;
+}
+.user-share .user-icon .img-circle {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    position: relative;
+}
+
+.user-share .user-icon .img-circle img {
+    height: 40px;
+    margin: auto;
+    display: block;
+    background-color: black;
+}
+.user-share .user-icon .img-circle i {
+   color: #727272;
+    font-size: 28px;
+    display: block;
+    margin-top: 4px;
+}
+
+.users-share .user-share .user-email {
+    display: inline-block;
+    color: #8B8B8B;
+    font-size: 16px;
+    position: absolute;
+    margin-left: 8px;
+    top: 9px;
+    max-width: 264px;
+    word-wrap: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.users-share .user-share .user-right {
+    display: inline-block;
+    width: 102px;
+    height: 25px;
+    position: absolute;
+    margin-left: 7px;
+    right: 47px;
+    top: 8px;
+    overflow: hidden;
+    color: #8B8B8B;
+    font-size: 16px;
+}
+
+.users-share .user-share .user-right select {
+    width: 122px;
+    height: 23px;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid #c5c5c5;
+    background-color: transparent;
+}
+.users-share .user-share .user-right select:focus {
+    outline: none;
+}
+
+.users-share .user-share .user-remove {
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    right: 18px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #A5A5A5;
+}
+
+
+.buttons {
+    height: 68px;
+    padding-top: 20px;
+}
+
+.button {
+    border: none;
+    height: 50px;
+    width: 204px;
+    font-size: 20px !important;
+    background-color: #ff5a5a;
+    text-align: center;
+    line-height: 31px;
+    -webkit-transition: .02s all linear;
+    -moz-transition: .02s all linear;
+    -ms-transition: .02s all linear;
+    -o-transition: .02s all linear;
+    transition: .02s all linear;
+}
+.button:focus {
+    outline: none;
+}
+.button.left {
+    float: left;
+}
+.button.right {
+    float: right;
+}
+
+.button.red {
+    background-color: #ff5a5a;
+}
+.button.red:hover {
+    background-color: #F14242;
+}
+.button.blue {
+    background-color: #75c8ef;
+}
+.button.green {
+    background-color: #83c734;
+}
+.button.green:hover {
+    background-color: #83c734;
+}
+.button.blue:hover {
+    background-color: #5DC0EE;
+}
+
+.button img,
+.button i {
+    height: 31px;
+    margin-left: 21px;
+    margin-right: -11px;
+    padding-bottom: 1px;
+    float: left;
+}
+
+.button.unshare i {
+    font-size: 28px;
+    float: left;
+    margin-right: -16px;
+    padding-top: 2px;
+}
+.button.register {
+    margin: auto;
+}
+.button.register i {
+    font-size: 21px;
+    float: left;
+    margin-right: 23px;
+    padding-top: 8px;
+}
+#modal-confirmation .button.register i {
+    margin-right: 32px;
+    padding-top: 2px;
+}
+
+.confirmation-container .confirmation {
+    color: #ababab;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 9px;
+}
+
+.button.close img,
+.button.close i,{
+    margin-right: 33px;
+}
+
+@media screen and (max-width: 520px) {
+
+    .md-modal {
+        width: 400px;
+    }
+
+    .md-content .url .copy-zone {
+        height: 147px;
+    }
+
+    .md-content .url .icon-cloud-download {
+        font-size: 137px;
+        height: 137px;
+    }
+
+    .users-share .user-share .user-email {
+        max-width: 172px;
+    }
+
+    .button {
+        width: 184px;
+    }
+
+    .scroll-bar-container {
+        height: 600px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+    .md-modal {
+        width: 100px;
+    }
+
+    .md-content .url .copy-zone {
+        height: 137px;
+    }
+
+    .md-content .url .icon-cloud-download {
+        font-size: 117px;
+        height: 117px;
+    }
+
+    .users-share .user-share .user-email {
+        max-width: 97px;
+    }
+
+    .button {
+        width: 174px;
+    }
+
+    #modal-sharing-folder .button {
+        width: 144px;
+    }
+
+    #modal-sharing-folder .button img,
+    #modal-sharing-folder .button i {
+        margin-left: 14px;
+        margin-right: 11px;
+    }
+
+    .scroll-bar-container {
+        height: 600px;
+    }
+}

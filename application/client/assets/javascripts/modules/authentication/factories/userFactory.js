@@ -1,5 +1,5 @@
 angular.module('Authentication').
-    factory('UserFactory', ['$window', '$http', function($window, $http){
+    factory('UserFactory', ['$window', '$http', 'AuthenticationFactory', function($window, $http, AuthenticationFactory){
 
         var _user = {};
 
@@ -44,7 +44,7 @@ angular.module('Authentication').
             prototype.logout = function() {
                 var user = prototype.get();
                 if(user.token) {
-                    $http.get('/api/logout').
+                    $http.get(AuthenticationFactory.request({ url: '/api/logout' }).url).
                     success(function(data, status, headers, config) {
                         localStorage.removeItem('user');
                         sessionStorage.removeItem('user');

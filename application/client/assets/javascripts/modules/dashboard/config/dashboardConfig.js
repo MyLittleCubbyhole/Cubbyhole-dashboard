@@ -1,5 +1,5 @@
 angular.module('Dashboard').
-    config(['$locationProvider', '$routeProvider', function($location, $routeProvider) {
+    config(['API_URL', '$locationProvider', '$routeProvider', '$httpProvider', '$sceDelegateProvider', function(API_URL, $location, $routeProvider, $httpProvider, $sceDelegateProvider) {
 
         $routeProvider
         .when('/add', {
@@ -11,5 +11,12 @@ angular.module('Dashboard').
         .otherwise({ redirectTo: '/' });
 
         $location.html5Mode(false);
+
+        $httpProvider.interceptors.push('AuthenticationFactory');
+
+        $sceDelegateProvider.resourceUrlWhitelist([
+           'self',
+           API_URL + '**'
+        ]);
 
     }]);

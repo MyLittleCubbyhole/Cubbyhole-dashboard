@@ -53,11 +53,24 @@ section#body {
 	right: 0px;
 	bottom: 0px;
 	z-index: 10;
-	/*background-color: rgba(0, 0, 0, 0.6);*/
+	background-color: rgba(0, 0, 0, 0.6);
 }
 
 #overlay.activated {
 	display: block;
+}
+
+.form-file-preview {
+    background-repeat:no-repeat!important;
+    background-position:center center!important;
+    -webkit-background-size:cover!important;
+    -moz-background-size:cover!important;
+    -o-background-size:cover!important;
+    background-size:cover!important;
+}
+
+.form-file-preview .form-file-hide{
+    display:none!important;
 }
 
 /**gestion du flip widget**/
