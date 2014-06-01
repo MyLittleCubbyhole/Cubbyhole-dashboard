@@ -24,13 +24,13 @@ angular.module('Dashboard').
 
 			$local.kpis[QUERY_BUILDER[i].category].push(kpi);
 
-			if(QUERY_BUILDER[i].type == 'segment') {
+			if(QUERY_BUILDER[i].type == 'segment' || QUERY_BUILDER[i].type == 'meta') {
 				if(!$local.segments[QUERY_BUILDER[i].category])
 					$local.segments[QUERY_BUILDER[i].category] = [];
 				$local.segments[QUERY_BUILDER[i].category].push(kpi);
 			}
 
-			if(QUERY_BUILDER[i].type == 'metric') {
+			if(QUERY_BUILDER[i].type == 'metric' || QUERY_BUILDER[i].type == 'meta') {
 				if(!$local.metrics[QUERY_BUILDER[i].category])
 					$local.metrics[QUERY_BUILDER[i].category] = [];
 				$local.metrics[QUERY_BUILDER[i].category].push(kpi);
@@ -60,16 +60,18 @@ angular.module('Dashboard').
 				value: [0]
 			})
 		}
-		$local.addMetric = function() {
+		$local.addMetric = function(options) {
+			options = angular.extend({ name: QUERY_BUILDER['user.country'].index}, options);
 			$widgetScope.widget.metrics.push({
 				kpi: QUERY_BUILDER['count.user'],
-				options: { name: QUERY_BUILDER['count.user'].index }
+				options: options
 			})
 		}
-		$local.addSegment = function() {
+		$local.addSegment = function(options) {
+			options = angular.extend({ name: QUERY_BUILDER['user.country'].index}, options);
 			$widgetScope.widget.segments.push({
 				kpi: QUERY_BUILDER['user.country'],
-				options: { name: QUERY_BUILDER['user.country'].index }
+				options: options
 			})
 		}
 
