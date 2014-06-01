@@ -66,7 +66,7 @@ angular.module('Grumpy-ui').
 				self.stopScroll = attributes.grumpyStopScroll ? true : false;
 
 				$scope.$on('$destroy', function() {
-					$grumpyNode.remove();
+					$node.remove();
 				});
 
 				$local.close = function() {

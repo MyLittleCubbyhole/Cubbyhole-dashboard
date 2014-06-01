@@ -189,6 +189,7 @@ section.widget-content .widget-side .widget-front-body {
 /** corner **/
 
 .dd-widget {
+	font-family: Lato;
 	border-radius: 5px;
 	/*overflow: hidden;*/
 }
@@ -457,6 +458,8 @@ section#body-content {
 	overflow: hidden;
 }
 section#body-scroller {
+
+	margin-bottom: 70px;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -736,6 +739,7 @@ article.widget-back-head {
 	margin: 10px 5px 0px 5px;
 	border-radius: 3px;
 	position: relative;
+	font-family: Lato;
 	cursor: pointer;
 	background-color: #F3F3F3;
 }
@@ -753,8 +757,10 @@ article.pill:hover {
 	background-color: rgb(241, 241, 241);
 }
 article.pill.active {
-	background-color: #E6E6E6;
-	/*color: white;*/
+	/*background-color: #E6E6E6;*/
+	background-color: #454545;
+
+	color: white;
 }
 
 section[dd-width="1"] .nav-pills .pill span.pill-name {
@@ -950,6 +956,13 @@ article.bloc-content-option.filter {
 
 article.del-btn {
 	display: inline-block;
+	color: #B6B6B6;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+article.del-btn:hover {
+	color: #484848;
 }
 
 section[dd-width="1"] .bloc-content-option.filter span {
@@ -1013,10 +1026,11 @@ section.filter-box {
 
 section.filter-kpi-box {
 	margin: 10px 0px 10px 10px;
-	height: 165px;
+	max-height: 200px;
 	overflow: hidden;
 	overflow-y: auto;
-	max-width: 240px;
+	max-width: 290px;
+	min-width: 275px;
 }
 
 .filter-box article {
@@ -1044,6 +1058,7 @@ article.kpi-category {
 	min-width: 200px;
 	border-radius: 2px;
 	color: #828282;
+	width: 258px;
 	cursor: pointer;
 }
 article.kpi-category:hover {
@@ -1090,11 +1105,23 @@ section.filter-value-box {
 	color: #484848;
 }
 .filter-value-box input {
-	background-color: #F3F3F3;
+	background-color: #303030;
 	outline: none;
 	padding-left: 10px;
+	border: none;
+	height: 30px;
+	color: #ccc;
+	border-radius: 2px;
+	line-height: 30px;
 }
-
+input.config-title {
+	outline: none;
+	max-width: 300px;
+	width: 100%;
+	height: 40px;
+	line-height: 30px;
+	padding: 5px 10px;
+}
 
 
 @media screen and (min-width: 1750px) {	
@@ -1131,6 +1158,37 @@ section.filter-value-box {
 	section[dd-width="2"] .add-filter.btn.cubby-btn, section[dd-width="1"] .add-filter.btn.cubby-btn {
 		margin: auto;
 	}
+}
+article.bloc-option {
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3px;
+    font-size: 18px;
+    color: #484848;
+    font-family: Lato;
+    cursor: pointer;
+}
+article.bloc-option:hover {
+    background-color: #F2F2F2;
+}
+article.bloc-option.active {
+    background-color: #454545;
+    color: white;
+}
+article.bloc-button {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-family: Lato;
+}
+article.bloc-button:hover {
+    background-color: #D23E3E;  color: white;
 }
 
 @media screen and (max-width: 775px) {

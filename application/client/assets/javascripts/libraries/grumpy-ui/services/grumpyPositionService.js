@@ -92,7 +92,7 @@ angular.module('Grumpy-ui').
 				else
 					switch($local.align) {
 						case 'top':
-							top = $node.offset().top;
+							top = $node.offset().top - 6;
 						break;
 						case 'center':
 							top = $node.offset().top + ($node[0].offsetHeight - $grumpyNode.height())/2

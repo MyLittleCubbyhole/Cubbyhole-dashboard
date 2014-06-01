@@ -58,25 +58,10 @@ angular.module('Dashboard').
 		"subscribe.paused": {  "category":"subscribe", "index": "subscribe.paused", "type": "segment", "alias": "subscribe_paused", "datatype" : "number" },
 		"subscribe.renew": {  "category":"subscribe", "index": "subscribe.renew", "type": "segment", "alias": "subscribe_renew", "datatype" : "number" },
 	}).
-	constant('OPERATORS', [
-		{
-			"name": "GREATER THAN",
-			"value": ">"
-		},
-		{
-			"name": "LOWER THAN",
-			"value": "<"
-		},
-		{
-			"name": "EQUAL",
-			"value": "="
-		},
-		{
-			"name": "NOT EQUAL",
-			"value": "!="
-		},
-		{
-			"name": "BETWEEN",
-			"value": "BETWEEN"
-		}
-	]);
+	constant('OPERATORS', {
+		">": "GREATER THAN",
+		"<": "LOWER THAN",
+		"=": "EQUAL",
+		"!=": "NOT EQUAL",
+		"BETWEEN": "BETWEEN"
+	});

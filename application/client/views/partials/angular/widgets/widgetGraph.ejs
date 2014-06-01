@@ -6,7 +6,7 @@
 			<article class="corner-text">EDIT</article>
 		</article>
 	</article>
-	<article class="widget-front-body">front</article>
+	<article class="widget-front-body"></article>
 </section>
 <section class="widget-side widget-backside" ng-controller="WidgetBackSideController">
 	<article class="widget-back-head">
@@ -21,7 +21,7 @@
 				<i class="icon-cogs"></i><span class="pill-name">CONFIGURATION</span>
 			</article>
 		</nav>
-		<article class="corner edit" ng-click="_flip.active = !_flip.active">
+		<article class="corner edit" ng-click="WidgetBackSide.save();">
 			<article class="corner-text">SAVE</article>
 		</article>
 	</article>
@@ -32,14 +32,14 @@
 					<article class="bloc-title">Abscisse</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option">
-							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
-								<span>INSCRIPTION DATE<i class="icon-cross"></i></span>
+							<span grumpy-ui grumpy-position="right" grumpy-align="top">
+								<span>{{_ddWidgetGraph.widget.segments[0].kpi.alias}}</span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
-										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index">
-											<article class="kpi-category">{{category}}</article>
-											<section class="kpi-list">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
+											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+											<section class="kpi-list" ng-class="{ open: kpistatus}">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[0].kpi = kpi" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[0].kpi }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -54,14 +54,14 @@
 					<article class="bloc-title">Ordinate</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option">
-							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
-								<span>INSCRIPTION DATE<i class="icon-cross"></i></span>
+							<span grumpy-ui grumpy-position="right" grumpy-align="top">
+								<span>{{_ddWidgetGraph.widget.metrics[0].kpi.alias}}</span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
-										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index">
-											<article class="kpi-category">{{category}}</article>
-											<section class="kpi-list">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
+											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+											<section class="kpi-list" ng-class="{ open: kpistatus}">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[0].kpi = kpi" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[0].kpi }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -75,15 +75,16 @@
 								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
 							</section>
 						</article>
-						<article class="bloc-content-option">
-							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
-								<span>INSCRIPTION DATE<i class="icon-cross"></i></span>
+						<article class="bloc-content-option" ng-class="{ disabled: !_ddWidgetGraph.widget.metrics[1] }">
+							<span ng-if="!_ddWidgetGraph.widget.metrics[1]" ng-click="WidgetBackSide.addMetric();_ddWidgetGraph.widget.segments.splice(1,1);">NONE</span>
+							<span grumpy-ui grumpy-position="right" grumpy-align="top" ng-if="!!_ddWidgetGraph.widget.metrics[1]">
+								<span>{{_ddWidgetGraph.widget.metrics[1].kpi.alias}}<i class="icon-cross" ng-click="_ddWidgetGraph.widget.metrics.splice(1,1);"></i></span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
-										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index">
-											<article class="kpi-category">{{category}}</article>
-											<section class="kpi-list">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
+											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+											<section class="kpi-list" ng-class="{ open: kpistatus}">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[1].kpi = kpi" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[1].kpi }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -102,15 +103,16 @@
 				<section class="bloc-tab">
 					<article class="bloc-title">Segment</article>
 					<article class="bloc-content">
-						<article class="bloc-content-option disabled">
-							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
-								<span>INSCRIPTION DATE<i class="icon-cross"></i></span>
+						<article class="bloc-content-option" ng-class="{ disabled: !_ddWidgetGraph.widget.segments[1] }">
+							<span ng-if="!_ddWidgetGraph.widget.segments[1]" ng-click="WidgetBackSide.addSegment();_ddWidgetGraph.widget.metrics.splice(1,1);">NONE</span>
+							<span grumpy-ui grumpy-position="right" grumpy-align="top" ng-if="!!_ddWidgetGraph.widget.segments[1]">
+								<span>{{_ddWidgetGraph.widget.segments[1].kpi.alias}}<i class="icon-cross" ng-click="_ddWidgetGraph.widget.segments.splice(1,1);"></i></span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
-										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index">
-											<article class="kpi-category">{{category}}</article>
-											<section class="kpi-list">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
+											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+											<section class="kpi-list" ng-class="{ open: kpistatus}">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[1].kpi = kpi" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[1].kpi }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -127,21 +129,20 @@
 					<article class="bloc-title">
 						Filters
 						<label class="toggle float-right">
-							<input type="checkbox" name="checkbox-toggle">
+							<input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetGraph.widget.operator = _ddWidgetGraph.widget.operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetGraph.widget.operator == 'AND'">
 							<i data-swchon-text="OR" data-swchoff-text="AND"></i>
 						</label>
 					</article>
 					<article class="bloc-content">
-						<article class="bloc-content-option filter">
-
+						<article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetGraph.widget.filters track by $index">
 							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
-								AMOUNT_USER
+								{{filter.kpi.alias}}
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
-										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index">
-											<article class="kpi-category">{{category}}</article>
-											<section class="kpi-list">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-class="{ active: $index == 0 }">
+										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">
+											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+											<section class="kpi-list" ng-class="{ open: kpistatus}">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi" ng-class="{ active: kpi.index == filter.kpi.index }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -150,33 +151,52 @@
 								</grumpy-virgin>
 							</span>
 							<span grumpy-ui grumpy-position="bottom" grumpy-align="center">
-								GREATER THAN
+								{{WidgetBackSide.operators[filter.operator]}}
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-box">
-										<article ng-repeat="operator in WidgetBackSide.operators track by $index" ng-class="{ active: $index == 0 }">
-											{{operator.name}}
+										<article ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-click="filter.operator = index" ng-class="{ active: index == filter.operator }">
+											{{operator}}
 										</article>
 									</section>
 								</grumpy-virgin>
 							</span>
 
-							<span grumpy-ui grumpy-position="bottom" grumpy-align="right">
-								value
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="right" ng-repeat="value in filter.value track by $index">
+								{{ value ? value : 'VALUE' }}
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-value-box">
-										<input type="text" placeholder="value">
+										<input type="text" placeholder="value" ng-model="filter.value[$index]">
 									</section>
 								</grumpy-virgin>
 							</span>
-							<article class="del-btn"><i class="icon-cross"></i></article>
+							<article class="del-btn" ng-click="_ddWidgetGraph.widget.filters.splice($index, 1);"><i class="icon-cross"></i></article>
 						</article>
 					</article>
 				</section>
 				<section class="bloc-tab">
-					<article class="add-filter btn cubby-btn">ADD</article>
+					<article class="add-filter btn cubby-btn" ng-click="WidgetBackSide.addFilter();">ADD</article>
 				</section>
 			</article>
-			<article class="widget-back-tab" ng-switch-when="configuration">config</article>
+			<article class="widget-back-tab" ng-switch-when="configuration">
+				<section class="bloc-tab">
+					<article class="bloc-title">Title</article>
+					<article class="bloc-content"><input type="text" class="config-title" placeholder="title" ng-model="_ddWidgetGraph.widget.title"></article>
+				</section>
+				<section class="bloc-tab">
+					<article class="bloc-title">Width</article>
+					<article class="bloc-content">
+						<section class="bloc-selector">
+							<article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.width == 1 }" ng-click="WidgetBackSide.resize({ width: 1 });">25%</article>
+							<article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.width == 2 }" ng-click="WidgetBackSide.resize({ width: 2 });">50%</article>
+							<article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.width == 3 }" ng-click="WidgetBackSide.resize({ width: 3 });">75%</article>
+							<article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.width == 4 }" ng-click="WidgetBackSide.resize({ width: 4 });">100%</article>
+						</section>
+					</article>
+				</section>
+				<section class="bloc-tab">
+					<article class="bloc-button" ng-click="WidgetBackSide.delete()">DELETE WIDGET</article>
+				</section>
+			</article>
 		</section>
 	</article>
 </section>

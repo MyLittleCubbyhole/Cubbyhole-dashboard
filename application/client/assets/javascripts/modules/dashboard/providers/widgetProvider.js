@@ -75,6 +75,16 @@ angular.module('Dashboard').
 				})
 			};
 
+			Widget.prototype.resize = function(size, callback) {
+				var self = this;
+				callback = callback || angular.noop;
+				angular.extend(self.size, size);
+
+				self.scope.$emit('resize_widget', { node: self.node, size: self.size, callback: function() {
+					callback.call(self);
+				}});
+			};
+
 			Widget.prototype.toString = function() {
 				return 'Widget';
 			};

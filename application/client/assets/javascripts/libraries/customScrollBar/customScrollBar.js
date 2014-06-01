@@ -410,7 +410,8 @@ THE SOFTWARE.
 						}
 					}).bind("mouseup."+$this.data("mCustomScrollbarIndex"),function(e){
 						$this.data({"on_drag":false}); mCSB_dragger.removeClass("mCSB_dragger_onDrag");
-						$this.data("onDragStop_Callback").call($this);
+						if($this.data("onDragStop_Callback"))
+							$this.data("onDragStop_Callback").call($this);
 					});
 				}
 				$this.data({"bindEvent_scrollbar_drag":true});

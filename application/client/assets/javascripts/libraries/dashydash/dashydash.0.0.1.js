@@ -371,7 +371,7 @@ isDragged = false;
         this.set_dom_grid_height();
         this.set_dom_grid_width();
 
-        if (callback) {
+        if (callback && typeof callback == 'function') {
             callback.call(this, new_grid_data.width, new_grid_data.height);
         }
 

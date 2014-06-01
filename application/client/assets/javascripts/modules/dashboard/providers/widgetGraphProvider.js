@@ -24,10 +24,8 @@ angular.module('Dashboard').
 				,	axisType = ''
 				,	index = '';
 
-				self.chartOptions.title = {
-					text: self.title,
-					align: 'left'
-				};
+				if(!data || data.length == 0)
+					return true;
 
 				self.chartOptions.series = [];
 
@@ -175,7 +173,12 @@ angular.module('Dashboard').
 			};
 
 			Widget.prototype.refresh = function() {
-				this.node.find('.widget-front-body').highcharts(this.chartOptions);
+				var self = this;
+				self.chartOptions.title = {
+					text: self.title,
+					align: 'left'
+				};
+				this.node.find('.widget-front-body').highcharts(self.chartOptions);
 			}
 
 			Widget.prototype.toString = function() {

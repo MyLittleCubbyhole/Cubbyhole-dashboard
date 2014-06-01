@@ -32,7 +32,7 @@ angular.module('Dashboard').
 					_.merge(options, WIDGET_DEFAULT_DEFINITION, definition);
 
 					WidgetFactory($scope).create(self.dashboardDefinition.id, options, function(definition) {
-						self.addWidget(definition, function() { self.serialize(); })
+						self.addWidget(definition, function() { $local.serialize(); })
 					})
 				});
 
@@ -41,9 +41,13 @@ angular.module('Dashboard').
 					self.deleteWidget(options.node);
 				});
 
+				$scope.$on('resize_widget', function(scope, options) {
+					self.resizeWidget(options.node, options.size, options.callback);
+				});
+
 				//**************** dashydash management ****************//
 
-				self.serialize = function() {
+				$local.serialize = function() {
 					var currentAmountOfColumn = DashboardOptimizeService.amountOfColumn()
 					if(DASHYDASH_SETTINGS.columns.xs != currentAmountOfColumn) {
 						var serialization = self.dashydash.serialize();
@@ -54,7 +58,11 @@ angular.module('Dashboard').
 
 				self.deleteWidget = function($node) {
 					self.dashydash.remove_widget($node);
-					self.serialize();
+					$local.serialize();
+				}
+
+				self.resizeWidget = function(node, size, callback) {
+					self.dashydash.resize_widget( node, size.width, size.height, callback);
 				}
 
 				self.addWidget = function(definition, callback) {
@@ -107,14 +115,11 @@ angular.module('Dashboard').
 					if(!definition.id)
 						return false;
 
-					console.log(definition.id);
-
 					self.dashydash.remove_all_widgets();
 
 					self.dashboardDefinition = definition;
 					if(self.dashboardDefinition.id)
 						WidgetFactory($scope).getByDashboardId(self.dashboardDefinition.id, function(widgets) {
-							console.log(widgets.length)
 							for(var i = 0; i<widgets.length; i++)
 								self.addWidget(widgets[i]);
 						});
@@ -141,7 +146,7 @@ angular.module('Dashboard').
 					destroy();
 
 					self.dashydash = $board.dashyDash({
-						draggable: { stop: self.serialize },
+						draggable: { stop: $local.serialize },
 						margin: [DASHYDASH_SETTINGS.margin, DASHYDASH_SETTINGS.margin],
 						max_cols: self.options.col,
 						dimensions: [ width, DASHYDASH_SETTINGS.height]

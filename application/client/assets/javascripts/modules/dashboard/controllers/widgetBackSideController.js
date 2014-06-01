@@ -38,8 +38,39 @@ angular.module('Dashboard').
 
 		}
 
+		$local.save = function() {
+			$scope._flip.active = !$scope._flip.active;
+			$widgetScope.widget.refresh();
+			$scope._dashydash.serialize();
+		}
+
+		$local.resize = function(size) {
+			size = size || {};
+			$widgetScope.widget.resize(size);
+		}
+
 		$local.delete = function() {
 			$widgetScope.widget.delete();
+		}
+
+		$local.addFilter = function() {
+			$widgetScope.widget.filters.push({
+				kpi: QUERY_BUILDER['count.user'],
+				operator: '>',
+				value: [0]
+			})
+		}
+		$local.addMetric = function() {
+			$widgetScope.widget.metrics.push({
+				kpi: QUERY_BUILDER['count.user'],
+				options: { name: QUERY_BUILDER['count.user'].index }
+			})
+		}
+		$local.addSegment = function() {
+			$widgetScope.widget.segments.push({
+				kpi: QUERY_BUILDER['user.country'],
+				options: { name: QUERY_BUILDER['user.country'].index }
+			})
 		}
 
 		$scope.toString = function() {
