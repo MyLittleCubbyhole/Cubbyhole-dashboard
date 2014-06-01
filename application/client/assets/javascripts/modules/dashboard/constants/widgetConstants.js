@@ -43,7 +43,7 @@ angular.module('Dashboard').
 		map: {
 			type: 'map',
 			name: 'Map',
-			icon: '/images/widget-icons/icochart.png',
+			icon: '/images/widget-icons/icomap.png',
 			width: [1,2,3,4],
 			height: 3,
 			config: {"metrics":[{"name":"count.user"}],"segments":[{"name":"user.countrycode"},{"name":"user.country"}]}

@@ -7,6 +7,7 @@ angular.module('Dashboard').
                 var self = this;
                 WidgetProvider.call(this, options, context);
                 self.chartOptions = {};
+                self.series = [];
             };
 
             ClassService.extend(WidgetProvider, Widget);
@@ -16,7 +17,8 @@ angular.module('Dashboard').
                 ,   series = {}
                 ,   metricName = self.metrics[0].kpi.alias
                 ,   segmentName = self.segments[0].kpi.alias;
-                self.chartOptions.series = new Array();
+                self.series = new Array();
+                //self.chartOptions.series = new Array();
                 self.chartOptions.title = {
                     text: self.title,
                     align: 'left'
@@ -30,7 +32,7 @@ angular.module('Dashboard').
                         },
                         showInLegend: true
                     }
-                }
+                };
 
                 self.chartOptions.mapNavigation = {
                     enabled: true,
@@ -39,13 +41,21 @@ angular.module('Dashboard').
                     }
                 };
 
+                var maxValue = 0;
+                for(var i = 0; i < data.length; i++)
+                    if(data[i][metricName] > maxValue)
+                        maxValue = data[i][metricName];
+
                 self.chartOptions.colorAxis = {
+                    min: 0,
+                    max: maxValue,
+                    minColor: '#FFFFFF'
                 };
 
                 var serie = {
                     data : [],
-                    mapData: Highcharts.geojson(Highcharts.maps['custom/world'], 'map'),
-                    joinBy: ['iso-a2', 'code'],
+                    mapData: Highcharts.maps.world,
+                    joinBy: 'code',
                     name: metricName,
                     states: {
                         hover: {
@@ -58,20 +68,23 @@ angular.module('Dashboard').
                 for(var i = 0; i<data.length; i++)
                     dataTemp.push({"value": data[i][metricName], "code": data[i]["countrycode"], "name": data[i]["country"]});
 
-                var dataFinal = {};
-                //_.extend(dataFinal, COUNTRIES, dataTemp);
+                dataFinal = [];
+                for(var i = 0; i < COUNTRIES.length; i++)
+                    for(var j = 0; j < dataTemp.length; j++)
+                        if(COUNTRIES[i].code == dataTemp[j].code)
+                            dataFinal.push(dataTemp[j])
+                        else
+                            dataFinal.push(COUNTRIES[i]);
 
-                //dataFinal = _.map(dataFinal, function(el) { return el; });
 
-                serie.data = COUNTRIES;
-                self.chartOptions.series.push(serie);
-
-                console.log(self.chartOptions.series)
+                serie.data = dataFinal;
+                self.series.push(serie);
 
                 this.refresh();
             };
 
             Widget.prototype.refresh = function() {
+                this.chartOptions.series = this.series;
                 this.node.find('.widget-front-body').highcharts("Map", this.chartOptions);
             }
 

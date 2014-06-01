@@ -29,7 +29,6 @@ angular.module('Dashboard').
 
 				self.chartOptions = {};
 				self.chartOptions.series = [];
-				console.log(self.stacked)
     			if(self.stacked)
 				self.chartOptions.plotOptions = {
 					column: { stacking: 'normal' },
@@ -79,20 +78,20 @@ angular.module('Dashboard').
 
 						series = {
 							type: self.metrics[0].options.shape,
-							name: index,						
+							name: index,
 							marker: { enabled: false },
 							data: [],
                				stack: segmentName
 						};
 
 						switch(self.metrics[0].options.shape) {
-							case 'area': 
+							case 'area':
 								series.zIndex = 0;
 							break;
-							case 'column': 
+							case 'column':
 								series.zIndex = 1;
 							break;
-							case 'line': 
+							case 'line':
 								series.zIndex = 2;
 							break;
 						}
@@ -103,7 +102,7 @@ angular.module('Dashboard').
 								witness = false;
 								for(var k = 0; k<data.length; k++) {
 									value = axisType == 'date' ? (new Date(data[k][absName])).getTime() : data[k][absName];
-									if(value == axis[j] && data[k][segmentName] == index) {										
+									if(value == axis[j] && data[k][segmentName] == index) {
 										witness = true;
 										series.data.push([axis[j], data[k][alias]]);
 									}
@@ -127,20 +126,20 @@ angular.module('Dashboard').
 
 						series = {
 							type: self.metrics[i].options.shape,
-							name: index,						
+							name: index,
 							marker: { enabled: false },
 							data: [],
 							yAxis: i
 						};
 
 						switch(self.metrics[i].options.shape) {
-							case 'area': 
+							case 'area':
 								series.zIndex = 0;
 							break;
-							case 'column': 
+							case 'column':
 								series.zIndex = 1;
 							break;
-							case 'line': 
+							case 'line':
 								series.zIndex = 2;
 							break;
 						}
