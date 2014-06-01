@@ -17,11 +17,8 @@ angular.module('Dashboard').
 				,	series = {}
 				,	metricName = self.metrics[0].kpi.alias
 				,	segmentName = self.segments[0].kpi.alias;
+				self.chartOptions = {};
 				self.chartOptions.series = [];
-				self.chartOptions.title = {
-					text: self.title,
-					align: 'left'
-				};
 
 				self.chartOptions.plotOptions = {
 					pie: {
@@ -49,6 +46,11 @@ angular.module('Dashboard').
 			};
 
 			Widget.prototype.refresh = function() {
+				var self = this;
+				self.chartOptions.title = {
+					text: self.title,
+					align: 'left'
+				};
 				this.node.find('.widget-front-body').highcharts(this.chartOptions);
 			}
 
