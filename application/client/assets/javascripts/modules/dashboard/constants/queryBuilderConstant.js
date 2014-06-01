@@ -3,7 +3,7 @@ angular.module('Dashboard').
 		"special.firstpayment" : {  "category":"other", "index": "special.firstpayment", "type": "segment", "alias": "first_payment_day", "datatype" : "number" },
 		"count.user": { "category":"user", "index": "count.user", "type": "metric", "alias": "count_user", "datatype" : "number" },
 		"count.plan": { "category":"plan", "index": "count.plan", "type": "metric", "alias": "count_plan", "datatype" : "number" },
-		"count.payment": { "category":"payment", "index": "count.payment", "type": "segment", "alias": "count_payment", "datatype" : "number" },
+		"count.payment": { "category":"payment", "index": "count.payment", "type": "metric", "alias": "count_payment", "datatype" : "number" },
 		"object.plan": { "category":"plan", "index": "object.plan", "type": "segment", "alias": "plan_id", "datatype" : "number" },
 		"object.payment": { "category":"payment", "index": "object.payment", "type": "segment", "alias": "payment_id", "datatype" : "number" },
 		"object.dailyquota": { "category":"dailyquota", "index": "object.dailyquota", "type": "segment", "alias": "dailyquota_id", "datatype" : "number" },
