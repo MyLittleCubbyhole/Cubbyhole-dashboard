@@ -2,22 +2,117 @@
 
 <section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController">
 	<article class="widget-front-head">
-		{{_ddWidgetSingleNumber.widget.title}}
-
-		<article class="corner edit" ng-click="_flip.active = !_flip.active">
+		<article class="corner edit" ng-click="_flip.active = !_flip.active; _ddWidgetSingleNumber.edit()">
 			<article class="corner-text">EDIT</article>
 		</article>
 	</article>
 	<article class="widget-front-body">{{_ddWidgetSingleNumber.widget.value}}</article>
 </section>
 <section class="widget-side widget-backside" ng-controller="WidgetBackSideController">
-	<article class="widget-back-head">
-		<article class="corner edit" ng-click="_flip.active = !_flip.active">
+	<article class="widget-back-head  nodrag">
+		<nav class="nav-pills">
+			<article ng-click="WidgetBackSide.tab = 'data'" ng-class="{active: WidgetBackSide.tab == 'data'}" class="pill">
+				<i class="icon-earth"></i><span class="pill-name">DATA</span>
+			</article>
+			<article ng-click="WidgetBackSide.tab = 'filters'" ng-class="{active: WidgetBackSide.tab == 'filters'}" class="pill">
+				<i class="icon-earth"></i><span class="pill-name">FILTERS</span>
+			</article>
+			<article ng-click="WidgetBackSide.tab = 'configuration'" ng-class="{active: WidgetBackSide.tab == 'configuration'}" class="pill">
+				<i class="icon-cogs"></i><span class="pill-name">CONFIGURATION</span>
+			</article>
+		</nav>
+		<article class="corner edit" ng-click="WidgetBackSide.save();">
 			<article class="corner-text">SAVE</article>
 		</article>
-		<article class="corner del" ng-click="WidgetBackSide.delete();">
-			<article class="corner-text">DEL</article>
-		</article>
 	</article>
-	<article class="widget-back-body"></article>
+	<article class="widget-back-body nodrag">
+		<section id="widget-back-switch" ng-switch on="WidgetBackSide.tab">
+			<article class="widget-back-tab nodrag" ng-switch-when="data">
+				<section class="bloc-tab">
+					<article class="bloc-title">Metric</article>
+					<article class="bloc-content">
+						<article class="bloc-content-option">
+							<span grumpy-ui grumpy-position="right" grumpy-align="top">
+								<span>{{_ddWidgetSingleNumber.widget.metrics[0].kpi.alias}}</span>
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-kpi-box" scroll-bar>
+										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
+											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+											<section class="kpi-list" ng-class="{ open: kpistatus}">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetSingleNumber.widget.metrics[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetSingleNumber.widget.metrics[0].kpi }">
+													{{kpi.alias}}
+												</article>
+											</section>
+										</section>
+									</section>
+								</grumpy-virgin>
+							</span>
+						</article>
+					</article>
+				</section>
+			</article>
+			<article class="widget-back-tab nodrag" ng-switch-when="filters">
+				<section class="bloc-tab">
+					<article class="bloc-title">
+						Filters
+						<label class="toggle float-right">
+							<input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetSingleNumber.widget.operator = _ddWidgetSingleNumber.widget.operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetSingleNumber.widget.operator == 'AND'" ng-model="operator">
+							<i data-swchon-text="OR" data-swchoff-text="AND"></i>
+						</label>
+					</article>
+					<article class="bloc-content">
+						<article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetSingleNumber.widget.filters track by $index">
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+								{{filter.kpi.alias}}
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-kpi-box" scroll-bar>
+										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">
+											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+											<section class="kpi-list" ng-class="{ open: kpistatus}">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == filter.kpi.index }">
+													{{kpi.alias}}
+												</article>
+											</section>
+										</section>
+									</section>
+								</grumpy-virgin>
+							</span>
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="center">
+								{{WidgetBackSide.operators[filter.operator]}}
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-box">
+										<article ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-click="filter.operator = index; _grumpyUi.close();" ng-class="{ active: index == filter.operator }">
+											{{operator}}
+										</article>
+									</section>
+								</grumpy-virgin>
+							</span>
+
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="right" ng-repeat="value in filter.value track by $index">
+								{{ typeof(value) != 'undefined' ? value : 'VALUE' }}
+								<grumpy-virgin class="bounceIn">
+									<section class="filter-value-box">
+										<input type="text" placeholder="value" ng-model="filter.value[$index]">
+									</section>
+								</grumpy-virgin>
+							</span>
+							<article class="del-btn" ng-click="_ddWidgetSingleNumber.widget.filters.splice($index, 1);"><i class="icon-cross"></i></article>
+						</article>
+					</article>
+				</section>
+				<section class="bloc-tab">
+					<article class="add-filter btn cubby-btn" ng-click="WidgetBackSide.addFilter();">ADD</article>
+				</section>
+			</article>
+			<article class="widget-back-tab nodrag" ng-switch-when="configuration">
+				<section class="bloc-tab">
+					<article class="bloc-title">Title</article>
+					<article class="bloc-content"><input type="text" class="config-title" placeholder="title" ng-model="_ddWidgetSingleNumber.widget.title"></article>
+				</section>
+				<section class="bloc-tab">
+					<article class="bloc-button" ng-click="WidgetBackSide.delete()">DELETE WIDGET</article>
+				</section>
+			</article>
+		</section>
+	</article>
 </section>

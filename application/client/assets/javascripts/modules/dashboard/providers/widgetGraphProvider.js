@@ -29,6 +29,12 @@ angular.module('Dashboard').
 
 				self.chartOptions = {};
 				self.chartOptions.series = [];
+				
+				self.chartOptions.title = {
+					text: self.title,
+					align: 'left'
+				};
+
     			if(self.stacked)
 				self.chartOptions.plotOptions = {
 					column: { stacking: 'normal' },
@@ -198,10 +204,6 @@ angular.module('Dashboard').
 
 			Widget.prototype.refresh = function() {
 				var self = this;
-				self.chartOptions.title = {
-					text: self.title,
-					align: 'left'
-				};
 				this.node.find('.widget-front-body').highcharts(self.chartOptions);
 			}
 

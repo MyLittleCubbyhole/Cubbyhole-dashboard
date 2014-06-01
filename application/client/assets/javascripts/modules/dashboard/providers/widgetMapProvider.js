@@ -19,6 +19,11 @@ angular.module('Dashboard').
                 ,   segmentName = self.segments[0].kpi.alias;
                 self.chartOptions = {};
                 self.series = new Array();
+                
+                self.chartOptions.title = {
+                    text: self.title,
+                    align: 'left'
+                };
 
                 self.chartOptions.plotOptions = {
                     map: {
@@ -81,10 +86,6 @@ angular.module('Dashboard').
 
             Widget.prototype.refresh = function() {
                 var self = this
-                self.chartOptions.title = {
-                    text: self.title,
-                    align: 'left'
-                };
 
                 self.chartOptions.series = self.series;
                 self.node.find('.widget-front-body').highcharts("Map", self.chartOptions);
