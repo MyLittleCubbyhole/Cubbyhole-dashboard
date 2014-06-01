@@ -47,6 +47,7 @@
 									</section>
 								</grumpy-virgin>
 							</span>
+							<article class="sort-button" ng-click="_ddWidgetGraph.widget.sort.order = _ddWidgetGraph.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetGraph.widget.sort.name = _ddWidgetGraph.widget.segments[0].kpi.index" ng-class="{ active: !!_ddWidgetGraph.widget.sort.name }"><i class="icon-{{_ddWidgetGraph.widget.sort.order || 'asc'}}"></i></article>
 						</article>
 					</article>
 				</section>
@@ -70,9 +71,9 @@
 								</grumpy-virgin>
 							</span>
 							<section class="graph-selector">
-								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
-								<article class="graph-type active"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
-								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
+								<article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[0].options.shape = 'line';" ng-class="{ active:  !_ddWidgetGraph.widget.metrics[0].options.shape || _ddWidgetGraph.widget.metrics[0].options.shape == 'line'}"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
+								<article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[0].options.shape = 'area';" ng-class="{ active: _ddWidgetGraph.widget.metrics[0].options.shape == 'area'}"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
+								<article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[0].options.shape = 'column';" ng-class="{ active: _ddWidgetGraph.widget.metrics[0].options.shape == 'column'}"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
 							</section>
 						</article>
 						<article class="bloc-content-option" ng-class="{ disabled: !_ddWidgetGraph.widget.metrics[1] }">
@@ -92,12 +93,24 @@
 									</section>
 								</grumpy-virgin>
 							</span>
-							<section class="graph-selector">
-								<article class="graph-type active"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
-								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
+							<section class="graph-selector" ng-if="!!_ddWidgetGraph.widget.metrics[1]">
+								<article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[1].options.shape = 'line';" ng-class="{ active:  !_ddWidgetGraph.widget.metrics[1].options.shape || _ddWidgetGraph.widget.metrics[1].options.shape == 'line'}"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
+								<article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[1].options.shape = 'area';" ng-class="{ active: _ddWidgetGraph.widget.metrics[1].options.shape == 'area'}"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
+								<article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[1].options.shape = 'column';" ng-class="{ active: _ddWidgetGraph.widget.metrics[1].options.shape == 'column'}"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
+							</section>
+							<section class="graph-selector" ng-if="!_ddWidgetGraph.widget.metrics[1]">
 								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
+								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
+								<article class="graph-type"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
 							</section>
 						</article>
+						<section class="graph-option">
+							Stacked
+							<label class="toggle">
+								<input type="checkbox" name="checkbox-toggle" ng-model="_ddWidgetGraph.widget.stacked">
+								<i data-swchon-text="ON" data-swchoff-text="OFF"></i>
+							</label>
+						</section>
 					</article>
 				</section>
 				<section class="bloc-tab">
@@ -129,7 +142,7 @@
 					<article class="bloc-title">
 						Filters
 						<label class="toggle float-right">
-							<input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetGraph.widget.operator = _ddWidgetGraph.widget.operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetGraph.widget.operator == 'AND'">
+							<input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetGraph.widget.operator = _ddWidgetGraph.widget.operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetGraph.widget.operator == 'AND'" ng-model="operator">
 							<i data-swchon-text="OR" data-swchoff-text="AND"></i>
 						</label>
 					</article>
@@ -162,7 +175,7 @@
 							</span>
 
 							<span grumpy-ui grumpy-position="bottom" grumpy-align="right" ng-repeat="value in filter.value track by $index">
-								{{ value ? value : 'VALUE' }}
+								{{ typeof(value) != 'undefined' ? value : 'VALUE' }}
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-value-box">
 										<input type="text" placeholder="value" ng-model="filter.value[$index]">

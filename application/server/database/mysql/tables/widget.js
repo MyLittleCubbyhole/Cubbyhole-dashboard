@@ -53,15 +53,14 @@ provider.delete.byDashboardId = function(id, callback) {
 /********************************[  UPDATE   ]********************************/
 
 provider.update.widget = function(widget, callback) {
-	var query = 'update `widget` set `config` = "' + JSON.stringify(widget.config) + '",';
+	var query = "update `widget` set `config` = '" + JSON.stringify(widget.config) + "',";
 	query += '`title` = "' + widget.title + '",';
 	query += '`backgroundcolor` = "' + widget.backgroundcolor + '",';
 	query += '`fontcolor` = "' + widget.fontcolor + '",';
 	query += '`height` = ' + parseInt(widget.height, 10) + ',';
 	query += '`width` = ' + parseInt(widget.width, 10) + ',';
-	query += '`positionx` = ' + parseInt(widget.x, 10) + ',';
-	query += '`positiony` = ' + parseInt(widget.y, 10) + ',';
-	query += '`type` = "' + widget.type + '"';
+	query += '`positionx` = ' + parseInt(widget.positionx, 10) + ',';
+	query += '`positiony` = ' + parseInt(widget.positiony, 10) + ' ';
 	query += 'where `dashboardid` = "' + widget.dashboardid + '" and id = ' + widget.id + ';';
 	Mysql.query(query, callback);
 }

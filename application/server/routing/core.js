@@ -27,6 +27,7 @@ routing.init = function(app) {
 
     app.put('/api/dashboards/:id', filters.tokenInterceptor, filters.adminInterceptor, dashboard.put.update);
     app.put('/api/dashboards/:id/widgets/position', filters.tokenInterceptor, filters.adminInterceptor, widget.put.updatePosition);
+    app.put('/api/dashboards/:dashboardid/widgets/:id', filters.tokenInterceptor, filters.adminInterceptor, widget.put.update);
 
     app.delete('/api/dashboards/:id', filters.tokenInterceptor, filters.adminInterceptor, dashboard.delete.byId);
     app.delete('/api/dashboards/:dashboardid/widgets/:id', filters.tokenInterceptor, filters.adminInterceptor, widget.delete.byId);

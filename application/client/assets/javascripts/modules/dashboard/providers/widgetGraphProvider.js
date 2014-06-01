@@ -1,7 +1,7 @@
 angular.module('Dashboard').
 	provider('WidgetGraphProvider', function(){
 
-		this.$get = ['ClassService', 'WidgetProvider', '$window', function(ClassService, WidgetProvider, $window) {
+		this.$get = ['ClassService', 'WidgetProvider', 'WidgetFactory', '$window', function(ClassService, WidgetProvider, WidgetFactory, $window) {
 
 			var Widget = function(options, context) {
 				var self = this;
@@ -27,12 +27,14 @@ angular.module('Dashboard').
 				if(!data || data.length == 0)
 					return true;
 
+				self.chartOptions = {};
 				self.chartOptions.series = [];
-
+				console.log(self.stacked)
     			if(self.stacked)
 				self.chartOptions.plotOptions = {
 					column: { stacking: 'normal' },
-					area: { stacking: 'normal' }
+					area: { stacking: 'normal' },
+					line: { stacking: 'normal' }
 				}
 
 				for(var i = 0; i<self.segments.length; i++) {
@@ -47,17 +49,17 @@ angular.module('Dashboard').
 						absName = index;
 						switch(self.segments[i].kpi.datatype) {
 							case 'string':
-								self.chartOptions.xAxis = { categories: series.data };
+								axis = _.uniq(series.data, false);
+								self.chartOptions.xAxis = { categories: axis };
 							break;
 							case 'date':
 								self.chartOptions.xAxis = { type: 'datetime' };
-								for(var i = 0; i< series.data.length; i++)
-									axis.push( (new Date(series.data[i])).getTime() )
+								for(var j = 0; j< series.data.length; j++)
+									axis.push( (new Date(series.data[j])).getTime() )
 								axis = _.uniq(axis, false);
 							break;
 							case 'number':
-								axis = series.data;
-								axis = _.uniq(axis, false);
+								axis = _.uniq(series.data, false);
 							break;
 						}
 					}
@@ -69,7 +71,55 @@ angular.module('Dashboard').
 				}
 
 				var value = '';
-				if(self.metrics.length > 1) {
+
+				if(!!segment && segment.length > 0)
+					for(var i = 0; i<segment.length; i++) {
+						index = segment[i];
+						alias = self.metrics[0].kpi.alias;
+
+						series = {
+							type: self.metrics[0].options.shape,
+							name: index,						
+							marker: { enabled: false },
+							data: [],
+               				stack: segmentName
+						};
+
+						switch(self.metrics[0].options.shape) {
+							case 'area': 
+								series.zIndex = 0;
+							break;
+							case 'column': 
+								series.zIndex = 1;
+							break;
+							case 'line': 
+								series.zIndex = 2;
+							break;
+						}
+
+						var witness = false;
+						// if(axis.length>0)
+							for(var j = 0; j<axis.length; j++) {
+								witness = false;
+								for(var k = 0; k<data.length; k++) {
+									value = axisType == 'date' ? (new Date(data[k][absName])).getTime() : data[k][absName];
+									if(value == axis[j] && data[k][segmentName] == index) {										
+										witness = true;
+										series.data.push([axis[j], data[k][alias]]);
+									}
+								}
+								if(!witness)
+									series.data.push([axis[j], 0]);
+							}
+						// else
+						// 	for(var j = 0; j<data.length; j++){
+						// 		console.log('passage')
+						// 		series.data.push(data[j][alias]);
+						// 	}
+
+						self.chartOptions.series.push(series)
+					}
+				else {
 
 					self.chartOptions.yAxis = [];
 					for(var i = 0; i<self.metrics.length; i++) {
@@ -122,55 +172,30 @@ angular.module('Dashboard').
 						self.chartOptions.series.push(series)
 					}
 				}
-				else
-					for(var i = 0; i<segment.length; i++) {
-						index = segment[i];
-						alias = self.metrics[0].kpi.alias;
-
-						series = {
-							type: self.metrics[0].options.shape,
-							name: index,						
-							marker: { enabled: false },
-							data: [],
-               				stack: segmentName
-						};
-
-						switch(self.metrics[0].options.shape) {
-							case 'area': 
-								series.zIndex = 0;
-							break;
-							case 'column': 
-								series.zIndex = 1;
-							break;
-							case 'line': 
-								series.zIndex = 2;
-							break;
-						}
-
-						var witness = false;
-						if(axis.length>0)
-							for(var j = 0; j<axis.length; j++) {
-								witness = false;
-								for(var k = 0; k<data.length; k++) {
-									value = axisType == 'date' ? (new Date(data[k][absName])).getTime() : data[k][absName];
-									if(value == axis[j] && data[k][segmentName] == index) {										
-										witness = true;
-										series.data.push([axis[j], data[k][alias]]);
-									}
-								}
-								if(!witness)
-									series.data.push([axis[j], 0]);
-							}
-						else
-							for(var j = 0; j<data.length; j++)
-								series.data.push(data[j][alias]);
-
-						self.chartOptions.series.push(series)
-					}
 
 
 				this.refresh();
 			};
+
+			Widget.prototype.save = function() {
+				var self = this
+				,	definition = {}
+				,	configuration = this._save();
+
+				configuration.stacked = self.stacked;
+				definition.title = self.title;
+				definition.size = self.size;
+				definition.position = self.position;
+				definition.id = self.id;
+				definition.backgroundcolor = self.backgroundColor;
+				definition.fontcolor = self.fontColor;
+				definition.dashboardid = self.dashboardId;
+				definition.config = configuration;
+
+				WidgetFactory(self.scope).update(definition, angular.noop);
+
+				self.load();
+			}
 
 			Widget.prototype.refresh = function() {
 				var self = this;

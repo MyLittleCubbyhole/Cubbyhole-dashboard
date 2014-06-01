@@ -120,8 +120,8 @@ MysqlTools.query.generate = function(options) {
 	if(having.length > 0)
 		request += 'HAVING ' + having.join(' ' + options.operator + ' ') + ' ';
 
-	if(options.order)
-		request += 'ORDER BY ' + queryBuilder['kpi_definition'][options.order].apply;
+	if(!!options.sort && !!options.sort.name)
+		request += 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
 
 	return request;
 }

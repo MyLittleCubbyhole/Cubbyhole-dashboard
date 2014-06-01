@@ -23,6 +23,21 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-asc:before {
+	content: "\f160";
+}
+.icon-desc:before {
+	content: "\f161";
+}
+.icon-plus-circle:before {
+	content: "\f055";
+}
+.icon-group:before {
+	content: "\f0c0";
+}
+.icon-check:before {
+	content: "\f00c";
+}
 .icon-earth:before {
 	content: "\e600";
 }
@@ -55,15 +70,6 @@
 }
 .icon-plus:before {
 	content: "\e602";
-}
-.icon-plus-circle:before {
-	content: "\f055";
-}
-.icon-group:before {
-	content: "\f0c0";
-}
-.icon-check:before {
-	content: "\f00c";
 }
 .icon-info:before {
 	content: "\e60b";

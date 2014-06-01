@@ -32,6 +32,7 @@ angular.module('Dashboard').
 				self.node = context.node;
 
 				self.operator = self.options.config.operator || 'AND';
+				self.sort = self.options.config.sort || {};
 
 				if(self.options.config.metrics)
 				for(var i = 0; i<self.options.config.metrics.length; i++)
@@ -59,6 +60,59 @@ angular.module('Dashboard').
 			};
 
 			Widget.prototype.init = function() { throw 'init method must be overriden'; };
+
+			Widget.prototype._save = function() {
+				var configuration = {}
+				,	options
+				,	self = this;
+				configuration.sort = self.sort;
+				configuration.operator = self.operator;
+				configuration.metrics = [];
+				configuration.segments = [];
+				configuration.filters = [];
+
+				for(var i = 0; i<self.metrics.length; i++) {
+					options = self.metrics[i].options;
+					options.name = self.metrics[i].kpi.index;
+					configuration.metrics.push(options)
+				}
+				
+				for(var i = 0; i<self.segments.length; i++) {
+					options = self.segments[i].options;
+					options.name = self.segments[i].kpi.index;
+					configuration.segments.push(options)
+				}
+				
+				for(var i = 0; i<self.filters.length; i++) {
+					configuration.filters.push({
+						name: self.filters[i].kpi.index,
+						operator: self.filters[i].operator,
+						value: self.filters[i].value
+					})
+				}
+
+				return configuration;
+
+			};
+
+			Widget.prototype.save = function() {
+				var self = this
+				,	definition = {}
+				,	configuration = this._save();
+
+				definition.title = self.title;
+				definition.size = self.size;
+				definition.position = self.position;
+				definition.id = self.id;
+				definition.backgroundcolor = self.backgroundColor;
+				definition.fontcolor = self.fontColor;
+				definition.dashboardid = self.dashboardId;
+				definition.config = configuration;
+
+				WidgetFactory(self.scope).update(definition, angular.noop);
+
+				self.load();
+			}
 
 			Widget.prototype.load = function() {
 				var self = this;

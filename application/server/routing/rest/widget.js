@@ -102,6 +102,32 @@ widget.put.updatePosition = function(request, response) {
 
 }
 
+widget.put.update = function(request, response) {
+	var params = request.params
+	,	body = request.body
+	,	options = {
+		id: body.id,
+		title: body.title,
+		config: body.config,
+		backgroundcolor: body.backgroundcolor,
+		fontcolor: body.fontcolor,
+		width: body.size.width,
+		height: body.size.height,
+		positionx: body.position.x,
+		positiony: body.position.y,
+		dashboardid: body.dashboardid
+	}
+
+	provider.update.widget(options,  function(error, data) {
+		if(!error && data)
+			response.send({'information': 'Widget saved' });
+		else
+			response.send({'information': 'An error has occurred - ' + error });
+		response.end();
+	})
+
+}
+
 /********************************[  DELETE   ]********************************/
 
 widget.delete.byId = function(request, response) {

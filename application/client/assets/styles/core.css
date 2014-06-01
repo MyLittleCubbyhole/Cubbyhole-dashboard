@@ -61,16 +61,16 @@ section#body {
 }
 
 .form-file-preview {
-    background-repeat:no-repeat!important;
-    background-position:center center!important;
-    -webkit-background-size:cover!important;
-    -moz-background-size:cover!important;
-    -o-background-size:cover!important;
-    background-size:cover!important;
+	background-repeat:no-repeat!important;
+	background-position:center center!important;
+	-webkit-background-size:cover!important;
+	-moz-background-size:cover!important;
+	-o-background-size:cover!important;
+	background-size:cover!important;
 }
 
 .form-file-preview .form-file-hide{
-    display:none!important;
+	display:none!important;
 }
 
 /**gestion du flip widget**/
@@ -1160,37 +1160,76 @@ input.config-title {
 	}
 }
 article.bloc-option {
-    width: 60px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    display: inline-block;
-    border-radius: 3px;
-    font-size: 18px;
-    color: #484848;
-    font-family: Lato;
-    cursor: pointer;
+	width: 60px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 3px;
+	font-size: 18px;
+	color: #484848;
+	font-family: Lato;
+	cursor: pointer;
 }
 article.bloc-option:hover {
-    background-color: #F2F2F2;
+	background-color: #F2F2F2;
 }
 article.bloc-option.active {
-    background-color: #454545;
-    color: white;
+	background-color: #454545;
+	color: white;
 }
 article.bloc-button {
-    display: inline-block;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-top: 20px;
-    cursor: pointer;
-    font-family: Lato;
+	display: inline-block;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-top: 20px;
+	cursor: pointer;
+	font-family: Lato;
 }
 article.bloc-button:hover {
-    background-color: #D23E3E;  color: white;
+	background-color: #D23E3E;  color: white;
 }
 
+article.sort-button {
+	display: inline-block;
+	margin-left: 10px;
+	cursor: pointer;
+	padding: 5px;
+	width: 30px;
+	text-align: center;
+	border-radius: 2px;
+	line-height: 20px;
+	color: #B7B7B7;
+}
+article.sort-button:hover {
+	color: #949494;
+	background-color: #ebebeb;
+}
+article.sort-button.active {
+	color: #484848;
+	background-color: #ebebeb;
+}
+section.graph-option {
+    padding-left: 5px;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    text-transform: uppercase;
+}
+.graph-option .toggle i {
+    background: #D6D6D6;
+    border-color: #BDBDBD;
+}
+.graph-option .toggle i::after {
+    color: rgb(71, 71, 71);
+    font-size: 13px;
+    line-height: 11px;
+}
+.graph-option .toggle i::before {
+    background: #818181;
+    top: 3px;
+}
 @media screen and (max-width: 775px) {
 
 	aside#left-panel {
