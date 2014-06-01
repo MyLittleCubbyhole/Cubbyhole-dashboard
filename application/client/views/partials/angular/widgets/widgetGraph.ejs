@@ -27,7 +27,7 @@
 	</article>
 	<article class="widget-back-body nodrag">
 		<section id="widget-back-switch" ng-switch on="WidgetBackSide.tab">
-			<article class="widget-back-tab" ng-switch-when="data">
+			<article class="widget-back-tab nodrag" ng-switch-when="data">
 				<section class="bloc-tab">
 					<article class="bloc-title">Abscisse</article>
 					<article class="bloc-content">
@@ -137,7 +137,7 @@
 					</article>
 				</section>
 			</article>
-			<article class="widget-back-tab" ng-switch-when="filters">
+			<article class="widget-back-tab nodrag" ng-switch-when="filters">
 				<section class="bloc-tab">
 					<article class="bloc-title">
 						Filters
@@ -190,7 +190,7 @@
 					<article class="add-filter btn cubby-btn" ng-click="WidgetBackSide.addFilter();">ADD</article>
 				</section>
 			</article>
-			<article class="widget-back-tab" ng-switch-when="configuration">
+			<article class="widget-back-tab nodrag" ng-switch-when="configuration">
 				<section class="bloc-tab">
 					<article class="bloc-title">Title</article>
 					<article class="bloc-content"><input type="text" class="config-title" placeholder="title" ng-model="_ddWidgetGraph.widget.title"></article>

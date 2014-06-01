@@ -24,13 +24,13 @@ angular.module('Dashboard').
 
 			$local.kpis[QUERY_BUILDER[i].category].push(kpi);
 
-			if(QUERY_BUILDER[i].type == 'segment') {
+			if(QUERY_BUILDER[i].type == 'segment' || QUERY_BUILDER[i].type == 'meta') {
 				if(!$local.segments[QUERY_BUILDER[i].category])
 					$local.segments[QUERY_BUILDER[i].category] = [];
 				$local.segments[QUERY_BUILDER[i].category].push(kpi);
 			}
 
-			if(QUERY_BUILDER[i].type == 'metric') {
+			if(QUERY_BUILDER[i].type == 'metric' || QUERY_BUILDER[i].type == 'meta') {
 				if(!$local.metrics[QUERY_BUILDER[i].category])
 					$local.metrics[QUERY_BUILDER[i].category] = [];
 				$local.metrics[QUERY_BUILDER[i].category].push(kpi);
