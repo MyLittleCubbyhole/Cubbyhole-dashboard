@@ -2,7 +2,7 @@
 
 <section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController">
 	<article class="widget-front-head">
-		<article class="corner edit" ng-click="_flip.active = !_flip.active">
+		<article class="corner edit" ng-click="_flip.active = !_flip.active; _ddWidgetGraph.edit()">
 			<article class="corner-text">EDIT</article>
 		</article>
 	</article>
@@ -39,7 +39,7 @@
 										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[0].kpi = kpi;" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[0].kpi }">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[0].kpi }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -62,7 +62,7 @@
 										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[0].kpi = kpi" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[0].kpi }">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[0].kpi }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -85,7 +85,7 @@
 										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[1].kpi = kpi" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[1].kpi }">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[1].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[1].kpi }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -125,7 +125,7 @@
 										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[1].kpi = kpi;" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[1].kpi }">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[1].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[1].kpi }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -155,7 +155,7 @@
 										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi" ng-class="{ active: kpi.index == filter.kpi.index }">
+												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == filter.kpi.index }">
 													{{kpi.alias}}
 												</article>
 											</section>
@@ -167,7 +167,7 @@
 								{{WidgetBackSide.operators[filter.operator]}}
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-box">
-										<article ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-click="filter.operator = index" ng-class="{ active: index == filter.operator }">
+										<article ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-click="filter.operator = index; _grumpyUi.close();" ng-class="{ active: index == filter.operator }">
 											{{operator}}
 										</article>
 									</section>

@@ -40,6 +40,7 @@ angular.module('Dashboard').
 
 		$local.save = function() {
 			$scope._flip.active = !$scope._flip.active;
+			$scope._ddWidgetGraph.edit()
 			$widgetScope.widget.save();
 			$scope._dashydash.serialize();
 		}

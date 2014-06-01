@@ -11,6 +11,8 @@ angular.module('Dashboard').
 				,	self = this;
 
 				$local.widget = {};
+
+				self.edit = false;
 				self.id  = parseInt($attrs.widgetId, 10);
 
 				$scope.toString = function() {
@@ -19,6 +21,11 @@ angular.module('Dashboard').
 			}],
 			link: function($scope, $node, attributes, self) {
 				var $local = $scope._ddWidgetPie;
+
+                $local.edit = function() {
+                    self.edit = !self.edit;
+                    $node.css('z-index', ( self.edit ? ++$scope._dashydash.zIndex : 2 ) );
+                }
 
 				$local.widget = new WidgetPieProvider($scope._dashydash.widgets[self.id], {scope: $scope, node: $node});
 				$local.widget.load()
