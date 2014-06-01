@@ -20,6 +20,7 @@ angular.module('Dashboard').
 				,	throttleTimer;
 
 				$local.widgets = {};
+				$local.zIndex = 10;
 
 				self.dashydash = null;
 				self.options = {};

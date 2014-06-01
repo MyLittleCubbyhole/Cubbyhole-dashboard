@@ -11,6 +11,7 @@ angular.module('Dashboard').
                 ,   self = this;
 
                 $local.widget = {};
+                self.edit = false;
 
                 self.id  = parseInt($attrs.widgetId, 10);
 
@@ -20,6 +21,11 @@ angular.module('Dashboard').
             }],
             link: function($scope, $node, attributes, self) {
                 var $local = $scope._ddWidgetMap;
+
+                $local.edit = function() {
+                    self.edit = !self.edit;
+                    $node.css('z-index', ( self.edit ? ++$scope._dashydash.zIndex : 2 ) );
+                }
 
                 $local.widget = new WidgetMapProvider($scope._dashydash.widgets[self.id], {scope: $scope, node: $node});
                 $local.widget.load();

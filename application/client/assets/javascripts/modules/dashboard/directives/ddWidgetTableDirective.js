@@ -12,6 +12,7 @@ angular.module('Dashboard').
 
 				$local.widget = {};
 
+				self.edit = false;
 				self.id  = parseInt($attrs.widgetId, 10);
 
 				$scope.toString = function() {
@@ -20,6 +21,11 @@ angular.module('Dashboard').
 			}],
 			link: function($scope, $node, attributes, self) {
 				var $local = $scope._ddWidgetTable;
+
+                $local.edit = function() {
+                    self.edit = !self.edit;
+                    $node.css('z-index', ( self.edit ? ++$scope._dashydash.zIndex : 2 ) );
+                }
 
 				$local.widget = new WidgetTableProvider($scope._dashydash.widgets[self.id], {scope: $scope, node: $node});
 				$local.widget.load()
