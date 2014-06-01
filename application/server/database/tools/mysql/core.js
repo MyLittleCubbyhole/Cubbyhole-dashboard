@@ -180,7 +180,7 @@ MysqlTools.query.makeJoin = function(tables) {
 	return request;
 }
 
-MysqlTools.query.compare = function(base, compare) {}
+MysqlTools.query.compare = function(baseconfig, compareconfig) {}
 
 MysqlTools.format = function(widget) {
 
