@@ -76,13 +76,13 @@ angular.module('Dashboard').
 					options.name = self.metrics[i].kpi.index;
 					configuration.metrics.push(options)
 				}
-				
+
 				for(var i = 0; i<self.segments.length; i++) {
 					options = self.segments[i].options;
 					options.name = self.segments[i].kpi.index;
 					configuration.segments.push(options)
 				}
-				
+
 				for(var i = 0; i<self.filters.length; i++) {
 					configuration.filters.push({
 						name: self.filters[i].kpi.index,
@@ -109,9 +109,10 @@ angular.module('Dashboard').
 				definition.dashboardid = self.dashboardId;
 				definition.config = configuration;
 
-				WidgetFactory(self.scope).update(definition, angular.noop);
+				WidgetFactory(self.scope).update(definition, function() {
+					self.load();
+				});
 
-				self.load();
 			}
 
 			Widget.prototype.load = function() {
@@ -123,7 +124,7 @@ angular.module('Dashboard').
 
 			Widget.prototype.delete = function() {
 				var self = this;
-				
+
 				WidgetFactory(self.scope).remove(self.dashboardId, self.id, function() {
 					self.scope.$emit('delete_widget', { id: self.id, node: self.node });
 				})
