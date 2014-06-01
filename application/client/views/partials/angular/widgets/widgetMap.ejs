@@ -1,0 +1,21 @@
+<% layout('../../../layout/widget-core') %>
+
+<section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController">
+	<article class="widget-front-head">
+		<article class="corner edit" ng-click="_flip.active = !_flip.active">
+			<article class="corner-text">EDIT</article>
+		</article>
+	</article>
+	<article class="widget-front-body">front</article>
+</section>
+<section class="widget-side widget-backside" ng-controller="WidgetBackSideController">
+	<article class="widget-back-head">
+		<article class="corner edit" ng-click="_flip.active = !_flip.active">
+			<article class="corner-text">SAVE</article>
+		</article>
+		<article class="corner del" ng-click="WidgetBackSide.delete();">
+			<article class="corner-text">DEL</article>
+		</article>
+	</article>
+	<article class="widget-back-body"></article>
+</section>
