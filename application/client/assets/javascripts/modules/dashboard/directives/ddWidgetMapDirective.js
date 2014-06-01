@@ -21,7 +21,6 @@ angular.module('Dashboard').
             link: function($scope, $node, attributes, self) {
                 var $local = $scope._ddWidgetMap;
 
-                console.log($scope._dashydash.widgets[self.id])
                 $local.widget = new WidgetMapProvider($scope._dashydash.widgets[self.id], {scope: $scope, node: $node});
                 $local.widget.load();
             }
