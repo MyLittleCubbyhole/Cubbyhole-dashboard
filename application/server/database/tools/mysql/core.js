@@ -123,6 +123,9 @@ MysqlTools.query.generate = function(options) {
 	if(!!options.sort && !!options.sort.name)
 		request += 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
 
+	if(typeof options.limit != 'undefined')
+		request += ' LIMIT ' + options.limit;
+
 	return request;
 }
 
