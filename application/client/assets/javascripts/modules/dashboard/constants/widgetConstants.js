@@ -38,7 +38,7 @@ angular.module('Dashboard').
 			icon: '/images/widget-icons/icochart.png',
 			width: [1,2,3,4],
 			height: 3,
-			config: {"metrics":[{"name":"count.user", "shape": "column"}],"segments":[{"name":"user.country"},{"name":"user.inscriptiondate", "axis":"abs"}], "order": "user.inscriptiondate", "stacked": true}
+			config: {"metrics":[{"name":"count.user", "shape": "column"}],"segments":[{"name":"user.country", "axis":"abs"},{"name":"user.inscriptiondate"}], "order": "user.inscriptiondate", "stacked": true}
 		},
 		map: {
 			type: 'map',
