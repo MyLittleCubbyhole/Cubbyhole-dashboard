@@ -62,7 +62,10 @@ angular.module('Dashboard').
 				}
 
 				self.resizeWidget = function(node, size, callback) {
-					self.dashydash.resize_widget( node, size.width, size.height, callback);
+					self.dashydash.resize_widget( node, size.width, size.height, function() {
+						$local.serialize();
+						callback && callback.call(this);
+					});
 				}
 
 				self.addWidget = function(definition, callback) {

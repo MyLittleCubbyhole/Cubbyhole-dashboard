@@ -345,6 +345,10 @@ isDragged = false;
 
         width || (width = wgd.width);
         height || (height = wgd.height);
+        if(max_cols < new_col + width) {
+            new_col = max_cols - width +1;
+            col = new_col;
+        }
 
         if (max_cols !== Infinity) {
             width = Math.min(width, max_cols - col + 1);
