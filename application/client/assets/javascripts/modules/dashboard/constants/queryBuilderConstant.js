@@ -8,7 +8,7 @@ angular.module('Dashboard').
 		"object.payment": { "category":"payment", "index": "object.payment", "type": "segment", "alias": "payment_id", "datatype" : "number" },
 		"object.dailyquota": { "category":"dailyquota", "index": "object.dailyquota", "type": "segment", "alias": "dailyquota_id", "datatype" : "number" },
 		"user.age": { "category":"user", "index": "user.age", "type": "meta", "alias": "age", "datatype" : "number" },
-		"user.age.avg": { "category":"user", "index": "user.age.avg", "type": "meta", "alias": "average_age", "datatype" : "number" },
+		"user.age.avg": { "category":"user", "index": "user.age.avg", "type": "metric", "alias": "average_age", "datatype" : "number" },
 		"user.birthdate": { "category":"user", "index": "user.birthdate", "type": "segment", "alias": "birthdate", "datatype" : "date" },
 		"user.birthdate.year": { "category":"user", "index": "user.birthdate.year", "type": "segment", "alias": "birthyear", "datatype" : "number" },
 		"user.birthdate.month": { "category":"user", "index": "user.birthdate.month", "type": "segment", "alias": "birthmonth", "datatype" : "number" },

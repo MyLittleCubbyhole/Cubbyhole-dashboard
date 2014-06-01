@@ -123,6 +123,9 @@ MysqlTools.query.generate = function(options) {
 	if(!!options.sort && !!options.sort.name)
 		request += 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
 
+	console.log(request)
+
+
 	return request;
 }
 
