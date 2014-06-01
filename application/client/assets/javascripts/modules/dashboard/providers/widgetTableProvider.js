@@ -7,6 +7,7 @@ angular.module('Dashboard').
 				var self = this;
 				WidgetProvider.call(this, options, context);
 				self.value = 0;
+				self.kpis = [];
 			};
 
 			ClassService.extend(WidgetProvider, Widget);
@@ -16,13 +17,20 @@ angular.module('Dashboard').
 				,	datatype
 				,	index
 				,	row;
-
+				self.kpis = [];
 				self.head = [];
 
-				for(var i = 0; i < self.metrics.length; i++)
+				console.log(data);
+
+				for(var i = 0; i < self.metrics.length; i++) {
 					self.head.push(self.metrics[i].kpi.alias);
-				for(var i = 0; i < self.segments.length; i++)
+					self.kpis.push(self.metrics[i].kpi);
+				}
+				for(var i = 0; i < self.segments.length; i++) {
 					self.head.push(self.segments[i].kpi.alias);
+					self.kpis.push(self.segments[i].kpi);
+				}
+
 
 				self.body = [];
 				for(var i = 0; i < data.length; i++) {
@@ -39,7 +47,7 @@ angular.module('Dashboard').
 								row.push( data[i][index] );
 							break;
 						}
-						
+
 					}
 					for(var j = 0; j < self.segments.length; j++) {
 						index = self.segments[j].kpi.alias;
@@ -56,8 +64,6 @@ angular.module('Dashboard').
 
 					self.body.push(row);
 				}
-
-
 
 			};
 
