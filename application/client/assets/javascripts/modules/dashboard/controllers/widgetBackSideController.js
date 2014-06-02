@@ -1,5 +1,5 @@
 angular.module('Dashboard').
-	controller('WidgetBackSideController', ['$scope', 'QUERY_BUILDER', 'OPERATORS',  function($scope, QUERY_BUILDER, OPERATORS){
+	controller('WidgetBackSideController', ['$scope', 'QUERY_BUILDER', 'OPERATORS', '$timeout',  function($scope, QUERY_BUILDER, OPERATORS, $timeout){
 		var $local = $scope.WidgetBackSide = {}
 		,	widgetScopeName = $scope.$parent.toString()
 		,	$widgetScope = $scope[widgetScopeName];
@@ -40,7 +40,7 @@ angular.module('Dashboard').
 
 		$local.save = function() {
 			$scope._flip.active = !$scope._flip.active;
-			$widgetScope.edit()
+			$timeout(function() { $widgetScope.edit() }, 250);
 			$widgetScope.widget.save();
 			$scope._dashydash.serialize();
 		}

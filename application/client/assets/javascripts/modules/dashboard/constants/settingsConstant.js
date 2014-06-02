@@ -19,4 +19,20 @@ angular.module('Dashboard').
 		metrics: [],
 		segments: [],
 		operator: 'AND'
-	});
+	}).constant('DASHBOARD_ICONS', [
+		"icon-earth",
+		"icon-pin",
+		"icon-bolt",
+		"icon-layers",
+		"icon-group",
+		"icon-info",
+		"icon-star",
+		"icon-heart",
+		"icon-sunny",
+		"icon-pacman",
+		"icon-rocket",
+		"icon-moneybag",
+		"icon-diamond",
+		"icon-locked",
+		"icon-spaceinvaders"
+	]);

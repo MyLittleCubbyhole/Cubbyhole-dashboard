@@ -1,5 +1,5 @@
 angular.module('Dashboard').
-	controller('DashboardController', ['$scope', '$location', '$routeParams', 'DashboardFactory', function($scope, $location, $routeParams, DashboardFactory){
+	controller('DashboardController', ['$scope', '$location', '$routeParams', 'DashboardFactory', 'CaptureService', function($scope, $location, $routeParams, DashboardFactory, CaptureService){
 		var $local = $scope.Dashboard = {}
 
 		$local.dashboards = [];
@@ -29,15 +29,15 @@ angular.module('Dashboard').
 					};
 					$local.dashboards.push(dashboard);
 					$local.currentDashboard = dashboard;
-				} else {
+				}
+				else {
 					var idToFound = $routeParams.id || null;
 
-					for(var i = 0; i < $local.dashboards.length; i++) {
+					for(var i = 0; i < $local.dashboards.length; i++)
 						if(idToFound == $local.dashboards[i].id || idToFound == null) {
 							$local.currentDashboard = $local.dashboards[i];
 							break;
 						}
-					}
 
 					if($local.currentDashboard && !idToFound)
 						$location.path('/' + $local.currentDashboard.id);
@@ -49,12 +49,12 @@ angular.module('Dashboard').
 				$local.lockRouteChange = true;
 				$local.currentDashboard = {};
 				if($local.dashboards === null || $local.dashboards.length == 0)
-					getDashboards(function() { next(); });
+					getDashboards(next);
 				else
 					next();
 			}
 
-		})
+		});
 
 		$local.delete = function($event) {
 			if($event) {
@@ -71,6 +71,11 @@ angular.module('Dashboard').
 					$local.currentDashboard = $local.dashboards[0];
 				}
 			})
+		}
+
+		$local.capture = function() {
+			var $board = angular.element('.dd-board');
+			CaptureService($board);
 		}
 
 		$scope.toString = function() {
