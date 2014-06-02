@@ -20,8 +20,6 @@ angular.module('Dashboard').
 				self.kpis = [];
 				self.head = [];
 
-				console.log(data);
-
 				for(var i = 0; i < self.metrics.length; i++) {
 					self.head.push(self.metrics[i].kpi.alias);
 					self.kpis.push(self.metrics[i].kpi);
@@ -30,6 +28,8 @@ angular.module('Dashboard').
 					self.head.push(self.segments[i].kpi.alias);
 					self.kpis.push(self.segments[i].kpi);
 				}
+
+				self.kpis.push({});
 
 
 				self.body = [];
