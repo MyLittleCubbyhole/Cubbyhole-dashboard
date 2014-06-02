@@ -49,9 +49,9 @@
 					<article class="bloc-title">Data</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option" ng-repeat="(indexKpi, widgetKpi) in _ddWidgetTable.widget.kpis" ng-class="{ disabled: !widgetKpi.alias }">
-							<span ng-if="!widgetKpi.alias" ng-click="WidgetBackSide.addKpi();_ddWidgetTable.widget.segments.splice(1,1);">&nbsp</span>
+							<span ng-if="!widgetKpi.alias" ng-click="WidgetBackSide.addKpi(indexKpi);">&nbsp</span>
 							<span grumpy-ui grumpy-position="right" grumpy-align="top" ng-if="!!widgetKpi.alias">
-								<span>{{widgetKpi.alias}}<i class="icon-cross" ng-click="_ddWidgetTable.widget.kpis.splice(indexKpi,1);" ng-if="$index > 0"></i></span>
+								<span>{{widgetKpi.alias}}<i class="icon-cross" ng-click="_ddWidgetTable.widget.kpis[indexKpi] = {}" ng-if="$index > 0"></i></span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
 										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">

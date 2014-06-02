@@ -75,6 +75,15 @@ angular.module('Dashboard').
 				options: options
 			})
 		}
+		$local.addKpi = function(kpi) {
+			$widgetScope.widget.kpis[kpi] = {
+				'category':'user',
+				'index':'count.user',
+				'type':'metric',
+				'alias':'count_user',
+				'datatype':'number'
+			}
+		}
 
 		$scope.toString = function() {
 			return 'WidgetBackSide';
