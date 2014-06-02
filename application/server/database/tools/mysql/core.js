@@ -94,7 +94,7 @@ MysqlTools.query.generate = function(options) {
 
 
 		if(queryBuilder['kpi_definition'][name].group)
-			having.push(queryBuilder['kpi_definition'][name].alias + ' ' + options.filters[i].operator + ' ' + value);
+			having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' ' + value);
 		else
 			where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' "' + value);
 
@@ -180,7 +180,7 @@ MysqlTools.query.makeJoin = function(tables) {
 	return request;
 }
 
-MysqlTools.query.compare = function(base, compare) {}
+MysqlTools.query.compare = function(baseconfig, compareconfig) {}
 
 MysqlTools.format = function(widget) {
 

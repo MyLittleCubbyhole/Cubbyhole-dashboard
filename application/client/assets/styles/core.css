@@ -1244,3 +1244,14 @@ section.graph-option {
 
 
 }
+
+
+.capturing section, .capturing article {
+	overflow: visible!important;
+}
+.capturing .widget-backside {
+	display: none!important;
+}
+.capturing .corner {
+	display: none!important;
+}

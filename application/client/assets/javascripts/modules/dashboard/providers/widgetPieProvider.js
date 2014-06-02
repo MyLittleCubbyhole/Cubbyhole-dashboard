@@ -43,7 +43,7 @@ angular.module('Dashboard').
 				}
 
 				for(var j = 0; j<data.length; j++)
-					serie.data.push([data[j][segmentName], data[j][metricName]]);
+					serie.data.push([data[j][segmentName].toString(), data[j][metricName]]);
 
 				self.chartOptions.series.push(serie);
 

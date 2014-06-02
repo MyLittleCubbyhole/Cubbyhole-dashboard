@@ -1,24 +1,8 @@
 angular.module('Dashboard').
-    controller('DashboardMenuController', ['$scope', '$location', function($scope, $location){
+    controller('DashboardMenuController', ['$scope', '$location', 'DASHBOARD_ICONS', function($scope, $location, DASHBOARD_ICONS){
         var $local = $scope.DashboardMenu = {}
 
-        $local.icons = [
-            "icon-earth",
-            "icon-pin",
-            "icon-bolt",
-            "icon-layers",
-            "icon-group",
-            "icon-info",
-            "icon-star",
-            "icon-heart",
-            "icon-sunny",
-            "icon-pacman",
-            "icon-rocket",
-            "icon-moneybag",
-            "icon-diamond",
-            "icon-locked",
-            "icon-spaceinvaders"
-        ];
+        $local.icons = DASHBOARD_ICONS;
 
         $local.location = function(location) {
             $scope.Dashboard.lockRouteChange = false;

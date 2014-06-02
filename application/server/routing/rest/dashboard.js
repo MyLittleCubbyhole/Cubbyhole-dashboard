@@ -1,4 +1,5 @@
 var provider = require(global.paths.server + '/database/mysql/tables/dashboard')
+,	MysqlTools = require(global.paths.server + '/database/tools/mysql/core')
 ,	dashboard = { get : {}, post : {}, put : {}, delete : {} };
 
 
@@ -45,6 +46,12 @@ dashboard.post.create = function(request, response) {
 	}
 }
 
+dashboard.post.export = function(request, response) {
+	var body = request.body
+	,	params = request.params;
+
+
+}
 
 /********************************[  PUT   ]********************************/
 
