@@ -803,6 +803,7 @@ article.bloc-content-option {
 	/* float: left; */
 	display: inline-block;
 	top: 0px;
+	min-width: 71px;
 }
 .bloc-content-option span i {
 	position: absolute;
@@ -1125,7 +1126,7 @@ input.config-title {
 }
 
 
-@media screen and (min-width: 1750px) {	
+@media screen and (min-width: 1750px) {
 	section[dd-width="1"] .nav-pills .pill span.pill-name {
 		display: block;
 	}
