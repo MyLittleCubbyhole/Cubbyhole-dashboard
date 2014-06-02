@@ -96,7 +96,7 @@ MysqlTools.query.generate = function(options) {
 		if(queryBuilder['kpi_definition'][name].group)
 			having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' ' + value);
 		else
-			where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' "' + value);
+			where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' "' + value + '"');
 
 		tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
 	}
