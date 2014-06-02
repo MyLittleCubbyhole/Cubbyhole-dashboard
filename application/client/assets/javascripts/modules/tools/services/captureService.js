@@ -55,7 +55,7 @@ angular.module('Tools').
 				for(var i = 0; i<elements.toRecover.length; i++)
 					elements.toRecover[i].parent.appendChild(elements.toRecover[i].child);
 
-				contextualizeCss();
+				contextualizeCss(false);
 			});
 		}
 
