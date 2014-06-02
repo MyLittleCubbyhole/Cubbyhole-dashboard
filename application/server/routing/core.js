@@ -25,7 +25,7 @@ routing.init = function(app) {
 
     app.post('/api/auth', user.post.authenticate);
 
-    app.post('/api/export', user.post.export);
+    // app.post('/api/export', user.post.export);
 
     app.put('/api/dashboards/:id', filters.tokenInterceptor, filters.adminInterceptor, dashboard.put.update);
     app.put('/api/dashboards/:id/widgets/position', filters.tokenInterceptor, filters.adminInterceptor, widget.put.updatePosition);
