@@ -63,5 +63,8 @@ angular.module('Dashboard').
 		"<": "LOWER THAN",
 		"=": "EQUAL",
 		"!=": "NOT EQUAL",
-		"BETWEEN": "BETWEEN"
+		"BETWEEN": "BETWEEN",
+		"NOT BETWEEN": "NOT BETWEEN",
+		"IN": "IN",
+		"NOT IN": "NOT IN"
 	});

@@ -32,8 +32,8 @@ angular.module('Dashboard').
 				self.node = context.node;
 
 				self.limit = self.options.config.limit;
-
 				self.operator = self.options.config.operator || 'AND';
+
 				self.sort = self.options.config.sort || {};
 
 				if(self.options.config.metrics)
@@ -86,6 +86,22 @@ angular.module('Dashboard').
 				}
 
 				for(var i = 0; i<self.filters.length; i++) {
+					var lengthMax = 0;
+					if(self.filters[i].operator == 'BETWEEN' || self.filters[i].operator == 'NOT BETWEEN') {
+						lengthMax = 2;
+						if(self.filters[i].value[0] == '' || self.filters[i].value[1] == '')
+							if(self.filters[i].value[0] != '')
+								self.filters[i].value[1] = self.filters[i].value[0];
+							else if(self.filters[i].value[1] != '')
+								self.filters[i].value[0] = self.filters[i].value[1];
+					}
+					else if(self.filters[i].operator != 'IN' && self.filters[i].operator != 'NOT IN')
+						lengthMax = 1;
+
+					if(lengthMax != 0)
+						while(self.filters[i].value.length > lengthMax)
+								self.filters[i].value.splice(self.filters[i].value.length - 1, 1);
+
 					configuration.filters.push({
 						name: self.filters[i].kpi.index,
 						operator: self.filters[i].operator,
