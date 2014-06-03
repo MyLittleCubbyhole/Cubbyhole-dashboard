@@ -23,10 +23,10 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-asc:before {
+.icon-sort-amount-asc:before {
 	content: "\f160";
 }
-.icon-desc:before {
+.icon-sort-amount-desc:before {
 	content: "\f161";
 }
 .icon-plus-circle:before {
@@ -52,6 +52,9 @@
 }
 .icon-layers:before {
 	content: "\e60a";
+}
+.icon-filter:before {
+	content: "\e615";
 }
 .icon-checkmark:before {
 	content: "\e603";
