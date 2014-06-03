@@ -78,7 +78,7 @@ MysqlTools.query.generate = function(options) {
 	for(var i = 0; i<options.filters.length; i++) {
 		name = options.filters[i].name;
 
-		switch(options.filters[i].operator.toLowerCase()) {
+		switch(options.filters[i].operator.toUpperCase()) {
 			case 'BETWEEN':
 			case 'NOT BETWEEN':
 				value = options.filters[i].value.join(' AND ');
@@ -125,6 +125,8 @@ MysqlTools.query.generate = function(options) {
 
 	if(typeof options.limit != 'undefined')
 		request += ' LIMIT ' + options.limit;
+
+	console.log(request)
 
 	return request;
 }

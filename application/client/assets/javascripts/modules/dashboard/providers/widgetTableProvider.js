@@ -91,6 +91,16 @@ angular.module('Dashboard').
 
 
 				for(var i = 0; i<self.filters.length; i++) {
+					var lengthMax = 0;
+					if(self.filters[i].operator == 'BETWEEN' || self.filters[i].operator == 'NOT BETWEEN')
+						lengthMax = 2;
+					else if(self.filters[i].operator != 'IN' && self.filters[i].operator != 'NOT IN')
+						lengthMax = 1;
+
+					if(lengthMax != 0)
+						while(self.filters[i].value.length > lengthMax)
+								self.filters[i].value.splice(self.filters[i].value.length - 1, 1);
+
 					configuration.filters.push({
 						name: self.filters[i].kpi.index,
 						operator: self.filters[i].operator,

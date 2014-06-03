@@ -72,7 +72,7 @@ angular.module('Dashboard').
 			$widgetScope.widget.filters.push({
 				kpi: QUERY_BUILDER['count.user'],
 				operator: '>',
-				value: [0]
+				value: [0, 0]
 			})
 		}
 		$local.addMetric = function(options) {
@@ -112,7 +112,6 @@ angular.module('Dashboard').
 			$local.removeKpi(kpiIndex, false);
 			$widgetScope.widget.kpis[kpiIndex].kpi = kpi;
 		}
-
 		$local.removeKpi = function(kpiIndex, clean) {
 			clean = clean || false;
 			for(var i = $widgetScope.widget.metrics.length - 1; i >= 0 ; i--)

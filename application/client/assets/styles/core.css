@@ -808,7 +808,7 @@ article.bloc-content-option {
 	min-height: 40px;
 	vertical-align: top;
 }
-.bloc-content-option span {
+.bloc-content-option > span {
 	padding: 0px 20px 0px 10px;
 	height: 30px;
 	line-height: 30px;
@@ -825,7 +825,7 @@ article.bloc-content-option {
 	top: 0px;
 	min-width: 71px;
 }
-.bloc-content-option span i {
+.bloc-content-option > span i {
 	position: absolute;
 	top: 0;
 	right: 4px;
@@ -871,7 +871,7 @@ article.bloc-content-option.filter {
 	border-radius: 3px;
 	/*padding: 6px;*/
 }
-.bloc-content-option span {
+.bloc-content-option > span {
 	background-color: #454545;
 }
 
@@ -972,7 +972,7 @@ article.bloc-content-option.filter {
 	float: right;
 }
 
-.bloc-content-option.filter span {
+.bloc-content-option.filter > span {
 	padding: 0px 15px 0px 15px;
 }
 
@@ -987,7 +987,7 @@ article.del-btn:hover {
 	color: #484848;
 }
 
-section[dd-width="1"] .bloc-content-option.filter span {
+section[dd-width="1"] .bloc-content-option.filter > span {
 	display: block;
 	margin-bottom: 4px;
 	text-align: center;
@@ -1007,7 +1007,7 @@ section[dd-width="1"] .add-filter.btn.cubby-btn {
 	margin: auto;
 }
 
-.bloc-content-option.disabled span {
+.bloc-content-option.disabled > span {
 	background-color: rgb(234, 234, 234);
 	color: rgb(234, 234, 234);
 }
@@ -1040,7 +1040,8 @@ section[dd-width="1"] .add-filter.btn.cubby-btn {
 
 section.filter-box {
 	margin: 10px;
-	height: 165px;
+	height: 264px;
+	width: 140px;
 	overflow: hidden;
 	overflow-y: auto;
 }
