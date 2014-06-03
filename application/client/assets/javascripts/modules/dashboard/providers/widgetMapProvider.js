@@ -19,7 +19,7 @@ angular.module('Dashboard').
                 ,   segmentName = self.segments[0].kpi.alias;
                 self.chartOptions = {};
                 self.series = new Array();
-                
+
                 self.chartOptions.title = {
                     text: self.title,
                     align: 'left'
@@ -70,12 +70,17 @@ angular.module('Dashboard').
                     dataTemp.push({"value": data[i][metricName], "code": data[i]["countrycode"], "name": data[i]["country"]});
 
                 dataFinal = [];
-                for(var i = 0; i < COUNTRIES.length; i++)
-                    for(var j = 0; j < dataTemp.length; j++)
+                for(var i = 0; i < COUNTRIES.length; i++) {
+                    var added = false;
+                    for(var j = 0; j < dataTemp.length; j++) {
                         if(COUNTRIES[i].code == dataTemp[j].code)
                             dataFinal.push(dataTemp[j])
-                        else
+                        else if(!added) {
                             dataFinal.push(COUNTRIES[i]);
+                            added = true;
+                        }
+                    }
+                }
 
 
                 serie.data = dataFinal;

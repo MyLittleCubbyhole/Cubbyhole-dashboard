@@ -29,7 +29,7 @@ angular.module('Dashboard').
 
 				self.chartOptions = {};
 				self.chartOptions.series = [];
-				
+
 				self.chartOptions.title = {
 					text: self.title,
 					align: 'left'
@@ -67,6 +67,11 @@ angular.module('Dashboard').
 								axis = _.uniq(series.data, false);
 							break;
 						}
+
+						self.chartOptions.xAxis.labels = {
+							rotation: -45
+						}
+
 					}
 					else {
 						segmentName = index;

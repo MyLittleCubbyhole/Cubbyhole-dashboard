@@ -31,6 +31,8 @@ angular.module('Dashboard').
 				self.scope = context.scope;
 				self.node = context.node;
 
+				self.limit = self.options.config.limit;
+
 				self.operator = self.options.config.operator || 'AND';
 				self.sort = self.options.config.sort || {};
 
@@ -98,7 +100,7 @@ angular.module('Dashboard').
 			Widget.prototype.save = function() {
 				var self = this
 				,	definition = {}
-				,	configuration = this._save();
+				,	configuration = self._save();
 
 				definition.title = self.title;
 				definition.size = self.size;

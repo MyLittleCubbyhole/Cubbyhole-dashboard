@@ -22,11 +22,11 @@ angular.module('Dashboard').
 
 				for(var i = 0; i < self.metrics.length; i++) {
 					self.head.push(self.metrics[i].kpi.alias);
-					self.kpis.push(self.metrics[i].kpi);
+					self.kpis.push(self.metrics[i]);
 				}
 				for(var i = 0; i < self.segments.length; i++) {
 					self.head.push(self.segments[i].kpi.alias);
-					self.kpis.push(self.segments[i].kpi);
+					self.kpis.push(self.segments[i]);
 				}
 
 				self.kpis.push({});
@@ -64,6 +64,40 @@ angular.module('Dashboard').
 
 					self.body.push(row);
 				}
+
+			};
+
+			Widget.prototype._save = function() {
+				var configuration = {}
+				,	options
+				,	self = this;
+				configuration.sort = self.sort;
+				configuration.limit = self.limit;
+				configuration.operator = self.operator;
+				configuration.metrics = [];
+				configuration.segments = [];
+				configuration.filters = [];
+
+				for(var i = 0; i < self.kpis.length; i++)
+					if(self.kpis[i].kpi) {
+						options = self.kpis[i].options;
+						options.name = self.kpis[i].kpi.index;
+						if(self.kpis[i].kpi.type == "metric")
+							configuration.metrics.push(options);
+						else if(self.kpis[i].kpi.type == "segment")
+							configuration.segments.push(options);
+					}
+
+
+				for(var i = 0; i<self.filters.length; i++) {
+					configuration.filters.push({
+						name: self.filters[i].kpi.index,
+						operator: self.filters[i].operator,
+						value: self.filters[i].value
+					})
+				}
+
+				return configuration;
 
 			};
 
