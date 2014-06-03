@@ -144,6 +144,12 @@ section.widget-content .widget-side .widget-front-body {
 	height: 100%;
 	position: absolute;
 }
+section.widget-content .widget-side .widget-front-head {
+	min-height: 40px;
+	width: 100%;
+	position: absolute;
+	z-index: 5;
+}
 
 /** corner **/
 .dd-widget article.corner {
