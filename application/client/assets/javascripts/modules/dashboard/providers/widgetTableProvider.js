@@ -29,7 +29,8 @@ angular.module('Dashboard').
 					self.kpis.push(self.segments[i]);
 				}
 
-				self.kpis.push({});
+				while(self.kpis.length < self.size.width * 2 + 1)
+					self.kpis.push({});
 
 
 				self.body = [];

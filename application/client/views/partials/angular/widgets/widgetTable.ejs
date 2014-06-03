@@ -10,14 +10,14 @@
 		<table>
 			<thead>
 				<tr>
-					<th ng-repeat="col in _ddWidgetTable.widget.head track by $index">
+					<th ng-repeat="col in _ddWidgetTable.widget.head track by $index" ng-class="{'table-columns-1': _ddWidgetTable.widget.size.width == 1, 'table-columns-2': _ddWidgetTable.widget.size.width == 2, 'table-columns-3': _ddWidgetTable.widget.size.width == 3, 'table-columns-4': _ddWidgetTable.widget.size.width == 4}">
 						{{col}}
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="row in _ddWidgetTable.widget.body">
-					<td ng-repeat="col in row">
+				<tr ng-repeat="row in _ddWidgetTable.widget.body track by $index">
+					<td ng-repeat="col in row track by $index" ng-class="{'table-columns-1': _ddWidgetTable.widget.size.width == 1, 'table-columns-2': _ddWidgetTable.widget.size.width == 2, 'table-columns-3': _ddWidgetTable.widget.size.width == 3, 'table-columns-4': _ddWidgetTable.widget.size.width == 4}">
 						{{col}}
 					</td>
 				</tr>
@@ -132,10 +132,10 @@
 					<article class="bloc-title">Width</article>
 					<article class="bloc-content">
 						<section class="bloc-selector">
-							<article class="bloc-option" ng-class="{ active: _ddWidgetTable.widget.size.width == 1 }" ng-click="WidgetBackSide.resize({ width: 1 });">25%</article>
-							<article class="bloc-option" ng-class="{ active: _ddWidgetTable.widget.size.width == 2 }" ng-click="WidgetBackSide.resize({ width: 2 });">50%</article>
-							<article class="bloc-option" ng-class="{ active: _ddWidgetTable.widget.size.width == 3 }" ng-click="WidgetBackSide.resize({ width: 3 });">75%</article>
-							<article class="bloc-option" ng-class="{ active: _ddWidgetTable.widget.size.width == 4 }" ng-click="WidgetBackSide.resize({ width: 4 });">100%</article>
+							<article class="bloc-option" ng-class="{ active: _ddWidgetTable.widget.size.width == 1 }" ng-click="WidgetBackSide.resize({ width: 1 }, true);">25%</article>
+							<article class="bloc-option" ng-class="{ active: _ddWidgetTable.widget.size.width == 2 }" ng-click="WidgetBackSide.resize({ width: 2 }, true);">50%</article>
+							<article class="bloc-option" ng-class="{ active: _ddWidgetTable.widget.size.width == 3 }" ng-click="WidgetBackSide.resize({ width: 3 }, true);">75%</article>
+							<article class="bloc-option" ng-class="{ active: _ddWidgetTable.widget.size.width == 4 }" ng-click="WidgetBackSide.resize({ width: 4 }, true);">100%</article>
 						</section>
 					</article>
 				</section>

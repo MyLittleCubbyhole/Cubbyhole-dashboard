@@ -45,9 +45,23 @@ angular.module('Dashboard').
 			$scope._dashydash.serialize();
 		}
 
-		$local.resize = function(size) {
+		$local.resize = function(size, resizeKpisArray) {
+			resizeKpisArray = resizeKpisArray || false;
 			size = size || {};
 			$widgetScope.widget.resize(size);
+
+			if(resizeKpisArray) {
+				var nbToRemove = $widgetScope.widget.kpis.length - (size.width * 2 + 1)
+				,	indexToRemove = $widgetScope.widget.kpis.length - 1;
+				for(var i = 0; i < nbToRemove; i++) {
+					if($widgetScope.widget.kpis[indexToRemove].kpi)
+						$local.removeKpi(indexToRemove, true);
+					$widgetScope.widget.kpis.splice(indexToRemove, 1);
+					indexToRemove--;
+				}
+				while($widgetScope.widget.kpis.length < size.width * 2 + 1)
+					$widgetScope.widget.kpis.push({});
+			}
 		}
 
 		$local.delete = function() {
