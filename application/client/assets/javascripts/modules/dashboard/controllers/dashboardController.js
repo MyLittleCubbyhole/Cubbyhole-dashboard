@@ -75,7 +75,7 @@ angular.module('Dashboard').
 
 		$local.capture = function() {
 			var $board = angular.element('.dd-board');
-			CaptureService($board);
+			CaptureService($board, $local.currentDashboard.title);
 		}
 
 		$scope.toString = function() {
