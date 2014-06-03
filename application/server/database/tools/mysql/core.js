@@ -129,9 +129,8 @@ MysqlTools.query.generate = function(options) {
 			groupbyQuery +=  queryBuilder['kpi_definition'][name].apply + ' ';
 		}
 
+		request += havingQuery;
 		if(!union)
-			request += havingQuery;
-		else
 			unionQuery += havingQuery;
 	}
 
@@ -147,18 +146,16 @@ MysqlTools.query.generate = function(options) {
 	if(!!options.sort && !!options.sort.name) {
 		orderbyQuery = 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
 
+		request += orderbyQuery;
 		if(!union)
-			request += orderbyQuery;
-		else
 			unionQuery += orderbyQuery;
 	}
 
 	if(typeof options.limit != 'undefined') {
 		limit = ' LIMIT ' + options.limit;
 
+		request += limit;
 		if(!union)
-			request += limit;
-		else
 			unionQuery += limit;
 	}
 

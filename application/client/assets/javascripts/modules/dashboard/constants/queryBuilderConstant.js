@@ -58,13 +58,67 @@ angular.module('Dashboard').
 		"subscribe.paused": {  "category":"subscribe", "index": "subscribe.paused", "type": "segment", "alias": "subscribe_paused", "datatype" : "number" },
 		"subscribe.renew": {  "category":"subscribe", "index": "subscribe.renew", "type": "segment", "alias": "subscribe_renew", "datatype" : "number" },
 	}).
-	constant('OPERATORS', {
+	constant('OPERATORS_NAME', {
 		">": "GREATER THAN",
+		">=": "GREATER OR EQUAL",
 		"<": "LOWER THAN",
+		"<=": "LOWER OR EQUAL",
 		"=": "EQUAL",
 		"!=": "NOT EQUAL",
 		"BETWEEN": "BETWEEN",
 		"NOT BETWEEN": "NOT BETWEEN",
 		"IN": "IN",
 		"NOT IN": "NOT IN"
-	});
+	}).
+	constant('OPERATORS', [
+		{
+			"op": ">",
+			"name": "GREATER THAN",
+			"inflections": [
+				{
+					"op": ">=",
+					"name": "GREATER OR EQUAL"
+				}
+			]
+		},
+		{
+			"op": "<",
+			"name": "LOWER THAN",
+			"inflections": [
+				{
+					"op": "<=",
+					"name": "LOWER OR EQUAL"
+				}
+			]
+		},
+		{
+			"op": "=",
+			"name": "EQUAL",
+			"inflections": [
+				{
+					"op": "!=",
+					"name": "NOT EQUAL"
+				}
+			]
+		},
+		{
+			"op": "BETWEEN",
+			"name": "BETWEEN",
+			"inflections": [
+				{
+					"op": "NOT BETWEEN",
+					"name": "NOT BETWEEN"
+				}
+			]
+		},
+		{
+			"op": "IN",
+			"name": "IN",
+			"inflections": [
+				{
+					"op": "NOT IN",
+					"name": "NOT IN"
+				}
+			]
+		}
+	])
