@@ -203,6 +203,9 @@ angular.module('Dashboard').
 							$this.removeAttr('dd-row-saved');
 							$this.removeAttr('dd-col-saved');
 						}
+						else
+							if(DASHYDASH_SETTINGS.columns.xs == self.options.col)
+								$scope.$broadcast('stop_edit');
 
 						self.dashydash.add_widget.apply(self.dashydash, parameters);
 						$scope.$broadcast('widget_refresh');

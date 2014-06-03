@@ -44,6 +44,7 @@ MysqlTools.checkPassword = function(userPassword, bddPassword, salt){
 MysqlTools.query.generate = function(options) {
 	var request = 'SELECT '
 	,	tables = []
+	,	union = false
 	,	name = '';
 
 	if(!options.metrics || !options.segments)
@@ -101,31 +102,71 @@ MysqlTools.query.generate = function(options) {
 		tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
 	}
 
+
 	if(tables.length>0)
 		request += MysqlTools.query.makeJoin(tables);
 
+	var unionQuery = ''
+	,	havingQuery = ''
+	,	orderbyQuery =  ''
+	,	limit = ''
+	,	groupbyQuery = '';
+
+	union = options.operator == 'OR' && having.length > 0 && where.length > 0;
+
+	if(union)
+		unionQuery = request;
+	
 	if(where.length > 0)
 		request += 'WHERE ' + where.join(' ' + options.operator + ' ') + ' ';
 
 	if(options.metrics.length > 0 && options.segments.length > 0) {
-		request += 'GROUP BY ';
+		groupbyQuery += 'GROUP BY ';
 		for(var i = 0; i < options.segments.length; i++) {
 			if(i > 0)
-				request += ',';
+				groupbyQuery += ',';
 			name = options.segments[i].name;
-			request +=  queryBuilder['kpi_definition'][name].apply + ' ';
+			groupbyQuery +=  queryBuilder['kpi_definition'][name].apply + ' ';
 		}
+
+		if(!union)
+			request += havingQuery;
+		else
+			unionQuery += havingQuery;
 	}
 
-	if(having.length > 0)
-		request += 'HAVING ' + having.join(' ' + options.operator + ' ') + ' ';
+	if(having.length > 0) {
+		havingQuery = 'HAVING ' + having.join(' ' + options.operator + ' ') + ' ';
 
-	if(!!options.sort && !!options.sort.name)
-		request += 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
+		if(!union)
+			request += havingQuery;
+		else
+			unionQuery += havingQuery;
+	}
 
-	if(typeof options.limit != 'undefined')
-		request += ' LIMIT ' + options.limit;
+	if(!!options.sort && !!options.sort.name) {
+		orderbyQuery = 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
 
+		if(!union)
+			request += orderbyQuery;
+		else
+			unionQuery += orderbyQuery;
+	}
+
+	if(typeof options.limit != 'undefined') {
+		limit = ' LIMIT ' + options.limit;
+
+		if(!union)
+			request += limit;
+		else
+			unionQuery += limit;
+	}
+
+	if(union)
+		request += ' UNION ' + unionQuery;
+
+
+	console.log(request)
 	return request;
 }
 

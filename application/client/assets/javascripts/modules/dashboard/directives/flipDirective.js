@@ -8,6 +8,10 @@ angular.module('Dashboard').
 
 				$local.active = false;
 
+				$scope.$on('stop_edit', function() {
+					$local.active = false;
+				})
+
 				$scope.toString = function() {
 					return '_flip';
 				}
