@@ -145,7 +145,7 @@ section.widget-content .widget-side .widget-front-body {
 	position: absolute;
 }
 section.widget-content .widget-side .widget-front-head {
-	min-height: 40px;
+	min-height: 80px;
 	width: 100%;
 	position: absolute;
 	z-index: 5;
