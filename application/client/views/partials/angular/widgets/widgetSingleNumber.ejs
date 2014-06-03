@@ -32,7 +32,7 @@
 					<article class="bloc-title">Metric</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option">
-							<span grumpy-ui grumpy-position="right" grumpy-align="top">
+							<span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
 								<span>{{_ddWidgetSingleNumber.widget.metrics[0].kpi.alias}}</span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
@@ -56,7 +56,7 @@
 					<article class="bloc-title">
 						Filters
 						<label class="toggle float-right">
-							<input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetSingleNumber.widget.operator = _ddWidgetSingleNumber.widget.operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetSingleNumber.widget.operator == 'AND'" ng-model="operator">
+							<input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetSingleNumber.widget.operator = _ddWidgetSingleNumber.widget.operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetSingleNumber.widget.operator == 'OR'" ng-model="operator">
 							<i data-swchon-text="OR" data-swchoff-text="AND"></i>
 						</label>
 					</article>
@@ -88,11 +88,30 @@
 								</grumpy-virgin>
 							</span>
 
-							<span grumpy-ui grumpy-position="bottom" grumpy-align="right" ng-repeat="value in filter.value track by $index">
-								{{ typeof(value) != 'undefined' ? value : 'VALUE' }}
+							<span grumpy-ui grumpy-position="bottom" grumpy-align="right">
+								<span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : filter.value[0] + ' AND ' + filter.value[1]}}</span>
+								<span ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : 'ARRAY'}}</span>
+								<span ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">{{ typeof(filter.value[0]) != 'undefined' && filter.value[0] != '' ? filter.value[0] : 'VALUE' }}</span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-value-box">
-										<input type="text" placeholder="value" ng-model="filter.value[$index]">
+										<article ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN' || filter.operator == 'IN' || filter.operator == 'NOT IN'">
+											<input type="text" placeholder="value" ng-model="filter.value[0]">
+											<article class="separator">
+												<span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">AND</span>
+											</article>
+											<input type="text" placeholder="value" ng-model="filter.value[1]">
+
+											<article ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">
+												<article class="values-in" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="valueIndex > 1">
+													<article class="separator"></article>
+													<input type="text" placeholder="value" ng-model="filter.value[valueIndex]">
+													<article class="del-btn" ng-click="filter.value.splice(valueIndex, 1);"><i class="icon-cross"></i></article>
+												</article>
+												<article class="btn cubby-btn button-add" ng-click="filter.value.push('')">ADD</article>
+											</article>
+										</article>
+
+										<input type="text" placeholder="value" ng-model="filter.value[0]" ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">
 									</section>
 								</grumpy-virgin>
 							</span>

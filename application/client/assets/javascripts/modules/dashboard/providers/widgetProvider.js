@@ -63,6 +63,50 @@ angular.module('Dashboard').
 
 			Widget.prototype.init = function() { throw 'init method must be overriden'; };
 
+			Widget.prototype._formatFilters = function() {
+				var self = this;
+
+				for(var i = 0; i<self.filters.length; i++) {
+					var lengthMax = 0;
+					if(self.filters[i].operator == 'BETWEEN' || self.filters[i].operator == 'NOT BETWEEN') {
+						lengthMax = 2;
+						if(self.filters[i].value[0] == '' || self.filters[i].value[1] == '')
+							if(self.filters[i].value[0] != '')
+								self.filters[i].value[1] = self.filters[i].value[0];
+							else if(self.filters[i].value[1] != '')
+								self.filters[i].value[0] = self.filters[i].value[1];
+							else {
+								self.filters[i].value[0] = '0';
+								self.filters[i].value[1] = '0';
+							}
+					}
+					else if(self.filters[i].operator == 'IN' || self.filters[i].operator == 'NOT IN') {
+						for(var j = self.filters[i].value.length - 1; j >= 0 ; j--)
+							if(self.filters[i].value[j] == '')
+								self.filters[i].value.splice(j, 1);
+
+						if(self.filters[i].value.length == 0)
+							self.filters[i].value.push('0');
+
+						if(self.filters[i].value.length < 2) {
+							if(self.filters[i].value[0] != '')
+								self.filters[i].value[1] = self.filters[i].value[0];
+							else if(self.filters[i].value[1] != '')
+								self.filters[i].value[0] = self.filters[i].value[1];
+						}
+					}
+					else
+						lengthMax = 1;
+
+					if(lengthMax != 0)
+						while(self.filters[i].value.length > lengthMax)
+								self.filters[i].value.splice(self.filters[i].value.length - 1, 1);
+
+					if(self.filters[i].value.length == 1 && self.filters[i].value[0] == '')
+						self.filters[i].value[0] = '0';
+				}
+			}
+
 			Widget.prototype._save = function() {
 				var configuration = {}
 				,	options
@@ -85,23 +129,9 @@ angular.module('Dashboard').
 					configuration.segments.push(options)
 				}
 
+				self._formatFilters();
+
 				for(var i = 0; i<self.filters.length; i++) {
-					var lengthMax = 0;
-					if(self.filters[i].operator == 'BETWEEN' || self.filters[i].operator == 'NOT BETWEEN') {
-						lengthMax = 2;
-						if(self.filters[i].value[0] == '' || self.filters[i].value[1] == '')
-							if(self.filters[i].value[0] != '')
-								self.filters[i].value[1] = self.filters[i].value[0];
-							else if(self.filters[i].value[1] != '')
-								self.filters[i].value[0] = self.filters[i].value[1];
-					}
-					else if(self.filters[i].operator != 'IN' && self.filters[i].operator != 'NOT IN')
-						lengthMax = 1;
-
-					if(lengthMax != 0)
-						while(self.filters[i].value.length > lengthMax)
-								self.filters[i].value.splice(self.filters[i].value.length - 1, 1);
-
 					configuration.filters.push({
 						name: self.filters[i].kpi.index,
 						operator: self.filters[i].operator,

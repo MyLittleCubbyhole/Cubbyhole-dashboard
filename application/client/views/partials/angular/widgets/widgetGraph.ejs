@@ -32,7 +32,7 @@
 					<article class="bloc-title">Abscisse</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option">
-							<span grumpy-ui grumpy-position="right" grumpy-align="top">
+							<span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
 								<span>{{_ddWidgetGraph.widget.segments[0].kpi.alias}}</span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
@@ -55,7 +55,7 @@
 					<article class="bloc-title">Ordinate</article>
 					<article class="bloc-content">
 						<article class="bloc-content-option">
-							<span grumpy-ui grumpy-position="right" grumpy-align="top">
+							<span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
 								<span>{{_ddWidgetGraph.widget.metrics[0].kpi.alias}}</span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
@@ -187,9 +187,10 @@
 											<input type="text" placeholder="value" ng-model="filter.value[1]">
 
 											<article ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">
-												<article ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="valueIndex > 1">
+												<article class="values-in" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="valueIndex > 1">
+													<article class="separator"></article>
 													<input type="text" placeholder="value" ng-model="filter.value[valueIndex]">
-													<article class="del-btn" ng-click="_ddWidgetGraph.widget.filters.value.splice(valueIndex, 1);"><i class="icon-cross"></i></article>
+													<article class="del-btn" ng-click="filter.value.splice(valueIndex, 1);"><i class="icon-cross"></i></article>
 												</article>
 												<article class="btn cubby-btn button-add" ng-click="filter.value.push('')">ADD</article>
 											</article>

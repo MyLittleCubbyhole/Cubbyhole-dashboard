@@ -825,6 +825,9 @@ article.bloc-content-option {
 	top: 0px;
 	min-width: 71px;
 }
+.bloc-content-option > span.no-close {
+	padding-right: 10px;
+}
 .bloc-content-option > span i {
 	position: absolute;
 	top: 0;
@@ -1143,6 +1146,22 @@ section.filter-value-box {
 	padding-top: 2px;
 	padding-bottom: 2px;
 }
+.filter-value-box .values-in {
+	position: relative;
+}
+.filter-value-box .values-in .del-btn {
+	position: absolute;
+	top: 10px;
+	right: 3px;
+}
+.filter-value-box .values-in .del-btn:hover {
+	color: #DADADA;
+}
+.filter-value-box .button-add {
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+}
+
 input.config-title {
 	outline: none;
 	max-width: 300px;

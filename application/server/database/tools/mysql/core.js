@@ -116,7 +116,7 @@ MysqlTools.query.generate = function(options) {
 
 	if(union)
 		unionQuery = request;
-	
+
 	if(where.length > 0)
 		request += 'WHERE ' + where.join(' ' + options.operator + ' ') + ' ';
 
