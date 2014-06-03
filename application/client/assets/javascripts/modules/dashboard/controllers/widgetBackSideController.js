@@ -1,10 +1,11 @@
 angular.module('Dashboard').
-	controller('WidgetBackSideController', ['$scope', 'QUERY_BUILDER', 'OPERATORS', '$timeout',  function($scope, QUERY_BUILDER, OPERATORS, $timeout){
+	controller('WidgetBackSideController', ['$scope', 'QUERY_BUILDER', 'OPERATORS', 'OPERATORS_NAME', '$timeout',  function($scope, QUERY_BUILDER, OPERATORS, OPERATORS_NAME, $timeout){
 		var $local = $scope.WidgetBackSide = {}
 		,	widgetScopeName = $scope.$parent.toString()
 		,	$widgetScope = $scope[widgetScopeName];
 
 		$local.operators = OPERATORS;
+		$local.operatorsName = OPERATORS_NAME;
 		$local.tab = 'data';
 		$local.kpis = {};
 		$local.segments = {};

@@ -164,11 +164,22 @@
 								</grumpy-virgin>
 							</span>
 							<span grumpy-ui grumpy-position="bottom" grumpy-align="center">
-								{{WidgetBackSide.operators[filter.operator]}}
+								{{WidgetBackSide.operatorsName[filter.operator]}}
 								<grumpy-virgin class="bounceIn">
-									<section class="filter-box">
-										<article ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-click="filter.operator = index; _grumpyUi.close();" ng-class="{ active: index == filter.operator }">
-											{{operator}}
+									<section  class="filter-kpi-box operators"  scroll-bar>
+										<article class="operator-row" ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-class="{ active: index == filter.operator }" ng-init="inflection = false">
+											<article class="kpi-category" >
+												<article class="operator-title" ng-click="filter.operator = operator.op; _grumpyUi.close();">
+													{{operator.name}}
+												</article>
+												<i class="open-sub-dir icon-earth" ng-class="{ 'icon-earth': inflection, 'icon-star': !inflection }" ng-click="inflection = !inflection"></i>
+											</article>
+											<section class="kpi-list" ng-class="{ open: inflection}">
+												<article ng-repeat="inflection in operator.inflections track by $index" class="kpi" ng-click="filter.operator = inflection.op; _grumpyUi.close();" ng-class="{ active: inflection.op == filter.operator }">
+													{{inflection.name}}
+												</article>
+											</section>
+											
 										</article>
 									</section>
 								</grumpy-virgin>
