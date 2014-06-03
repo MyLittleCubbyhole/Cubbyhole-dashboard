@@ -173,12 +173,15 @@
 									</section>
 								</grumpy-virgin>
 							</span>
-
 							<span grumpy-ui grumpy-position="bottom" grumpy-align="right" ng-repeat="value in filter.value track by $index">
-								{{ typeof(value) != 'undefined' ? value : 'VALUE' }}
+								{{ typeof(value) != 'undefined' && value != '' ? value : 'VALUE' }}
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-value-box">
 										<input type="text" placeholder="value" ng-model="filter.value[$index]">
+										<article ng-if="filter.operator == 'BETWEEN'">
+											<article class="separator">AND</article>
+											<input type="text" placeholder="value" ng-model="filter.value[$index]">
+										</article>
 									</section>
 								</grumpy-virgin>
 							</span>
