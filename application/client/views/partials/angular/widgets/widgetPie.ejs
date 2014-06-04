@@ -128,20 +128,20 @@
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-value-box">
 										<article ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN' || filter.operator == 'IN' || filter.operator == 'NOT IN'">
-											<input type="text" placeholder="value" ng-model="filter.value[0]">
-											<article class="separator">
-												<span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">AND</span>
-											</article>
-											<input type="text" placeholder="value" ng-model="filter.value[1]">
+											<section class="input-boxes" scroll-bar>
+												<input type="text" placeholder="value" ng-model="filter.value[0]">
+												<article class="separator">
+													<span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">AND</span>
+												</article>
+												<input type="text" placeholder="value" ng-model="filter.value[1]">
 
-											<article ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">
-												<article class="values-in" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="valueIndex > 1">
+												<article class="values-in" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN') && valueIndex > 1">
 													<article class="separator"></article>
 													<input type="text" placeholder="value" ng-model="filter.value[valueIndex]">
 													<article class="del-btn" ng-click="filter.value.splice(valueIndex, 1);"><i class="icon-cross"></i></article>
 												</article>
-												<article class="btn cubby-btn button-add" ng-click="filter.value.push('')">ADD</article>
-											</article>
+											</section>
+											<article class="btn cubby-btn button-add" ng-click="filter.value.push('')" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN')">ADD</article>
 										</article>
 
 										<input type="text" placeholder="value" ng-model="filter.value[0]" ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">

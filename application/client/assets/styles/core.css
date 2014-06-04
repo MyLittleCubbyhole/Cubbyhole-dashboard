@@ -1151,6 +1151,10 @@ section.filter-value-box {
 	padding: 10px;
 	color: #484848;
 }
+.filter-value-box .input-boxes {
+	overflow: hidden;
+	max-height: 135px;
+}
 .filter-value-box input {
 	background-color: #303030;
 	outline: none;
