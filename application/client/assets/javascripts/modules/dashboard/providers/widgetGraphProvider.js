@@ -20,6 +20,7 @@ angular.module('Dashboard').
                 ,   segment = []
                 ,   absName = ''
                 ,   segmentName = ''
+                ,   segmentType = ''
                 ,   axis = []
                 ,   axisType = ''
                 ,   index = '';
@@ -61,7 +62,9 @@ angular.module('Dashboard').
                             break;
                             case 'date':
                                 self.chartOptions.xAxis.type = 'datetime';
-                                self.chartOptions.xAxis.labels.format = '{value:%Y-%m-%d}';
+                                self.chartOptions.xAxis.labels.formatter = function() {
+                                   return moment(this.value).format('MMMM Do YYYY');
+                                };
                                 for(var j = 0; j< series.data.length; j++)
                                     axis.push( (new Date(series.data[j])).getTime() )
                                 axis = _.uniq(axis, false);
@@ -75,6 +78,7 @@ angular.module('Dashboard').
                     }
                     else {
                         segmentName = index;
+                        segmentType = self.segments[i].kpi.datatype;
                         segment = _.uniq(series.data, false);
                     }
 
@@ -89,11 +93,16 @@ angular.module('Dashboard').
 
                         series = {
                             type: self.metrics[0].options.shape,
-                            name: self.metrics[0].kpi.formattedAlias,
+                            name: segment[i],//self.metrics[0].kpi.formattedAlias,
                             marker: { enabled: false },
                             data: [],
                             stack: segmentName
                         };
+
+                        if(segmentType == 'date') {
+                            var dateM = moment(new Date(segment[i]).getTime());
+                            series.name = dateM.format('MMMM Do YYYY');
+                        }
 
                         switch(self.metrics[0].options.shape) {
                             case 'area':
@@ -110,6 +119,7 @@ angular.module('Dashboard').
                         var witness = false;
                         // if(axis.length>0)
                             for(var j = 0; j<axis.length; j++) {
+                                // debugger;
                                 witness = false;
                                 for(var k = 0; k<data.length; k++) {
                                     value = axisType == 'date' ? (new Date(data[k][absName])).getTime() : data[k][absName];
