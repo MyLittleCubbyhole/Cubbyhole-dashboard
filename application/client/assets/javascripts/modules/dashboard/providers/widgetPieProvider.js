@@ -1,64 +1,72 @@
 angular.module('Dashboard').
-	provider('WidgetPieProvider', function(){
+    provider('WidgetPieProvider', function(){
 
-		this.$get = ['ClassService', 'WidgetProvider', '$window', function(ClassService, WidgetProvider, $window) {
+        this.$get = ['ClassService', 'WidgetProvider', '$window', function(ClassService, WidgetProvider, $window) {
 
-			var Widget = function(options, context) {
-				var self = this;
-				WidgetProvider.call(this, options, context);
-				self.chartOptions = {};
-			};
+            var Widget = function(options, context) {
+                var self = this;
+                WidgetProvider.call(this, options, context);
+                self.chartOptions = {};
+            };
 
-			ClassService.extend(WidgetProvider, Widget);
+            ClassService.extend(WidgetProvider, Widget);
 
-			Widget.prototype.init = function(data) {
+            Widget.prototype.init = function(data) {
 
-				var self = this
-				,	series = {}
-				,	metricName = self.metrics[0].kpi.alias
-				,	segmentName = self.segments[0].kpi.alias;
-				self.chartOptions = {};
-				self.chartOptions.series = [];
-				
-				self.chartOptions.title = {
-					text: self.title,
-					align: 'left'
-				};
+                var self = this
+                ,   series = {}
+                ,   metricName = self.metrics[0].kpi.alias
+                ,   segmentName = self.segments[0].kpi.alias;
+                self.chartOptions = {};
+                self.chartOptions.series = [];
 
-				self.chartOptions.plotOptions = {
-					pie: {
-						allowPointSelect: false,
-						cursor: 'pointer',
-						dataLabels: {
-							enabled: false
-						},
-						showInLegend: true
-					}
-				}
+                self.chartOptions.title = {
+                    text: self.title,
+                    align: 'left'
+                };
 
-				var serie = {
-					type: 'pie',
-					name: metricName,
-					data: []
-				}
+                self.chartOptions.plotOptions = {
+                    pie: {
+                        allowPointSelect: false,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                }
 
-				for(var j = 0; j<data.length; j++)
-					serie.data.push([data[j][segmentName].toString(), data[j][metricName]]);
+                var serie = {
+                    type: 'pie',
+                    name: self.metrics[0].kpi.formattedAlias,
+                    data: []
+                }
 
-				self.chartOptions.series.push(serie);
+                if(self.segments[0].kpi.datatype == "date")
+                    self.chartOptions.xAxis = {
+                        type: 'datetime',
+                        labels: {
+                            format: '{value:%Y-%m-%d %H:%M:%S}'
+                        }
+                    }
 
-				this.refresh();
-			};
+                for(var j = 0; j<data.length; j++)
+                    serie.data.push([data[j][segmentName].toString(), data[j][metricName]]);
 
-			Widget.prototype.refresh = function() {
-				var self = this;
-				this.node.find('.widget-front-body').highcharts(this.chartOptions);
-			}
+                self.chartOptions.series.push(serie);
 
-			Widget.prototype.toString = function() {
-				return 'Widget Pie';
-			};
+                this.refresh();
+            };
 
-			return Widget
-		}]
-	})
+            Widget.prototype.refresh = function() {
+                var self = this;
+                this.node.find('.widget-front-body').highcharts(this.chartOptions);
+            }
+
+            Widget.prototype.toString = function() {
+                return 'Widget Pie';
+            };
+
+            return Widget
+        }]
+    })

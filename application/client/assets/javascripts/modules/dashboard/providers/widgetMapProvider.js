@@ -57,7 +57,7 @@ angular.module('Dashboard').
                     data : [],
                     mapData: Highcharts.maps.world,
                     joinBy: 'code',
-                    name: metricName,
+                    name: self.metrics[0].kpi.formattedAlias,
                     states: {
                         hover: {
                             color: '#BADA55'
@@ -70,8 +70,8 @@ angular.module('Dashboard').
                     dataTemp.push({"value": data[i][metricName], "code": data[i]["countrycode"], "name": data[i]["country"]});
 
                 dataFinal = dataTemp.slice(0);
-                var witness = false;
                 for(var i = 0; i < COUNTRIES.length; i++) {
+                    var witness = false;
                     for(var j = 0; j < dataTemp.length; j++)
                         if(COUNTRIES[i].code == dataTemp[j].code) {
                             witness = true;
@@ -81,21 +81,6 @@ angular.module('Dashboard').
                     if(!witness)
                         dataFinal.push(COUNTRIES[i])
                 }
-
-                // for(var i = 0; i < COUNTRIES.length; i++) {
-                //     var added = false;
-                //     for(var j = 0; j < dataTemp.length; j++) {
-                //         if(COUNTRIES[i].code == dataTemp[j].code) {
-                //             dataFinal.push(dataTemp[j])
-                //             console.log(dataTemp[j])
-                //         }
-                //         else if(!added) {
-                //             dataFinal.push(COUNTRIES[i]);
-                //             added = true;
-                //         }
-                //     }
-                // }
-                // console.log(dataFinal)
 
                 serie.data = dataFinal;
                 self.series.push(serie);

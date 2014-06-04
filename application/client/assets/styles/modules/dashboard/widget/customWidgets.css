@@ -1,0 +1,50 @@
+
+/** table **/
+section[dd-widget-table] .widget-front-body table {
+    width: 100%;
+    color: #333;
+    text-align: center;
+}
+
+section[dd-widget-table] .widget-front-body table thead {
+    width: 100%;
+}
+
+section[dd-widget-table] .widget-front-body table th {
+    height: 70px;
+    line-height: 30px;
+    vertical-align: bottom;
+}
+
+section[dd-widget-table] .widget-front-body table th.table-columns-1 {
+    width: 33.33%;
+}
+section[dd-widget-table] .widget-front-body table th.table-columns-2 {
+    width: 20%
+}
+section[dd-widget-table] .widget-front-body table th.table-columns-3 {
+    width: 14.28%;
+}
+section[dd-widget-table] .widget-front-body table th.table-columns-4 {
+    width: 11.11%;
+}
+
+section[dd-widget-table] .widget-front-body table td {
+    border-top: 1px solid #ddd;
+    line-height: 40px;
+    height: 40px;
+}
+
+section[dd-widget-table]    .widget-front-body {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/** table **/
+
+/** single number **/
+section[dd-widget-single-number] .widget-front-body {
+    font-size: 57px;
+    text-align: center;
+    line-height: 101px;
+}
+/** single number **/

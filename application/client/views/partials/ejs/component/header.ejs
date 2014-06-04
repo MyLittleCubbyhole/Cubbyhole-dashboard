@@ -1,53 +1,53 @@
 <header ng-class="{ preventClick: Overlay.activated }">
-	<section id="global-nav" ng-controller="NavigationController" du-scroll-container="bloc-container">
-		<section id="logo-container" class="pull-left" ng-click="Navigation.goto('/home')">
-			<article id="logo"><img src="/images/design/logo.png" alt="logo"></article>
-			<article id="logo-title" class="google-font hidden-xs">Cubbyhole</article>
-		</section>
-		<section class="menu pull-right" ng-controller="AuthenticationController" ng-cloak>
-			<article class="option nav" ng-if="!Authentication.user.firstname" ng-click="Home.showLoginModal()">
-				<span class="label">LOG IN</span>
-			</article>
-			<article class="option authentication" ng-if="Authentication.user.firstname">
-				<section class="button-profile" ng-click="Authentication.open();">
-					<article class="img-circle image-target" ng-style="Authentication.stylePhoto" ng-class="{'form-file-preview': Authentication.user.photo && Authentication.user.photo != 'null'}">
-	                    <i class="icon-profile-male form-file-hide"></i>
-	                </article>
-					<article class="label hidden-xs">{{Authentication.user.firstname}}</article>
-				</section>
+    <section id="global-nav" ng-controller="NavigationController" du-scroll-container="bloc-container">
+        <section id="logo-container" class="pull-left" ng-click="Navigation.goto('/home')">
+            <article id="logo"><img src="/images/design/logo.png" alt="logo"></article>
+            <article id="logo-title" class="google-font hidden-xs">Cubbyhole</article>
+        </section>
+        <section class="menu pull-right" ng-controller="AuthenticationController" ng-cloak>
+            <article class="option nav" ng-if="!Authentication.user.firstname" ng-click="Home.showLoginModal()">
+                <span class="label">LOG IN</span>
+            </article>
+            <article class="option authentication" ng-if="Authentication.user.firstname">
+                <section class="button-profile" ng-click="Authentication.open();">
+                    <article class="img-circle image-target" ng-style="Authentication.stylePhoto" ng-class="{'form-file-preview': Authentication.user.photo && Authentication.user.photo != 'null'}">
+                        <i class="icon-profile-male form-file-hide"></i>
+                    </article>
+                    <article class="label hidden-xs">{{Authentication.user.firstname}}</article>
+                </section>
 
-				<section id="user-card" class="bounceIn animated" ng-class="{ open: Authentication.opened }" user-card>
-					<article class="card-arrow"></article>
-					<section id="user-profile">
-						<article class="user-picture">
-							<article class="border-circle-blue">
-								<article class="img-circle image-target" ng-style="Authentication.stylePhoto" ng-class="{'form-file-preview': Authentication.user.photo && Authentication.user.photo != 'null'}">
-				                    <i class="icon-profile-male form-file-hide"></i>
-				                </article>
-							</article>
-						</article>
-						<article class="user-info">
-							<article class="user-firstname google-font">{{Authentication.user.firstname}}</article>
-							<article class="user-lastname google-font">{{Authentication.user.lastname}}</article>
-						</article>
-					</section>
-					<section id="user-disconnect" class="big-font google-font" ng-click="Authentication.logout()">
-						<span>Log out</span>
-					</section>
-				</section>
-			</article>
-		</section>
+                <section id="user-card" class="bounceIn animated" ng-class="{ open: Authentication.opened }" user-card>
+                    <article class="card-arrow"></article>
+                    <section id="user-profile">
+                        <article class="user-picture">
+                            <article class="border-circle-blue">
+                                <article class="img-circle image-target" ng-style="Authentication.stylePhoto" ng-class="{'form-file-preview': Authentication.user.photo && Authentication.user.photo != 'null'}">
+                                    <i class="icon-profile-male form-file-hide"></i>
+                                </article>
+                            </article>
+                        </article>
+                        <article class="user-info">
+                            <article class="user-firstname google-font">{{Authentication.user.firstname}}</article>
+                            <article class="user-lastname google-font">{{Authentication.user.lastname}}</article>
+                        </article>
+                    </section>
+                    <section id="user-disconnect" class="big-font google-font" ng-click="Authentication.logout()">
+                        <span>Log out</span>
+                    </section>
+                </section>
+            </article>
+        </section>
 
-		<nav class="navigation pull-left hidden-xs hidden-sm">
-			<article class="option nav google-font big-font" ng-class="{ selected: Navigation.isSelected('/home') }" ng-click="Navigation.goto('/home')">
-				<span class="label">HOME</span>
-			</article>
-		</nav>
+        <nav class="navigation pull-left hidden-xs hidden-sm">
+            <article class="option nav google-font big-font" ng-class="{ selected: Navigation.isSelected('/home') }" ng-click="Navigation.goto('/home')">
+                <span class="label">HOME</span>
+            </article>
+        </nav>
 
-		<section class="redirect-zone pull-left">
-			<article class="option nav" ng-class="{ selected: Navigation.isSelected('/dashboard') }" ng-click="Navigation.goto('/dashboard')">
-				<span class="label">DASHBOARD</span>
-			</article>
-		</section>
-	</section>
+        <section class="redirect-zone pull-left">
+            <article class="option nav" ng-class="{ selected: Navigation.isSelected('/dashboard') }" ng-click="Navigation.goto('/dashboard')">
+                <span class="label">DASHBOARD</span>
+            </article>
+        </section>
+    </section>
 </header>
