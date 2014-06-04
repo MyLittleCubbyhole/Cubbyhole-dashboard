@@ -45,7 +45,7 @@ angular.module('Dashboard').
             name: 'Map',
             icon: '/images/widget-icons/icomap.png',
             width: [1,2,3,4],
-            height: 4,
+            height: 3,
             config: {"metrics":[{"name":"count.user"}],"segments":[{"name":"user.countrycode"},{"name":"user.country"}], "order": "user.countrycode"}
         }
     }).

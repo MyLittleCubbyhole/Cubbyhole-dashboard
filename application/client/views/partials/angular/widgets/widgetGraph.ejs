@@ -236,6 +236,16 @@
                     </article>
                 </section>
                 <section class="bloc-tab">
+                    <article class="bloc-title">Height</article>
+                    <article class="bloc-content">
+                        <section class="bloc-selector">
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.height == 3 }" ng-click="WidgetBackSide.resize({ height: 3 });">3</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.height == 5 }" ng-click="WidgetBackSide.resize({ height: 5 });">5</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.height == 7 }" ng-click="WidgetBackSide.resize({ height: 7 });">7</article>
+                        </section>
+                    </article>
+                </section>
+                <section class="bloc-tab">
                     <article class="bloc-button" ng-click="WidgetBackSide.delete()">DELETE WIDGET</article>
                 </section>
             </article>
