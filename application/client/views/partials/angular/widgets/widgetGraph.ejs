@@ -172,14 +172,14 @@
 												<article class="operator-title" ng-click="filter.operator = operator.op; _grumpyUi.close();">
 													{{operator.name}}
 												</article>
-												<i class="open-sub-dir icon-earth" ng-class="{ 'icon-earth': inflection, 'icon-star': !inflection }" ng-click="inflection = !inflection"></i>
+												<i class="open-sub-dir icon-arrow-down" ng-class="{ 'icon-arrow-up': inflection, 'icon-arrow-down': !inflection }" ng-click="inflection = !inflection"></i>
 											</article>
 											<section class="kpi-list" ng-class="{ open: inflection}">
 												<article ng-repeat="inflection in operator.inflections track by $index" class="kpi" ng-click="filter.operator = inflection.op; _grumpyUi.close();" ng-class="{ active: inflection.op == filter.operator }">
 													{{inflection.name}}
 												</article>
 											</section>
-											
+
 										</article>
 									</section>
 								</grumpy-virgin>

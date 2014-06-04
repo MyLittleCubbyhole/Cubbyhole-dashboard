@@ -129,9 +129,9 @@ MysqlTools.query.generate = function(options) {
 			groupbyQuery +=  queryBuilder['kpi_definition'][name].apply + ' ';
 		}
 
-		request += havingQuery;
+		request += groupbyQuery;
 		if(!union)
-			unionQuery += havingQuery;
+			unionQuery += groupbyQuery;
 	}
 
 	if(having.length > 0) {
@@ -161,6 +161,8 @@ MysqlTools.query.generate = function(options) {
 
 	if(union)
 		request += ' UNION ' + unionQuery;
+
+	console.log(request)
 
 	return request;
 }
