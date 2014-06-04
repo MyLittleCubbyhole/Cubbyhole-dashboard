@@ -1,0 +1,155 @@
+#overlay {
+    display: none;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+#overlay.activated {
+    display: block;
+}
+
+.form-file-preview {
+    background-repeat:no-repeat!important;
+    background-position:center center!important;
+    -webkit-background-size:cover!important;
+    -moz-background-size:cover!important;
+    -o-background-size:cover!important;
+    background-size:cover!important;
+}
+
+.form-file-preview .form-file-hide{
+    display:none!important;
+}
+
+#pusher {
+    overflow: hidden;
+    position: relative;
+    left: 0;
+    z-index: 0;
+    height: 100%;
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    -ms-transition: -ms-transform 0.5s;
+    -o-transition: -o-transform 0.5s;
+    transition: transform 0.5s;
+}
+#pusher::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -moz-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -ms-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -o-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+.open #pusher::after {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+#overlay-pusher {
+    position: absolute;
+    background: #333;
+    color: white;
+    padding: 30px;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    visibility: hidden;
+    width: 300px;
+    height: 100%;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+#overlay-pusher::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    opacity: 1;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+.open #overlay-pusher::after {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -moz-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -ms-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -o-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+#container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+}
+#pusher {
+    -webkit-transform-origin: 0% 50%;
+    -moz-transform-origin: 0% 50%;
+    -ms-transform-origin: 0% 50%;
+    -o-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.open #pusher {
+    -webkit-transform: rotateY(15deg);
+    -moz-transform: rotateY(15deg);
+    -ms-transform: rotateY(15deg);
+    -o-transform: rotateY(15deg);
+    transform: rotateY(15deg);
+}
+#overlay-pusher {
+    z-index: 30;
+    opacity: 1;
+    -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    -o-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+}
+.open #overlay-pusher {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    -ms-transition: -ms-transform 0.5s;
+    -o-transition: -o-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+#overlay-pusher::after {
+    display: none;
+}

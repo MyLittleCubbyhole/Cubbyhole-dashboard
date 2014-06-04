@@ -121,17 +121,24 @@ module.exports = function(grunt) {
                         "application/client/assets/styles/libraries/grumpy-ui/grumpy-ui.css",
                         "application/client/assets/styles/libraries/grumpy-ui/grumpy-accordion.css",
                         "application/client/assets/styles/libraries/modalWindowEffects/component.css",
-                        "application/client/assets/styles/components/header.css",
+                        "application/client/assets/styles/components/buttons.css",
                         "application/client/assets/styles/components/forms.css",
-                        "application/client/assets/styles/components/userCard.css",
+                        "application/client/assets/styles/components/header.css",
                         "application/client/assets/styles/components/modale.css",
+                        "application/client/assets/styles/components/overlay.css",
+                        "application/client/assets/styles/components/userCard.css",
+                        "application/client/assets/styles/modules/dashboard/dashboard.css",
+                        "application/client/assets/styles/modules/dashboard/dashboardMenu.css",
+                        "application/client/assets/styles/modules/dashboard/widget/backWidget.css",
+                        "application/client/assets/styles/modules/dashboard/widget/customWidgets.css",
+                        "application/client/assets/styles/modules/dashboard/widget/frontWidget.css",
+                        "application/client/assets/styles/modules/dashboard/widget/widget.css",
                         "application/client/assets/styles/core.css"
                     ]
                 }
             }
         }
     });
-
 
 
     grunt.registerTask('concatJS', [
