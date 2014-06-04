@@ -71,7 +71,7 @@ angular.module('Tools').
 					console.log(canvas)
 
 					var pdf = new jsPDF('p', 'mm', 'a3');
-					console.log(pdf)
+					// console.log(pdf)
 					//taille pdf px - 794, 1122
 					var image = canvas.toDataURL("image/jpeg", 1.0);
 					contextualizeCss(false);
@@ -79,9 +79,9 @@ angular.module('Tools').
 					var capture = new Image();
 					capture.src = image;
 
-					$('body').append(capture)
-					console.log(capture.height)
-					return true;
+					// $('body').append(capture)
+					// console.log(capture.height)
+					// return true;
 					var MARGIN = 10;
 					var WIDTH = 1122 - MARGIN*4;//794;
 					var HEIGHT = 794 - MARGIN*4;
@@ -118,22 +118,23 @@ angular.module('Tools').
 					cropCanvas.setAttributeNode(height);
 					var context = cropCanvas.getContext("2d");
 
+					var canvasHeight = currentHeight;
 					//pillow tag
 					////todo ajouter margin + augmenter taille
 					var logo = new Image();
 					logo.src = '/images/design/logo-big.png';
 					logo.onload = function() {
 						context.fillStyle = "#fff";
-						context.fillRect(0,0,WIDTH,HEIGHT);
+						context.fillRect(0,0,WIDTH,canvasHeight);
 
 						context.drawImage(logo, (WIDTH - 230)/2 , 250, 230, 286);
 						part = cropCanvas.toDataURL("image/jpeg", 1.0);
 						pdf.addImage(part,'JPEG', 0, 0)
 
 						while(maxHeight > 0) {
-							context.clearRect(0, 0, WIDTH, HEIGHT);
+							context.clearRect(0, 0, WIDTH, canvasHeight);
 							context.fillStyle = "#fff";
-							context.fillRect(0,0,WIDTH,HEIGHT);
+							context.fillRect(0,0,WIDTH,canvasHeight);
 
 
 							currentHeight = maxHeight - increment < 0 ? maxHeight : currentHeight;
