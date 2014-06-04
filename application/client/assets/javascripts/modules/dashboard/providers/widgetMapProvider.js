@@ -66,24 +66,20 @@ angular.module('Dashboard').
                 };
 
                 var dataTemp = [];
-                for(var i = 0; i<data.length; i++) {
-                    console.log(data[i][metricName], data[i], metricName)
+                for(var i = 0; i<data.length; i++)
                     dataTemp.push({"value": data[i][metricName], "code": data[i]["countrycode"], "name": data[i]["country"]});
-                }
 
                 dataFinal = dataTemp.slice(0);
                 var witness = false;
                 for(var i = 0; i < COUNTRIES.length; i++) {
-                    for(var j = 0; j < dataTemp.length; j++) {
+                    for(var j = 0; j < dataTemp.length; j++)
                         if(COUNTRIES[i].code == dataTemp[j].code) {
                             witness = true;
                             break;
                         }
-                    }
 
                     if(!witness)
                         dataFinal.push(COUNTRIES[i])
-
                 }
 
                 // for(var i = 0; i < COUNTRIES.length; i++) {
@@ -99,7 +95,7 @@ angular.module('Dashboard').
                 //         }
                 //     }
                 // }
-                console.log(dataFinal)
+                // console.log(dataFinal)
 
                 serie.data = dataFinal;
                 self.series.push(serie);
