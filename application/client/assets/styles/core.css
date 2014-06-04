@@ -1007,7 +1007,7 @@ article.del-btn {
 }
 
 article.del-btn:hover {
-	color: #484848;
+	color: #8D8D8D;
 }
 
 section[dd-width="1"] .bloc-content-option.filter > span {
@@ -1020,8 +1020,8 @@ section[dd-width="1"] .bloc-content-option {
 }
 section[dd-width="1"] .bloc-content-option article.del-btn {
 	position: absolute;
-	top: -8px;
-	right: -4px;
+	top: 6px;
+	right: 1px;
 }
 section[dd-width="1"] .bloc-content {
 	margin-top: 4px;
