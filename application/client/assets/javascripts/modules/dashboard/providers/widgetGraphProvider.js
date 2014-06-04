@@ -93,10 +93,10 @@ angular.module('Dashboard').
 
                         series = {
                             type: self.metrics[0].options.shape,
-                            name: segment[i],//self.metrics[0].kpi.formattedAlias,
+                            name: segment[i],
                             marker: { enabled: false },
                             data: [],
-                            stack: segmentName
+                            stack: !!segmentName
                         };
 
                         if(segmentType == 'date') {
@@ -117,25 +117,19 @@ angular.module('Dashboard').
                         }
 
                         var witness = false;
-                        // if(axis.length>0)
-                            for(var j = 0; j<axis.length; j++) {
-                                // debugger;
-                                witness = false;
-                                for(var k = 0; k<data.length; k++) {
-                                    value = axisType == 'date' ? (new Date(data[k][absName])).getTime() : data[k][absName];
-                                    if(value == axis[j] && data[k][segmentName] == index) {
-                                        witness = true;
-                                        series.data.push([axis[j], data[k][alias]]);
-                                    }
+                        for(var j = 0; j<axis.length; j++) {
+                            witness = false;
+                            for(var k = 0; k<data.length; k++) {
+                                value = axisType == 'date' ? (new Date(data[k][absName])).getTime() : data[k][absName];
+                                if(value == axis[j] && data[k][segmentName] == index) {
+                                    witness = true;
+                                    series.data.push([axis[j], data[k][alias]]);
                                 }
-                                if(!witness)
-                                    series.data.push([axis[j], 0]);
                             }
-                        // else
-                        //  for(var j = 0; j<data.length; j++){
-                        //      console.log('passage')
-                        //      series.data.push(data[j][alias]);
-                        //  }
+
+                            if(!witness)
+                                series.data.push([axis[j], 0]);
+                        }
 
                         self.chartOptions.series.push(series)
                     }
@@ -194,7 +188,7 @@ angular.module('Dashboard').
                 }
 
 
-                this.refresh();
+                self.refresh();
             };
 
             Widget.prototype.save = function() {
@@ -219,7 +213,7 @@ angular.module('Dashboard').
 
             Widget.prototype.refresh = function() {
                 var self = this;
-                this.node.find('.widget-front-body').highcharts(self.chartOptions);
+                self.node.find('.widget-front-body').highcharts(self.chartOptions);
             }
 
             Widget.prototype.toString = function() {
