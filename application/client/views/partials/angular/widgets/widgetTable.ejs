@@ -11,14 +11,14 @@
         <table>
             <thead>
                 <tr>
-                    <th ng-repeat="col in _ddWidgetTable.widget.head track by $index" ng-class="{'table-columns-1': _ddWidgetTable.widget.size.width == 1, 'table-columns-2': _ddWidgetTable.widget.size.width == 2, 'table-columns-3': _ddWidgetTable.widget.size.width == 3, 'table-columns-4': _ddWidgetTable.widget.size.width == 4}">
+                    <th ng-repeat="col in _ddWidgetTable.widget.head track by $index">
                         {{col}}
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="row in _ddWidgetTable.widget.body track by $index">
-                    <td ng-repeat="col in row track by $index" ng-class="{'table-columns-1': _ddWidgetTable.widget.size.width == 1, 'table-columns-2': _ddWidgetTable.widget.size.width == 2, 'table-columns-3': _ddWidgetTable.widget.size.width == 3, 'table-columns-4': _ddWidgetTable.widget.size.width == 4}">
+                    <td ng-repeat="col in row track by $index">
                         {{col}}
                     </td>
                 </tr>

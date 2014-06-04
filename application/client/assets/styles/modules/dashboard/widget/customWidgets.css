@@ -13,32 +13,36 @@ section[dd-widget-table] .widget-front-body table thead {
 section[dd-widget-table] .widget-front-body table th {
     height: 70px;
     line-height: 30px;
+    padding: 0 5px;
     vertical-align: bottom;
-}
-
-section[dd-widget-table] .widget-front-body table th.table-columns-1 {
-    width: 33.33%;
-}
-section[dd-widget-table] .widget-front-body table th.table-columns-2 {
-    width: 20%
-}
-section[dd-widget-table] .widget-front-body table th.table-columns-3 {
-    width: 14.28%;
-}
-section[dd-widget-table] .widget-front-body table th.table-columns-4 {
-    width: 11.11%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 0px;
 }
 
 section[dd-widget-table] .widget-front-body table td {
     border-top: 1px solid #ddd;
     line-height: 40px;
     height: 40px;
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 0px;
 }
 
-section[dd-widget-table]    .widget-front-body {
+section[dd-widget-table] .widget-front-body {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+@media screen and (max-width: 1100px) {
+    section[dd-width="1"] .corner {
+        display: none!important;
+    }
+}
+
 /** table **/
 
 /** single number **/
