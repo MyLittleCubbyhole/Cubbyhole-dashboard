@@ -19,7 +19,7 @@ angular.module('Dashboard').
 				,	segmentName = self.segments[0].kpi.alias;
 				self.chartOptions = {};
 				self.chartOptions.series = [];
-				
+
 				self.chartOptions.title = {
 					text: self.title,
 					align: 'left'
@@ -38,9 +38,17 @@ angular.module('Dashboard').
 
 				var serie = {
 					type: 'pie',
-					name: metricName,
+					name: self.metrics[0].kpi.formattedAlias,
 					data: []
 				}
+
+				if(self.segments[0].kpi.datatype == "date")
+					self.chartOptions.xAxis = {
+				        type: 'datetime',
+				        labels: {
+				            format: '{value:%Y-%m-%d %H:%M:%S}'
+				        }
+	    			}
 
 				for(var j = 0; j<data.length; j++)
 					serie.data.push([data[j][segmentName].toString(), data[j][metricName]]);

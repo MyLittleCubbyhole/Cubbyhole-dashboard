@@ -52,13 +52,16 @@ angular.module('Dashboard').
 					if(self.segments[i].options.axis == 'abs' || self.segments.length == 1) {
 						axisType = self.segments[i].kpi.datatype;
 						absName = index;
+						self.chartOptions.xAxis = {};
+						self.chartOptions.xAxis.labels = {};
 						switch(self.segments[i].kpi.datatype) {
 							case 'string':
 								axis = _.uniq(series.data, false);
-								self.chartOptions.xAxis = { categories: axis };
+								self.chartOptions.xAxis.categories = axis;
 							break;
 							case 'date':
-								self.chartOptions.xAxis = { type: 'datetime' };
+								self.chartOptions.xAxis.type = 'datetime';
+								self.chartOptions.xAxis.labels.format = '{value:%Y-%m-%d}';
 								for(var j = 0; j< series.data.length; j++)
 									axis.push( (new Date(series.data[j])).getTime() )
 								axis = _.uniq(axis, false);
@@ -68,10 +71,7 @@ angular.module('Dashboard').
 							break;
 						}
 
-						self.chartOptions.xAxis.labels = {
-							rotation: -45
-						}
-
+						self.chartOptions.xAxis.labels.rotation = -45;
 					}
 					else {
 						segmentName = index;
@@ -89,7 +89,7 @@ angular.module('Dashboard').
 
 						series = {
 							type: self.metrics[0].options.shape,
-							name: index,
+							name: self.metrics[0].kpi.formattedAlias,
 							marker: { enabled: false },
 							data: [],
                				stack: segmentName
@@ -137,7 +137,7 @@ angular.module('Dashboard').
 
 						series = {
 							type: self.metrics[i].options.shape,
-							name: index,
+							name: self.metrics[i].kpi.formattedAlias,
 							marker: { enabled: false },
 							data: [],
 							yAxis: i
@@ -174,7 +174,7 @@ angular.module('Dashboard').
 
 						self.chartOptions.yAxis.push({
 							title: {
-								text: index
+								text: self.metrics[i].kpi.formattedAlias
 							},
 							opposite: i>0
 						})

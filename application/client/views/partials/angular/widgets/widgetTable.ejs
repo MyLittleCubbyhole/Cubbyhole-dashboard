@@ -7,6 +7,7 @@
 		</article>
 	</article>
 	<article class="widget-front-body nodrag">
+		<article class="widget-title">{{_ddWidgetTable.widget.title}}</article>
 		<table>
 			<thead>
 				<tr>
@@ -51,14 +52,14 @@
 						<article class="bloc-content-option" ng-repeat="(indexKpi, widgetKpi) in _ddWidgetTable.widget.kpis track by $index" ng-class="{ disabled: !widgetKpi.kpi }">
 							<span ng-if="!widgetKpi.kpi" ng-click="WidgetBackSide.addKpi(indexKpi);">&nbsp</span>
 							<span grumpy-ui grumpy-position="right" grumpy-align="top" ng-if="!!widgetKpi.kpi" ng-class="{'no-close': $index == 0}">
-								<span>{{widgetKpi.kpi.alias}}<i class="icon-cross" ng-click="WidgetBackSide.removeKpi(indexKpi, true)" ng-if="$index > 0"></i></span>
+								<span>{{widgetKpi.kpi.formattedAlias}}<i class="icon-cross" ng-click="WidgetBackSide.removeKpi(indexKpi, true)" ng-if="$index > 0"></i></span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
 										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
 												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="WidgetBackSide.changeKpi(indexKpi, kpi); _grumpyUi.close();" ng-class="{ active: kpi.index == widgetKpi.kpi }">
-													{{kpi.alias}}
+													{{kpi.formattedAlias}}
 												</article>
 											</section>
 										</section>
@@ -81,14 +82,14 @@
 					<article class="bloc-content">
 						<article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetTable.widget.filters track by $index">
 							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
-								{{filter.kpi.alias}}
+								{{filter.kpi.formattedAlias}}
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
 										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
 												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == filter.kpi.index }">
-													{{kpi.alias}}
+													{{kpi.formattedAlias}}
 												</article>
 											</section>
 										</section>
@@ -96,12 +97,22 @@
 								</grumpy-virgin>
 							</span>
 							<span grumpy-ui grumpy-position="bottom" grumpy-align="center">
-								{{WidgetBackSide.operators[filter.operator]}}
+								{{WidgetBackSide.operatorsName[filter.operator]}}
 								<grumpy-virgin class="bounceIn">
-									<section class="filter-box">
-										<article ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-click="filter.operator = index; _grumpyUi.close();" ng-class="{ active: index ==
-										 filter.operator }">
-											{{operator}}
+									<section  class="filter-kpi-box operators"  scroll-bar>
+										<article class="operator-row" ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-class="{ active: index == filter.operator }" ng-init="inflection = false">
+											<article class="kpi-category" >
+												<article class="operator-title" ng-click="filter.operator = operator.op; _grumpyUi.close();">
+													{{operator.name}}
+												</article>
+												<i class="open-sub-dir icon-arrow-down" ng-class="{ 'icon-arrow-up': inflection, 'icon-arrow-down': !inflection }" ng-click="inflection = !inflection"></i>
+											</article>
+											<section class="kpi-list" ng-class="{ open: inflection}">
+												<article ng-repeat="inflection in operator.inflections track by $index" class="kpi" ng-click="filter.operator = inflection.op; _grumpyUi.close();" ng-class="{ active: inflection.op == filter.operator }">
+													{{inflection.name}}
+												</article>
+											</section>
+
 										</article>
 									</section>
 								</grumpy-virgin>

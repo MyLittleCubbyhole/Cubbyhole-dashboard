@@ -33,14 +33,14 @@
 					<article class="bloc-content">
 						<article class="bloc-content-option">
 							<span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
-								<span>{{_ddWidgetGraph.widget.segments[0].kpi.alias}}</span>
+								<span>{{_ddWidgetGraph.widget.segments[0].kpi.formattedAlias}}</span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
 										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
 												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[0].kpi }">
-													{{kpi.alias}}
+													{{kpi.formattedAlias}}
 												</article>
 											</section>
 										</section>
@@ -56,14 +56,14 @@
 					<article class="bloc-content">
 						<article class="bloc-content-option">
 							<span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
-								<span>{{_ddWidgetGraph.widget.metrics[0].kpi.alias}}</span>
+								<span>{{_ddWidgetGraph.widget.metrics[0].kpi.formattedAlias}}</span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
 										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
 												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[0].kpi }">
-													{{kpi.alias}}
+													{{kpi.formattedAlias}}
 												</article>
 											</section>
 										</section>
@@ -79,14 +79,14 @@
 						<article class="bloc-content-option" ng-class="{ disabled: !_ddWidgetGraph.widget.metrics[1] }">
 							<span ng-if="!_ddWidgetGraph.widget.metrics[1]" ng-click="WidgetBackSide.addMetric();_ddWidgetGraph.widget.segments.splice(1,1);">&nbsp</span>
 							<span grumpy-ui grumpy-position="right" grumpy-align="top" ng-if="!!_ddWidgetGraph.widget.metrics[1]">
-								<span>{{_ddWidgetGraph.widget.metrics[1].kpi.alias}}<i class="icon-cross" ng-click="_ddWidgetGraph.widget.metrics.splice(1,1);"></i></span>
+								<span>{{_ddWidgetGraph.widget.metrics[1].kpi.formattedAlias}}<i class="icon-cross" ng-click="_ddWidgetGraph.widget.metrics.splice(1,1);"></i></span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
 										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
 												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[1].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[1].kpi }">
-													{{kpi.alias}}
+													{{kpi.formattedAlias}}
 												</article>
 											</section>
 										</section>
@@ -119,14 +119,14 @@
 						<article class="bloc-content-option" ng-class="{ disabled: !_ddWidgetGraph.widget.segments[1] }">
 							<span ng-if="!_ddWidgetGraph.widget.segments[1]" ng-click="WidgetBackSide.addSegment({axis: ''});_ddWidgetGraph.widget.metrics.splice(1,1);">&nbsp</span>
 							<span grumpy-ui grumpy-position="right" grumpy-align="top" ng-if="!!_ddWidgetGraph.widget.segments[1]">
-								<span>{{_ddWidgetGraph.widget.segments[1].kpi.alias}}<i class="icon-cross" ng-click="_ddWidgetGraph.widget.segments.splice(1,1);"></i></span>
+								<span>{{_ddWidgetGraph.widget.segments[1].kpi.formattedAlias}}<i class="icon-cross" ng-click="_ddWidgetGraph.widget.segments.splice(1,1);"></i></span>
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
 										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
 												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[1].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[1].kpi }">
-													{{kpi.alias}}
+													{{kpi.formattedAlias}}
 												</article>
 											</section>
 										</section>
@@ -149,14 +149,14 @@
 					<article class="bloc-content">
 						<article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetGraph.widget.filters track by $index">
 							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
-								{{filter.kpi.alias}}
+								{{filter.kpi.formattedAlias}}
 								<grumpy-virgin class="bounceIn">
 									<section class="filter-kpi-box" scroll-bar>
 										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">
 											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
 											<section class="kpi-list" ng-class="{ open: kpistatus}">
 												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == filter.kpi.index }">
-													{{kpi.alias}}
+													{{kpi.formattedAlias}}
 												</article>
 											</section>
 										</section>

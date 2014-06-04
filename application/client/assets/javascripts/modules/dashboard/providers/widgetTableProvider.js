@@ -21,11 +21,11 @@ angular.module('Dashboard').
 				self.head = [];
 
 				for(var i = 0; i < self.metrics.length; i++) {
-					self.head.push(self.metrics[i].kpi.alias);
+					self.head.push(self.metrics[i].kpi.formattedAlias);
 					self.kpis.push(self.metrics[i]);
 				}
 				for(var i = 0; i < self.segments.length; i++) {
-					self.head.push(self.segments[i].kpi.alias);
+					self.head.push(self.segments[i].kpi.formattedAlias);
 					self.kpis.push(self.segments[i]);
 				}
 
@@ -89,7 +89,7 @@ angular.module('Dashboard').
 							configuration.segments.push(options);
 					}
 
-				self.formatFilters();
+				self._formatFilters();
 
 				for(var i = 0; i<self.filters.length; i++) {
 					configuration.filters.push({
