@@ -1,73 +1,73 @@
 <!DOCTYPE html>
 <html ng-app="<%- angular.module %>">
-	<head>
+    <head>
 
-	<!-- meta -->
-		<title>CubbyHole - <%- headers.title %></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta http-equiv="Pragma" content="no-cache">
-		<meta http-equiv="Cache-Control" content="no-cache">
-		<meta http-equiv="Lang" content="fr">
-		<meta charset="UTF-8">
-		<meta name="description" content="<%- headers.description %>"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<!-- if partials used -->
-		<meta name="fragment" content="!">
-	<!-- meta -->
+    <!-- meta -->
+        <title>CubbyHole - <%- headers.title %></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Lang" content="fr">
+        <meta charset="UTF-8">
+        <meta name="description" content="<%- headers.description %>"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <!-- if partials used -->
+        <meta name="fragment" content="!">
+    <!-- meta -->
 
-	<!-- design -->
-		<!-- styles -->
-		<%if (environment == 'dev') { %>
-		<link rel="stylesheet" href="/styles/libraries/animate/animate.css">
-		<link rel="stylesheet" href="/styles/libraries/dashydash.css">
-		<link rel="stylesheet" href="/styles/libraries/fonts/font.css">
-		<link rel="stylesheet" href="/styles/libraries/bootstrap/bootstrap.min.css">
-		<link rel="stylesheet" href="/styles/libraries/customScrollBar/customScrollBar.css">
-		<link rel="stylesheet" href="/styles/libraries/grumpy-ui/grumpy-ui.css">
-		<link rel="stylesheet" href="/styles/libraries/grumpy-ui/grumpy-accordion.css">
-		<link rel="stylesheet" href="/styles/libraries/modalWindowEffects/component.css">
-		<link rel="stylesheet" href="/styles/components/header.css">
-		<link rel="stylesheet" href="/styles/components/forms.css">
-		<link rel="stylesheet" href="/styles/components/userCard.css">
-		<link rel="stylesheet" href="/styles/components/modale.css">
-		<link rel="stylesheet" href="/styles/core.css">
-		<% } %>
-		<%if (environment == 'prod') { %>
-		<link rel="stylesheet" href="/minified/styles/style.min.css">
-		<% } %>
-		<!-- styles -->
-		<!-- fonts -->
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-		<!-- fonts -->
-	<!-- design -->
+    <!-- design -->
+        <!-- styles -->
+        <%if (environment == 'dev') { %>
+        <link rel="stylesheet" href="/styles/libraries/animate/animate.css">
+        <link rel="stylesheet" href="/styles/libraries/dashydash.css">
+        <link rel="stylesheet" href="/styles/libraries/fonts/font.css">
+        <link rel="stylesheet" href="/styles/libraries/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/styles/libraries/customScrollBar/customScrollBar.css">
+        <link rel="stylesheet" href="/styles/libraries/grumpy-ui/grumpy-ui.css">
+        <link rel="stylesheet" href="/styles/libraries/grumpy-ui/grumpy-accordion.css">
+        <link rel="stylesheet" href="/styles/libraries/modalWindowEffects/component.css">
+        <link rel="stylesheet" href="/styles/components/header.css">
+        <link rel="stylesheet" href="/styles/components/forms.css">
+        <link rel="stylesheet" href="/styles/components/userCard.css">
+        <link rel="stylesheet" href="/styles/components/modale.css">
+        <link rel="stylesheet" href="/styles/core.css">
+        <% } %>
+        <%if (environment == 'prod') { %>
+        <link rel="stylesheet" href="/minified/styles/style.min.css">
+        <% } %>
+        <!-- styles -->
+        <!-- fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <!-- fonts -->
+    <!-- design -->
 
-	</head>
-	<body ng-controller="OverlayController">
-		<section id="body" ng-controller="<%- angular.controller %>">
+    </head>
+    <body ng-controller="OverlayController">
+        <section id="body" ng-controller="<%- angular.controller %>">
 
-			<!-- header -->
-	        <%- include ../partials/ejs/component/header.ejs %>
-			<!-- header -->
+            <!-- header -->
+            <%- include ../partials/ejs/component/header.ejs %>
+            <!-- header -->
 
-			<!-- content -->
-	        <%- body %>
-			<!-- content -->
+            <!-- content -->
+            <%- body %>
+            <!-- content -->
 
-		</section>
+        </section>
 
-		<section id="overlay" ng-class="{ activated: Overlay.activated }" ng-click="Overlay.clickout();"></section>
+        <section id="overlay" ng-class="{ activated: Overlay.activated }" ng-click="Overlay.clickout();"></section>
 
-		<!-- scripts -->
-			<!-- libraries -->
-    		<%- include [[javascripts.libraries]] %>
-			<!-- libraries -->
-			<!-- features -->
-    		<%- include [[javascripts.features]] %>
-    		<%- include [[javascripts.core]] %>
-			<!-- features -->
-		<!-- scripts -->
+        <!-- scripts -->
+            <!-- libraries -->
+            <%- include [[javascripts.libraries]] %>
+            <!-- libraries -->
+            <!-- features -->
+            <%- include [[javascripts.features]] %>
+            <%- include [[javascripts.core]] %>
+            <!-- features -->
+        <!-- scripts -->
 
-	</body>
+    </body>
 </html>

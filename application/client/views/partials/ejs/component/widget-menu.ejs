@@ -1,22 +1,22 @@
 <section id="widget-menu" ng-controller="WidgetMenuController">
-	<h2 class="switch">
-		<span class="widget_menu">
-			<i class="icon-cogs"></i>
-		</span>
-		Chose your widget
-	</h2>
-	<ul class="container">
+    <h2 class="switch">
+        <span class="widget_menu">
+            <i class="icon-cogs"></i>
+        </span>
+        Chose your widget
+    </h2>
+    <ul class="container">
 
-		<li ng-repeat="widget in WidgetMenu.widgets track by $index">
-			<span class="btn">
-				<img ng-src="{{widget.icon}}">
-				<span>{{widget.name}}</span>
-			</span>
-			<span class="widgsize">
-				<span> Widget size </span>
-				<button class="btn btn-danger" ng-click="WidgetMenu.create(widget, size)" ng-repeat="size in widget.width">{{25 * size}}%</button>
-			</span>
-		</li>
+        <li ng-repeat="widget in WidgetMenu.widgets track by $index">
+            <span class="btn">
+                <img ng-src="{{widget.icon}}">
+                <span>{{widget.name}}</span>
+            </span>
+            <span class="widgsize">
+                <span> Widget size </span>
+                <button class="btn btn-danger" ng-click="WidgetMenu.create(widget, size)" ng-repeat="size in widget.width">{{25 * size}}%</button>
+            </span>
+        </li>
 
-	</ul>
+    </ul>
 </section>

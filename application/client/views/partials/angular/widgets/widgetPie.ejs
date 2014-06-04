@@ -1,170 +1,170 @@
 <% layout('../../../layout/widget-core') %>
 
 <section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController">
-	<article class="widget-front-head">
-		<article class="corner edit" ng-click="_flip.active = !_flip.active; _ddWidgetPie.edit()">
-			<article class="corner-text">EDIT</article>
-		</article>
-	</article>
-	<article class="widget-front-body nodrag"></article>
+    <article class="widget-front-head">
+        <article class="corner edit" ng-click="_flip.active = !_flip.active; _ddWidgetPie.edit()">
+            <article class="corner-text">EDIT</article>
+        </article>
+    </article>
+    <article class="widget-front-body nodrag"></article>
 </section>
 <section class="widget-side widget-backside" ng-controller="WidgetBackSideController">
-	<article class="widget-back-head  nodrag">
-		<nav class="nav-pills">
-			<article ng-click="WidgetBackSide.tab = 'data'" ng-class="{active: WidgetBackSide.tab == 'data'}" class="pill">
-				<i class="icon-earth"></i><span class="pill-name">DATA</span>
-			</article>
-			<article ng-click="WidgetBackSide.tab = 'filters'" ng-class="{active: WidgetBackSide.tab == 'filters'}" class="pill">
-				<i class="icon-filter"></i><span class="pill-name">FILTERS</span>
-			</article>
-			<article ng-click="WidgetBackSide.tab = 'configuration'" ng-class="{active: WidgetBackSide.tab == 'configuration'}" class="pill">
-				<i class="icon-cogs"></i><span class="pill-name">CONFIGURATION</span>
-			</article>
-		</nav>
-		<article class="corner edit" ng-click="WidgetBackSide.save();">
-			<article class="corner-text">SAVE</article>
-		</article>
-	</article>
-	<article class="widget-back-body nodrag">
-		<section id="widget-back-switch" ng-switch on="WidgetBackSide.tab">
-			<article class="widget-back-tab nodrag" ng-switch-when="data">
-				<section class="bloc-tab">
-					<article class="bloc-title">Segment</article>
-					<article class="bloc-content">
-						<article class="bloc-content-option">
-							<span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
-								<span>{{_ddWidgetPie.widget.segments[0].kpi.formattedAlias}}</span>
-								<grumpy-virgin class="bounceIn">
-									<section class="filter-kpi-box" scroll-bar>
-										<section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
-											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
-											<section class="kpi-list" ng-class="{ open: kpistatus}">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetPie.widget.segments[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetPie.widget.segments[0].kpi }">
-													{{kpi.formattedAlias}}
-												</article>
-											</section>
-										</section>
-									</section>
-								</grumpy-virgin>
-							</span>
-						</article>
-					</article>
-				</section>
-				<section class="bloc-tab">
-					<article class="bloc-title">Metric</article>
-					<article class="bloc-content">
-						<article class="bloc-content-option">
-							<span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
-								<span>{{_ddWidgetPie.widget.metrics[0].kpi.formattedAlias}}</span>
-								<grumpy-virgin class="bounceIn">
-									<section class="filter-kpi-box" scroll-bar>
-										<section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
-											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
-											<section class="kpi-list" ng-class="{ open: kpistatus}">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetPie.widget.metrics[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetPie.widget.metrics[0].kpi }">
-													{{kpi.formattedAlias}}
-												</article>
-											</section>
-										</section>
-									</section>
-								</grumpy-virgin>
-							</span>
-						</article>
-					</article>
-				</section>
-			</article>
-			<article class="widget-back-tab nodrag" ng-switch-when="filters">
-				<section class="bloc-tab">
-					<article class="bloc-title">
-						Filters
-						<label class="toggle float-right">
-							<input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetPie.widget.operator = _ddWidgetPie.widget.operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetPie.widget.operator == 'OR'" ng-model="operator">
-							<i data-swchon-text="OR" data-swchoff-text="AND"></i>
-						</label>
-					</article>
-					<article class="bloc-content">
-						<article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetPie.widget.filters track by $index">
-							<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
-								{{filter.kpi.formattedAlias}}
-								<grumpy-virgin class="bounceIn">
-									<section class="filter-kpi-box" scroll-bar>
-										<section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">
-											<article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
-											<section class="kpi-list" ng-class="{ open: kpistatus}">
-												<article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == filter.kpi.index }">
-													{{kpi.formattedAlias}}
-												</article>
-											</section>
-										</section>
-									</section>
-								</grumpy-virgin>
-							</span>
-							<span grumpy-ui grumpy-position="bottom" grumpy-align="center">
-								{{WidgetBackSide.operatorsName[filter.operator]}}
-								<grumpy-virgin class="bounceIn">
-									<section  class="filter-kpi-box operators"  scroll-bar>
-										<article class="operator-row" ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-class="{ active: index == filter.operator }" ng-init="inflection = false">
-											<article class="kpi-category" >
-												<article class="operator-title" ng-click="filter.operator = operator.op; _grumpyUi.close();">
-													{{operator.name}}
-												</article>
-												<i class="open-sub-dir icon-arrow-down" ng-class="{ 'icon-arrow-up': inflection, 'icon-arrow-down': !inflection }" ng-click="inflection = !inflection"></i>
-											</article>
-											<section class="kpi-list" ng-class="{ open: inflection}">
-												<article ng-repeat="inflection in operator.inflections track by $index" class="kpi" ng-click="filter.operator = inflection.op; _grumpyUi.close();" ng-class="{ active: inflection.op == filter.operator }">
-													{{inflection.name}}
-												</article>
-											</section>
+    <article class="widget-back-head  nodrag">
+        <nav class="nav-pills">
+            <article ng-click="WidgetBackSide.tab = 'data'" ng-class="{active: WidgetBackSide.tab == 'data'}" class="pill">
+                <i class="icon-earth"></i><span class="pill-name">DATA</span>
+            </article>
+            <article ng-click="WidgetBackSide.tab = 'filters'" ng-class="{active: WidgetBackSide.tab == 'filters'}" class="pill">
+                <i class="icon-filter"></i><span class="pill-name">FILTERS</span>
+            </article>
+            <article ng-click="WidgetBackSide.tab = 'configuration'" ng-class="{active: WidgetBackSide.tab == 'configuration'}" class="pill">
+                <i class="icon-cogs"></i><span class="pill-name">CONFIGURATION</span>
+            </article>
+        </nav>
+        <article class="corner edit" ng-click="WidgetBackSide.save();">
+            <article class="corner-text">SAVE</article>
+        </article>
+    </article>
+    <article class="widget-back-body nodrag">
+        <section id="widget-back-switch" ng-switch on="WidgetBackSide.tab">
+            <article class="widget-back-tab nodrag" ng-switch-when="data">
+                <section class="bloc-tab">
+                    <article class="bloc-title">Segment</article>
+                    <article class="bloc-content">
+                        <article class="bloc-content-option">
+                            <span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
+                                <span>{{_ddWidgetPie.widget.segments[0].kpi.formattedAlias}}</span>
+                                <grumpy-virgin class="bounceIn">
+                                    <section class="filter-kpi-box" scroll-bar>
+                                        <section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
+                                            <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+                                            <section class="kpi-list" ng-class="{ open: kpistatus}">
+                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetPie.widget.segments[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetPie.widget.segments[0].kpi }">
+                                                    {{kpi.formattedAlias}}
+                                                </article>
+                                            </section>
+                                        </section>
+                                    </section>
+                                </grumpy-virgin>
+                            </span>
+                        </article>
+                    </article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="bloc-title">Metric</article>
+                    <article class="bloc-content">
+                        <article class="bloc-content-option">
+                            <span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
+                                <span>{{_ddWidgetPie.widget.metrics[0].kpi.formattedAlias}}</span>
+                                <grumpy-virgin class="bounceIn">
+                                    <section class="filter-kpi-box" scroll-bar>
+                                        <section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
+                                            <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+                                            <section class="kpi-list" ng-class="{ open: kpistatus}">
+                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetPie.widget.metrics[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetPie.widget.metrics[0].kpi }">
+                                                    {{kpi.formattedAlias}}
+                                                </article>
+                                            </section>
+                                        </section>
+                                    </section>
+                                </grumpy-virgin>
+                            </span>
+                        </article>
+                    </article>
+                </section>
+            </article>
+            <article class="widget-back-tab nodrag" ng-switch-when="filters">
+                <section class="bloc-tab">
+                    <article class="bloc-title">
+                        Filters
+                        <label class="toggle float-right">
+                            <input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetPie.widget.operator = _ddWidgetPie.widget.operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetPie.widget.operator == 'OR'" ng-model="operator">
+                            <i data-swchon-text="OR" data-swchoff-text="AND"></i>
+                        </label>
+                    </article>
+                    <article class="bloc-content">
+                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetPie.widget.filters track by $index">
+                            <span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+                                {{filter.kpi.formattedAlias}}
+                                <grumpy-virgin class="bounceIn">
+                                    <section class="filter-kpi-box" scroll-bar>
+                                        <section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">
+                                            <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+                                            <section class="kpi-list" ng-class="{ open: kpistatus}">
+                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == filter.kpi.index }">
+                                                    {{kpi.formattedAlias}}
+                                                </article>
+                                            </section>
+                                        </section>
+                                    </section>
+                                </grumpy-virgin>
+                            </span>
+                            <span grumpy-ui grumpy-position="bottom" grumpy-align="center">
+                                {{WidgetBackSide.operatorsName[filter.operator]}}
+                                <grumpy-virgin class="bounceIn">
+                                    <section  class="filter-kpi-box operators"  scroll-bar>
+                                        <article class="operator-row" ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-class="{ active: index == filter.operator }" ng-init="inflection = false">
+                                            <article class="kpi-category" >
+                                                <article class="operator-title" ng-click="filter.operator = operator.op; _grumpyUi.close();">
+                                                    {{operator.name}}
+                                                </article>
+                                                <i class="open-sub-dir icon-arrow-down" ng-class="{ 'icon-arrow-up': inflection, 'icon-arrow-down': !inflection }" ng-click="inflection = !inflection"></i>
+                                            </article>
+                                            <section class="kpi-list" ng-class="{ open: inflection}">
+                                                <article ng-repeat="inflection in operator.inflections track by $index" class="kpi" ng-click="filter.operator = inflection.op; _grumpyUi.close();" ng-class="{ active: inflection.op == filter.operator }">
+                                                    {{inflection.name}}
+                                                </article>
+                                            </section>
 
-										</article>
-									</section>
-								</grumpy-virgin>
-							</span>
+                                        </article>
+                                    </section>
+                                </grumpy-virgin>
+                            </span>
 
-							<span grumpy-ui grumpy-position="bottom" grumpy-align="right">
-								<span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : filter.value[0] + ' AND ' + filter.value[1]}}</span>
-								<span ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : 'ARRAY'}}</span>
-								<span ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">{{ typeof(filter.value[0]) != 'undefined' && filter.value[0] != '' ? filter.value[0] : 'VALUE' }}</span>
-								<grumpy-virgin class="bounceIn">
-									<section class="filter-value-box">
-										<article ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN' || filter.operator == 'IN' || filter.operator == 'NOT IN'">
-											<section class="input-boxes" scroll-bar>
-												<input type="text" placeholder="value" ng-model="filter.value[0]">
-												<article class="separator">
-													<span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">AND</span>
-												</article>
-												<input type="text" placeholder="value" ng-model="filter.value[1]">
+                            <span grumpy-ui grumpy-position="bottom" grumpy-align="right">
+                                <span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : filter.value[0] + ' AND ' + filter.value[1]}}</span>
+                                <span ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : 'ARRAY'}}</span>
+                                <span ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">{{ typeof(filter.value[0]) != 'undefined' && filter.value[0] != '' ? filter.value[0] : 'VALUE' }}</span>
+                                <grumpy-virgin class="bounceIn">
+                                    <section class="filter-value-box">
+                                        <article ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN' || filter.operator == 'IN' || filter.operator == 'NOT IN'">
+                                            <section class="input-boxes" scroll-bar>
+                                                <input type="text" placeholder="value" ng-model="filter.value[0]">
+                                                <article class="separator">
+                                                    <span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">AND</span>
+                                                </article>
+                                                <input type="text" placeholder="value" ng-model="filter.value[1]">
 
-												<article class="values-in" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN') && valueIndex > 1">
-													<article class="separator"></article>
-													<input type="text" placeholder="value" ng-model="filter.value[valueIndex]">
-													<article class="del-btn" ng-click="filter.value.splice(valueIndex, 1);"><i class="icon-cross"></i></article>
-												</article>
-											</section>
-											<article class="btn cubby-btn button-add" ng-click="filter.value.push('')" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN')">ADD</article>
-										</article>
+                                                <article class="values-in" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN') && valueIndex > 1">
+                                                    <article class="separator"></article>
+                                                    <input type="text" placeholder="value" ng-model="filter.value[valueIndex]">
+                                                    <article class="del-btn" ng-click="filter.value.splice(valueIndex, 1);"><i class="icon-cross"></i></article>
+                                                </article>
+                                            </section>
+                                            <article class="btn cubby-btn button-add" ng-click="filter.value.push('')" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN')">ADD</article>
+                                        </article>
 
-										<input type="text" placeholder="value" ng-model="filter.value[0]" ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">
-									</section>
-								</grumpy-virgin>
-							</span>
-							<article class="del-btn" ng-click="_ddWidgetPie.widget.filters.splice($index, 1);"><i class="icon-cross"></i></article>
-						</article>
-					</article>
-				</section>
-				<section class="bloc-tab">
-					<article class="add-filter btn cubby-btn" ng-click="WidgetBackSide.addFilter();">ADD</article>
-				</section>
-			</article>
-			<article class="widget-back-tab nodrag" ng-switch-when="configuration">
-				<section class="bloc-tab">
-					<article class="bloc-title">Title</article>
-					<article class="bloc-content"><input type="text" class="config-title" placeholder="title" ng-model="_ddWidgetPie.widget.title"></article>
-				</section>
-				<section class="bloc-tab">
-					<article class="bloc-button" ng-click="WidgetBackSide.delete()">DELETE WIDGET</article>
-				</section>
-			</article>
-		</section>
-	</article>
+                                        <input type="text" placeholder="value" ng-model="filter.value[0]" ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">
+                                    </section>
+                                </grumpy-virgin>
+                            </span>
+                            <article class="del-btn" ng-click="_ddWidgetPie.widget.filters.splice($index, 1);"><i class="icon-cross"></i></article>
+                        </article>
+                    </article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="add-filter btn cubby-btn" ng-click="WidgetBackSide.addFilter();">ADD</article>
+                </section>
+            </article>
+            <article class="widget-back-tab nodrag" ng-switch-when="configuration">
+                <section class="bloc-tab">
+                    <article class="bloc-title">Title</article>
+                    <article class="bloc-content"><input type="text" class="config-title" placeholder="title" ng-model="_ddWidgetPie.widget.title"></article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="bloc-button" ng-click="WidgetBackSide.delete()">DELETE WIDGET</article>
+                </section>
+            </article>
+        </section>
+    </article>
 </section>

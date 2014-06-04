@@ -1,6 +1,6 @@
 angular.module('Authentication').
-	controller('AuthenticationController', ['$scope', 'UserFactory', 'API_URL', function($scope, UserFactory, API_URL){
-		var $local = $scope.Authentication = {};
+    controller('AuthenticationController', ['$scope', 'UserFactory', 'API_URL', function($scope, UserFactory, API_URL){
+        var $local = $scope.Authentication = {};
 
         var user = localStorage.getItem('user');
         if(!user)
@@ -39,4 +39,4 @@ angular.module('Authentication').
         $scope.toString = function() {
             return 'Authentication';
         };
-	}])
+    }])
