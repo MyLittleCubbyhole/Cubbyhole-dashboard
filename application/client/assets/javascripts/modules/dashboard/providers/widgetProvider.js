@@ -188,6 +188,19 @@ angular.module('Dashboard').
                 }});
             };
 
+            Widget.prototype.getFormatedValue = function(val, type) {
+                switch(type) {
+                    case 'date':
+                        val = (new Date(val)).getTime();
+                    break;
+                    case 'bytes':
+                        val = numeral(val).format('0.0b');
+                    break;
+                }
+
+                return val;
+            }
+
             Widget.prototype.toString = function() {
                 return 'Widget';
             };

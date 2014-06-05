@@ -84,9 +84,9 @@ angular.module('Dashboard').
 
                         self.chartOptions.tooltip = {};
                         self.chartOptions.tooltip.formatter = function() {
-                            var formated = axisType == 'date' ? '<b>'+ moment( getFormatedValue(this.x, axisType) ).format('MMMM Do YYYY') +'</b>' : '<b>'+ getFormatedValue(this.x, axisType) +'</b>';
-                            formated += '<br/>'+ this.point.series.name +': '+ getFormatedValue(this.point.y, this.series.userOptions.serieType);
-                            
+                            var formated = axisType == 'date' ? '<b>'+ moment( self.getFormatedValue(this.x, axisType) ).format('MMMM Do YYYY') +'</b>' : '<b>'+ self.getFormatedValue(this.x, axisType) +'</b>';
+                            formated += '<br/>'+ this.point.series.name +': '+ self.getFormatedValue(this.point.y, this.series.userOptions.serieType);
+
                             return formated;
                         };
 
@@ -104,7 +104,6 @@ angular.module('Dashboard').
 
                 if(!!segment && segment.length > 0)
                     for(var i = 0; i<segment.length; i++) {
-                        console.log('double segment')
                         index = segment[i];
                         alias = self.metrics[0].kpi.alias;
 
@@ -154,7 +153,7 @@ angular.module('Dashboard').
                                 witness = false;
                                 for(var k = 0; k<data.length; k++) {
 
-                                    value = getFormatedValue(data[k][absName], axisType);
+                                    value = self.getFormatedValue(data[k][absName], axisType);
                                     if(value == axis[j] && data[k][segmentName] == index) {
                                         witness = true;
                                         series.data.push([axis[j], data[k][alias]]);
@@ -163,7 +162,7 @@ angular.module('Dashboard').
 
                                 if(!witness) {
 
-                                    value = getFormatedValue(axis[j], axisType);
+                                    value = self.getFormatedValue(axis[j], axisType);
                                     series.data.push([value, 0]);
                                 }
                             }
@@ -174,7 +173,6 @@ angular.module('Dashboard').
                         self.chartOptions.series.push(series)
                     }
                 else {
-                    console.log('double metric')
 
                     self.chartOptions.yAxis = [];
                     for(var i = 0; i<self.metrics.length; i++) {
@@ -206,7 +204,7 @@ angular.module('Dashboard').
                             for(var j = 0; j<axis.length; j++) {
                                 witness = false;
                                 for(var k = 0; k<data.length; k++) {
-                                    value = getFormatedValue(data[k][absName], axisType);
+                                    value = self.getFormatedValue(data[k][absName], axisType);
 
                                     if(value == axis[j]) {
                                         witness = true;
@@ -215,7 +213,7 @@ angular.module('Dashboard').
                                 }
 
                                 if(!witness) {
-                                    value = getFormatedValue(axis[j], axisType);
+                                    value = self.getFormatedValue(axis[j], axisType);
                                     series.data.push([value, 0]);
                                 }
                             }
@@ -235,7 +233,7 @@ angular.module('Dashboard').
                                 yaxis.labels = {};
                                 yaxis.labels.formatter = function() {
                                    return numeral(this.value).format('0.0b');
-                                };                         
+                                };
                             break;
                         }
                         self.chartOptions.yAxis.push(yaxis)
@@ -246,19 +244,6 @@ angular.module('Dashboard').
 
                 self.refresh();
             };
-
-            function getFormatedValue(val, type) {
-                switch(type) {
-                    case 'date':
-                        val = (new Date(val)).getTime();
-                    break;
-                    case 'bytes':
-                        val = numeral(val).format('0.0b');
-                    break;
-                }
-
-                return val;
-            }
 
             Widget.prototype.save = function() {
                 var self = this

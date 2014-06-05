@@ -39,10 +39,13 @@ angular.module('Dashboard').
 
                     for(var j = 0; j < self.metrics.length; j++) {
                         index = self.metrics[j].kpi.alias;
-                        datatype = self.metrics[j].kpi.datatype;
+                        datatype = self.metrics[j].kpi.format;
                         switch(datatype) {
                             case 'date':
                                 row.push( moment( new Date(data[i][index]) ).format("MMM Do YYYY") );
+                            break;
+                            case 'bytes':
+                                row.push(self.getFormatedValue(data[i][index], datatype));
                             break;
                             default:
                                 row.push( data[i][index] );
@@ -52,10 +55,13 @@ angular.module('Dashboard').
                     }
                     for(var j = 0; j < self.segments.length; j++) {
                         index = self.segments[j].kpi.alias;
-                        datatype = self.segments[j].kpi.datatype;
+                        datatype = self.segments[j].kpi.format;
                         switch(datatype) {
                             case 'date':
                                 row.push( moment( new Date(data[i][index]) ).format("MMM Do YYYY") );
+                            break;
+                            case 'bytes':
+                                row.push(self.getFormatedValue(data[i][index], datatype));
                             break;
                             default:
                                 row.push( data[i][index] );

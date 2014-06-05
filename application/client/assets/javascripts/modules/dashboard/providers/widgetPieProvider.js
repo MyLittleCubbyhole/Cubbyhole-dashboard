@@ -16,7 +16,8 @@ angular.module('Dashboard').
                 var self = this
                 ,   series = {}
                 ,   metricName = self.metrics[0].kpi.alias
-                ,   segmentName = self.segments[0].kpi.alias;
+                ,   segmentName = self.segments[0].kpi.alias
+                ,   axisType = self.segments[0].kpi.format;
                 self.chartOptions = {};
                 self.chartOptions.series = [];
 
@@ -39,19 +40,31 @@ angular.module('Dashboard').
                 var serie = {
                     type: 'pie',
                     name: self.metrics[0].kpi.formattedAlias,
-                    data: []
+                    data: [],
+                    serieType: self.metrics[0].kpi.format
                 }
 
-                if(self.segments[0].kpi.datatype == "date")
-                    self.chartOptions.xAxis = {
-                        type: 'datetime',
-                        labels: {
-                            format: '{value:%Y-%m-%d %H:%M:%S}'
-                        }
+                self.chartOptions.tooltip = {};
+                self.chartOptions.tooltip.formatter = function() {
+                    var formated = '<b>'+ this.key +'</b>';
+                    formated += '<br/>'+ this.point.series.name +': '+ self.getFormatedValue(this.point.y, this.series.userOptions.serieType);
+
+                    return formated;
+                };
+
+                for(var j = 0; j<data.length; j++) {
+                    var dataName = data[j][segmentName].toString();
+                    switch(axisType) {
+                        case 'date':
+                            dataName = moment( new Date(dataName).getTime() ).format('MMMM Do YYYY');
+                        break;
+                        case 'bytes':
+                            dataName = numeral(dataName).format('0.0b');
+                        break;
                     }
 
-                for(var j = 0; j<data.length; j++)
-                    serie.data.push([data[j][segmentName].toString(), data[j][metricName]]);
+                    serie.data.push([dataName, data[j][metricName]]);
+                }
 
                 self.chartOptions.series.push(serie);
 
