@@ -42,7 +42,8 @@ MysqlTools.checkPassword = function(userPassword, bddPassword, salt){
 }
 
 MysqlTools.query.generate = function(options) {
-	var request = 'SELECT '
+	var queries = []
+	,	request = 'SELECT '
 	,	tables = []
 	,	union = false
 	,	name = '';
@@ -71,40 +72,51 @@ MysqlTools.query.generate = function(options) {
 		tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
 	}
 
+	queries.push({request: request, tables: tables});
+
 	var where = []
 	,	having = []
 	,	filter = ""
 	,	value = "";
-	if(options.filters)
-	for(var i = 0; i<options.filters.length; i++) {
-		name = options.filters[i].name;
+	if(!!options.filters)
+		for(var i = 0; i<options.filters.length; i++) {
 
-		switch(options.filters[i].operator.toUpperCase()) {
-			case 'BETWEEN':
-			case 'NOT BETWEEN':
-				value = options.filters[i].value.join(' AND ');
-			break;
-			case 'IN':
-			case 'NOT IN':
-				value = '(' + options.filters[i].value.join(',') + ')';
-			break;
-			default:
-				value = options.filters[i].value;
-			break;
+			if(i>0)
+				queries.push({request: request});
+
+
+			for(var j = 0; j<options.filters[i]; j++) {
+
+
+				name = options.filters[i][j].name;
+
+				switch(options.filters[i][j].operator.toUpperCase()) {
+					case 'BETWEEN':
+					case 'NOT BETWEEN':
+						value = options.filters[i][j].value.join(' AND ');
+					break;
+					case 'IN':
+					case 'NOT IN':
+						value = '(' + options.filters[i][j].value.join(',') + ')';
+					break;
+					default:
+						value = options.filters[i][j].value;
+					break;
+				}
+
+
+				if(queryBuilder['kpi_definition'][name].group)
+					queries[i].having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i][j].operator + ' ' + value);
+				else
+					queries[i].where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i][j].operator + ' "' + value + '"');
+
+				queries[i].tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
+			}
 		}
 
-
-		if(queryBuilder['kpi_definition'][name].group)
-			having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' ' + value);
-		else
-			where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' "' + value + '"');
-
-		tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
-	}
-
-
-	if(tables.length>0)
-		request += MysqlTools.query.makeJoin(tables);
+	for(var i = 0; i<queries.length; i++)
+		if(queries[i].tables.length>0)
+			queries[i].request += MysqlTools.query.makeJoin(queries[i].tables);
 
 	var unionQuery = ''
 	,	havingQuery = ''
@@ -115,10 +127,12 @@ MysqlTools.query.generate = function(options) {
 	union = options.operator == 'OR' && having.length > 0 && where.length > 0;
 
 	if(union)
-		unionQuery = request;
+		for(var i = 0; i<queries.length; i++)
+			queries[i].union = queries[i].request;
 
-	if(where.length > 0)
-		request += 'WHERE ' + where.join(' ' + options.operator + ' ') + ' ';
+	for(var i = 0; i<queries.length; i++) 
+		if(!!queries[i].where && queries[i].where.length > 0)
+			queries[i].request += 'WHERE ' + where.join(' ' + options.operator + ' ') + ' ';
 
 	if(options.metrics.length > 0 && options.segments.length > 0) {
 		groupbyQuery += 'GROUP BY ';
@@ -129,40 +143,47 @@ MysqlTools.query.generate = function(options) {
 			groupbyQuery +=  queryBuilder['kpi_definition'][name].apply + ' ';
 		}
 
-		request += groupbyQuery;
-		if(!union)
-			unionQuery += groupbyQuery;
+		for(var i = 0; i<queries.length; i++) {
+			if(union)
+				queries[i].union += groupbyQuery;
+			queries[i].request += groupbyQuery;
+		}
 	}
 
-	if(having.length > 0) {
-		havingQuery = 'HAVING ' + having.join(' ' + options.operator + ' ') + ' ';
+	for(var i = 0; i<queries.length; i++)
+		if(!!queries[i].having && queries[i].having.length > 0) {
+			havingQuery = 'HAVING ' + queries[i].having.join(' ' + options.operator + ' ') + ' ';
 
-		if(!union)
-			request += havingQuery;
-		else
-			unionQuery += havingQuery;
-	}
+				if(union)
+					queries[i].union += havingQuery;
+				else
+					queries[i].request += havingQuery;
+		}
 
 	if(!!options.sort && !!options.sort.name) {
 		orderbyQuery = 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
 
-		request += orderbyQuery;
-		if(!union)
-			unionQuery += orderbyQuery;
+		for(var i = 0; i<queries.length; i++) {
+			if(!union)
+				queries[i].union += orderbyQuery;
+			queries[i].request += orderbyQuery;
+		}
 	}
 
 	if(typeof options.limit != 'undefined') {
 		limit = ' LIMIT ' + options.limit;
 
-		request += limit;
-		if(!union)
-			unionQuery += limit;
+		for(var i = 0; i<queries.length; i++) {
+			if(!union)
+				queries[i].union += limit;
+			queries[i].request += limit;
+		}
 	}
 
-	if(union)
-		request += ' UNION ' + unionQuery;
-	console.log(request)
-	return request;
+	for(var i = 0; i<queries.length; i++)
+			queries[i] = queries[i].request + (union ? ' UNION ' + queries[i].union : '' );
+
+	return queries.length > 1 ? queries : queries[0];
 }
 
 MysqlTools.query.makeJoin = function(tables) {
