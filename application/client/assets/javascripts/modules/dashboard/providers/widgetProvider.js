@@ -188,13 +188,14 @@ angular.module('Dashboard').
                 }});
             };
 
-            Widget.prototype.getFormatedValue = function(val, type) {
+            Widget.prototype.getFormatedValue = function(val, type, round) {
                 switch(type) {
                     case 'date':
                         val = (new Date(val)).getTime();
                     break;
                     case 'bytes':
-                        val = numeral(val).format('0.0b');
+                        round = round || false;
+                        val = round ? numeral(val).format('0b') : numeral(val).format('0.0b');
                     break;
                 }
 

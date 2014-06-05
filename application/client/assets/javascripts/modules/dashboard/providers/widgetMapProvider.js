@@ -51,7 +51,19 @@ angular.module('Dashboard').
                 self.chartOptions.colorAxis = {
                     min: 0,
                     max: maxValue,
-                    minColor: '#FFFFFF'
+                    minColor: '#FFFFFF',
+                    labels: {
+                        formatter: function() {
+                            return this.value != 0 ? self.getFormatedValue(this.value, axisType, true) : 0;
+                        }
+                    }
+                };
+
+                self.chartOptions.legend = {
+                    borderWidth: 0,
+                    title: {
+                        text: self.metrics[0].kpi.formattedAlias
+                    }
                 };
 
                 self.chartOptions.tooltip = {};
@@ -61,16 +73,6 @@ angular.module('Dashboard').
 
                     return formated;
                 };
-
-                self.chartOptions.legend = {
-                    borderWidth: 0,
-
-                    title: {
-                        text: self.metrics[0].kpi.formattedAlias
-                    }
-                }
-
-
 
                 var serie = {
                     data : [],
