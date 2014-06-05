@@ -20,6 +20,7 @@ angular.module('Tools').
                 var $local = $scope._modal;
 
                 $local.node = $node;
+                $node.appendTo(angular.element('body'));
             }
         };
     }]);
