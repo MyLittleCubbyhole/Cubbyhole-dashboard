@@ -31,6 +31,7 @@ angular.module('Dashboard').
                 self.chartOptions = {};
                 self.chartOptions.series = [];
 
+                self.chartOptions.yAxis = {};
                 self.chartOptions.title = {
                     text: self.title,
                     align: 'left'
@@ -51,16 +52,17 @@ angular.module('Dashboard').
                         series.data.push(data[j][index]);
 
                     if(self.segments[i].options.axis == 'abs' || self.segments.length == 1) {
-                        axisType = self.segments[i].kpi.datatype;
+                        axisType = self.segments[i].kpi.format;
                         absName = index;
                         self.chartOptions.xAxis = {};
                         self.chartOptions.xAxis.labels = {};
-                        switch(self.segments[i].kpi.datatype) {
+
+                        switch(self.segments[i].kpi.format) {
                             case 'string':
-                                axis = _.uniq(series.data, false);
-                                self.chartOptions.xAxis.categories = axis;
+                                self.chartOptions.xAxis.categories = _.uniq(series.data, false);
                             break;
                             case 'date':
+
                                 self.chartOptions.xAxis.type = 'datetime';
                                 self.chartOptions.xAxis.labels.formatter = function() {
                                    return moment(this.value).format('MMMM Do YYYY');
@@ -69,16 +71,30 @@ angular.module('Dashboard').
                                     axis.push( (new Date(series.data[j])).getTime() )
                                 axis = _.uniq(axis, false);
                             break;
+                            case 'bytes':
+                                self.chartOptions.xAxis.labels.formatter = function() {
+                                   return numeral(this.value).format('0.0b');
+                                };
+                                self.chartOptions.xAxis.categories = _.uniq(series.data, false);
+                            break;
                             case 'number':
                                 axis = _.uniq(series.data, false);
                             break;
                         }
 
+                        self.chartOptions.tooltip = {};
+                        self.chartOptions.tooltip.formatter = function() {
+                            var formated = axisType == 'date' ? '<b>'+ moment( getFormatedValue(this.x, axisType) ).format('MMMM Do YYYY') +'</b>' : '<b>'+ getFormatedValue(this.x, axisType) +'</b>';
+                            formated += '<br/>'+ this.point.series.name +': '+ getFormatedValue(this.point.y, this.series.userOptions.serieType);
+                            
+                            return formated;
+                        };
+
                         self.chartOptions.xAxis.labels.rotation = -45;
                     }
                     else {
                         segmentName = index;
-                        segmentType = self.segments[i].kpi.datatype;
+                        segmentType = self.segments[i].kpi.format;
                         segment = _.uniq(series.data, false);
                     }
 
@@ -88,20 +104,35 @@ angular.module('Dashboard').
 
                 if(!!segment && segment.length > 0)
                     for(var i = 0; i<segment.length; i++) {
+                        console.log('double segment')
                         index = segment[i];
                         alias = self.metrics[0].kpi.alias;
 
                         series = {
-                            type: self.metrics[0].options.shape,
+                            type: self.metrics[0].options.shape || 'line',
                             name: segment[i],
                             marker: { enabled: false },
                             data: [],
-                            stack: !!segmentName
+                            stack: !!segmentName,
+                            serieType: self.metrics[0].kpi.format
                         };
 
-                        if(segmentType == 'date') {
-                            var dateM = moment(new Date(segment[i]).getTime());
-                            series.name = dateM.format('MMMM Do YYYY');
+                        switch(segmentType) {
+                            case 'date':
+                                series.name = moment( new Date(segment[i]).getTime() ).format('MMMM Do YYYY');
+                            break;
+                            case 'bytes':
+                                series.name = numeral(segment[i]).format('0.0b');
+                            break;
+                        }
+
+                        switch(self.metrics[0].kpi.format) {
+                            case 'bytes':
+                                self.chartOptions.yAxis.labels = {};
+                                self.chartOptions.yAxis.labels.formatter = function() {
+                                   return numeral(this.value).format('0.0b');
+                                };
+                            break;
                         }
 
                         switch(self.metrics[0].options.shape) {
@@ -112,39 +143,50 @@ angular.module('Dashboard').
                                 series.zIndex = 1;
                             break;
                             case 'line':
-                                series.zIndex = 2;
+                                series.zIndex = 3;
                             break;
                         }
 
-                        var witness = false;
-                        for(var j = 0; j<axis.length; j++) {
-                            witness = false;
-                            for(var k = 0; k<data.length; k++) {
-                                value = axisType == 'date' ? (new Date(data[k][absName])).getTime() : data[k][absName];
-                                if(value == axis[j] && data[k][segmentName] == index) {
-                                    witness = true;
-                                    series.data.push([axis[j], data[k][alias]]);
+                        var witness = false
+                        ,   axisValue;
+                        if(axis.length>0)
+                            for(var j = 0; j<axis.length; j++) {
+                                witness = false;
+                                for(var k = 0; k<data.length; k++) {
+
+                                    value = getFormatedValue(data[k][absName], axisType);
+                                    if(value == axis[j] && data[k][segmentName] == index) {
+                                        witness = true;
+                                        series.data.push([axis[j], data[k][alias]]);
+                                    }
+                                }
+
+                                if(!witness) {
+
+                                    value = getFormatedValue(axis[j], axisType);
+                                    series.data.push([value, 0]);
                                 }
                             }
-
-                            if(!witness)
-                                series.data.push([axis[j], 0]);
-                        }
+                        else
+                            for(var j = 0; j<data.length; j++)
+                                series.data.push(data[j][alias]);
 
                         self.chartOptions.series.push(series)
                     }
                 else {
+                    console.log('double metric')
 
                     self.chartOptions.yAxis = [];
                     for(var i = 0; i<self.metrics.length; i++) {
+                        index = self.metrics[i].kpi.index;
                         index = self.metrics[i].kpi.alias;
-
                         series = {
-                            type: self.metrics[i].options.shape,
+                            type: self.metrics[i].options.shape || 'line',
                             name: self.metrics[i].kpi.formattedAlias,
                             marker: { enabled: false },
                             data: [],
-                            yAxis: i
+                            yAxis: i,
+                            serieType: self.metrics[i].kpi.format
                         };
 
                         switch(self.metrics[i].options.shape) {
@@ -158,38 +200,65 @@ angular.module('Dashboard').
                                 series.zIndex = 2;
                             break;
                         }
+                        // debugger;
                         var witness = false;
                         if(axis.length>0)
                             for(var j = 0; j<axis.length; j++) {
                                 witness = false;
                                 for(var k = 0; k<data.length; k++) {
-                                    value = axisType == 'date' ? (new Date(data[k][absName])).getTime() : data[k][absName];
+                                    value = getFormatedValue(data[k][absName], axisType);
+
                                     if(value == axis[j]) {
                                         witness = true;
                                         series.data.push([axis[j], data[k][index]]);
                                     }
                                 }
-                                if(!witness)
-                                    series.data.push([axis[j], 0]);
+
+                                if(!witness) {
+                                    value = getFormatedValue(axis[j], axisType);
+                                    series.data.push([value, 0]);
+                                }
                             }
                         else
                             for(var j = 0; j<data.length; j++)
                                 series.data.push(data[j][index]);
 
-                        self.chartOptions.yAxis.push({
+                        var yaxis = {
                             title: {
                                 text: self.metrics[i].kpi.formattedAlias
                             },
                             opposite: i>0
-                        })
+                        };
+
+                        switch(self.metrics[i].kpi.format) {
+                            case 'bytes':
+                                yaxis.labels = {};
+                                yaxis.labels.formatter = function() {
+                                   return numeral(this.value).format('0.0b');
+                                };                         
+                            break;
+                        }
+                        self.chartOptions.yAxis.push(yaxis)
 
                         self.chartOptions.series.push(series)
                     }
                 }
 
-
                 self.refresh();
             };
+
+            function getFormatedValue(val, type) {
+                switch(type) {
+                    case 'date':
+                        val = (new Date(val)).getTime();
+                    break;
+                    case 'bytes':
+                        val = numeral(val).format('0.0b');
+                    break;
+                }
+
+                return val;
+            }
 
             Widget.prototype.save = function() {
                 var self = this

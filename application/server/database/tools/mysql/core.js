@@ -161,7 +161,7 @@ MysqlTools.query.generate = function(options) {
 
 	if(union)
 		request += ' UNION ' + unionQuery;
-
+	console.log(request)
 	return request;
 }
 

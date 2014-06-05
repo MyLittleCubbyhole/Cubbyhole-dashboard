@@ -19,7 +19,8 @@ angular.module('Dashboard').
                 formattedAlias: QUERY_BUILDER[i].formattedAlias,
                 index: QUERY_BUILDER[i].index,
                 datatype: QUERY_BUILDER[i].datatype,
-                type: QUERY_BUILDER[i].type
+                type: QUERY_BUILDER[i].type,
+                format: QUERY_BUILDER[i].format
             }
 
             if(!$local.kpis[QUERY_BUILDER[i].category])
