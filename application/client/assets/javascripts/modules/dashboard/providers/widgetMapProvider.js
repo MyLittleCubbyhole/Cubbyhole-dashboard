@@ -16,7 +16,8 @@ angular.module('Dashboard').
                 var self = this
                 ,   series = {}
                 ,   metricName = self.metrics[0].kpi.alias
-                ,   segmentName = self.segments[0].kpi.alias;
+                ,   segmentName = self.segments[0].kpi.alias
+                ,   axisType = self.metrics[0].kpi.format;
                 self.chartOptions = {};
                 self.series = new Array();
 
@@ -50,7 +51,27 @@ angular.module('Dashboard').
                 self.chartOptions.colorAxis = {
                     min: 0,
                     max: maxValue,
-                    minColor: '#FFFFFF'
+                    minColor: '#FFFFFF',
+                    labels: {
+                        formatter: function() {
+                            return this.value != 0 ? self.getFormatedValue(this.value, axisType, true) : 0;
+                        }
+                    }
+                };
+
+                self.chartOptions.legend = {
+                    borderWidth: 0,
+                    title: {
+                        text: self.metrics[0].kpi.formattedAlias
+                    }
+                };
+
+                self.chartOptions.tooltip = {};
+                self.chartOptions.tooltip.formatter = function() {
+                    var formated = '<b>'+ this.key +'</b>';
+                    formated += '<br/>'+ this.point.series.name +': '+ (this.point.value != 0 ? self.getFormatedValue(this.point.value, axisType) : 0);
+
+                    return formated;
                 };
 
                 var serie = {

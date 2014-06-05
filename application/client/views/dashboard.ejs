@@ -49,7 +49,8 @@
                 </span>
             </article>
             <article class="col-sm-3 hidden-xs dashboard-ribbon">
-                <article class="btn cubby-btn tiny" ng-click="Dashboard.capture();">EXPORT</article>
+                <article class="btn cubby-btn tiny" ng-click="Dashboard.showExportModal();">EXPORT</article>
+
             </article>
             <article class="strap" ng-click="Overlay.pusherOpen = true"><i class="icon-plus-circle"></i></article>
         </section>
@@ -57,3 +58,5 @@
         <section ng-view class="dashboard-view"></section>
     </section>
 </section>
+
+<%- include partials/ejs/component/export-menu.ejs %>

@@ -1,0 +1,14 @@
+<section class="md-modal md-effect-1 google-font" id="modal-export" ng-controller="ExportController" ng-class="{'md-show': Dashboard.showExportModal === true}" ng-cloak modal>
+    <section class="md-content">
+        <article>
+            <section>
+                <i class="close-icon icon-cross" ng-click="Overlay.clickout()"></i>
+                <section class="export-container" scroll-bar>
+                    <article class="export-pdf" ng-click="Dashboard.capture();"><img src="/images/design/export-pdf.png" alt="export pdf"/> PDF</article>
+                    <article class="export-xml"><img src="/images/design/export-xml.png" alt="export xml"/> XML</article>
+                    <article class="export-csv"><img src="/images/design/export-csv.png" alt="export csv"/> CSV</article>
+                </section>
+            </section>
+        </article>
+    </section>
+</section>
