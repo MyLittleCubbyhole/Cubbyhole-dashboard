@@ -83,6 +83,7 @@ module.exports = function(grunt) {
                     "application/client/assets/javascripts/modules/dashboard/services/dashboardOptimizeService.js",
                     "application/client/assets/javascripts/modules/dashboard/controllers/dashboardController.js",
                     "application/client/assets/javascripts/modules/dashboard/controllers/dashboardMenuController.js",
+                    "application/client/assets/javascripts/modules/dashboard/controllers/exportController.js",
                     "application/client/assets/javascripts/modules/dashboard/controllers/widgetMenuController.js",
                     "application/client/assets/javascripts/modules/dashboard/controllers/widgetBackSideController.js",
                     "application/client/assets/javascripts/modules/dashboard/controllers/widgetFrontSideController.js",

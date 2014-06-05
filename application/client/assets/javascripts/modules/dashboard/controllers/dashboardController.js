@@ -6,6 +6,12 @@ angular.module('Dashboard').
         $local.currentDashboard = {};
         $local.lockRouteChange = false;
 
+        $local.showExportModal = false;
+
+        $scope.$on('hide', function() {
+            $local.showExportModal = false;
+        });
+
         function getDashboards(callback) {
             DashboardFactory($scope).all(function(data) {
                 for(var i = 0; i < data.length; i++)
@@ -76,6 +82,11 @@ angular.module('Dashboard').
         $local.capture = function() {
             var $board = angular.element('.dd-board');
             CaptureService($board, $local.currentDashboard.title);
+        }
+
+        $local.showExportModal = function() {
+            $scope.Overlay.activated = true;
+            $local.showExportModal = true;
         }
 
         $scope.toString = function() {
