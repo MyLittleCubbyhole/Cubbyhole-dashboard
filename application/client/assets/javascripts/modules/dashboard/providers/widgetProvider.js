@@ -197,6 +197,9 @@ angular.module('Dashboard').
                         round = round || false;
                         val = round ? numeral(val).format('0b') : numeral(val).format('0.0b');
                     break;
+                    case 'money':
+                        val = numeral(val).format('$0,0[.]00');
+                    break;
                 }
 
                 return val;

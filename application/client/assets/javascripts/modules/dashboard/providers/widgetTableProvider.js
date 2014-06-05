@@ -47,6 +47,9 @@ angular.module('Dashboard').
                             case 'bytes':
                                 row.push(self.getFormatedValue(data[i][index], datatype));
                             break;
+                            case 'money':
+                                row.push(self.getFormatedValue(data[i][index], datatype));
+                            break;
                             default:
                                 row.push( data[i][index] );
                             break;
@@ -61,6 +64,9 @@ angular.module('Dashboard').
                                 row.push( moment( new Date(data[i][index]) ).format("MMM Do YYYY") );
                             break;
                             case 'bytes':
+                                row.push(self.getFormatedValue(data[i][index], datatype));
+                            break;
+                            case 'money':
                                 row.push(self.getFormatedValue(data[i][index], datatype));
                             break;
                             default:

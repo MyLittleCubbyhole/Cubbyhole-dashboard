@@ -77,6 +77,12 @@ angular.module('Dashboard').
                                 };
                                 self.chartOptions.xAxis.categories = _.uniq(series.data, false);
                             break;
+                            case 'money':
+                                self.chartOptions.xAxis.labels.formatter = function() {
+                                   return numeral(this.value).format('$0,0[.]00');
+                                };
+                                self.chartOptions.xAxis.categories = _.uniq(series.data, false);
+                            break;
                             case 'number':
                                 axis = _.uniq(series.data, false);
                             break;
@@ -122,6 +128,9 @@ angular.module('Dashboard').
                             break;
                             case 'bytes':
                                 series.name = numeral(segment[i]).format('0.0b');
+                            break;
+                            case 'money':
+                                series.name = numeral(segment[i]).format('$0,0[.]00');
                             break;
                         }
 

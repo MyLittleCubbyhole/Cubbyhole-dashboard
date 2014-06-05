@@ -59,7 +59,10 @@ angular.module('Dashboard').
                             dataName = moment( new Date(dataName).getTime() ).format('MMMM Do YYYY');
                         break;
                         case 'bytes':
-                            dataName = numeral(dataName).format('0.0b');
+                            dataName = self.getFormatedValue(dataName, axisType);
+                        break;
+                        case 'money':
+                            dataName = self.getFormatedValue(dataName, axisType);
                         break;
                     }
 
