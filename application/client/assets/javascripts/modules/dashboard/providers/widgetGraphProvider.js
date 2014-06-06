@@ -60,6 +60,7 @@ angular.module('Dashboard').
                         switch(self.segments[i].kpi.format) {
                             case 'string':
                                 self.chartOptions.xAxis.categories = _.uniq(series.data, false);
+                                axis = self.chartOptions.xAxis.categories;
                             break;
                             case 'date':
 
@@ -76,12 +77,14 @@ angular.module('Dashboard').
                                    return numeral(this.value).format('0.0b');
                                 };
                                 self.chartOptions.xAxis.categories = _.uniq(series.data, false);
+                                axis = self.chartOptions.xAxis.categories;
                             break;
                             case 'money':
                                 self.chartOptions.xAxis.labels.formatter = function() {
                                    return numeral(this.value).format('$0,0[.]00');
                                 };
                                 self.chartOptions.xAxis.categories = _.uniq(series.data, false);
+                                axis = self.chartOptions.xAxis.categories;
                             break;
                             case 'number':
                                 axis = _.uniq(series.data, false);
@@ -157,27 +160,23 @@ angular.module('Dashboard').
 
                         var witness = false
                         ,   axisValue;
-                        if(axis.length>0)
-                            for(var j = 0; j<axis.length; j++) {
-                                witness = false;
-                                for(var k = 0; k<data.length; k++) {
-                                    value = self.getFormatedValue(data[k][absName], axisType);
-                                    console.log('passage', value)
-                                    if(value == axis[j] && data[k][segmentName] == index) {
-                                        witness = true;
-                                        series.data.push([axis[j], data[k][alias]]);
-                                    }
-                                }
 
-                                if(!witness) {
-
-                                    value = self.getFormatedValue(axis[j], axisType);
-                                    series.data.push([value, 0]);
+                        for(var j = 0; j<axis.length; j++) {
+                            witness = false;
+                            for(var k = 0; k<data.length; k++) {
+                                value = self.getFormatedValue(data[k][absName], axisType);
+                                if(value == axis[j] && data[k][segmentName] == index) {
+                                    witness = true;
+                                    series.data.push([axis[j], data[k][alias]]);
                                 }
                             }
-                        else
-                            for(var j = 0; j<data.length; j++)
-                                series.data.push(data[j][alias]);
+
+                            if(!witness) {
+
+                                value = self.getFormatedValue(axis[j], axisType);
+                                series.data.push([value, 0]);
+                            }
+                        }
 
                         self.chartOptions.series.push(series)
                     }
@@ -209,26 +208,22 @@ angular.module('Dashboard').
                         }
                         // debugger;
                         var witness = false;
-                        if(axis.length>0)
-                            for(var j = 0; j<axis.length; j++) {
-                                witness = false;
-                                for(var k = 0; k<data.length; k++) {
-                                    value = self.getFormatedValue(data[k][absName], axisType);
+                        for(var j = 0; j<axis.length; j++) {
+                            witness = false;
+                            for(var k = 0; k<data.length; k++) {
+                                value = self.getFormatedValue(data[k][absName], axisType);
 
-                                    if(value == axis[j]) {
-                                        witness = true;
-                                        series.data.push([axis[j], data[k][index]]);
-                                    }
-                                }
-
-                                if(!witness) {
-                                    value = self.getFormatedValue(axis[j], axisType);
-                                    series.data.push([value, 0]);
+                                if(value == axis[j]) {
+                                    witness = true;
+                                    series.data.push([axis[j], data[k][index]]);
                                 }
                             }
-                        else
-                            for(var j = 0; j<data.length; j++)
-                                series.data.push(data[j][index]);
+
+                            if(!witness) {
+                                value = self.getFormatedValue(axis[j], axisType);
+                                series.data.push([value, 0]);
+                            }
+                        }
 
                         var yaxis = {
                             title: {
