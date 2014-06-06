@@ -85,7 +85,7 @@ MysqlTools.query.generate = function(options) {
 				queries.push({request: request, tables: tables});
 
 
-			for(var j = 0; j<options.filters[i]; j++) {
+			for(var j = 0; j<options.filters[i].length; j++) {
 
 
 				name = options.filters[i][j].name;
@@ -105,10 +105,16 @@ MysqlTools.query.generate = function(options) {
 				}
 
 
-				if(queryBuilder['kpi_definition'][name].group)
+				if(queryBuilder['kpi_definition'][name].group) {
+					if(!queries[i].having)
+						queries[i].having = [];
 					queries[i].having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i][j].operator + ' ' + value);
-				else
+				}
+				else {
+					if(!queries[i].where)
+						queries[i].where = [];
 					queries[i].where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i][j].operator + ' "' + value + '"');
+				}
 
 				queries[i].tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
 			}
@@ -130,7 +136,7 @@ MysqlTools.query.generate = function(options) {
 		for(var i = 0; i<queries.length; i++)
 			queries[i].union = queries[i].request;
 
-	for(var i = 0; i<queries.length; i++) 
+	for(var i = 0; i<queries.length; i++)
 		if(!!queries[i].where && queries[i].where.length > 0)
 			queries[i].request += 'WHERE ' + where.join(' ' + options.operator + ' ') + ' ';
 

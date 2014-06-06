@@ -2,14 +2,14 @@
 
 <section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController">
     <article class="widget-front-head">
-        <article class="corner edit" ng-click="_flip.active = !_flip.active; _ddWidgetGraph.edit()">
+        <article class="corner edit" ng-click="_flip.active(); _ddWidgetGraph.edit()">
             <article class="corner-text">EDIT</article>
         </article>
     </article>
     <article class="widget-front-body nodrag"></article>
 </section>
 <section class="widget-side widget-backside" ng-controller="WidgetBackSideController">
-    <article class="widget-back-head  nodrag">
+    <article class="widget-back-head nodrag">
         <nav class="nav-pills">
             <article ng-click="WidgetBackSide.tab = 'data'" ng-class="{active: WidgetBackSide.tab == 'data'}" class="pill">
                 <i class="icon-earth"></i><span class="pill-name">DATA</span>
@@ -147,7 +147,7 @@
                         </label>
                     </article>
                     <article class="bloc-content">
-                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetGraph.widget.filters track by $index">
+                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetGraph.widget.filters[0] track by $index">
                             <span grumpy-ui grumpy-position="bottom" grumpy-align="left">
                                 {{filter.kpi.formattedAlias}}
                                 <grumpy-virgin class="bounceIn">
@@ -211,7 +211,7 @@
                                     </section>
                                 </grumpy-virgin>
                             </span>
-                            <article class="del-btn" ng-click="_ddWidgetGraph.widget.filters.splice($index, 1);"><i class="icon-cross"></i></article>
+                            <article class="del-btn" ng-click="_ddWidgetGraph.widget.filters[0].splice($index, 1);"><i class="icon-cross"></i></article>
                         </article>
                     </article>
                 </section>

@@ -89,7 +89,7 @@ angular.module('Dashboard').
                 configuration.operator = self.operator;
                 configuration.metrics = [];
                 configuration.segments = [];
-                configuration.filters = [];
+                configuration.filters = [[]];
 
                 for(var i = 0; i < self.kpis.length; i++)
                     if(self.kpis[i].kpi) {
@@ -103,16 +103,15 @@ angular.module('Dashboard').
 
                 self._formatFilters();
 
-                for(var i = 0; i<self.filters.length; i++) {
-                    configuration.filters.push({
-                        name: self.filters[i].kpi.index,
-                        operator: self.filters[i].operator,
-                        value: self.filters[i].value
+                for(var i = 0; i<self.filters[0].length; i++) {
+                    configuration.filters[0].push({
+                        name: self.filters[0][i].kpi.index,
+                        operator: self.filters[0][i].operator,
+                        value: self.filters[0][i].value
                     })
                 }
 
                 return configuration;
-
             };
 
             Widget.prototype.refresh = function() {}

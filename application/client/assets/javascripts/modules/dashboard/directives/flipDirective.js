@@ -3,18 +3,22 @@ angular.module('Dashboard').
         return {
             scope: true,
             restrict: 'A',
-            link: function($scope, $node, attributes) {
+            require: 'flip',
+            controller: ['$scope', '$attrs', function($scope, $attrs) {
                 var $local = $scope._flip = {}
+                ,   self = this;
 
-                $local.active = false;
+                $local.active = angular.noop;
+            }],
+            link: function($scope, $node, attributes) {
+                var $local = $scope._flip;
+
+                $local._active = false;
 
                 $scope.$on('stop_edit', function() {
-                    $local.active = false;
+                    $local._active = false;
                 })
 
-                $scope.toString = function() {
-                    return '_flip';
-                }
             }
         };
     });

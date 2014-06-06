@@ -7,6 +7,7 @@ section#grumpy-overlay-clickout {
 	display: none;
 	top: 0px;
 	left: 0px;
+    z-index: 200;
 }
 
 section#grumpy-overlay-clickout.active {
@@ -14,6 +15,7 @@ section#grumpy-overlay-clickout.active {
 }
 
 section.grumpy-ui {
+    z-index: 201;
     border-radius: 2px;
 	width: auto;
 	background-color: white;

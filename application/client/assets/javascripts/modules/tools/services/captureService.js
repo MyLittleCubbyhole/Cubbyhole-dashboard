@@ -79,7 +79,7 @@ angular.module('Tools').
 					HEIGHT = (WIDTH/HEIGHT) * WIDTH;
 
 					var cropCanvas = document.createElement('canvas')
-				
+
 					var maxHeight = capture.height;
 					var projectionMaxHeight = (capture.height * WIDTH) / capture.width;
 					var increment = (HEIGHT * capture.height) / ( (capture.height * WIDTH) / capture.width );

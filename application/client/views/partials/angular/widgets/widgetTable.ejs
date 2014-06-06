@@ -2,7 +2,7 @@
 
 <section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController">
     <article class="widget-front-head">
-        <article class="corner edit" ng-click="_flip.active = !_flip.active">
+        <article class="corner edit" ng-click="_flip.active();">
             <article class="corner-text">EDIT</article>
         </article>
     </article>
@@ -80,7 +80,7 @@
                         </label>
                     </article>
                     <article class="bloc-content">
-                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetTable.widget.filters track by $index">
+                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetTable.widget.filters[0] track by $index">
                             <span grumpy-ui grumpy-position="bottom" grumpy-align="left">
                                 {{filter.kpi.formattedAlias}}
                                 <grumpy-virgin class="bounceIn">
@@ -145,7 +145,7 @@
                                     </section>
                                 </grumpy-virgin>
                             </span>
-                            <article class="del-btn" ng-click="_ddWidgetTable.widget.filters.splice($index, 1);"><i class="icon-cross"></i></article>
+                            <article class="del-btn" ng-click="_ddWidgetTable.widget.filters[0].splice($index, 1);"><i class="icon-cross"></i></article>
                         </article>
                     </article>
                 </section>

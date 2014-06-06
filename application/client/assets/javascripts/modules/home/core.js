@@ -1,1 +1,1 @@
-angular.module('Home', ['Overlay', 'Authentication']);
+angular.module('Home', ['Overlay', 'Authentication', 'Tools']);

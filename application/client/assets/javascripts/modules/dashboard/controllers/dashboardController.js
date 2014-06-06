@@ -7,9 +7,11 @@ angular.module('Dashboard').
         $local.lockRouteChange = false;
 
         $local.showExportModal = false;
+        $local.showExportDetailsModal = false;
 
         $scope.$on('hide', function() {
             $local.showExportModal = false;
+            $local.showExportDetailsModal = false;
         });
 
         function getDashboards(callback) {
@@ -87,6 +89,12 @@ angular.module('Dashboard').
         $local.showExportModal = function() {
             $scope.Overlay.activated = true;
             $local.showExportModal = true;
+        }
+
+        $local.showExportDetailsModal = function() {
+            $scope.Overlay.activated = true;
+            $local.showExportModal = false;
+            $local.showExportDetailsModal = true;
         }
 
         $scope.toString = function() {
