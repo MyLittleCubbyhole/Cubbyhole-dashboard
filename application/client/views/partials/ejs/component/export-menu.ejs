@@ -1,4 +1,4 @@
-<section class="md-modal md-effect-1 google-font" id="modal-export" ng-class="{'md-show': Dashboard.showExportModal === true}" ng-cloak modal>
+<section class="md-modal md-effect-1 google-font" id="modal-export" ng-class="{'md-show': Dashboard.exportModalVisible === true}" ng-cloak modal>
     <section class="md-content">
         <article>
             <section>
@@ -22,7 +22,7 @@
     </section>
 </section>
 
-<section class="md-modal md-effect-1 google-font" id="modal-export-details" ng-controller="ExportController" ng-class="{'md-show': Dashboard.showExportDetailsModal === true}" ng-cloak modal>
+<section class="md-modal md-effect-1 google-font" id="modal-export-details" ng-controller="ExportController" ng-class="{'md-show': Dashboard.exportDetailsModalVisible === true}" ng-cloak modal>
     <section class="md-content">
         <article>
             <section>
@@ -68,87 +68,94 @@
                                     </article>
                                 </section>
                             </article>
-                            <article class="widget-back-tab nodrag" ng-switch-when="filters" scroll-bar>
-                                <section class="bloc-tab">
-                                    <article class="bloc-title">
-                                        Filters
-                                        <label class="toggle float-right">
-                                            <input type="checkbox" name="checkbox-toggle" ng-change="Export.operator = Export.operator == 'AND' ? 'OR' : 'AND';" ng-checked="Export.operator == 'OR'" ng-model="operator">
-                                            <i data-swchon-text="OR" data-swchoff-text="AND"></i>
-                                        </label>
+                            <article class="widget-back-tab widget-back-tab-filters nodrag" ng-switch-when="filters">
+                                <article class="bloc-panel">
+                                    <article class="filter-select" ng-repeat="filter in Export.filters track by $index">
+                                        <article class="filter-number">{{$index + 1}}</article>
                                     </article>
-                                    <article class="bloc-content">
-                                        <article class="bloc-content-option filter" ng-repeat="filter in Export.filters[0] track by $index">
-                                            <span grumpy-ui grumpy-position="bottom" grumpy-align="left">
-                                                {{filter.kpi.formattedAlias}}
-                                                <grumpy-virgin class="bounceIn">
-                                                    <section class="filter-kpi-box" scroll-bar>
-                                                        <section ng-repeat="(category, kpis) in Export.kpis track by $index" ng-init="kpistatus = false">
-                                                            <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
-                                                            <section class="kpi-list" ng-class="{ open: kpistatus}">
-                                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == filter.kpi.index }">
-                                                                    {{kpi.formattedAlias}}
-                                                                </article>
+                                </article>
+                                <section class="bloc-tab-container" scroll-bar>
+                                    <section class="bloc-tab bloc-tab-filter">
+                                        <article class="bloc-title">
+                                            Filters
+                                            <label class="toggle float-right">
+                                                <input type="checkbox" name="checkbox-toggle" ng-change="Export.operator = Export.operator == 'AND' ? 'OR' : 'AND';" ng-checked="Export.operator == 'OR'" ng-model="operator">
+                                                <i data-swchon-text="OR" data-swchoff-text="AND"></i>
+                                            </label>
+                                        </article>
+                                        <article class="bloc-content">
+                                            <article class="bloc-content-option filter" ng-repeat="filter in Export.filters[0] track by $index">
+                                                <span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+                                                    {{filter.kpi.formattedAlias}}
+                                                    <grumpy-virgin class="bounceIn">
+                                                        <section class="filter-kpi-box" scroll-bar>
+                                                            <section ng-repeat="(category, kpis) in Export.kpis track by $index" ng-init="kpistatus = false">
+                                                                <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+                                                                <section class="kpi-list" ng-class="{ open: kpistatus}">
+                                                                    <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == filter.kpi.index }">
+                                                                        {{kpi.formattedAlias}}
+                                                                    </article>
+                                                                </section>
                                                             </section>
                                                         </section>
-                                                    </section>
-                                                </grumpy-virgin>
-                                            </span>
-                                            <span grumpy-ui grumpy-position="bottom" grumpy-align="center">
-                                                {{Export.operatorsName[filter.operator]}}
-                                                <grumpy-virgin class="bounceIn">
-                                                    <section  class="filter-kpi-box operators" scroll-bar>
-                                                        <article class="operator-row" ng-repeat="(index, operator) in Export.operators track by $index" ng-class="{ active: index == filter.operator }" ng-init="inflection = false">
-                                                            <article class="kpi-category" >
-                                                                <article class="operator-title" ng-click="filter.operator = operator.op; _grumpyUi.close();">
-                                                                    {{operator.name}}
+                                                    </grumpy-virgin>
+                                                </span>
+                                                <span grumpy-ui grumpy-position="bottom" grumpy-align="center">
+                                                    {{Export.operatorsName[filter.operator]}}
+                                                    <grumpy-virgin class="bounceIn">
+                                                        <section  class="filter-kpi-box operators" scroll-bar>
+                                                            <article class="operator-row" ng-repeat="(index, operator) in Export.operators track by $index" ng-class="{ active: index == filter.operator }" ng-init="inflection = false">
+                                                                <article class="kpi-category" >
+                                                                    <article class="operator-title" ng-click="filter.operator = operator.op; _grumpyUi.close();">
+                                                                        {{operator.name}}
+                                                                    </article>
+                                                                    <i class="open-sub-dir icon-arrow-down" ng-class="{ 'icon-arrow-up': inflection, 'icon-arrow-down': !inflection }" ng-click="inflection = !inflection"></i>
                                                                 </article>
-                                                                <i class="open-sub-dir icon-arrow-down" ng-class="{ 'icon-arrow-up': inflection, 'icon-arrow-down': !inflection }" ng-click="inflection = !inflection"></i>
+                                                                <section class="kpi-list" ng-class="{ open: inflection}">
+                                                                    <article ng-repeat="inflection in operator.inflections track by $index" class="kpi" ng-click="filter.operator = inflection.op; _grumpyUi.close();" ng-class="{ active: inflection.op == filter.operator }">
+                                                                        {{inflection.name}}
+                                                                    </article>
+                                                                </section>
+
                                                             </article>
-                                                            <section class="kpi-list" ng-class="{ open: inflection}">
-                                                                <article ng-repeat="inflection in operator.inflections track by $index" class="kpi" ng-click="filter.operator = inflection.op; _grumpyUi.close();" ng-class="{ active: inflection.op == filter.operator }">
-                                                                    {{inflection.name}}
-                                                                </article>
-                                                            </section>
+                                                        </section>
+                                                    </grumpy-virgin>
+                                                </span>
 
-                                                        </article>
-                                                    </section>
-                                                </grumpy-virgin>
-                                            </span>
+                                                <span grumpy-ui grumpy-position="bottom" grumpy-align="right">
+                                                    <span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : filter.value[0] + ' AND ' + filter.value[1]}}</span>
+                                                    <span ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : 'ARRAY'}}</span>
+                                                    <span ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">{{ typeof(filter.value[0]) != 'undefined' && filter.value[0] != '' ? filter.value[0] : 'VALUE' }}</span>
+                                                    <grumpy-virgin class="bounceIn">
+                                                        <section class="filter-value-box">
+                                                            <article ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN' || filter.operator == 'IN' || filter.operator == 'NOT IN'">
+                                                                <section class="input-boxes" scroll-bar>
+                                                                    <input type="text" placeholder="value" ng-model="filter.value[0]">
+                                                                    <article class="separator">
+                                                                        <span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">AND</span>
+                                                                    </article>
+                                                                    <input type="text" placeholder="value" ng-model="filter.value[1]">
 
-                                            <span grumpy-ui grumpy-position="bottom" grumpy-align="right">
-                                                <span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : filter.value[0] + ' AND ' + filter.value[1]}}</span>
-                                                <span ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : 'ARRAY'}}</span>
-                                                <span ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">{{ typeof(filter.value[0]) != 'undefined' && filter.value[0] != '' ? filter.value[0] : 'VALUE' }}</span>
-                                                <grumpy-virgin class="bounceIn">
-                                                    <section class="filter-value-box">
-                                                        <article ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN' || filter.operator == 'IN' || filter.operator == 'NOT IN'">
-                                                            <section class="input-boxes" scroll-bar>
-                                                                <input type="text" placeholder="value" ng-model="filter.value[0]">
-                                                                <article class="separator">
-                                                                    <span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">AND</span>
-                                                                </article>
-                                                                <input type="text" placeholder="value" ng-model="filter.value[1]">
+                                                                    <article class="values-in" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN') && valueIndex > 1">
+                                                                        <article class="separator"></article>
+                                                                        <input type="text" placeholder="value" ng-model="filter.value[valueIndex]">
+                                                                        <article class="del-btn" ng-click="filter.value.splice(valueIndex, 1);"><i class="icon-cross"></i></article>
+                                                                    </article>
+                                                                </section>
+                                                                <article class="btn cubby-btn button-add" ng-click="filter.value.push('')" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN')">ADD</article>
+                                                            </article>
 
-                                                                <article class="values-in" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN') && valueIndex > 1">
-                                                                    <article class="separator"></article>
-                                                                    <input type="text" placeholder="value" ng-model="filter.value[valueIndex]">
-                                                                    <article class="del-btn" ng-click="filter.value.splice(valueIndex, 1);"><i class="icon-cross"></i></article>
-                                                                </article>
-                                                            </section>
-                                                            <article class="btn cubby-btn button-add" ng-click="filter.value.push('')" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN')">ADD</article>
-                                                        </article>
-
-                                                        <input type="text" placeholder="value" ng-model="filter.value[0]" ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">
-                                                    </section>
-                                                </grumpy-virgin>
-                                            </span>
-                                            <article class="del-btn" ng-click="Export.filters[0].splice($index, 1);"><i class="icon-cross"></i></article>
+                                                            <input type="text" placeholder="value" ng-model="filter.value[0]" ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">
+                                                        </section>
+                                                    </grumpy-virgin>
+                                                </span>
+                                                <article class="del-btn" ng-click="Export.filters[0].splice($index, 1);"><i class="icon-cross"></i></article>
+                                            </article>
                                         </article>
-                                    </article>
-                                </section>
-                                <section class="bloc-tab">
-                                    <article class="add-filter btn cubby-btn" ng-click="Export.addFilter();">ADD</article>
+                                    </section>
+                                    <section class="bloc-tab bloc-tab-filter">
+                                        <article class="add-filter btn cubby-btn" ng-click="Export.addFilter();">ADD</article>
+                                    </section>
                                 </section>
                             </article>
                         </section>

@@ -14,7 +14,7 @@ angular.module('Dashboard').
             icon: '/images/widget-icons/icopie.png',
             width: [1],
             height: 3,
-            config: {"metrics":[{"name":"count.user"}],"segments":[{"name":"user.country"}]}
+            config: {"metrics":[{"name":"count.user"}],"segments":[{"name":"user.country"}], "filters": []}
         },
         singlenumber: {
             type: 'singlenumber',
@@ -22,7 +22,7 @@ angular.module('Dashboard').
             icon: '/images/widget-icons/icosinglenumber.png',
             width: [1],
             height: 1,
-            config: {"metrics":[{"name":"user.age.avg"}],"segments":[]}
+            config: {"metrics":[{"name":"user.age.avg"}],"segments":[], "filters": []}
         },
         table: {
             type: 'table',
@@ -30,7 +30,7 @@ angular.module('Dashboard').
             icon: '/images/widget-icons/icotable.png',
             width: [1,2,3,4],
             height: 5,
-            config: {"metrics":[{"name":"user.age.avg"}, {"name":"count.user"}],"segments":[{"name":"user.country"},{"name":"user.inscriptiondate"}], "order": "user.inscriptiondate", "limit": 10}
+            config: {"metrics":[{"name":"user.age.avg"}, {"name":"count.user"}],"segments":[{"name":"user.country"},{"name":"user.inscriptiondate"}], "order": "user.inscriptiondate", "limit": 10, "filters": []}
         },
         graph: {
             type: 'graph',
@@ -38,7 +38,7 @@ angular.module('Dashboard').
             icon: '/images/widget-icons/icochart.png',
             width: [1,2,3,4],
             height: 3,
-            config: {"metrics":[{"name":"count.user", "shape": "column"}],"segments":[{"name":"user.country", "axis":"abs"},{"name":"user.inscriptiondate"}], "order": "user.inscriptiondate", "stacked": true}
+            config: {"metrics":[{"name":"count.user", "shape": "column"}],"segments":[{"name":"user.country", "axis":"abs"},{"name":"user.inscriptiondate"}], "order": "user.inscriptiondate", "stacked": true, "filters": []}
         },
         map: {
             type: 'map',
@@ -46,7 +46,7 @@ angular.module('Dashboard').
             icon: '/images/widget-icons/icomap.png',
             width: [1,2,3,4],
             height: 3,
-            config: {"metrics":[{"name":"count.user"}],"segments":[{"name":"user.countrycode"},{"name":"user.country"}], "order": "user.countrycode"}
+            config: {"metrics":[{"name":"count.user"}],"segments":[{"name":"user.countrycode"},{"name":"user.country"}], "order": "user.countrycode", "filters": []}
         }
     }).
     constant('WIDGET_TEMPLATES', {
