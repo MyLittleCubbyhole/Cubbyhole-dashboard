@@ -161,8 +161,8 @@ angular.module('Dashboard').
                             for(var j = 0; j<axis.length; j++) {
                                 witness = false;
                                 for(var k = 0; k<data.length; k++) {
-
                                     value = self.getFormatedValue(data[k][absName], axisType);
+                                    console.log('passage', value)
                                     if(value == axis[j] && data[k][segmentName] == index) {
                                         witness = true;
                                         series.data.push([axis[j], data[k][alias]]);

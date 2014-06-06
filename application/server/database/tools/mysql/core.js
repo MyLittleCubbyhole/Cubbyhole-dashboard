@@ -82,7 +82,7 @@ MysqlTools.query.generate = function(options) {
 		for(var i = 0; i<options.filters.length; i++) {
 
 			if(i>0)
-				queries.push({request: request});
+				queries.push({request: request, tables: tables});
 
 
 			for(var j = 0; j<options.filters[i]; j++) {
@@ -115,7 +115,7 @@ MysqlTools.query.generate = function(options) {
 		}
 
 	for(var i = 0; i<queries.length; i++)
-		if(queries[i].tables.length>0)
+		if(!!queries[i].tables && queries[i].tables.length>0)
 			queries[i].request += MysqlTools.query.makeJoin(queries[i].tables);
 
 	var unionQuery = ''
@@ -183,6 +183,7 @@ MysqlTools.query.generate = function(options) {
 	for(var i = 0; i<queries.length; i++)
 			queries[i] = queries[i].request + (union ? ' UNION ' + queries[i].union : '' );
 
+	console.log( queries)
 	return queries.length > 1 ? queries : queries[0];
 }
 
@@ -233,7 +234,6 @@ MysqlTools.query.makeJoin = function(tables) {
 
 
 	}
-
 	return request;
 }
 
