@@ -6,12 +6,12 @@ angular.module('Dashboard').
         $local.currentDashboard = {};
         $local.lockRouteChange = false;
 
-        $local.showExportModal = false;
-        $local.showExportDetailsModal = false;
+        $local.exportModalVisible = false;
+        $local.exportDetailsModalVisible = false;
 
         $scope.$on('hide', function() {
-            $local.showExportModal = false;
-            $local.showExportDetailsModal = false;
+            $local.exportModalVisible = false;
+            $local.exportDetailsModalVisible = false;
         });
 
         function getDashboards(callback) {
@@ -88,13 +88,13 @@ angular.module('Dashboard').
 
         $local.showExportModal = function() {
             $scope.Overlay.activated = true;
-            $local.showExportModal = true;
+            $local.exportModalVisible = true;
         }
 
         $local.showExportDetailsModal = function() {
             $scope.Overlay.activated = true;
-            $local.showExportModal = false;
-            $local.showExportDetailsModal = true;
+            $local.exportModalVisible = false;
+            $local.exportDetailsModalVisible = true;
         }
 
         $scope.toString = function() {

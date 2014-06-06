@@ -11,7 +11,7 @@ angular.module('Dashboard').
         $local.operatorsName = OPERATORS_NAME;
         $local.operator = 'AND';
 
-        $local.filters = [[]];
+        $local.filters = [[], [], [], []];
 
         var kpi;
         for(var i in QUERY_BUILDER) {

@@ -51,10 +51,47 @@
 }
 
 #modal-export-details .md-content {
+    height: 100%;
+    padding-bottom: 0;
+}
+
+#modal-export-details .bloc-panel {
+    float: left;
+    width: 58px;
+    height: 306px;
+    border-right: 1px solid #c4c4c4;
+}
+#modal-export-details .filter-select {
+    color: black;
+    font-size: 22px;
+    padding: 13px;
+    border-top: 1px solid #C4C4C4;
+    text-align: center;
+}
+
+#modal-export-details .filter-select:first-child {
+    border-top: 0;
+}
+#modal-export-details .bloc-tab-filter {
+    margin-left: 80px;
+}
+#modal-export-details .widget-back-tab-filters {
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 10px;
+}
+#modal-export-details .mCSB_container {
+    margin-right: 0px;
+}
+#modal-export-details .mCustomScrollBox>.mCSB_scrollTools {
+    width: 6px;
+}
+
+#modal-export-details .md-content {
     height: 370px;
 }
 
-#modal-export-details .widget-back-tab {
+#modal-export-details .bloc-tab-container {
     overflow: auto;
     max-height: 280px;
 }
