@@ -74,9 +74,7 @@ MysqlTools.query.generate = function(options) {
 
 	queries.push({request: request, tables: tables});
 
-	var where = []
-	,	having = []
-	,	filter = ""
+	var filter = ""
 	,	value = "";
 	if(!!options.filters)
 		for(var i = 0; i<options.filters.length; i++) {
@@ -108,7 +106,7 @@ MysqlTools.query.generate = function(options) {
 				if(queryBuilder['kpi_definition'][name].group) {
 					if(!queries[i].having)
 						queries[i].having = [];
-					queries[i].having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i][j].operator + ' ' + value);
+					queries[i].having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i][j].operator + ' "' + value + '"');
 				}
 				else {
 					if(!queries[i].where)
@@ -130,11 +128,13 @@ MysqlTools.query.generate = function(options) {
 	,	limit = ''
 	,	groupbyQuery = '';
 
-	union = options.operator == 'OR' && having.length > 0 && where.length > 0;
 
-	if(union)
-		for(var i = 0; i<queries.length; i++)
-			queries[i].union = queries[i].request;
+	for(var i = 0; i<queries.length; i++) {
+		queries[i].union = options.operator == 'OR' && queries[i].having.length > 0 && queries[i].where.length > 0;
+		console.log(queries[i].union, options.operator, queries[i].having.length, queries[i].where.length)
+		if(queries[i].union)
+			queries[i].unionQuery = queries[i].request;
+	}
 
 	for(var i = 0; i<queries.length; i++)
 		if(!!queries[i].where && queries[i].where.length > 0)
@@ -150,8 +150,8 @@ MysqlTools.query.generate = function(options) {
 		}
 
 		for(var i = 0; i<queries.length; i++) {
-			if(union)
-				queries[i].union += groupbyQuery;
+			if(queries[i].unionQuery)
+				queries[i].unionQuery += groupbyQuery;
 			queries[i].request += groupbyQuery;
 		}
 	}
@@ -160,8 +160,8 @@ MysqlTools.query.generate = function(options) {
 		if(!!queries[i].having && queries[i].having.length > 0) {
 			havingQuery = 'HAVING ' + queries[i].having.join(' ' + options.operator + ' ') + ' ';
 
-				if(union)
-					queries[i].union += havingQuery;
+				if(queries[i].unionQuery)
+					queries[i].unionQuery += havingQuery;
 				else
 					queries[i].request += havingQuery;
 		}
@@ -170,8 +170,8 @@ MysqlTools.query.generate = function(options) {
 		orderbyQuery = 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
 
 		for(var i = 0; i<queries.length; i++) {
-			if(!union)
-				queries[i].union += orderbyQuery;
+			if(!queries[i].union)
+				queries[i].unionQuery += orderbyQuery;
 			queries[i].request += orderbyQuery;
 		}
 	}
@@ -180,14 +180,14 @@ MysqlTools.query.generate = function(options) {
 		limit = ' LIMIT ' + options.limit;
 
 		for(var i = 0; i<queries.length; i++) {
-			if(!union)
-				queries[i].union += limit;
+			if(!queries[i].union)
+				queries[i].unionQuery += limit;
 			queries[i].request += limit;
 		}
 	}
 
 	for(var i = 0; i<queries.length; i++)
-			queries[i] = queries[i].request + (union ? ' UNION ' + queries[i].union : '' );
+		queries[i] = queries[i].request + (queries[i].union ? ' UNION ' + queries[i].unionQuery : '' );
 	console.log(queries[0])
 	return queries.length > 1 ? queries : queries[0];
 }
