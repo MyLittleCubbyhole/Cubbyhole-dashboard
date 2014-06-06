@@ -138,7 +138,7 @@ MysqlTools.query.generate = function(options) {
 
 	for(var i = 0; i<queries.length; i++)
 		if(!!queries[i].where && queries[i].where.length > 0)
-			queries[i].request += 'WHERE ' + where.join(' ' + options.operator + ' ') + ' ';
+			queries[i].request += 'WHERE ' + queries[i].where.join(' ' + options.operator + ' ') + ' ';
 
 	if(options.metrics.length > 0 && options.segments.length > 0) {
 		groupbyQuery += 'GROUP BY ';
@@ -188,7 +188,7 @@ MysqlTools.query.generate = function(options) {
 
 	for(var i = 0; i<queries.length; i++)
 			queries[i] = queries[i].request + (union ? ' UNION ' + queries[i].union : '' );
-
+	console.log(queries[0])
 	return queries.length > 1 ? queries : queries[0];
 }
 

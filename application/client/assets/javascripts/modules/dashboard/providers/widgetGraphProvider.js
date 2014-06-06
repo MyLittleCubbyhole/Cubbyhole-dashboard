@@ -68,8 +68,9 @@ angular.module('Dashboard').
                                 self.chartOptions.xAxis.labels.formatter = function() {
                                    return moment(this.value).format('MMMM Do YYYY');
                                 };
-                                for(var j = 0; j< series.data.length; j++)
-                                    axis.push( (new Date(series.data[j])).getTime() )
+                                for(var j = 0; j< series.data.length; j++) {
+                                    axis.push( new Date( series.data[j] ).getTime() );
+                                }
                                 axis = _.uniq(axis, false);
                             break;
                             case 'bytes':
