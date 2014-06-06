@@ -1,4 +1,60 @@
-.export-container > span {
+#modal-export {
+    width: 670px;
+}
+.export-container .export {
     display: inline-block;
+    height: 200px;
+    color: black;
+    position: relative;
+    padding: 33px 52px;
+    cursor: pointer;
+}
+.export-container .export:hover {
+    color: #75c8ef;
 }
 
+.export-container .export-image {
+    height: 110px;
+    width: 110px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90px;
+}
+
+.export-container .export-pdf-image {
+    background-image: url('/images/design/export-pdf.png');
+}
+.export-container .export:hover .export-pdf-image {
+    background-image: url('/images/design/export-pdf-active.png');
+}
+.export-container .export-xml-image {
+    background-image: url('/images/design/export-xml.png');
+}
+.export-container .export:hover .export-xml-image {
+    background-image: url('/images/design/export-xml-active.png');
+}
+.export-container .export-csv-image {
+    background-image: url('/images/design/export-csv.png');
+}
+.export-container .export:hover .export-csv-image {
+    background-image: url('/images/design/export-csv-active.png');
+}
+
+.export-container .export-text {
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 29px;
+}
+
+#modal-export-details .md-content {
+    height: 370px;
+}
+
+#modal-export-details .widget-back-tab {
+    overflow: auto;
+    max-height: 280px;
+}

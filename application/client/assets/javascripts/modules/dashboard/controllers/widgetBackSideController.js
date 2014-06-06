@@ -11,10 +11,11 @@ angular.module('Dashboard').
         $local.segments = {};
         $local.metrics = {};
 
-        $scope._flip.active = function() {
-            $local.tab = 'data';
-            $scope._flip._active = !$scope._flip._active;
-        };
+        if($scope._flip)
+            $scope._flip.active = function() {
+                $local.tab = 'data';
+                $scope._flip._active = !$scope._flip._active;
+            };
 
         var kpi;
         for(var i in QUERY_BUILDER) {
@@ -50,7 +51,6 @@ angular.module('Dashboard').
             $scope._flip._active = !$scope._flip._active;
             $local.tab = '';
             $timeout(function() { $widgetScope.edit() }, 250);
-            console.log($widgetScope)
             $widgetScope.widget.save();
             $scope._dashydash.serialize();
         }
@@ -79,7 +79,7 @@ angular.module('Dashboard').
         }
 
         $local.addFilter = function() {
-            $widgetScope.widget.filters.push({
+            $widgetScope.widget.filters[0].push({
                 kpi: QUERY_BUILDER['count.user'],
                 operator: '>',
                 value: [0, 0]

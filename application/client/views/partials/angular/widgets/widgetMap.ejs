@@ -61,7 +61,7 @@
                         </label>
                     </article>
                     <article class="bloc-content">
-                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetMap.widget.filters track by $index">
+                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetMap.widget.filters[0] track by $index">
                             <span grumpy-ui grumpy-position="bottom" grumpy-align="left">
                                 {{filter.kpi.formattedAlias}}
                                 <grumpy-virgin class="bounceIn">
@@ -126,7 +126,7 @@
                                     </section>
                                 </grumpy-virgin>
                             </span>
-                            <article class="del-btn" ng-click="_ddWidgetMap.widget.filters.splice($index, 1);"><i class="icon-cross"></i></article>
+                            <article class="del-btn" ng-click="_ddWidgetMap.widget.filters[0].splice($index, 1);"><i class="icon-cross"></i></article>
                         </article>
                     </article>
                 </section>

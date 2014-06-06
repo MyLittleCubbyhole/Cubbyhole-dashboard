@@ -50,13 +50,17 @@ angular.module('Dashboard').
                         options: self.options.config.segments[i]
                     });
 
-                if(self.options.config.filters)
-                for(var i = 0; i<self.options.config.filters.length; i++)
-                    self.filters.push({
-                        kpi: QUERY_BUILDER[self.options.config.filters[i].name],
-                        operator: self.options.config.filters[i].operator,
-                        value: self.options.config.filters[i].value
+                if(self.options.config.filters) {
+                    self.filters.push([]);
+
+                if(self.options.config.filters[0])
+                for(var i = 0; i<self.options.config.filters[0].length; i++)
+                    self.filters[0].push({
+                        kpi: QUERY_BUILDER[self.options.config.filters[0][i].name],
+                        operator: self.options.config.filters[0][i].operator,
+                        value: self.options.config.filters[0][i].value
                     });
+                }
 
                 self.scope.$on('widget_refresh', function() { self.refresh(); })
             };
@@ -66,44 +70,44 @@ angular.module('Dashboard').
             Widget.prototype._formatFilters = function() {
                 var self = this;
 
-                for(var i = 0; i<self.filters.length; i++) {
+                for(var i = 0; i<self.filters[0].length; i++) {
                     var lengthMax = 0;
-                    if(self.filters[i].operator == 'BETWEEN' || self.filters[i].operator == 'NOT BETWEEN') {
+                    if(self.filters[0][i].operator == 'BETWEEN' || self.filters[0][i].operator == 'NOT BETWEEN') {
                         lengthMax = 2;
-                        if(self.filters[i].value[0] == '' || self.filters[i].value[1] == '')
-                            if(self.filters[i].value[0] != '')
-                                self.filters[i].value[1] = self.filters[i].value[0];
-                            else if(self.filters[i].value[1] != '')
-                                self.filters[i].value[0] = self.filters[i].value[1];
+                        if(self.filters[0][i].value[0] == '' || self.filters[0][i].value[1] == '')
+                            if(self.filters[0][i].value[0] != '')
+                                self.filters[0][i].value[1] = self.filters[0][i].value[0];
+                            else if(self.filters[0][i].value[1] != '')
+                                self.filters[0][i].value[0] = self.filters[0][i].value[1];
                             else {
-                                self.filters[i].value[0] = '0';
-                                self.filters[i].value[1] = '0';
+                                self.filters[0][i].value[0] = '0';
+                                self.filters[0][i].value[1] = '0';
                             }
                     }
-                    else if(self.filters[i].operator == 'IN' || self.filters[i].operator == 'NOT IN') {
-                        for(var j = self.filters[i].value.length - 1; j >= 0 ; j--)
-                            if(self.filters[i].value[j] == '')
-                                self.filters[i].value.splice(j, 1);
+                    else if(self.filters[0][i].operator == 'IN' || self.filters[0][i].operator == 'NOT IN') {
+                        for(var j = self.filters[0][i].value.length - 1; j >= 0 ; j--)
+                            if(self.filters[0][i].value[j] == '')
+                                self.filters[0][i].value.splice(j, 1);
 
-                        if(self.filters[i].value.length == 0)
-                            self.filters[i].value.push('0');
+                        if(self.filters[0][i].value.length == 0)
+                            self.filters[0][i].value.push('0');
 
-                        if(self.filters[i].value.length < 2) {
-                            if(self.filters[i].value[0] != '')
-                                self.filters[i].value[1] = self.filters[i].value[0];
-                            else if(self.filters[i].value[1] != '')
-                                self.filters[i].value[0] = self.filters[i].value[1];
+                        if(self.filters[0][i].value.length < 2) {
+                            if(self.filters[0][i].value[0] != '')
+                                self.filters[0][i].value[1] = self.filters[0][i].value[0];
+                            else if(self.filters[0][i].value[1] != '')
+                                self.filters[0][i].value[0] = self.filters[0][i].value[1];
                         }
                     }
                     else
                         lengthMax = 1;
 
                     if(lengthMax != 0)
-                        while(self.filters[i].value.length > lengthMax)
-                                self.filters[i].value.splice(self.filters[i].value.length - 1, 1);
+                        while(self.filters[0][i].value.length > lengthMax)
+                                self.filters[0][i].value.splice(self.filters[0][i].value.length - 1, 1);
 
-                    if(self.filters[i].value.length == 1 && self.filters[i].value[0] == '')
-                        self.filters[i].value[0] = '0';
+                    if(self.filters[0][i].value.length == 1 && self.filters[0][i].value[0] == '')
+                        self.filters[0][i].value[0] = '0';
                 }
             }
 
@@ -115,7 +119,7 @@ angular.module('Dashboard').
                 configuration.operator = self.operator;
                 configuration.metrics = [];
                 configuration.segments = [];
-                configuration.filters = [];
+                configuration.filters = [[]];
 
                 for(var i = 0; i<self.metrics.length; i++) {
                     options = self.metrics[i].options;
@@ -131,11 +135,11 @@ angular.module('Dashboard').
 
                 self._formatFilters();
 
-                for(var i = 0; i<self.filters.length; i++) {
-                    configuration.filters.push({
-                        name: self.filters[i].kpi.index,
-                        operator: self.filters[i].operator,
-                        value: self.filters[i].value
+                for(var i = 0; i<self.filters[0].length; i++) {
+                    configuration.filters[0].push({
+                        name: self.filters[0][i].kpi.index,
+                        operator: self.filters[0][i].operator,
+                        value: self.filters[0][i].value
                     })
                 }
 
