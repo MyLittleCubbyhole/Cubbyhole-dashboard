@@ -10,8 +10,6 @@ module.exports = function(grunt) {
             libs: {
                 src: [
                     "application/client/assets/javascripts/libraries/jquery/jquery.js",
-
-                    "application/client/assets/javascripts/libraries/jquery/jquery.js",
                     "application/client/assets/javascripts/libraries/jquery/jquery-ui.js",
                     "application/client/assets/javascripts/libraries/angular/angular.js",
                     "application/client/assets/javascripts/libraries/angular/angular-route.js",
@@ -25,11 +23,18 @@ module.exports = function(grunt) {
                     "application/client/assets/javascripts/libraries/highcharts/theme.js",
                     "application/client/assets/javascripts/libraries/highmaps/highmaps.js",
                     "application/client/assets/javascripts/libraries/highmaps/world.js",
+                    "application/client/assets/javascripts/libraries/numeral/numeral.min.js",
+                    "application/client/assets/javascripts/libraries/numeral/languages.min.js",
                     "application/client/assets/javascripts/libraries/highcharts-ng/highcharts-ng.js",
                     "application/client/assets/javascripts/libraries/customScrollBar/customScrollBar.js",
                     "application/client/assets/javascripts/libraries/scrollTo/scrollTo.js",
                     "application/client/assets/javascripts/libraries/annyang/annyang.js",
+                    "application/client/assets/javascripts/libraries/jspdf/jspdf.js",
                     "application/client/assets/javascripts/libraries/moment/moment.js",
+                    "application/client/assets/javascripts/libraries/html2canvas/html2canvas.js",
+                    "application/client/assets/javascripts/libraries/canvg/canvg.js",
+                    "application/client/assets/javascripts/libraries/canvg/rgbcolor.js",
+                    "application/client/assets/javascripts/libraries/canvg/StackBlur.js",
                     "application/client/assets/javascripts/libraries/dashydash/dependencies/draggable.js",
                     "application/client/assets/javascripts/libraries/dashydash/dependencies/coords.js",
                     "application/client/assets/javascripts/libraries/dashydash/dependencies/collision.js",
