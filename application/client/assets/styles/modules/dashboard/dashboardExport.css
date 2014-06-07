@@ -55,6 +55,10 @@
     padding-bottom: 0;
 }
 
+#modal-export-details .bloc-title {
+    margin-bottom: 10px;
+}
+
 #modal-export-details .bloc-panel {
     float: left;
     width: 58px;
@@ -73,7 +77,7 @@
     border-top: 0;
 }
 #modal-export-details .bloc-tab-filter {
-    margin-left: 80px;
+    margin-left: 71px;
 }
 #modal-export-details .widget-back-tab-filters {
     padding-left: 0px;
@@ -91,7 +95,7 @@
     height: 370px;
 }
 
-#modal-export-details .bloc-tab-container {
+#modal-export-details .bloc-tab-filter {
     overflow: auto;
-    max-height: 280px;
+    max-height: 240px;
 }

@@ -78,12 +78,12 @@
                     <article class="bloc-title">
                         Filters
                         <label class="toggle float-right">
-                            <input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetPie.widget.operator = _ddWidgetPie.widget.operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetPie.widget.operator == 'OR'" ng-model="operator">
+                            <input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetPie.widget.filters[0].operator = _ddWidgetPie.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetPie.widget.filters[0].operator == 'OR'" ng-model="operator">
                             <i data-swchon-text="OR" data-swchoff-text="AND"></i>
                         </label>
                     </article>
                     <article class="bloc-content">
-                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetPie.widget.filters[0] track by $index">
+                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetPie.widget.filters[0].conditions track by $index">
                             <span grumpy-ui grumpy-position="bottom" grumpy-align="left">
                                 {{filter.kpi.formattedAlias}}
                                 <grumpy-virgin class="bounceIn">
@@ -148,7 +148,7 @@
                                     </section>
                                 </grumpy-virgin>
                             </span>
-                            <article class="del-btn" ng-click="_ddWidgetPie.widget.filters[0].splice($index, 1);"><i class="icon-cross"></i></article>
+                            <article class="del-btn" ng-click="_ddWidgetPie.widget.filters[0].conditions.splice($index, 1);"><i class="icon-cross"></i></article>
                         </article>
                     </article>
                 </section>
