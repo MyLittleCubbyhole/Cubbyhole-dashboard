@@ -53,6 +53,8 @@ module.exports = function(grunt) {
                     "application/client/assets/javascripts/modules/tools/directives/modalDirective.js",
                     "application/client/assets/javascripts/modules/tools/directives/scrollBarDirective.js",
                     "application/client/assets/javascripts/modules/tools/services/classService.js",
+                    "application/client/assets/javascripts/modules/tools/services/captureService.js",
+                    "application/client/assets/javascripts/modules/tools/filters/numeraljsFilter.js",
                     "application/client/assets/javascripts/modules/authentication/core.js",
                     "application/client/assets/javascripts/modules/authentication/controllers/authenticationController.js",
                     "application/client/assets/javascripts/modules/authentication/controllers/loginController.js",
