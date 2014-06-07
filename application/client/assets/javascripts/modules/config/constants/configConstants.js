@@ -1,9 +1,12 @@
 angular.module('Config').
     //*/
-    constant('API_URL', 'http://127.0.0.1:5150/api/').
-    constant('WEBSOCKET_URL', 'http://127.0.0.1:5150').
+    constant('apiUrl', 'http://127.0.0.1:5150/api/').
+    constant('websocketUrl', 'http://127.0.0.1:5150').
     /*/
-    constant('API_URL', 'https://api.trouducube.com/api/').
-    constant('WEBSOCKET_URL', 'https://api.trouducube.com').
+    constant('apiUrl', 'https://api.trouducube.com/api/').
+    constant('websocketUrl', 'https://api.trouducube.com').
+    /*
+    constant('apiUrl', 'http://www.pillowrc.com/api/').
+    constant('websocketUrl', 'http://www.pillowrc.com:80').
     //*/
     constant('socketRoom', '/cubbyhole');
