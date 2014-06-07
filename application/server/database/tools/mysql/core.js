@@ -85,22 +85,22 @@ MysqlTools.query.generate = function(options) {
 				queries.push({request: request});
 
 
-			for(var j = 0; j<options.filters[i].length; j++) {
+			for(var j = 0; j<options.filters[i].conditions.length; j++) {
 
 
-				name = options.filters[i][j].name;
+				name = options.filters[i].conditions[j].name;
 
-				switch(options.filters[i][j].operator.toUpperCase()) {
+				switch(options.filters[i].conditions[j].operator.toUpperCase()) {
 					case 'BETWEEN':
 					case 'NOT BETWEEN':
-						value = options.filters[i][j].value.join(' AND ');
+						value = options.filters[i].conditions[j].value.join(' AND ');
 					break;
 					case 'IN':
 					case 'NOT IN':
-						value = '(' + options.filters[i][j].value.join(',') + ')';
+						value = '(' + options.filters[i].conditions[j].value.join(',') + ')';
 					break;
 					default:
-						value = options.filters[i][j].value;
+						value = options.filters[i].conditions[j].value;
 					break;
 				}
 
@@ -108,12 +108,12 @@ MysqlTools.query.generate = function(options) {
 				if(queryBuilder['kpi_definition'][name].group) {
 					if(!queries[i].having)
 						queries[i].having = [];
-					queries[i].having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i][j].operator + ' ' + value);
+					queries[i].having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' ' + value);
 				}
 				else {
 					if(!queries[i].where)
 						queries[i].where = [];
-					queries[i].where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i][j].operator + ' "' + value + '"');
+					queries[i].where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' "' + value + '"');
 				}
 
 				queries[i].tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
@@ -188,6 +188,8 @@ MysqlTools.query.generate = function(options) {
 
 	for(var i = 0; i<queries.length; i++)
 			queries[i] = queries[i].request + (union ? ' UNION ' + queries[i].union : '' );
+
+	console.log(queries.length > 1 ? queries : queries[0])
 
 	return queries.length > 1 ? queries : queries[0];
 }

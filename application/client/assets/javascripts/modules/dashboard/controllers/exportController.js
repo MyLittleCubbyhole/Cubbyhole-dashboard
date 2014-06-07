@@ -11,7 +11,8 @@ angular.module('Dashboard').
         $local.operatorsName = OPERATORS_NAME;
         $local.operator = 'AND';
 
-        $local.filters = [[], [], [], []];
+        $local.filters = [[], []];
+        $local.currentFilter = 0;
 
         var kpi;
         for(var i in QUERY_BUILDER) {
@@ -31,8 +32,8 @@ angular.module('Dashboard').
             $local.kpis[QUERY_BUILDER[i].category].push(kpi);
         }
 
-        $local.addFilter = function() {
-            $local.filters[0].push({
+        $local.addFilter = function(index) {
+            $local.filters[index].push({
                 kpi: QUERY_BUILDER['count.user'],
                 operator: '>',
                 value: [0, 0]
