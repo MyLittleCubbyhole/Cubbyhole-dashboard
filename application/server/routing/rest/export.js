@@ -43,11 +43,10 @@ exporter.post.exportXML = function(request, response) {
 	,	header = {}
 	,	config = JSON.parse(body.config);
 
-
-	// var options = {"sort":{"name":"user.inscriptiondate","order":"asc"},"metrics":[{"name":"count.user","shape":"column"}],"segments":[{"name":"user.country","axis":"abs"},{"name":"user.inscriptiondate"}],"filters":[{"name": "sup0","conditions":[{"name":"count.user","operator":">","value":["0"]}],"operator":"AND"},{"name": "sup10","conditions":[{"name":"count.user","operator":">","value":["10"]}],"operator":"AND"}],"stacked":true}
+	/*var options = {"sort":{"name":"user.inscriptiondate","order":"asc"},"metrics":[{"name":"count.user","shape":"column"}],"segments":[{"name":"user.country","axis":"abs"},{"name":"user.inscriptiondate"}],"filters":[{"name": "sup0","conditions":[{"name":"count.user","operator":">","value":["0"]}],"operator":"AND"},{"name": "sup10","conditions":[{"name":"count.user","operator":">","value":["10"]}],"operator":"AND"}],"stacked":true}*/
 	if(!!config.segments && !!config.metrics && !!config.filters)
 		MysqlTools.query.compare(config, function(error, data) {
-			
+
 			var xml = js2xmlparser("export", JSON.parse(  JSON.stringify( { "row":data.data } ) ) );
 
 			header['Content-Type'] = 'text/xml';

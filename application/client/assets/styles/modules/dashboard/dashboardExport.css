@@ -1,5 +1,13 @@
+form[form-post-downloader] {
+    display: none;
+}
 #modal-export {
     width: 670px;
+}
+
+#modal-export .md-content {
+    height: 370px;
+    padding-bottom: 0;
 }
 .export-container .export {
     display: inline-block;
@@ -50,21 +58,33 @@
     font-size: 29px;
 }
 
-#modal-export-details .md-content {
-    height: 100%;
-    padding-bottom: 0;
+
+#modal-export-details .corner-text-save {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    color: black;
+    cursor: pointer;
 }
 
 #modal-export-details .bloc-title {
     margin-bottom: 10px;
 }
 
+#modal-export-details .bloc-tab-filter .bloc-title {
+    height: 50px;
+}
+
+#modal-export-details .bloc-title input {
+    margin-top: 10px;
+    padding-left: 5px;
+}
+
 #modal-export-details .corner.edit {
     position: absolute;
-    top: 16px;
-    right: 47px;
+    top: 0;
+    right: 0;
     color: black;
-    border: 1px solid black;
     padding: 6px;
     cursor: pointer;
 }
@@ -111,10 +131,6 @@
 }
 #modal-export-details .mCustomScrollBox>.mCSB_scrollTools {
     width: 6px;
-}
-
-#modal-export-details .md-content {
-    height: 370px;
 }
 
 #modal-export-details .bloc-tab-filter {

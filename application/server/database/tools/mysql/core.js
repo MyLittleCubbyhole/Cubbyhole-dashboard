@@ -190,8 +190,6 @@ MysqlTools.query.generate = function(options) {
 	for(var i = 0; i<queries.length; i++)
 		queries[i] = queries[i].request + (queries[i].union ? ' UNION ' + queries[i].unionQuery + queries[i].unionOrderer : '' );
 
-	console.log(queries.length > 1 ? queries : queries[0])
-
 	return queries.length > 1 ? queries : queries[0];
 }
 
@@ -310,6 +308,8 @@ MysqlTools.query.compare = function(options, callback) {
 	}
 
 	query += ' union ' + right;
+
+	console.log(query)
 
 	Mysql.query(query, function(error, data) {
 		!!callback && callback(error, {head: head, data: data});
