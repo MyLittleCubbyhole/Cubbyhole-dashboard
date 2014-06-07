@@ -98,7 +98,7 @@ module.exports = function(grunt) {
                     "application/client/assets/javascripts/modules/dashboard/factories/widgetFactory.js",
                     "application/client/assets/javascripts/modules/dashboard/directives/flipDirective.js",
                     "application/client/assets/javascripts/modules/dashboard/directives/dashboardDirective.js",
-                    "application/client/assets/javascripts/modules/dashboard/directives/dashydashDirective.js",
+                    "application/client/assets/javascripts/modules/dashboard/directives/dashyDashDirective.js",
                     "application/client/assets/javascripts/modules/dashboard/directives/ddWidgetGraphDirective.js",
                     "application/client/assets/javascripts/modules/dashboard/directives/ddWidgetSingleNumberDirective.js",
                     "application/client/assets/javascripts/modules/dashboard/directives/ddWidgetPieDirective.js",
