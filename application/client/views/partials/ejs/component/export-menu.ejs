@@ -71,9 +71,10 @@
                             <article class="widget-back-tab widget-back-tab-filters nodrag" ng-switch-when="filters">
                                 <article class="bloc-panel">
                                     <article class="filter-select" ng-repeat="filter in Export.filters track by $index" ng-click="Export.currentFilter = $index">
-                                        <article class="filter-number">{{$index + 1}}</article>
+                                        <article class="filter-number" ng-class="{'filter-number-active': Export.currentFilter == $index}">{{$index + 1}}</article>
+                                        <article class="del-btn" ng-if="$index > 0" ng-click="Export.removeFilter($index)"><i class="icon-cross"></i></article>
                                     </article>
-                                    <article class="filter-select" ng-if="Export.filters.length < 4" ng-click="Export.filters.push([])">
+                                    <article class="filter-select" ng-if="Export.filters.length < 4" ng-click="Export.filters.push({operator: 'AND'})">
                                         <article class="filter-number">+</article>
                                     </article>
                                 </article>
@@ -82,12 +83,12 @@
                                         <article class="bloc-title">
                                             Filters
                                             <label class="toggle float-right">
-                                                <input type="checkbox" name="checkbox-toggle" ng-change="Export.operator = Export.operator == 'AND' ? 'OR' : 'AND';" ng-checked="Export.operator == 'OR'" ng-model="operator">
+                                                <input type="checkbox" name="checkbox-toggle" ng-change="Export.filters[Export.currentFilter].operator = Export.filters[Export.currentFilter].operator == 'AND' ? 'OR' : 'AND';" ng-checked="Export.filters[Export.currentFilter].operator == 'OR'" ng-model="operator">
                                                 <i data-swchon-text="OR" data-swchoff-text="AND"></i>
                                             </label>
                                         </article>
                                         <article class="bloc-content">
-                                            <article class="bloc-content-option filter" ng-repeat="filter in Export.filters[Export.currentFilter] track by $index">
+                                            <article class="bloc-content-option filter" ng-repeat="filter in Export.filters[Export.currentFilter].conditions track by $index">
                                                 <span grumpy-ui grumpy-position="bottom" grumpy-align="left">
                                                     {{filter.kpi.formattedAlias}}
                                                     <grumpy-virgin class="bounceIn">
@@ -152,12 +153,12 @@
                                                         </section>
                                                     </grumpy-virgin>
                                                 </span>
-                                                <article class="del-btn" ng-click="Export.filters[Export.currentFilter].splice($index, 1);"><i class="icon-cross"></i></article>
+                                                <article class="del-btn" ng-click="Export.filters[Export.currentFilter].conditions.splice($index, 1);"><i class="icon-cross"></i></article>
                                             </article>
                                         </article>
                                     </section>
                                     <section class="bloc-tab bloc-tab-filter">
-                                        <article class="add-filter btn cubby-btn" ng-click="Export.addFilter(Export.currentFilter);">ADD</article>
+                                        <article class="add-filter btn cubby-btn" ng-click="Export.addCondition(Export.currentFilter);">ADD</article>
                                     </section>
                                 </section>
                             </article>

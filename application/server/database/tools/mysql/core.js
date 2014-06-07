@@ -95,7 +95,7 @@ MysqlTools.query.generate = function(options) {
 					break;
 					case 'IN':
 					case 'NOT IN':
-						value = '(' + options.filters[i].conditions[j].value.join(',') + ')';
+						value = '("' + options.filters[i].conditions[j].value.join('","') + '")';
 					break;
 					default:
 						value = '"' + options.filters[i].conditions[j].value + '"';
@@ -188,6 +188,8 @@ MysqlTools.query.generate = function(options) {
 
 	for(var i = 0; i<queries.length; i++)
 		queries[i] = queries[i].request + (queries[i].union ? ' UNION ' + queries[i].unionQuery + queries[i].unionOrderer : '' );
+
+	console.log(queries.length > 1 ? queries : queries[0])
 
 	return queries.length > 1 ? queries : queries[0];
 }

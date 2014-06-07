@@ -59,6 +59,16 @@
     margin-bottom: 10px;
 }
 
+#modal-export-details .corner.edit {
+    position: absolute;
+    top: 16px;
+    right: 47px;
+    color: black;
+    border: 1px solid black;
+    padding: 6px;
+    cursor: pointer;
+}
+
 #modal-export-details .bloc-panel {
     float: left;
     width: 58px;
@@ -71,6 +81,18 @@
     padding: 13px;
     border-top: 1px solid #C4C4C4;
     text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+#modal-export-details .filter-select .filter-number-active {
+    font-weight: bold;
+}
+
+#modal-export-details .filter-select .del-btn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 20px;
 }
 
 #modal-export-details .filter-select:first-child {
