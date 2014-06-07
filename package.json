@@ -32,6 +32,8 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.4.0",
     "grunt-contrib-cssmin": "^0.9.0",
-    "moment": "~2.6.0"
+    "moment": "~2.6.0",
+    "json2csv": "^2.2.1",
+    "js2xmlparser": "^0.1.3"
   }
 }

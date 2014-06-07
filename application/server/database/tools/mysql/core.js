@@ -1,4 +1,5 @@
 var MysqlTools = { query: {} }
+,	Mysql = require(global.paths.server + '/database/mysql/core')
 ,	crypto = require('crypto')
 ,	_ = require('lodash')
 ,	queryBuilder = require(global.paths.server + '/config/core').get()['query-builder'];
@@ -244,7 +245,77 @@ MysqlTools.query.makeJoin = function(tables) {
 	return request;
 }
 
-MysqlTools.query.compare = function(baseconfig, compareconfig) {}
+MysqlTools.query.compare = function(options, callback) {
+
+	var queries = MysqlTools.query.generate(options)
+	,	datas = []
+	,	query = 'SELECT '
+	,	started = 0
+	,	currentAlias
+	,	head = []
+	,	alias = [];
+
+	if(typeof queries == 'string')
+		queries = [queries];
+
+	for(var aliasIndex = 0; aliasIndex<options.filters.length; aliasIndex++) {
+		currentAlias = options.filters[aliasIndex].name || aliasIndex;
+		alias.push( currentAlias );
+
+		if(aliasIndex > 0)
+			query += ','
+
+		for(var i = 0; i < options.metrics.length; i++) {
+			name = options.metrics[i].name;
+			if(i > 0)
+				query += ',';
+			head.push(alias[aliasIndex] + ' - ' + queryBuilder['kpi_definition'][name].formattedAlias);
+			query += 'COALESCE( query_' + aliasIndex + '.' + queryBuilder['kpi_definition'][name].alias + ', "-") as "' + alias[aliasIndex] + '-' + queryBuilder['kpi_definition'][name].alias + '" ';
+		}
+
+		if(options.metrics.length > 0 && options.segments.length > 0)
+			query += ',';
+
+		for(var i = 0; i < options.segments.length; i++) {
+			name = options.segments[i].name;
+			if(i > 0)
+				query += ',';
+			head.push(alias[aliasIndex] + ' - ' + queryBuilder['kpi_definition'][name].formattedAlias);
+			query += 'COALESCE( query_' + aliasIndex + '.' + queryBuilder['kpi_definition'][name].alias + ', "-") as "' + alias[aliasIndex] + '-' + queryBuilder['kpi_definition'][name].alias + '" ';
+		}
+
+	}
+
+	query += ' FROM ';
+
+	var right = query;
+
+
+
+	for(var aliasIndex = 0; aliasIndex<options.filters.length; aliasIndex++) {
+
+		if(aliasIndex > 0) {
+			query += ' LEFT JOIN ';
+			right += ' RIGHT JOIN ';
+		}
+
+		query += '(' + queries[aliasIndex] + ') query_' + aliasIndex + ' ';
+		right += '(' + queries[aliasIndex] + ') query_' + aliasIndex + ' ';
+
+
+		if(aliasIndex > 0) {
+			query += ' ON 1 = 1 ';
+			right += ' ON 1 = 1 ';
+		}
+	}
+
+	query += ' union ' + right;
+
+	Mysql.query(query, function(error, data) {
+		!!callback && callback(error, {head: head, data: data});
+	})
+
+}
 
 MysqlTools.format = function(widget) {
 
