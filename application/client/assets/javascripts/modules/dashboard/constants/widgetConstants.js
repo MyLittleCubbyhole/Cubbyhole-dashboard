@@ -30,7 +30,7 @@ angular.module('Dashboard').
             icon: '/images/widget-icons/icotable.png',
             width: [1,2,3,4],
             height: 5,
-            config: {"metrics":[{"name":"user.age.avg"}, {"name":"count.user"}],"segments":[{"name":"user.country"},{"name":"user.inscriptiondate"}], "order": "user.inscriptiondate", "limit": 10, "filters": []}
+            config: {"metrics":[{"name":"user.age.avg"}, {"name":"count.user"}],"segments":[{"name":"user.country"},{"name":"user.inscriptiondate"}], "sort": {"name": "user.inscriptiondate", "order": "asc"}, "limit": 10, "filters": []}
         },
         graph: {
             type: 'graph',
@@ -38,7 +38,7 @@ angular.module('Dashboard').
             icon: '/images/widget-icons/icochart.png',
             width: [1,2,3,4],
             height: 3,
-            config: {"metrics":[{"name":"count.user", "shape": "column"}],"segments":[{"name":"user.country", "axis":"abs"},{"name":"user.inscriptiondate"}], "order": "user.inscriptiondate", "stacked": true, "filters": []}
+            config: {"metrics":[{"name":"count.user", "shape": "column"}],"segments":[{"name":"user.country", "axis":"abs"},{"name":"user.inscriptiondate"}], "sort": {"name": "user.inscriptiondate", "order": "asc"}, "stacked": true, "filters": []}
         },
         map: {
             type: 'map',

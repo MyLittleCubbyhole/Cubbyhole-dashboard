@@ -39,7 +39,7 @@
                                         <section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
                                             <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
                                             <section class="kpi-list" ng-class="{ open: kpistatus}">
-                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[0].kpi }">
+                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[0].kpi = kpi; _ddWidgetGraph.widget.sort.name = kpi.index; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[0].kpi }">
                                                     {{kpi.formattedAlias}}
                                                 </article>
                                             </section>

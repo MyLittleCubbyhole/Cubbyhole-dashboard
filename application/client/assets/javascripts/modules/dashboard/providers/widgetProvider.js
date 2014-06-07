@@ -33,7 +33,7 @@ angular.module('Dashboard').
 
                 self.limit = self.options.config.limit;
                 self.operator = self.options.config.operator || 'AND';
-
+                console.log(self.options.config.sort)
                 self.sort = self.options.config.sort || {};
 
                 if(self.options.config.metrics)

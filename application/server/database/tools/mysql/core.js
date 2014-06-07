@@ -130,8 +130,7 @@ MysqlTools.query.generate = function(options) {
 
 
 	for(var i = 0; i<queries.length; i++) {
-		queries[i].union = options.operator == 'OR' && queries[i].having.length > 0 && queries[i].where.length > 0;
-		console.log(queries[i].union, options.operator, queries[i].having.length, queries[i].where.length)
+		queries[i].union = options.operator == 'OR' && !!queries[i].having && queries[i].having.length > 0 && queries[i].where && queries[i].where.length > 0;
 		if(queries[i].union)
 			queries[i].unionQuery = queries[i].request;
 	}
