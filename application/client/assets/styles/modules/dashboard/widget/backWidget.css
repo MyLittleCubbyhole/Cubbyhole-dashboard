@@ -369,6 +369,8 @@ article.bloc-button:hover {
 }
 
 article.sort-button {
+    position: relative;
+    top: 1px;
     display: inline-block;
     margin-left: 10px;
     cursor: pointer;

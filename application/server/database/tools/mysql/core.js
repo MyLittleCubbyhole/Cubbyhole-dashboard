@@ -72,7 +72,7 @@ MysqlTools.query.generate = function(options) {
 		tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);
 	}
 
-	queries.push({request: request, tables: tables});
+	queries.push({request: request, tables: tables, unionOrderer: ''});
 
 	var filter = ""
 	,	value = "";
@@ -80,7 +80,7 @@ MysqlTools.query.generate = function(options) {
 		for(var i = 0; i<options.filters.length; i++) {
 
 			if(i>0)
-				queries.push({request: request, tables: tables});
+				queries.push({request: request, tables: tables, unionOrderer: ''});
 
 
 			for(var j = 0; j<options.filters[i].length; j++) {
@@ -122,8 +122,7 @@ MysqlTools.query.generate = function(options) {
 		if(!!queries[i].tables && queries[i].tables.length>0)
 			queries[i].request += MysqlTools.query.makeJoin(queries[i].tables);
 
-	var unionQuery = ''
-	,	havingQuery = ''
+	var havingQuery = ''
 	,	orderbyQuery =  ''
 	,	limit = ''
 	,	groupbyQuery = '';
@@ -166,13 +165,15 @@ MysqlTools.query.generate = function(options) {
 		}
 
 	if(!!options.sort && !!options.sort.name) {
-		orderbyQuery = 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
 
+		orderbyQuery = 'ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].apply + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
 		for(var i = 0; i<queries.length; i++) {
-			if(!queries[i].union)
-				queries[i].unionQuery += orderbyQuery;
-			queries[i].request += orderbyQuery;
+			if(queries[i].union)
+				queries[i].unionOrderer = ' ORDER BY ' + queryBuilder['kpi_definition'][options.sort.name].alias + ' ' + ( options.sort.order ? options.sort.order : 'ASC' );
+			else
+				queries[i].request += orderbyQuery;
 		}
+
 	}
 
 	if(typeof options.limit != 'undefined') {
@@ -186,8 +187,8 @@ MysqlTools.query.generate = function(options) {
 	}
 
 	for(var i = 0; i<queries.length; i++)
-		queries[i] = queries[i].request + (queries[i].union ? ' UNION ' + queries[i].unionQuery : '' );
-	console.log(queries[0])
+		queries[i] = queries[i].request + (queries[i].union ? ' UNION ' + queries[i].unionQuery + queries[i].unionOrderer : '' );
+
 	return queries.length > 1 ? queries : queries[0];
 }
 

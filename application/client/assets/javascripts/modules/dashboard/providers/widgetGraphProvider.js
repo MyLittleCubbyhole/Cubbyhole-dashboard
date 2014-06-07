@@ -54,7 +54,7 @@ angular.module('Dashboard').
                     if(self.segments[i].options.axis == 'abs' || self.segments.length == 1) {
                         axisType = self.segments[i].kpi.format;
                         absName = index;
-                        self.chartOptions.xAxis = {};
+                        self.chartOptions.xAxis = { ordinal: false };
                         self.chartOptions.xAxis.labels = {};
 
                         switch(self.segments[i].kpi.format) {
