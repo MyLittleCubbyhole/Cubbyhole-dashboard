@@ -46,13 +46,6 @@ dashboard.post.create = function(request, response) {
 	}
 }
 
-dashboard.post.export = function(request, response) {
-	var body = request.body
-	,	params = request.params;
-
-
-}
-
 /********************************[  PUT   ]********************************/
 
 dashboard.put.update = function(request, response) {

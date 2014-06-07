@@ -2,7 +2,8 @@ var filters = require(global.paths.server + '/routing/filters/core')
 ,	navigation = require(global.paths.server + '/routing/routes/navigation')
 ,   dashboard = require(global.paths.server + '/routing/rest/dashboard')
 ,	user = require(global.paths.server + '/routing/rest/user')
-,	widget = require(global.paths.server + '/routing/rest/widget')
+,   widget = require(global.paths.server + '/routing/rest/widget')
+,	exporter = require(global.paths.server + '/routing/rest/export')
 ,	routing = {};
 
 routing.init = function(app) {
@@ -25,7 +26,8 @@ routing.init = function(app) {
 
     app.post('/api/auth', user.post.authenticate);
 
-    // app.post('/api/export', user.post.export);
+    app.get('/api/export/xml', exporter.post.exportXML);
+    app.get('/api/export/csv', exporter.post.exportCSV);
 
     app.put('/api/dashboards/:id', filters.tokenInterceptor, filters.adminInterceptor, dashboard.put.update);
     app.put('/api/dashboards/:id/widgets/position', filters.tokenInterceptor, filters.adminInterceptor, widget.put.updatePosition);
