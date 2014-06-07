@@ -106,7 +106,8 @@ angular.module('Dashboard').
                 if(self.filters[0] && self.filters[0].conditions.length > 0) {
                     configuration.filters[0].conditions = [];
                     configuration.filters[0].operator = self.filters[0].operator;
-                }
+                }  else
+                    configuration.filters = [];
 
                 for(var i = 0; i<self.filters[0].conditions.length; i++) {
 

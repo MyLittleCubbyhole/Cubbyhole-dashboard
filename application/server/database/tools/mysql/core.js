@@ -98,7 +98,7 @@ MysqlTools.query.generate = function(options) {
 						value = '(' + options.filters[i].conditions[j].value.join(',') + ')';
 					break;
 					default:
-						value = options.filters[i].conditions[j].value;
+						value = '"' + options.filters[i].conditions[j].value + '"';
 					break;
 				}
 
@@ -106,12 +106,12 @@ MysqlTools.query.generate = function(options) {
 				if(queryBuilder['kpi_definition'][name].group) {
 					if(!queries[i].having)
 						queries[i].having = [];
-					queries[i].having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' "' + value + '"');
+					queries[i].having.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].conditions[j].operator + ' ' + value);
 				}
 				else {
 					if(!queries[i].where)
 						queries[i].where = [];
-					queries[i].where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].operator + ' "' + value + '"');
+					queries[i].where.push(queryBuilder['kpi_definition'][name].apply + ' ' + options.filters[i].conditions[j].operator + ' ' + value);
 				}
 
 				queries[i].tables = _.union(tables, queryBuilder['kpi_definition'][name].tables);

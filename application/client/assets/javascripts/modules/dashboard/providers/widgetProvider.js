@@ -55,15 +55,12 @@ angular.module('Dashboard').
                     if(self.options.config.filters[0] && self.options.config.filters[0].conditions)
                         for(var i = 0; i<self.options.config.filters[0].conditions.length; i++) {
                             self.filters[0].operator = self.options.config.filters[0].operator || 'AND';
-                            console.log(self.options.config.filters[0].conditions[i])
                             self.filters[0].conditions.push({
                                 kpi: QUERY_BUILDER[self.options.config.filters[0].conditions[i].name],
                                 operator: self.options.config.filters[0].conditions[i].operator,
                                 value: self.options.config.filters[0].conditions[i].value
                             });
                         }
-
-                console.log(self.filters)
 
                 self.scope.$on('widget_refresh', function() { self.refresh(); })
             };
@@ -141,7 +138,8 @@ angular.module('Dashboard').
                 if(self.filters[0] && self.filters[0].conditions.length > 0) {
                     configuration.filters[0].conditions = [];
                     configuration.filters[0].operator = self.filters[0].operator;
-                }
+                } else
+                    configuration.filters = [];
 
                 for(var i = 0; i<self.filters[0].conditions.length; i++) {
 

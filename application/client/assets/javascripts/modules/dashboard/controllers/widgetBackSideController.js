@@ -79,7 +79,6 @@ angular.module('Dashboard').
         }
 
         $local.addFilter = function() {
-            console.log($widgetScope.widget)
             $widgetScope.widget.filters[0].conditions.push({
                 kpi: QUERY_BUILDER['count.user'],
                 operator: '>',
