@@ -248,7 +248,7 @@ angular.module('Dashboard').
                         self.chartOptions.series.push(series)
                     }
                 }
-                console.log(self.chartOptions)
+
                 self.refresh();
             };
 
