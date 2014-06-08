@@ -16,8 +16,8 @@ exporter.post.exportCSV = function(request, response) {
 
 	if(!!config.segments && !!config.metrics && !!config.filters)
 		MysqlTools.query.compare(config, function(error, data) {
-			json2csv({data: data.data, fields: data.head, del: '\t'}, function(error, csv) { //pillowTAG la data renvoyée est correcte mais le csv contient uniquement les headers. La même requête pour le xml marche. Cas de test : export avec en kpi count_users, age et country, et en filtre : le 1er filtre countrycode = FR et 2ème filtre country code = BE
-
+			json2csv({data: data.data, fields: data.head, del: '\t'}, function(error, csv) {
+				console.log(data.data)
 				header['Content-Type'] = 'text/csv';
 
 				header['Content-Disposition'] = 'attachment; filename="export.csv"';

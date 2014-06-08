@@ -2,6 +2,7 @@ var MysqlTools = { query: {} }
 ,	Mysql = require(global.paths.server + '/database/mysql/core')
 ,	crypto = require('crypto')
 ,	_ = require('lodash')
+,	fs = require('fs')
 ,	queryBuilder = require(global.paths.server + '/config/core').get()['query-builder'];
 
 function encrypt(string, salt) {
@@ -256,6 +257,9 @@ MysqlTools.query.compare = function(options, callback) {
 	if(typeof queries == 'string')
 		queries = [queries];
 
+	if(!options.filters || options.filters.length <= 0)
+		options.filters = [ { name: 'BASE' } ]; 
+
 	for(var aliasIndex = 0; aliasIndex<options.filters.length; aliasIndex++) {
 		currentAlias = options.filters[aliasIndex].name || aliasIndex;
 		alias.push( currentAlias );
@@ -267,7 +271,7 @@ MysqlTools.query.compare = function(options, callback) {
 			name = options.metrics[i].name;
 			if(i > 0)
 				query += ',';
-			head.push(alias[aliasIndex] + ' - ' + queryBuilder['kpi_definition'][name].formattedAlias);
+			head.push(alias[aliasIndex] + '-' + queryBuilder['kpi_definition'][name].alias);
 			query += 'COALESCE( query_' + aliasIndex + '.' + queryBuilder['kpi_definition'][name].alias + ', "-") as "' + alias[aliasIndex] + '-' + queryBuilder['kpi_definition'][name].alias + '" ';
 		}
 
@@ -278,7 +282,7 @@ MysqlTools.query.compare = function(options, callback) {
 			name = options.segments[i].name;
 			if(i > 0)
 				query += ',';
-			head.push(alias[aliasIndex] + ' - ' + queryBuilder['kpi_definition'][name].formattedAlias);
+			head.push(alias[aliasIndex] + '-' + queryBuilder['kpi_definition'][name].alias);
 			query += 'COALESCE( query_' + aliasIndex + '.' + queryBuilder['kpi_definition'][name].alias + ', "-") as "' + alias[aliasIndex] + '-' + queryBuilder['kpi_definition'][name].alias + '" ';
 		}
 
@@ -309,7 +313,10 @@ MysqlTools.query.compare = function(options, callback) {
 
 	query += ' union ' + right;
 
-	console.log(query)
+	fs.appendFile('sql_dump.txt', query, function (error) {
+		if(error)
+			throw 'an error occured';
+	});
 
 	Mysql.query(query, function(error, data) {
 		!!callback && callback(error, {head: head, data: data});
