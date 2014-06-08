@@ -15,7 +15,7 @@ angular.module('Dashboard').
                 var self = this
                 ,   axisType = self.metrics[0].kpi.format;
                 self.value = data[0][self.metrics[0].kpi.alias];
-                self.value = axisType == 'date' ? moment( self.getFormatedValue(self.value, axisType) ).format('MMMM Do YYYY') : self.getFormatedValue(self.value, axisType);
+                self.value = self.getFormatedValue(self.value, axisType);
                 self.alias = self.metrics[0].kpi.formattedAlias;
             };
 

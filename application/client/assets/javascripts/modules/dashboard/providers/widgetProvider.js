@@ -205,6 +205,7 @@ angular.module('Dashboard').
             Widget.prototype.getFormatedValue = function(val, type, round) {
                 switch(type) {
                     case 'date':
+                    case 'monthyear':
                         val = (new Date(val)).getTime();
                     break;
                     case 'bytes':
