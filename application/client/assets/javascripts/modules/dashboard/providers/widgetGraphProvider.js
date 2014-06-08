@@ -73,6 +73,28 @@ angular.module('Dashboard').
                                 }
                                 axis = _.uniq(axis, false);
                             break;
+                            case 'monthyear':
+                                self.chartOptions.xAxis.type = 'datetime';
+                                self.chartOptions.xAxis.labels.formatter = function() {
+                                   return moment(this.value).format('MMMM YYYY');
+                                };
+                                for(var j = 0; j< series.data.length; j++) {
+                                    axis.push( new Date( series.data[j] ).getTime() );
+                                }
+                                axis = _.uniq(axis, false);
+                            break;
+                            case 'month':
+                                self.chartOptions.xAxis.labels.formatter = function() {
+                                   return moment().month(this.value - 1).format('MMMM');
+                                };
+                                axis = _.uniq(series.data, false);
+                            break;
+                            case 'boolean':
+                                self.chartOptions.xAxis.labels.formatter = function() {
+                                   return this.value == 1 ? 'oui' : 'non';
+                                };
+                                axis = _.uniq(series.data, false);
+                            break;
                             case 'bytes':
                                 self.chartOptions.xAxis.labels.formatter = function() {
                                    return numeral(this.value).format('0.0b');
@@ -87,14 +109,29 @@ angular.module('Dashboard').
                                 self.chartOptions.xAxis.categories = _.uniq(series.data, false);
                                 axis = self.chartOptions.xAxis.categories;
                             break;
-                            case 'number':
+                            default:
                                 axis = _.uniq(series.data, false);
                             break;
                         }
 
                         self.chartOptions.tooltip = {};
                         self.chartOptions.tooltip.formatter = function() {
-                            var formated = axisType == 'date' ? '<b>'+ moment( self.getFormatedValue(this.x, axisType) ).format('MMMM Do YYYY') +'</b>' : '<b>'+ self.getFormatedValue(this.x, axisType) +'</b>';
+                            var formated = '<b>';
+                            switch(axisType) {
+                                case 'date':
+                                    formated += moment(self.getFormatedValue(this.x, axisType)).format('MMMM Do YYYY');
+                                break;
+                                case 'monthyear':
+                                    formated += moment(self.getFormatedValue(this.x, axisType)).format('MMMM YYYY');
+                                break;
+                                case 'month':
+                                    formated += moment().month(this.x - 1).format('MMMM');
+                                break;
+                                default:
+                                    formated += self.getFormatedValue(this.x, axisType);
+                                break;
+                            }
+                            formated += '</b>';
                             formated += '<br/>'+ this.point.series.name +': '+ self.getFormatedValue(this.point.y, this.series.userOptions.serieType);
 
                             return formated;
@@ -125,16 +162,18 @@ angular.module('Dashboard').
                             stack: !!segmentName,
                             serieType: self.metrics[0].kpi.format
                         };
-
                         switch(segmentType) {
                             case 'date':
                                 series.name = moment( new Date(segment[i]).getTime() ).format('MMMM Do YYYY');
                             break;
-                            case 'bytes':
-                                series.name = numeral(segment[i]).format('0.0b');
+                            case 'monthyear':
+                                series.name = moment( new Date(segment[i]).getTime() ).format('MMMM YYYY');
                             break;
-                            case 'money':
-                                series.name = numeral(segment[i]).format('$0,0[.]00');
+                            case 'month':
+                                series.name = moment().month(segment[i] - 1).format('MMMM');
+                            break;
+                            default:
+                                series.name = self.getFormatedValue(segment[i], segmentType);
                             break;
                         }
 
@@ -196,7 +235,7 @@ angular.module('Dashboard').
                             yAxis: i,
                             serieType: self.metrics[i].kpi.format
                         };
-                        
+
                         switch(self.metrics[i].options.shape) {
                             case 'area':
                                 series.zIndex = 0;
@@ -209,7 +248,7 @@ angular.module('Dashboard').
                                 series.zIndex = 3;
                             break;
                         }
-                        // debugger;
+
                         var witness = false;
                         for(var j = 0; j<axis.length; j++) {
                             witness = false;
@@ -248,7 +287,6 @@ angular.module('Dashboard').
                         self.chartOptions.series.push(series)
                     }
                 }
-
                 self.refresh();
             };
 

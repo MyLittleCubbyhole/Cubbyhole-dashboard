@@ -58,10 +58,13 @@ angular.module('Dashboard').
                         case 'date':
                             dataName = moment( new Date(dataName).getTime() ).format('MMMM Do YYYY');
                         break;
-                        case 'bytes':
-                            dataName = self.getFormatedValue(dataName, axisType);
+                        case 'monthyear':
+                            dataName = moment( new Date(dataName).getTime() ).format('MMMM YYYY');
                         break;
-                        case 'money':
+                        case 'month':
+                            dataName = moment().month(dataName - 1).format('MMMM');
+                        break;
+                        default:
                             dataName = self.getFormatedValue(dataName, axisType);
                         break;
                     }

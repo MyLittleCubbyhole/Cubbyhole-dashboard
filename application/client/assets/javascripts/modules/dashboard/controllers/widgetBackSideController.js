@@ -24,7 +24,6 @@ angular.module('Dashboard').
                 alias: QUERY_BUILDER[i].alias,
                 formattedAlias: QUERY_BUILDER[i].formattedAlias,
                 index: QUERY_BUILDER[i].index,
-                datatype: QUERY_BUILDER[i].datatype,
                 type: QUERY_BUILDER[i].type,
                 format: QUERY_BUILDER[i].format
             }
