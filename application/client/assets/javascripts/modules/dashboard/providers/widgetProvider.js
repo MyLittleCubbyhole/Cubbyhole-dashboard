@@ -1,13 +1,14 @@
 angular.module('Dashboard').
     provider('WidgetProvider', function(){
 
-        this.$get = ['WIDGET_DEFAULT_SETTINGS', 'QUERY_BUILDER', 'WidgetFactory', '$window', function(WIDGET_DEFAULT_SETTINGS, QUERY_BUILDER, WidgetFactory, $window) {
+        this.$get = ['WIDGET_DEFAULT_SETTINGS', 'QUERY_BUILDER', 'WidgetFactory', '$window', '$timeout', function(WIDGET_DEFAULT_SETTINGS, QUERY_BUILDER, WidgetFactory, $window, $timeout) {
 
             var Widget = function(options, context) {
                 if(!options || !context)
                     return false;
 
                 var self = this;
+                self.inLoading = true;
                 self.options = {};
                 _.merge(self.options, WIDGET_DEFAULT_SETTINGS, options);
 
@@ -179,7 +180,11 @@ angular.module('Dashboard').
 
             Widget.prototype.load = function() {
                 var self = this;
-                WidgetFactory(self.scope).getData(self.dashboardId, self.id, function(data) { self.init(data); })
+                self.inLoading = true;
+                WidgetFactory(self.scope).getData(self.dashboardId, self.id, function(data) { 
+                    self.init(data);
+                    self.inLoading = false;
+                })
             };
 
             Widget.prototype.refresh = function() { };

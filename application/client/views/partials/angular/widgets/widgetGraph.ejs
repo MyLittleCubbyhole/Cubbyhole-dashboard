@@ -1,6 +1,7 @@
 <% layout('../../../layout/widget-core') %>
 
-<section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController">
+<section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController" ng-class="{loader: WidgetFrontSide.inLoading}">
+{{WidgetFrontSide.inLoading}}
     <article class="widget-front-head">
         <article class="corner edit" ng-click="_flip.active(); _ddWidgetGraph.edit()">
             <article class="corner-text">EDIT</article>
