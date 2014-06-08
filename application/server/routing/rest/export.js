@@ -17,7 +17,6 @@ exporter.post.exportCSV = function(request, response) {
 	if(!!config.segments && !!config.metrics && !!config.filters)
 		MysqlTools.query.compare(config, function(error, data) {
 			json2csv({data: data.data, fields: data.head, del: '\t'}, function(error, csv) {
-				console.log(data.data)
 				header['Content-Type'] = 'text/csv';
 
 				header['Content-Disposition'] = 'attachment; filename="export.csv"';

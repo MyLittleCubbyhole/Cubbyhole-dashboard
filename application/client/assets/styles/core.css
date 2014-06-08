@@ -111,3 +111,66 @@ section#body-content {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* MODAL - NOUVEAU MODEL*/
+section#box-export {
+    height: 350px;
+    width: 700px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+    /*border: 1px solid black;*/
+}
+section.export-container {
+    height: 80px;
+    position: absolute;
+    bottom: 40px;
+    margin: auto;
+    width: 638px;
+    right: 0;
+    left: 0;
+}
+section.export-header {
+    line-height: 60px;
+    text-align: center;
+    font-size: 25px;
+    border-bottom: 1px solid #ebebeb;  
+    height: 60px;  
+    background-color: #DFDFDF;
+    font-family: Lato;
+    color: #949494;
+}
+
+.export-container .export {
+    height: 80px;
+    width: 200px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    line-height: 80px;
+    background: #262626;
+    font-family: Lato;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #DADADA;
+}
+.export-container .export-text {
+    font-size: 40px;
+}
+#box-export section.widget-side.widget-frontside {
+    background-color: #F0F0F0;
+}

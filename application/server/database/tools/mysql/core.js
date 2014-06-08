@@ -262,6 +262,7 @@ MysqlTools.query.compare = function(options, callback) {
 
 	for(var aliasIndex = 0; aliasIndex<options.filters.length; aliasIndex++) {
 		currentAlias = options.filters[aliasIndex].name || aliasIndex;
+		currentAlias = currentAlias.toString().replace(' ', '');
 		alias.push( currentAlias );
 
 		if(aliasIndex > 0)
@@ -312,11 +313,6 @@ MysqlTools.query.compare = function(options, callback) {
 	}
 
 	query += ' union ' + right;
-
-	fs.appendFile('sql_dump.txt', query, function (error) {
-		if(error)
-			throw 'an error occured';
-	});
 
 	Mysql.query(query, function(error, data) {
 		!!callback && callback(error, {head: head, data: data});
