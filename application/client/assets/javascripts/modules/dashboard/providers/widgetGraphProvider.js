@@ -155,6 +155,7 @@ angular.module('Dashboard').
                                 series.zIndex = 1;
                             break;
                             case 'line':
+                            default:
                                 series.zIndex = 3;
                             break;
                         }
@@ -195,7 +196,7 @@ angular.module('Dashboard').
                             yAxis: i,
                             serieType: self.metrics[i].kpi.format
                         };
-
+                        
                         switch(self.metrics[i].options.shape) {
                             case 'area':
                                 series.zIndex = 0;
@@ -204,7 +205,8 @@ angular.module('Dashboard').
                                 series.zIndex = 1;
                             break;
                             case 'line':
-                                series.zIndex = 2;
+                            default:
+                                series.zIndex = 3;
                             break;
                         }
                         // debugger;
@@ -246,7 +248,7 @@ angular.module('Dashboard').
                         self.chartOptions.series.push(series)
                     }
                 }
-
+                console.log(self.chartOptions)
                 self.refresh();
             };
 

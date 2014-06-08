@@ -174,3 +174,44 @@ section.export-header {
 #box-export section.widget-side.widget-frontside {
     background-color: #F0F0F0;
 }
+
+section#logo-bouncing {
+    height: 190px;
+    width: 125px;
+    margin: 21px auto;
+}
+#logo-bouncing img {
+    height: 100%;
+}
+section.export-head {
+    font-family: Lato;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: rgb(110, 110, 110);
+    font-size: 25px;
+    background-color: rgb(247, 247, 247);
+}
+
+
+/** LOADER **/
+section.widget-side.widget-frontside.loader * {
+    opacity: 0;
+}
+section.widget-side.widget-frontside.loader::before {
+    content: 'loading...';
+    background-image: url(/images/design/loader.gif);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 64px;
+    height: 64px;
+    background-repeat: no-repeat;
+    right: 0px;
+    padding-top: 60px;
+    margin: auto;
+    text-align: center;
+    color: #262338;
+    font-family: Lato;
+}
