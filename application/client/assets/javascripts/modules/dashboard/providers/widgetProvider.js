@@ -31,7 +31,7 @@ angular.module('Dashboard').
                 self.scope = context.scope;
                 self.node = context.node;
 
-                self.limit = self.options.config.limit;
+                self.limit = self.options.config.limit || 0;
 
                 self.sort = self.options.config.sort || {};
 
@@ -120,6 +120,9 @@ angular.module('Dashboard').
                 configuration.metrics = [];
                 configuration.segments = [];
                 configuration.filters = [{}];
+
+                if(self.limit)
+                    configuration.limit = self.limit;
 
                 for(var i = 0; i<self.metrics.length; i++) {
                     options = self.metrics[i].options;
