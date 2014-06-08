@@ -162,6 +162,17 @@
                     <article class="bloc-content"><input type="text" class="config-title" placeholder="title" ng-model="_ddWidgetPie.widget.title"></article>
                 </section>
                 <section class="bloc-tab">
+                    <article class="bloc-title">LIMIT</article>
+                    <article class="bloc-content">
+                        <section class="bloc-selector">
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetPie.widget.limit == 5 }" ng-click="_ddWidgetPie.widget.limit=5">5</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetPie.widget.limit == 10 }" ng-click="_ddWidgetPie.widget.limit=10">10</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetPie.widget.limit == 20 }" ng-click="_ddWidgetPie.widget.limit=20">20</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetPie.widget.limit == 0 }" ng-click="_ddWidgetPie.widget.limit=0">&infin;</article>
+                        </section>
+                    </article>
+                </section>
+                <section class="bloc-tab">
                     <article class="bloc-button" ng-click="WidgetBackSide.delete()">DELETE WIDGET</article>
                 </section>
             </article>
