@@ -23,8 +23,11 @@ provider.get.byEmail = function(email, callback) {
 
 provider.connect = function(email, password, callback) {
 	provider.get.byEmail(email, function(error, user) {
-		var goodPassword = user[0].password ? tools.checkPassword(password, user[0].password, user[0].salt) : false;
-		var userResult = (user[0].activated && goodPassword) ? user : null;
+		var userResult = null;
+		if(user) {
+			var goodPassword = user[0].password ? tools.checkPassword(password, user[0].password, user[0].salt) : false;
+			userResult = (user[0].activated && goodPassword) ? user : null;
+		}
 		callback(error, userResult);
 	});
 }
