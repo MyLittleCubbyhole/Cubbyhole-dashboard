@@ -173,7 +173,7 @@ angular.module('Dashboard').
                                 series.name = moment().month(segment[i] - 1).format('MMMM');
                             break;
                             default:
-                                series.name = numeral(segment[i]).format('$0,0[.]00');
+                                series.name = self.getFormatedValue(segment[i], segmentType);
                             break;
                         }
 
