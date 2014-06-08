@@ -348,6 +348,9 @@ article.bloc-option {
     font-family: Lato;
     cursor: pointer;
 }
+.bloc-selector-sort article.bloc-option {
+    font-size: 16px;
+}
 article.bloc-option:hover {
     background-color: #F2F2F2;
 }

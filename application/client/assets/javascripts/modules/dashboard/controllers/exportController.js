@@ -35,7 +35,6 @@ angular.module('Dashboard').
 
         if($scope._flip)
             $scope._flip.active = function() {
-                console.log('flip')
                 $local.tab = 'data';
                 $scope._flip._active = !$scope._flip._active;
             };

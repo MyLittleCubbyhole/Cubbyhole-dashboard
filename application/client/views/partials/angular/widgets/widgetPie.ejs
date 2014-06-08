@@ -69,6 +69,7 @@
                                     </section>
                                 </grumpy-virgin>
                             </span>
+                            <article class="sort-button" ng-click="_ddWidgetPie.widget.sort.order = _ddWidgetPie.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetPie.widget.sort.name = _ddWidgetPie.widget.metrics[0].kpi.index" ng-class="{ active: !!_ddWidgetPie.widget.sort.name }"><i class="icon-sort-amount-{{_ddWidgetPie.widget.sort.order || 'asc'}}"></i></article>
                         </article>
                     </article>
                 </section>

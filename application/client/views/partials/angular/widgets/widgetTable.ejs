@@ -66,6 +66,7 @@
                                     </section>
                                 </grumpy-virgin>
                             </span>
+                            <article class="sort-button" ng-if="indexKpi < _ddWidgetTable.widget.kpis.length - 1 " ng-click="_ddWidgetTable.widget.sort.order = _ddWidgetTable.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetTable.widget.sort.name = widgetKpi.kpi.index" ng-class="{ active: !!_ddWidgetTable.widget.sort.name && _ddWidgetTable.widget.sort.name == widgetKpi.kpi.index}"><i class="icon-sort-amount-{{_ddWidgetTable.widget.sort.name == widgetKpi.kpi.index ? (_ddWidgetTable.widget.sort.order || 'asc') : 'asc'}}"></i></article>
                         </article>
                     </article>
                 </section>

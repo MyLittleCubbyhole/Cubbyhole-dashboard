@@ -14,7 +14,7 @@ angular.module('Dashboard').
             icon: '/images/widget-icons/icopie.png',
             width: [1],
             height: 3,
-            config: {"metrics":[{"name":"count.user"}],"segments":[{"name":"user.country"}], "limit": 10, "filters": []}
+            config: {"metrics":[{"name":"count.user"}],"segments":[{"name":"user.country"}], "sort": {"name": "count.user", "order": "desc"}, "limit": 10, "filters": []}
         },
         singlenumber: {
             type: 'singlenumber',
@@ -30,7 +30,7 @@ angular.module('Dashboard').
             icon: '/images/widget-icons/icotable.png',
             width: [1,2,3,4],
             height: 5,
-            config: {"metrics":[{"name":"user.age.avg"}, {"name":"count.user"}],"segments":[{"name":"user.country"},{"name":"user.inscriptiondate"}], "sort": {"name": "user.inscriptiondate", "order": "asc"}, "limit": 10, "filters": []}
+            config: {"metrics":[{"name":"user.age.avg"}, {"name":"count.user"}],"segments":[{"name":"user.country"},{"name":"user.inscriptiondate"}], "sort": {"name": "user.inscriptiondate", "order": "desc"}, "limit": 10, "filters": []}
         },
         graph: {
             type: 'graph',
