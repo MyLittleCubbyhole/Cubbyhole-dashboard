@@ -181,7 +181,7 @@ angular.module('Dashboard').
             Widget.prototype.load = function() {
                 var self = this;
                 self.inLoading = true;
-                WidgetFactory(self.scope).getData(self.dashboardId, self.id, function(data) { 
+                WidgetFactory(self.scope).getData(self.dashboardId, self.id, function(data) {
                     self.init(data);
                     self.inLoading = false;
                 })
@@ -219,6 +219,9 @@ angular.module('Dashboard').
                     break;
                     case 'money':
                         val = numeral(val).format('$0,0[.]00');
+                    break;
+                    case 'boolean':
+                        val = val == 1 ? 'oui' : 'non';
                     break;
                 }
 

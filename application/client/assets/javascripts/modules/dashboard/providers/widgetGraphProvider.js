@@ -89,6 +89,12 @@ angular.module('Dashboard').
                                 };
                                 axis = _.uniq(series.data, false);
                             break;
+                            case 'boolean':
+                                self.chartOptions.xAxis.labels.formatter = function() {
+                                   return this.value == 1 ? 'oui' : 'non';
+                                };
+                                axis = _.uniq(series.data, false);
+                            break;
                             case 'bytes':
                                 self.chartOptions.xAxis.labels.formatter = function() {
                                    return numeral(this.value).format('0.0b');
@@ -120,12 +126,6 @@ angular.module('Dashboard').
                                 break;
                                 case 'month':
                                     formated += moment().month(this.x - 1).format('MMMM');
-                                break;
-                                case 'bytes':
-                                    formated += numeral(this.x).format('0.0b');
-                                break;
-                                case 'money':
-                                    formated += numeral(segment[i]).format('$0,0[.]00');
                                 break;
                                 default:
                                     formated += self.getFormatedValue(this.x, axisType);
@@ -172,10 +172,7 @@ angular.module('Dashboard').
                             case 'month':
                                 series.name = moment().month(segment[i] - 1).format('MMMM');
                             break;
-                            case 'bytes':
-                                series.name = numeral(segment[i]).format('0.0b');
-                            break;
-                            case 'money':
+                            default:
                                 series.name = numeral(segment[i]).format('$0,0[.]00');
                             break;
                         }
@@ -238,7 +235,7 @@ angular.module('Dashboard').
                             yAxis: i,
                             serieType: self.metrics[i].kpi.format
                         };
-                        
+
                         switch(self.metrics[i].options.shape) {
                             case 'area':
                                 series.zIndex = 0;
@@ -290,7 +287,6 @@ angular.module('Dashboard').
                         self.chartOptions.series.push(series)
                     }
                 }
-                console.log(self.chartOptions)
                 self.refresh();
             };
 

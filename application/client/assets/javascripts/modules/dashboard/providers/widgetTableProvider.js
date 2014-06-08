@@ -50,14 +50,8 @@ angular.module('Dashboard').
                             case 'month':
                                 row.push( moment().month(data[i][index] - 1).format('MMMM'));
                             break;
-                            case 'bytes':
-                                row.push(self.getFormatedValue(data[i][index], format));
-                            break;
-                            case 'money':
-                                row.push(self.getFormatedValue(data[i][index], format));
-                            break;
                             default:
-                                row.push( data[i][index] );
+                                row.push(self.getFormatedValue(data[i][index], format));
                             break;
                         }
 
@@ -75,14 +69,8 @@ angular.module('Dashboard').
                             case 'month':
                                 row.push( moment().month(data[i][index] - 1).format('MMMM'));
                             break;
-                            case 'bytes':
-                                row.push(self.getFormatedValue(data[i][index], format));
-                            break;
-                            case 'money':
-                                row.push(self.getFormatedValue(data[i][index], format));
-                            break;
                             default:
-                                row.push( data[i][index] );
+                                row.push(self.getFormatedValue(data[i][index], format));
                             break;
                         }
                     }
