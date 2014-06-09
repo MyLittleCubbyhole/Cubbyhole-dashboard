@@ -314,7 +314,46 @@ MysqlTools.query.compare = function(options, callback) {
 
 	query += ' union ' + right;
 
-	console.log(query)
+	var comparison = 'SELECT ';
+
+	for(var i = 0; i < head.length; i++) {
+		if(i > 0)
+			comparison += ', ';
+		comparison += '`' + head[i] + '`';
+	}
+
+	if(head.length > 0 && aliasIndex > 1)
+		comparison += ', ';
+
+	for(var aliasIndex = 1; aliasIndex < options.filters.length; aliasIndex++) {
+
+		if(aliasIndex > 1)
+			comparison += ', ';
+
+		var metricIndex = (options.metrics.length + options.segments.length) * aliasIndex;
+
+		for(var i = 0; i < options.metrics.length; i++) {
+			if(i > 0)
+				comparison += ', ';
+			comparison += '`' + head[metricIndex + i] + '` - `' + head[i] + '` as "' + alias[0] + '-' + head[metricIndex + i] + '_evol' + '"';
+		}
+
+		if(options.metrics.length > 0 && options.segments.length > 0)
+			comparison += ',';
+
+		var segmentIndex = metricIndex + options.metrics.length;
+
+		for(var i = 0; i < options.segments.length; i++) {
+			if(i > 0)
+				comparison += ', ';
+			comparison += '`' + head[segmentIndex + i] + '` - `' + head[i + options.metrics.length] + '` as "' + alias[0] + '-' + head[segmentIndex + i] + '_evol' + '"';
+		}
+
+	}
+
+	query = comparison + ' FROM (' + query + ') as comparison';
+
+	console.log(query);
 
 	Mysql.query(query, function(error, data) {
 		!!callback && callback(error, {head: head, data: data});

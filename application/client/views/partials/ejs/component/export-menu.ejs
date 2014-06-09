@@ -68,7 +68,7 @@
 										<article class="filter-number">{{$index + 1}}</article>
 										<article class="del-btn" ng-if="$index > 0" ng-click="Export.removeFilter($index)"><i class="icon-cross"></i></article>
 									</article>
-									<article class="filter-select" ng-if="Export.filters.length < 4" ng-click="Export.filters.push({operator: 'AND', name: 'Filter ' + (Export.filters.length + 1)})">
+									<article class="filter-select" ng-if="Export.filters.length < 2" ng-click="Export.filters.push({operator: 'AND', name: 'Filter ' + (Export.filters.length + 1)})">
 										<article class="filter-number">+</article>
 									</article>
 								</article>
