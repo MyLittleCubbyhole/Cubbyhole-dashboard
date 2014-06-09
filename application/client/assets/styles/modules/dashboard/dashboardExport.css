@@ -5,6 +5,18 @@ form[form-post-downloader] {
     width: 670px;
 }
 
+#box-export .widget-frontside .close-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 19px;
+    color: rgb(175, 175, 175);
+}
+#box-export .widget-frontside .close-icon:hover {
+    color: rgb(129, 128, 128);
+}
+
 #modal-export .md-content {
     height: 370px;
     padding-bottom: 0;
@@ -29,25 +41,6 @@ form[form-post-downloader] {
     background-size: 90px;
 }
 
-.export-container .export-pdf-image {
-    background-image: url('/images/design/export-pdf.png');
-}
-.export-container .export:hover .export-pdf-image {
-    background-image: url('/images/design/export-pdf-active.png');
-}
-.export-container .export-xml-image {
-    background-image: url('/images/design/export-xml.png');
-}
-.export-container .export:hover .export-xml-image {
-    background-image: url('/images/design/export-xml-active.png');
-}
-.export-container .export-csv-image {
-    background-image: url('/images/design/export-csv.png');
-}
-.export-container .export:hover .export-csv-image {
-    background-image: url('/images/design/export-csv-active.png');
-}
-
 .export-container .export-text {
     display: inline-block;
     position: absolute;
@@ -58,29 +51,41 @@ form[form-post-downloader] {
     font-size: 29px;
 }
 
-
-#modal-export-details .corner-text-save {
-    position: absolute;
-    top: 20px;
-    right: 50px;
-    color: black;
-    cursor: pointer;
+#box-export .widget-side.widget-backside {
+    max-height: 350px;
 }
 
-#modal-export-details .bloc-title {
+#box-export .corner-text-save {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: #454545;
+    color: #DADADA;
+    padding: 10px;
+    border-radius: 3px;
+}
+#box-export .corner-text-save:hover {
+    color: #75c8ef;
+}
+
+#box-export .bloc-title {
     margin-bottom: 10px;
 }
 
-#modal-export-details .bloc-tab-filter .bloc-title {
+#box-export .bloc-tab-filter .bloc-title {
     height: 50px;
 }
 
-#modal-export-details .bloc-title input {
+#box-export .bloc-title input {
     margin-top: 10px;
     padding-left: 5px;
 }
+#box-export .bloc-title input:focus {
+    outline: none;
+}
 
-#modal-export-details .corner.edit {
+#box-export .corner.edit {
     position: absolute;
     top: 0;
     right: 0;
@@ -89,51 +94,54 @@ form[form-post-downloader] {
     cursor: pointer;
 }
 
-#modal-export-details .bloc-panel {
+#box-export .bloc-panel {
     float: left;
-    width: 58px;
+    width: 63px;
     height: 306px;
-    border-right: 1px solid #c4c4c4;
 }
-#modal-export-details .filter-select {
-    color: black;
+#box-export .filter-select {
     font-size: 22px;
     padding: 13px;
-    border-top: 1px solid #C4C4C4;
     text-align: center;
     position: relative;
     cursor: pointer;
+    background: #F5F5F5;
+    color: #A8A8A8;
+    border-radius: 3px;
+    margin-top: 6px;
+    margin-left: 5px;
+    border: 1px solid #fff;
 }
-#modal-export-details .filter-select .filter-number-active {
-    font-weight: bold;
+#box-export .filter-select:hover {
+    color: #75c8ef;
+}
+#box-export .filter-select-active {
+    border: 1px solid #CACACA;
 }
 
-#modal-export-details .filter-select .del-btn {
+#box-export .filter-select .del-btn {
     position: absolute;
     top: 0px;
     right: 0px;
-    font-size: 20px;
+    font-size: 16px;
 }
 
-#modal-export-details .filter-select:first-child {
-    border-top: 0;
+#box-export .bloc-tab-filter {
+    margin-left: 74px;
 }
-#modal-export-details .bloc-tab-filter {
-    margin-left: 71px;
-}
-#modal-export-details .widget-back-tab-filters {
+#box-export .widget-back-tab-filters {
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 10px;
 }
-#modal-export-details .mCSB_container {
+#box-export .mCSB_container {
     margin-right: 0px;
 }
-#modal-export-details .mCustomScrollBox>.mCSB_scrollTools {
+#box-export .mCustomScrollBox>.mCSB_scrollTools {
     width: 6px;
 }
 
-#modal-export-details .bloc-tab-filter {
+#box-export .bloc-tab-filter {
     overflow: auto;
     max-height: 240px;
 }

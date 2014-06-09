@@ -22,6 +22,10 @@ article.widget-back-head {
     cursor: pointer;
     background-color: #F3F3F3;
 }
+.nav-pills article.pill.back {
+    background-color: #F5F5F5;
+    border: 1px solid #CACACA;
+}
 .nav-pills .pill i {
     position: absolute;
     left: 13px;
@@ -48,7 +52,7 @@ article.widget-back-tab {
 }
 section.bloc-tab {
     min-height: 70px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 article.bloc-title {
     height: 30px;
@@ -79,6 +83,11 @@ article.bloc-content-option {
     display: inline-block;
     top: 0px;
     min-width: 71px;
+    overflow: hidden;
+}
+.bloc-content-option > span:nth-child(3) {
+    max-width: 120px;
+    margin-right: 0px;
 }
 .bloc-content-option > span.no-close {
     padding-right: 10px;
@@ -125,6 +134,7 @@ article.graph-type:hover {
 article.bloc-content-option.filter {
     margin-bottom: 2px;
     border-radius: 3px;
+    position: relative;
 }
 .bloc-content-option > span {
     background-color: #454545;

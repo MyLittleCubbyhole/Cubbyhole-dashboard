@@ -54,7 +54,7 @@ angular.module('Tools').
             contextualizeCss(false);
         }
 
-		return function($node, name) {
+		return function($node, name, callback) {
 			var elements;
 			name = name || '';
 
@@ -129,6 +129,7 @@ angular.module('Tools').
 
                         pdf.save('export_'+ name +'.pdf')
                         recover(elements);
+                        callback.call(this);
                     }
                 }
             });

@@ -1,25 +1,31 @@
-<section id="box-export"  ng-show="Dashboard.exportModalVisible" ng-cloak modal>
+<section id="box-export" ng-show="Dashboard.exportModalVisible" ng-cloak modal>
 	<section class="widget-content export-content" flip ng-class="{rotated: _flip._active}">
 		<section ng-controller="ExportController">
 			<section class="widget-side widget-frontside">
 				<section class="export-head">CHOOSE YOUR EXPORT METHOD</section>
+				<i class="close-icon icon-cross" ng-click="Dashboard.exportModalLocked || _modal.close();"></i>
 				<section id="logo-bouncing"><img src="/images/design/snuffen.png" alt="logo"></section>
 				<section class="export-container">
-					<article class="export export-pdf" ng-click="Dashboard.capture();">
+					<article class="export export-pdf" ng-click="Dashboard.exportModalLocked || _flip.active() && Dashboard.exportModalLocked || Export.capture();">
 						<span class="export-text">PDF</span>
 					</article>
-					<article class="export export-xml" ng-click="_flip.active();">
+					<article class="export export-xml" ng-click="Dashboard.exportModalLocked || _flip.active() && Dashboard.exportModalLocked || Export.showExportDetails('xml')">
 						<span class="export-text">XML</span>
 					</article>
-					<article class="export export-csv" ng-click="_flip.active();">
+					<article class="export export-csv" ng-click="Dashboard.exportModalLocked || _flip.active() && Dashboard.exportModalLocked || Export.showExportDetails('csv')">
 						<span class="export-text">CSV</span>
 					</article>
 				</section>
 			</section>
-            <section class="widget-side widget-backside">
+			<section class="widget-side widget-backside loader" ng-show="Export.inProgress">
+			</section>
+            <section class="widget-side widget-backside" ng-if="!Export.inProgress">
 				<section class="export-container-details">
 					<article class="widget-back-head">
 						<nav class="nav-pills">
+							<article ng-click="_flip.active();" class="pill back">
+								<i class="icon-back"></i><span class="pill-name"></span>
+							</article>
 							<article ng-click="Export.tab = 'data'" ng-class="{active: Export.tab == 'data'}" class="pill">
 								<i class="icon-earth"></i><span class="pill-name">DATA</span>
 							</article>
@@ -28,9 +34,6 @@
 							</article>
 						</nav>
 						<article class="corner-text-save" ng-click="Export.save();">EXPORT</article>
-						<article class="corner edit">
-							<i class="close-icon icon-cross" ng-click="_flip.active();"></i>
-						</article>
 					</article>
 					<article class="widget-back-body">
 						<section id="widget-back-switch" ng-switch on="Export.tab">
@@ -61,8 +64,8 @@
 							</article>
 							<article class="widget-back-tab widget-back-tab-filters nodrag" ng-switch-when="filters">
 								<article class="bloc-panel">
-									<article class="filter-select" ng-repeat="filter in Export.filters track by $index" ng-click="Export.currentFilter = $index">
-										<article class="filter-number" ng-class="{'filter-number-active': Export.currentFilter == $index}">{{$index + 1}}</article>
+									<article class="filter-select" ng-class="{'filter-select-active': Export.currentFilter == $index}" ng-repeat="filter in Export.filters track by $index" ng-click="Export.currentFilter = $index">
+										<article class="filter-number">{{$index + 1}}</article>
 										<article class="del-btn" ng-if="$index > 0" ng-click="Export.removeFilter($index)"><i class="icon-cross"></i></article>
 									</article>
 									<article class="filter-select" ng-if="Export.filters.length < 4" ng-click="Export.filters.push({operator: 'AND', name: 'Filter ' + (Export.filters.length + 1)})">
@@ -160,4 +163,4 @@
 			<form-post-downloader></form-post-downloader>
 		</section>
 	</section>
-</section>	
+</section>

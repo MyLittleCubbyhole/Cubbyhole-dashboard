@@ -27,7 +27,9 @@ article.del-btn {
     display: inline-block;
     color: #B6B6B6;
     cursor: pointer;
-    margin-left: 5px;
+    padding-left: 5px;
+    position: absolute;
+    top: 7px;
 }
 
 article.del-btn:hover {

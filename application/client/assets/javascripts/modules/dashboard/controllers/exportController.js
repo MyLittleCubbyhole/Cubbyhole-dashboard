@@ -1,5 +1,5 @@
 angular.module('Dashboard').
-    controller('ExportController', ['$scope', 'QUERY_BUILDER', 'OPERATORS', 'OPERATORS_NAME', function($scope, QUERY_BUILDER, OPERATORS, OPERATORS_NAME){
+    controller('ExportController', ['$scope', 'QUERY_BUILDER', 'OPERATORS', 'OPERATORS_NAME', 'CaptureService', function($scope, QUERY_BUILDER, OPERATORS, OPERATORS_NAME, CaptureService){
         var $local = $scope.Export = {};
 
         $local.tab = '';
@@ -14,6 +14,7 @@ angular.module('Dashboard').
         $local.currentFilter = 0;
 
         $local.exportUrl = {};
+        $local.inProgress = false;
         $local.configuration = {};
 
         var kpi;
@@ -38,6 +39,11 @@ angular.module('Dashboard').
                 $local.tab = 'data';
                 $scope._flip._active = !$scope._flip._active;
             };
+
+        $scope.$on('hide_export_modal', function() {
+            if($scope._flip)
+                $scope._flip._active = false;
+        });
 
         $local.showExportDetails = function(fileType) {
             $local.exportUrl = '/api/export/' + fileType;
@@ -170,10 +176,19 @@ angular.module('Dashboard').
             $local.configuration = $local._save();
             angular.element('form input').val(JSON.stringify($local.configuration));
 
-            console.log($local.configuration);
-
             $scope.$broadcast('start_post_download');
         };
+
+        $local.capture = function() {
+            var $board = angular.element('.dd-board');
+            $scope.Dashboard.exportModalLocked = true;
+            $local.inProgress = true;
+            CaptureService($board, $scope.Dashboard.currentDashboard.title, function() {
+                $scope._flip._active = false;
+                $scope.Dashboard.exportModalLocked = false;
+                $local.inProgress = false;
+            });
+        }
 
         $scope.toString = function() {
             return 'Export';

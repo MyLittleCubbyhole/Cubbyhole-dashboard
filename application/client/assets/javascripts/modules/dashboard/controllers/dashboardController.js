@@ -1,5 +1,5 @@
 angular.module('Dashboard').
-    controller('DashboardController', ['$scope', '$location', '$routeParams', 'DashboardFactory', 'CaptureService', function($scope, $location, $routeParams, DashboardFactory, CaptureService){
+    controller('DashboardController', ['$scope', '$location', '$routeParams', 'DashboardFactory', function($scope, $location, $routeParams, DashboardFactory){
         var $local = $scope.Dashboard = {}
 
         $local.dashboards = [];
@@ -7,9 +7,13 @@ angular.module('Dashboard').
         $local.lockRouteChange = false;
 
         $local.exportModalVisible = false;
+        $local.exportModalLocked = false;
 
         $scope.$on('hide', function() {
-            $local.exportModalVisible = false;
+            if(!$local.exportModalLocked) {
+                $local.exportModalVisible = false;
+                $scope.$broadcast('hide_export_modal');
+            }
         });
 
         function getDashboards(callback) {
@@ -77,11 +81,6 @@ angular.module('Dashboard').
                     $local.currentDashboard = $local.dashboards[0];
                 }
             })
-        }
-
-        $local.capture = function() {
-            var $board = angular.element('.dd-board');
-            CaptureService($board, $local.currentDashboard.title);
         }
 
         $local.showExportModal = function() {
