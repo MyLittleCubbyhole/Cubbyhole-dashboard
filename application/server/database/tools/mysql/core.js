@@ -294,7 +294,6 @@ MysqlTools.query.compare = function(options, callback) {
 	var right = query;
 
 
-
 	for(var aliasIndex = 0; aliasIndex<options.filters.length; aliasIndex++) {
 
 		if(aliasIndex > 0) {
@@ -352,8 +351,6 @@ MysqlTools.query.compare = function(options, callback) {
 	}
 
 	query = comparison + ' FROM (' + query + ') as comparison';
-
-	console.log(query);
 
 	Mysql.query(query, function(error, data) {
 		!!callback && callback(error, {head: head, data: data});
