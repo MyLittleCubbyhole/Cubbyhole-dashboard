@@ -104,7 +104,6 @@ article.bloc-content-option {
 section.graph-selector {
     display: inline-block;
     position: relative;
-    top: 10px;
     margin-left: 10px;
 }
 article.graph-type {
@@ -147,6 +146,8 @@ section[dd-width="1"] .bloc-content-option.filter > span {
     display: block;
     margin-bottom: 4px;
     text-align: center;
+    max-width: none;
+    margin-right: -5px;
 }
 section[dd-width="1"] .bloc-content-option {
     position: relative;
@@ -393,6 +394,7 @@ article.sort-button {
     border-radius: 2px;
     line-height: 20px;
     color: #B7B7B7;
+    overflow: hidden;
 }
 article.sort-button:hover {
     color: #949494;

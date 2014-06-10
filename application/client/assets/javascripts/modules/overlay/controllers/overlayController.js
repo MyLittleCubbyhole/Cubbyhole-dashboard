@@ -5,12 +5,16 @@ angular.module('Overlay').
         $local.activated = false;
         $local.pusherOpen = false;
 
+        $local.locked = false;
+
         $scope.$on('enable_overlay', function() { $local.activated = true; });
 
         $local.clickout = function() {
-            $local.activated = false;
-            $local.pusherOpen = false;
-            $scope.$broadcast('hide');
+            if(!$local.locked) {
+                $local.activated = false;
+                $local.pusherOpen = false;
+                $scope.$broadcast('hide');
+            }
         }
 
         $scope.toString = function() {

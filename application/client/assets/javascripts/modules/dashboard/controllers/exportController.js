@@ -183,10 +183,14 @@ angular.module('Dashboard').
             var $board = angular.element('.dd-board');
             $scope.Dashboard.exportModalLocked = true;
             $local.inProgress = true;
+            $scope.Overlay.locked = true;
             CaptureService($board, $scope.Dashboard.currentDashboard.title, function() {
                 $scope._flip._active = false;
-                $scope.Dashboard.exportModalLocked = false;
-                $local.inProgress = false;
+                setTimeout(function() {
+                    $scope.Overlay.locked = false;
+                    $scope.Dashboard.exportModalLocked = false;
+                    $local.inProgress = false;
+                }, 2000);
             });
         }
 
