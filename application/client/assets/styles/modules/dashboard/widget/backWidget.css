@@ -146,6 +146,8 @@ section[dd-width="1"] .bloc-content-option.filter > span {
     display: block;
     margin-bottom: 4px;
     text-align: center;
+    max-width: none;
+    margin-right: -5px;
 }
 section[dd-width="1"] .bloc-content-option {
     position: relative;
