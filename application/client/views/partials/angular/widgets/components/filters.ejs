@@ -1,0 +1,66 @@
+<span grumpy-ui grumpy-position="bottom" grumpy-align="left">
+    {{filter.kpi.formattedAlias}}
+    <grumpy-virgin class="bounceIn">
+        <section class="filter-kpi-box" scroll-bar>
+            <section ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index" ng-init="kpistatus = false">
+                <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+                <section class="kpi-list" ng-class="{ open: kpistatus}">
+                    <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="filter.kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == filter.kpi.index }">
+                        {{kpi.formattedAlias}}
+                    </article>
+                </section>
+            </section>
+        </section>
+    </grumpy-virgin>
+</span>
+<span grumpy-ui grumpy-position="bottom" grumpy-align="center">
+    {{WidgetBackSide.operatorsName[filter.operator]}}
+    <grumpy-virgin class="bounceIn">
+        <section  class="filter-kpi-box operators"  scroll-bar>
+            <article class="operator-row" ng-repeat="(index, operator) in WidgetBackSide.operators track by $index" ng-class="{ active: index == filter.operator }" ng-init="inflection = false">
+                <article class="kpi-category" >
+                    <article class="operator-title" ng-click="filter.operator = operator.op; _grumpyUi.close();">
+                        {{operator.name}}
+                    </article>
+                    <i class="open-sub-dir icon-arrow-down" ng-class="{ 'icon-arrow-up': inflection, 'icon-arrow-down': !inflection }" ng-click="inflection = !inflection"></i>
+                </article>
+                <section class="kpi-list" ng-class="{ open: inflection}">
+                    <article ng-repeat="inflection in operator.inflections track by $index" class="kpi" ng-click="filter.operator = inflection.op; _grumpyUi.close();" ng-class="{ active: inflection.op == filter.operator }">
+                        {{inflection.name}}
+                    </article>
+                </section>
+
+            </article>
+        </section>
+    </grumpy-virgin>
+</span>
+<span grumpy-ui grumpy-position="bottom" grumpy-align="right">
+    <span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : filter.value[0] + ' AND ' + filter.value[1]}}</span>
+    <span ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : 'ARRAY'}}</span>
+    <span ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">{{ typeof(filter.value[0]) != 'undefined' && filter.value[0] != '' ? filter.value[0] : 'VALUE' }}</span>
+    <grumpy-virgin class="bounceIn">
+        <section class="filter-value-box">
+            <section class="input-boxes" scroll-bar>
+                <article class="values-in" ng-class="{'input-date': filter.kpi.format == 'date'}" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="((filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex < 2) || (filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN' && valueIndex < 1) || filter.operator == 'IN' || filter.operator == 'NOT IN'">
+                    <article class="separator">
+                        <span ng-if="(filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex == 1">AND</span>
+                    </article>
+                    <input type="text" placeholder="value" ng-class="{'input-date': filter.kpi.format != 'date'}" ng-model="filter.value[valueIndex]">
+                    <article class="del-btn" ng-click="filter.value.splice(valueIndex, 1);" ng-if="valueIndex > 1"><i class="icon-cross"></i></article>
+                        <article class="cal-btn" ng-class="{'cal-btn-only': valueIndex < 2}" ng-if="filter.kpi.format != 'date'" grumpy-ui grumpy-position="right" grumpy-align="center">
+                            <i class="icon-calendar"></i>
+                            <grumpy-virgin class="bounceIn">
+                                <section class="calendar-relative-picker">
+                                    <article class="btn cubby-btn button-calendar" ng-click="">NOW</article>
+                                    <article class="btn cubby-btn button-calendar" ng-click="">SUB</article>
+                                    <article class="btn cubby-btn button-calendar" ng-click="">ADD</article>
+                                    <input type="text" placeholder="value" ng-model="">
+                                </section>
+                            </grumpy-virgin>
+                        </article>
+                </article>
+            </section>
+            <article class="btn cubby-btn button-add" ng-click="filter.value.push('')" ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN')">ADD</article>
+        </section>
+    </grumpy-virgin>
+</span>

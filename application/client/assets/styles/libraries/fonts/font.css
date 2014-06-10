@@ -107,3 +107,6 @@
 .icon-profile-male:before {
 	content: "\e040";
 }
+.icon-calendar:before {
+	content: "\e616";
+}

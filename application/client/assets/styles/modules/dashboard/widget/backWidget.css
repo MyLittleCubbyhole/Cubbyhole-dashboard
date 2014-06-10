@@ -286,7 +286,8 @@ section.filter-value-box {
     overflow: hidden;
     max-height: 135px;
 }
-.filter-value-box input {
+.filter-value-box input,
+.calendar-relative-picker input {
     background-color: #303030;
     outline: none;
     padding-left: 10px;
@@ -295,6 +296,10 @@ section.filter-value-box {
     color: #ccc;
     border-radius: 2px;
     line-height: 30px;
+}
+.filter-value-box input.input-date {
+    padding-right: 30px;
+    width: 161px;
 }
 .filter-value-box .separator {
     text-align: center;
@@ -313,6 +318,32 @@ section.filter-value-box {
 .filter-value-box .values-in .del-btn:hover {
     color: #DADADA;
 }
+
+.calendar-relative-picker {
+    height: 90px;
+    width: 200px;
+    padding: 10px;
+}
+
+.calendar-relative-picker .button-calendar {
+    font-family: 'Lato';
+    display: inline-block;
+    width: 55px;
+    float: left;
+    margin: 0 !important;
+}
+.calendar-relative-picker .button-calendar:first-child {
+    margin-right: 15px !important;
+}
+.calendar-relative-picker .button-calendar:last-child {
+    border-left: none;
+}
+
+.calendar-relative-picker input {
+    margin-top: 8px;
+    width: 100%;
+}
+
 .filter-value-box .button-add {
     margin-right: 0 !important;
     margin-left: 0 !important;

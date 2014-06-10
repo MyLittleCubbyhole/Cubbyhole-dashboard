@@ -32,8 +32,21 @@ article.del-btn {
     top: 7px;
 }
 
+article.cal-btn {
+    display: inline-block;
+    color: #B6B6B6;
+    cursor: pointer;
+    padding-left: 5px;
+    position: absolute;
+    top: 9px;
+    right: 17px;
+    font-size: 16px;
+}
 article.del-btn:hover {
     color: #8D8D8D;
+}
+article.cal-btn:hover {
+    color: #DADADA;
 }
 
 section[dd-width="1"] .add-filter.btn.cubby-btn {
