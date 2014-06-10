@@ -104,7 +104,6 @@ article.bloc-content-option {
 section.graph-selector {
     display: inline-block;
     position: relative;
-    top: 10px;
     margin-left: 10px;
 }
 article.graph-type {
@@ -393,6 +392,7 @@ article.sort-button {
     border-radius: 2px;
     line-height: 20px;
     color: #B7B7B7;
+    overflow: hidden;
 }
 article.sort-button:hover {
     color: #949494;
