@@ -90,20 +90,35 @@ MysqlTools.query.generate = function(options) {
 
 				name = options.filters[i].conditions[j].name;
 
-				switch(options.filters[i].conditions[j].operator.toUpperCase()) {
-					case 'BETWEEN':
-					case 'NOT BETWEEN':
-						value = options.filters[i].conditions[j].value.join(' AND ');
-					break;
-					case 'IN':
-					case 'NOT IN':
-						value = '("' + options.filters[i].conditions[j].value.join('","') + '")';
-					break;
-					default:
-						value = '"' + options.filters[i].conditions[j].value + '"';
-					break;
+				if(typeof options.filters[i].conditions[j].value != 'object')					
+					switch(options.filters[i].conditions[j].operator.toUpperCase()) {
+						case 'BETWEEN':
+						case 'NOT BETWEEN':
+							for(var val in options.filters[i].conditions[j].value)
+								options.filters[i].conditions[j].value[val].toString().replace(/[^\sa-zA-z0-9\_\-]/, '');
+							value = options.filters[i].conditions[j].value.join(' AND ');
+						break;
+						case 'IN':
+						case 'NOT IN':
+							for(var val in options.filters[i].conditions[j].value)
+								options.filters[i].conditions[j].value[val].toString().replace(/[^\sa-zA-z0-9\_\-]/, '');
+							value = '("' + options.filters[i].conditions[j].value.join('","') + '")';
+						break;
+						default:
+							value = '"' + options.filters[i].conditions[j].value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') + '"';
+						break;
+					}
+				else {
+					value = 'NOW()';
+					switch(options.filters[i].conditions[j].value.apply) {
+						case 'ADD': 
+							value = 'DATE_SUB(NOW(), INTERVAL '+ options.filters[i].conditions[j].value.value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
+						break;
+						case 'SUB': 
+							value = 'DATE_SUB(NOW(), INTERVAL '+ options.filters[i].conditions[j].value.value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
+						break;
+					}
 				}
-
 
 				if(queryBuilder['kpi_definition'][name].group) {
 					if(!queries[i].having)
