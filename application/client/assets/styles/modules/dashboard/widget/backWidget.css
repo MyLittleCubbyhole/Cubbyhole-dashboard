@@ -286,7 +286,8 @@ section.filter-value-box {
     overflow: hidden;
     max-height: 135px;
 }
-.filter-value-box input {
+.filter-value-box input,
+.calendar-relative-picker input {
     background-color: #303030;
     outline: none;
     padding-left: 10px;
@@ -295,6 +296,23 @@ section.filter-value-box {
     color: #ccc;
     border-radius: 2px;
     line-height: 30px;
+}
+.calendar-relative-picker input[disabled] {
+    background-color: #B1B1B1;
+    color: #FFF !important;
+}
+.calendar-relative-picker input[disabled]::-webkit-input-placeholder {
+    color: #FFF;
+}
+.calendar-relative-picker input[disabled]::-moz-placeholder {
+    color: #FFF;
+}
+.calendar-relative-picker input[disabled]:-ms-input-placeholder {
+    color: #FFF;
+}
+.filter-value-box input.input-date {
+    padding-right: 39px;
+    width: 161px;
 }
 .filter-value-box .separator {
     text-align: center;
@@ -313,6 +331,42 @@ section.filter-value-box {
 .filter-value-box .values-in .del-btn:hover {
     color: #DADADA;
 }
+
+.calendar-relative-picker {
+    height: 90px;
+    width: 200px;
+    padding: 10px;
+}
+
+.calendar-relative-picker .button-calendar {
+    font-family: 'Lato';
+    display: inline-block;
+    width: 55px;
+    float: left;
+    margin: 0 !important;
+    background-color: white;
+    color: black !important;
+}
+.calendar-relative-picker .button-calendar.active {
+    background-color: #303030;
+    color: #ccc !important;
+}
+.calendar-relative-picker .button-calendar:hover {
+    background-color: rgb(255, 255, 255) !important;
+    color: #303030 !important;
+}
+.calendar-relative-picker .button-calendar:first-child {
+    margin-right: 15px !important;
+}
+.calendar-relative-picker .button-calendar:nth-child(3) {
+    border-left: none;
+}
+
+.calendar-relative-picker input {
+    margin-top: 8px;
+    width: 100%;
+}
+
 .filter-value-box .button-add {
     margin-right: 0 !important;
     margin-left: 0 !important;

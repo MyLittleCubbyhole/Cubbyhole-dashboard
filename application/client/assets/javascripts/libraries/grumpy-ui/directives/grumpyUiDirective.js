@@ -22,7 +22,7 @@ angular.module('Grumpy-ui').
 					self.$overlay.bind('click', function(event) {
 						event.stopPropagation();
 						event.preventDefault();
-						
+
 						$rootScope.$broadcast('grumpy-ui-hide-child');
 						$local.scrolling(true);
 					})
@@ -45,8 +45,10 @@ angular.module('Grumpy-ui').
 				}
 
 				$local.closeChildren = function($event) {
-					$event.stopPropagation();
-					$event.preventDefault();
+					if(!!$event) {
+						$event.stopPropagation();
+						$event.preventDefault();
+					}
 					self.initiator = true;
 					$scope.$parent.$broadcast('grumpy-ui-hide-child');
 				}
@@ -79,7 +81,7 @@ angular.module('Grumpy-ui').
 					self.initiator = false;
 				})
 
-				$node.bind('click', function(event) {					
+				$node.bind('click', function(event) {
 					event.stopPropagation();
 					event.preventDefault();
 					self.initiator = true;

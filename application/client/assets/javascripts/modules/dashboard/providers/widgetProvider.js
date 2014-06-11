@@ -53,7 +53,7 @@ angular.module('Dashboard').
                 self.filters.push({conditions: [], operator: 'AND'});
 
                 if(self.options.config.filters)
-                    if(self.options.config.filters[0] && self.options.config.filters[0].conditions)
+                    if(self.options.config.filters[0] && self.options.config.filters[0].conditions) {
                         for(var i = 0; i<self.options.config.filters[0].conditions.length; i++) {
                             self.filters[0].operator = self.options.config.filters[0].operator || 'AND';
                             self.filters[0].conditions.push({
@@ -61,7 +61,10 @@ angular.module('Dashboard').
                                 operator: self.options.config.filters[0].conditions[i].operator,
                                 value: self.options.config.filters[0].conditions[i].value
                             });
+                            if(self.filters[0].conditions[self.filters[0].conditions.length - 1].value.length < 2)
+                                self.filters[0].conditions[self.filters[0].conditions.length - 1].value.push('0');
                         }
+                    }
 
                 self.scope.$on('widget_refresh', function() { self.refresh(); })
             };
