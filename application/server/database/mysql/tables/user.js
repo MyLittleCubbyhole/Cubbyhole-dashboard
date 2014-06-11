@@ -24,7 +24,7 @@ provider.get.byEmail = function(email, callback) {
 provider.connect = function(email, password, callback) {
 	provider.get.byEmail(email, function(error, user) {
 		var userResult = null;
-		if(user) {
+		if(user[0]) {
 			var goodPassword = user[0].password ? tools.checkPassword(password, user[0].password, user[0].salt) : false;
 			userResult = (user[0].activated && goodPassword) ? user : null;
 		}
@@ -34,8 +34,10 @@ provider.connect = function(email, password, callback) {
 
 provider.connectById = function(id, password, callback) {
 	provider.get.byId(id, function(error, user) {
-		var goodPassword = user[0].password ? tools.checkPassword(password, user[0].password, user[0].salt) : false;
-		var userResult = (user[0].activated && goodPassword) ? user[0] : null;
+		if(user[0]) {
+			var goodPassword = user[0].password ? tools.checkPassword(password, user[0].password, user[0].salt) : false;
+			var userResult = (user[0].activated && goodPassword) ? user[0] : null;
+		}
 		callback(error, userResult);
 	});
 }
