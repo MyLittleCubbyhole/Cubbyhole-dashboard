@@ -54,6 +54,7 @@ module.exports = function(grunt) {
                     "application/client/assets/javascripts/modules/config/core.js",
                     "application/client/assets/javascripts/modules/config/constants/configConstants.js",
                     "application/client/assets/javascripts/modules/tools/core.js",
+                    "application/client/assets/javascripts/modules/tools/directives/datePickerDirective.js",
                     "application/client/assets/javascripts/modules/tools/directives/focusDirective.js",
                     "application/client/assets/javascripts/modules/tools/directives/modalDirective.js",
                     "application/client/assets/javascripts/modules/tools/directives/scrollBarDirective.js",

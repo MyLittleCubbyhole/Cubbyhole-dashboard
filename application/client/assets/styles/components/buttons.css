@@ -19,6 +19,11 @@ article.btn.cubby-btn:hover {
     background-color: rgb(124, 181, 236);
     color: white;
 }
+article.btn.cubby-btn.disabled:hover {
+    background-color: white;
+    color: #333;
+    cursor: default;
+}
 article.btn.cubby-btn.tiny {
     width: 130px;
 }
@@ -41,6 +46,9 @@ article.cal-btn {
     top: 9px;
     right: 17px;
     font-size: 16px;
+}
+article.cal-btn.cal-btn-between{
+    top: 31px;
 }
 article.del-btn:hover {
     color: #8D8D8D;

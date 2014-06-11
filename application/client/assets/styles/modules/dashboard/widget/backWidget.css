@@ -297,8 +297,21 @@ section.filter-value-box {
     border-radius: 2px;
     line-height: 30px;
 }
+.calendar-relative-picker input[disabled] {
+    background-color: #B1B1B1;
+    color: #FFF !important;
+}
+.calendar-relative-picker input[disabled]::-webkit-input-placeholder {
+    color: #FFF;
+}
+.calendar-relative-picker input[disabled]::-moz-placeholder {
+    color: #FFF;
+}
+.calendar-relative-picker input[disabled]:-ms-input-placeholder {
+    color: #FFF;
+}
 .filter-value-box input.input-date {
-    padding-right: 30px;
+    padding-right: 39px;
     width: 161px;
 }
 .filter-value-box .separator {
@@ -331,11 +344,21 @@ section.filter-value-box {
     width: 55px;
     float: left;
     margin: 0 !important;
+    background-color: white;
+    color: black !important;
+}
+.calendar-relative-picker .button-calendar.active {
+    background-color: #303030;
+    color: #ccc !important;
+}
+.calendar-relative-picker .button-calendar:hover {
+    background-color: rgb(255, 255, 255) !important;
+    color: #303030 !important;
 }
 .calendar-relative-picker .button-calendar:first-child {
     margin-right: 15px !important;
 }
-.calendar-relative-picker .button-calendar:last-child {
+.calendar-relative-picker .button-calendar:nth-child(3) {
     border-left: none;
 }
 

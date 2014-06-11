@@ -110,3 +110,9 @@
 .icon-calendar:before {
 	content: "\e616";
 }
+.icon-chevron-right:before {
+	content: "\e617";
+}
+.icon-chevron-left:before {
+	content: "\e618";
+}

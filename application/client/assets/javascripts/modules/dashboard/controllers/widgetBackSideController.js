@@ -81,8 +81,46 @@ angular.module('Dashboard').
             $widgetScope.widget.filters[0].conditions.push({
                 kpi: QUERY_BUILDER['count.user'],
                 operator: '>',
-                value: [0, 0]
+                value: ['0', '0']
             })
+        }
+        $local.getValueToShow = function(filterIndex, valueIndex) {
+            var value = $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex];
+            var valueToShow = value;
+            if(typeof value == 'object') {
+                valueToShow = value.name;
+                if(value.apply != '')
+                    valueToShow += (value.apply == 'SUB' ? '-' : '+') + value.value + 'DAYS';
+            }
+            return valueToShow;
+        }
+        $local.switchDateNow = function(filterIndex, valueIndex) {
+            if($widgetScope.widget.filters[0].conditions[filterIndex] && $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] !== undefined) {
+                if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] == 'object')
+                    $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] = '0';
+                else
+                    $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] = {
+                        name: 'NOW',
+                        apply: '',
+                        value: '0'
+                    };
+            }
+        }
+        $local.switchDateAdd = function(filterIndex, valueIndex, type) {
+            if($widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].name) {
+                if($widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply == type)
+                    $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply = '';
+                else
+                    if(type == 'SUB')
+                        $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply = 'SUB';
+                    else
+                        $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply = 'ADD';
+            }
+        }
+        $local.transformDateValues = function(filterIndex, kpi) {
+            for(var i = 0; i < $widgetScope.widget.filters[0].conditions[filterIndex].value.length; i++)
+                if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[i] == 'object' && kpi.format != 'date')
+                    $widgetScope.widget.filters[0].conditions[filterIndex].value[i] = '0';
         }
         $local.addMetric = function(options) {
             options = angular.extend({ name: QUERY_BUILDER['count.user'].index}, options);

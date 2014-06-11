@@ -39,7 +39,7 @@ angular.module('Grumpy-ui').
 							top: GrumpyPosition($scope, {local: $localUi}).top($grumpyNode, self.node)
 						}
 
-						if(!enable)						
+						if(!enable)
 							$grumpyNode.css(options).removeClass('active');
 						else
 							$grumpyNode.css(options).addClass('active');
@@ -50,5 +50,5 @@ angular.module('Grumpy-ui').
 				}
 			}
 		};
-	}]); 
+	}]);
 

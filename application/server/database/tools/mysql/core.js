@@ -87,37 +87,72 @@ MysqlTools.query.generate = function(options) {
 
 			for(var j = 0; j<options.filters[i].conditions.length; j++) {
 
-
 				name = options.filters[i].conditions[j].name;
 
-				if(typeof options.filters[i].conditions[j].value != 'object')					
-					switch(options.filters[i].conditions[j].operator.toUpperCase()) {
-						case 'BETWEEN':
-						case 'NOT BETWEEN':
-							for(var val in options.filters[i].conditions[j].value)
-								options.filters[i].conditions[j].value[val].toString().replace(/[^\sa-zA-z0-9\_\-]/, '');
-							value = options.filters[i].conditions[j].value.join(' AND ');
-						break;
-						case 'IN':
-						case 'NOT IN':
-							for(var val in options.filters[i].conditions[j].value)
-								options.filters[i].conditions[j].value[val].toString().replace(/[^\sa-zA-z0-9\_\-]/, '');
-							value = '("' + options.filters[i].conditions[j].value.join('","') + '")';
-						break;
-						default:
+				switch(options.filters[i].conditions[j].operator.toUpperCase()) {
+					case 'BETWEEN':
+					case 'NOT BETWEEN':
+						for(var val in options.filters[i].conditions[j].value) {
+							var valueTemp = '';
+							if(typeof options.filters[i].conditions[j].value[val] != 'object')
+								valueTemp = '"' + options.filters[i].conditions[j].value[val].toString().replace(/[^\sa-zA-z0-9\_\-]/, '') + '"';
+							else {
+								valueTemp = 'NOW()';
+								switch(options.filters[i].conditions[j].value[val].apply) {
+									case 'ADD':
+										valueTemp = 'DATE_ADD(NOW(), INTERVAL '+ options.filters[i].conditions[j].value[val].value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
+									break;
+									case 'SUB':
+										valueTemp = 'DATE_SUB(NOW(), INTERVAL '+ options.filters[i].conditions[j].value[val].value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
+									break;
+								}
+							}
+							value += valueTemp;
+							if(val < options.filters[i].conditions[j].value.length - 1)
+								value += ' AND ';
+						}
+					break;
+					case 'IN':
+					case 'NOT IN':
+						value = '(';
+						for(var val in options.filters[i].conditions[j].value) {
+							var valueTemp = '';
+
+							if(typeof options.filters[i].conditions[j].value[val] != 'object')
+								valueTemp = '"' + options.filters[i].conditions[j].value[val].toString().replace(/[^\sa-zA-z0-9\_\-]/, '') + '"';
+							else {
+								valueTemp = 'NOW()';
+								switch(options.filters[i].conditions[j].value[val].apply) {
+									case 'ADD':
+										valueTemp = 'DATE_ADD(NOW(), INTERVAL '+ options.filters[i].conditions[j].value[val].value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
+									break;
+									case 'SUB':
+										valueTemp = 'DATE_SUB(NOW(), INTERVAL '+ options.filters[i].conditions[j].value[val].value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
+									break;
+								}
+							}
+
+							value += valueTemp;
+							if(val < options.filters[i].conditions[j].value.length - 1)
+								value +=  ',';
+						}
+						value += ')';
+					break;
+					default:
+						if(typeof options.filters[i].conditions[j].value[0] != 'object')
 							value = '"' + options.filters[i].conditions[j].value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') + '"';
-						break;
-					}
-				else {
-					value = 'NOW()';
-					switch(options.filters[i].conditions[j].value.apply) {
-						case 'ADD': 
-							value = 'DATE_SUB(NOW(), INTERVAL '+ options.filters[i].conditions[j].value.value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
-						break;
-						case 'SUB': 
-							value = 'DATE_SUB(NOW(), INTERVAL '+ options.filters[i].conditions[j].value.value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
-						break;
-					}
+						else {
+							value = 'NOW()';
+							switch(options.filters[i].conditions[j].value[0].apply) {
+								case 'ADD':
+									value = 'DATE_ADD(NOW(), INTERVAL '+ options.filters[i].conditions[j].value[0].value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
+								break;
+								case 'SUB':
+									value = 'DATE_SUB(NOW(), INTERVAL '+ options.filters[i].conditions[j].value[0].value.toString().replace(/[^\sa-zA-z0-9\_\-]/, '') +' DAY)';
+								break;
+							}
+						}
+					break;
 				}
 
 				if(queryBuilder['kpi_definition'][name].group) {
@@ -205,6 +240,8 @@ MysqlTools.query.generate = function(options) {
 
 	for(var i = 0; i<queries.length; i++)
 		queries[i] = queries[i].request + (queries[i].union ? ' UNION ' + queries[i].unionQuery + queries[i].unionOrderer : '' );
+
+	console.log(queries.length > 1 ? queries : queries[0])
 
 	return queries.length > 1 ? queries : queries[0];
 }
@@ -366,6 +403,8 @@ MysqlTools.query.compare = function(options, callback) {
 	}
 
 	query = comparison + ' FROM (' + query + ') as comparison';
+
+	console.log(query)
 
 	Mysql.query(query, function(error, data) {
 		!!callback && callback(error, {head: head, data: data});
