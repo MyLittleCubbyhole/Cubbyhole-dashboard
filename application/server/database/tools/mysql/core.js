@@ -48,7 +48,8 @@ MysqlTools.query.generate = function(options) {
 	,	request = 'SELECT '
 	,	tables = []
 	,	union = false
-	,	name = '';
+	,	name = ''
+	,	names = {};
 
 	if(!options.metrics || !options.segments)
 		throw 'invalid configuration';
@@ -57,6 +58,10 @@ MysqlTools.query.generate = function(options) {
 
 	for(var i = 0; i < options.metrics.length; i++) {
 		name = options.metrics[i].name;
+		if(!!names[name])
+			continue;
+
+		names[name] = true;
 		if(i > 0)
 			request += ',';
 		request += queryBuilder['kpi_definition'][name].apply + ' as ' + queryBuilder['kpi_definition'][name].alias + ' ';
@@ -68,6 +73,10 @@ MysqlTools.query.generate = function(options) {
 
 	for(var i = 0; i < options.segments.length; i++) {
 		name = options.segments[i].name;
+		if(!!names[name])
+			continue;
+		
+		names[name] = true;
 		if(i > 0)
 			request += ',';
 		request += queryBuilder['kpi_definition'][name].apply + ' as ' + queryBuilder['kpi_definition'][name].alias + ' ';
@@ -267,7 +276,8 @@ MysqlTools.query.compare = function(options, callback) {
 	,	started = 0
 	,	currentAlias
 	,	head = []
-	,	alias = [];
+	,	alias = []
+	,	names = [];
 
 	if(typeof queries == 'string')
 		queries = [queries];
@@ -285,6 +295,10 @@ MysqlTools.query.compare = function(options, callback) {
 
 		for(var i = 0; i < options.metrics.length; i++) {
 			name = options.metrics[i].name;
+			if(names[name])
+				continue;
+			
+			names[name] = true;
 			if(i > 0)
 				query += ',';
 			head.push(alias[aliasIndex] + '-' + queryBuilder['kpi_definition'][name].alias);
@@ -296,6 +310,10 @@ MysqlTools.query.compare = function(options, callback) {
 
 		for(var i = 0; i < options.segments.length; i++) {
 			name = options.segments[i].name;
+			if(names[name])
+				continue;
+			
+			names[name] = true;
 			if(i > 0)
 				query += ',';
 			head.push(alias[aliasIndex] + '-' + queryBuilder['kpi_definition'][name].alias);
