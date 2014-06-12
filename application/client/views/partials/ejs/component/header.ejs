@@ -5,9 +5,6 @@
             <article id="logo-title" class="google-font hidden-xs">Cubbyhole</article>
         </section>
         <section class="menu pull-right" ng-controller="AuthenticationController" ng-cloak>
-            <article class="option nav" ng-if="!Authentication.user.firstname" ng-click="Home.showLoginModal()">
-                <span class="label">LOG IN</span>
-            </article>
             <article class="option authentication" ng-if="Authentication.user.firstname">
                 <section class="button-profile" ng-click="Authentication.open();">
                     <article class="img-circle image-target" ng-style="Authentication.stylePhoto" ng-class="{'form-file-preview': Authentication.user.photo && Authentication.user.photo != 'null'}">

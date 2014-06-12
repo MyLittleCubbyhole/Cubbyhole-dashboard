@@ -1,8 +1,7 @@
-<section class="md-modal md-effect-1 google-font" id="modal-login" ng-controller="LoginController" ng-class="{'md-show': Home.showModalLogin === true}" ng-cloak modal>
+<section class="md-modal google-font md-show" id="modal-login" ng-controller="LoginController" ng-cloak>
     <section class="md-content">
         <article>
             <section>
-                <i class="close-icon icon-cross" ng-click="_modal.close()"></i>
                 <section class="login-container" scroll-bar>
                     <form name="form" ng-submit="Login.authenticate(form.$valid)" class="form" novalidate>
 
