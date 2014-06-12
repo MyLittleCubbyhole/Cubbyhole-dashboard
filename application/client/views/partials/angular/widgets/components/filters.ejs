@@ -37,7 +37,7 @@
 <span grumpy-ui grumpy-position="bottom" grumpy-align="right">
     <span ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : WidgetBackSide.getValueToShow(filterIndex, 0) + ' AND ' + WidgetBackSide.getValueToShow(filterIndex, 1)}}</span>
     <span ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'">{{filter.value[0] == '' && filter.value[1] == '' ? 'VALUE' : 'ARRAY'}}</span>
-    <span ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">{{ typeof(filter.value[0]) != 'undefined' && filter.value[0] != '' ? WidgetBackSide.getValueToShow(filterIndex, 0) : 'VALUE' }}</span>
+    <span ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'">{{filter.value[0] != '' ? WidgetBackSide.getValueToShow(filterIndex, 0) : 'VALUE' }}</span>
     <grumpy-virgin class="bounceIn">
         <section class="filter-value-box">
             <section class="input-boxes" scroll-bar>

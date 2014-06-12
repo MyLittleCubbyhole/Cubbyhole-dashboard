@@ -150,7 +150,7 @@
                         </label>
                     </article>
                     <article class="bloc-content">
-                        <article class="bloc-content-option filter" ng-repeat="filter in _ddWidgetGraph.widget.filters[0].conditions track by $index">
+                        <article class="bloc-content-option filter" ng-repeat="(filterIndex, filter) in _ddWidgetGraph.widget.filters[0].conditions track by $index">
 
                             <%- include components/filters.ejs %>
 
