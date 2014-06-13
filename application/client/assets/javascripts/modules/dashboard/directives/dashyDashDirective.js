@@ -193,6 +193,7 @@ angular.module('Dashboard').
                         ,   widgetWidth = $local.widgets[widgetId].size.width ? $local.widgets[widgetId].size.width : dashydashWidth
                         ,   parameters = [ $this, ( widgetWidth > self.options.col ? 1 : widgetWidth ), dashydashHeight ];
 
+                        console.log($local.widgets[widgetId].size.width)
                         if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
                             $local.locked = false;
                             parameters.push(

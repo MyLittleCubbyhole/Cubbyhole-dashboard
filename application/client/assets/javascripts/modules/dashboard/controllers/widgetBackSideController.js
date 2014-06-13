@@ -59,6 +59,8 @@ angular.module('Dashboard').
             size = size || {};
             $widgetScope.widget.resize(size);
 
+            _.extend($scope._dashydash.widgets[$widgetScope.id].size, size);
+
             if(resizeKpisArray) {
                 var nbToRemove = $widgetScope.widget.kpis.length - (size.width * 2 + 1)
                 ,   indexToRemove = $widgetScope.widget.kpis.length - 1;
