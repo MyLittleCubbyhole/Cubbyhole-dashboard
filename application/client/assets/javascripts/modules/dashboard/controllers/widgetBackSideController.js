@@ -123,10 +123,9 @@ angular.module('Dashboard').
         }
 
         /**
-         * [switchDateNow description]
-         * @param  {[type]} filterIndex [description]
-         * @param  {[type]} valueIndex  [description]
-         * @return {[type]}             [description]
+         * date type case => use the sql now function
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
          */
         $local.switchDateNow = function(filterIndex, valueIndex) {
             if($widgetScope.widget.filters[0].conditions[filterIndex] && $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] !== undefined) {
@@ -140,6 +139,13 @@ angular.module('Dashboard').
                     };
             }
         }
+
+        /**
+         * date type case => use sql date sub and date add
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         * @param  {string} type  method
+         */
         $local.switchDateAdd = function(filterIndex, valueIndex, type) {
             if($widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].name) {
                 if($widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply == type)
