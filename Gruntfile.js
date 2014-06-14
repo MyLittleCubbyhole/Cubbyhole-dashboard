@@ -106,7 +106,6 @@ module.exports = function(grunt) {
                     "application/client/assets/javascripts/modules/dashboard/directives/ddWidgetPieDirective.js",
                     "application/client/assets/javascripts/modules/dashboard/directives/ddWidgetTableDirective.js",
                     "application/client/assets/javascripts/modules/dashboard/directives/ddWidgetMapDirective.js",
-                    "application/client/assets/javascripts/modules/dashboard/providers/exportProvider.js",
                     "application/client/assets/javascripts/modules/dashboard/providers/widgetProvider.js",
                     "application/client/assets/javascripts/modules/dashboard/providers/widgetGraphProvider.js",
                     "application/client/assets/javascripts/modules/dashboard/providers/widgetMapProvider.js",
