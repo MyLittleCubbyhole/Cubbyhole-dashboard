@@ -10,14 +10,30 @@ angular.module('Authentication').
 
             var prototype = {};
 
+            /**
+             * get the current loaded user
+             * @return {Object} User
+             */
             prototype.get = function() {
                 return _user;
             };
 
+            /**
+             * set new informations to the current user
+             * @param {Object} user User
+             */
             prototype.set = function(user) {
                 angular.extend(_user, user);
             };
 
+            /**
+             * Authenticate the user to the web Api
+             * and set the loaded user to the local storage|session storage
+             * in order to use it later
+             * @param  {Object}   user       User
+             * @param  {Boolean}   rememberMe manage the saving container - session or local
+             * @param  {Function} callback  
+             */
             prototype.login = function(user, rememberMe, callback) {
                 $http.post('/api/auth', user).
                 success(function(data, status, headers, config) {
@@ -41,6 +57,9 @@ angular.module('Authentication').
                 });
             };
 
+            /**
+             * disconnect the user and remove him from the storages
+             */
             prototype.logout = function() {
                 var user = prototype.get();
                 if(user.token) {

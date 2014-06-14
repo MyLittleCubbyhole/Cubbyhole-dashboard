@@ -1,4 +1,5 @@
 angular.module('Authentication').
+    //manage all the client-server queries and add to them some params like token 
     factory('AuthenticationFactory', ['$window', '$q', function($window, $q) {
         return {
             request: function(config) {
@@ -18,9 +19,7 @@ angular.module('Authentication').
                 return config || $q.when(config);
             },
             responseError: function(response) {
-                if (response.status === 401) {
-                    //$window.location = $window.location.protocol + "//" + $window.location.host + "/authentication#/login";
-                }
+                if (response.status === 401) {}
                 return response || $q.when(response);
             }
         };

@@ -9,6 +9,9 @@ angular.module('Dashboard').
         $local.exportModalVisible = false;
         $local.exportModalLocked = false;
 
+        /**
+         * LISTENER - Hide the export popup when triggered
+         */
         $scope.$on('hide', function() {
             if(!$local.exportModalLocked) {
                 $local.exportModalVisible = false;
@@ -16,6 +19,11 @@ angular.module('Dashboard').
             }
         });
 
+        /**
+         * initialize the dashboard list and the current dashboard
+         * in order to use them in the managed view
+         * @param  {Function} callback
+         */
         function getDashboards(callback) {
             DashboardFactory($scope).all(function(data) {
                 for(var i = 0; i < data.length; i++)
@@ -26,6 +34,11 @@ angular.module('Dashboard').
             })
         }
 
+        /**
+         * LISTENER - triggered when a route angular is setted
+         * - if the routing doesnt contains the dashboard id, the angular view is reloaded
+         * - else juste set the current user and load the angular view
+         */
         $scope.$on('$routeChangeSuccess', function() {
 
             var next = function() {
@@ -66,6 +79,10 @@ angular.module('Dashboard').
 
         });
 
+        /**
+         * delete the selected dashboard and all his widgets
+         * @param  {Object} $event Angular Event
+         */
         $local.delete = function($event) {
             if($event) {
                 $event.stopPropagation();
@@ -83,6 +100,9 @@ angular.module('Dashboard').
             })
         }
 
+        /**
+         * display the export modal
+         */
         $local.showExportModal = function() {
             $scope.Overlay.activated = true;
             $local.exportModalVisible = true;

@@ -40,15 +40,26 @@ angular.module('Dashboard').
                 $scope._flip._active = !$scope._flip._active;
             };
 
+        /**
+         * LISTNER - Hide the export modal when called
+         */
         $scope.$on('hide_export_modal', function() {
             if($scope._flip)
                 $scope._flip._active = false;
         });
 
+        /**
+         * set the export url 
+         * @param  {string} fileType
+         */
         $local.showExportDetails = function(fileType) {
             $local.exportUrl = '/api/export/' + fileType;
         };
 
+        /**
+         * add a condition to the selected export filter
+         * @param {integer} index index of the targeted filter
+         */
         $local.addCondition = function(index) {
             if(!$local.filters[index].conditions)
                 $local.filters[index].conditions = [];
@@ -59,6 +70,12 @@ angular.module('Dashboard').
             });
         };
 
+        /**
+         * format the value in order to display it in the managed view
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         * @return {string}             formatted string
+         */
         $local.getValueToShow = function(filterIndex, valueIndex) {
             var value = $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex];
             var valueToShow = value;
@@ -69,6 +86,13 @@ angular.module('Dashboard').
             }
             return valueToShow;
         }
+
+        /**
+         * manage the formatting value string to object - object to string
+         * Date case
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         */
         $local.switchDateNow = function(filterIndex, valueIndex) {
             if($local.filters[$local.currentFilter].conditions[filterIndex] && $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex] !== undefined) {
                 if(typeof $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex] == 'object')
@@ -81,6 +105,15 @@ angular.module('Dashboard').
                     };
             }
         }
+
+
+        /**
+         * manage the day manipulation in case of complexe value
+         * Date case 
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         * @param  {string} type        manipulation type {ADD | SUB}
+         */
         $local.switchDateAdd = function(filterIndex, valueIndex, type) {
             if($local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].name) {
                 if($local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].apply == type)
@@ -92,12 +125,22 @@ angular.module('Dashboard').
                         $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].apply = 'ADD';
             }
         }
+
+        /**
+         * initialize the object value into 0 when a native kpi is selected
+         * @param  {integer} filterIndex filter index
+         * @param  {Object} kpi         Kpi
+         */
         $local.transformDateValues = function(filterIndex, kpi) {
             for(var i = 0; i < $local.filters[$local.currentFilter].conditions[filterIndex].value.length; i++)
                 if(typeof $local.filters[$local.currentFilter].conditions[filterIndex].value[i] == 'object' && kpi.format != 'date')
                     $local.filters[$local.currentFilter].conditions[filterIndex].value[i] = '0';
         }
 
+        /**
+         * remove a filter
+         * @param  {integer} index index
+         */
         $local.removeFilter = function(index) {
             if(index == $local.currentFilter)
                 $local.currentFilter = index - 1;
@@ -105,6 +148,10 @@ angular.module('Dashboard').
             $local.filters.splice(index, 1);
         }
 
+        /**
+         * [addKpi description]
+         * @param {[type]} kpiIndex [description]
+         */
         $local.addKpi = function(kpiIndex) {
             options = { name: QUERY_BUILDER['count.user'].index};
             $local.selectedKpis[kpiIndex] = {
@@ -116,16 +163,30 @@ angular.module('Dashboard').
 
         $local.addKpi(0);
 
+        /**
+         * select a new kpi
+         * @param  {integer} kpiIndex kpi index
+         * @param  {integer} kpi      Kpi
+         */
         $local.changeKpi = function(kpiIndex, kpi) {
             $local.selectedKpis[kpiIndex] = {};
             $local.selectedKpis[kpiIndex].kpi = kpi;
             $local.selectedKpis[kpiIndex].options = {};
         };
+
+        /**
+         * remove a Kpi
+         * @param  {integer} kpiIndex Kpi index
+         */
         $local.removeKpi = function(kpiIndex) {
             $local.selectedKpis.splice(kpiIndex, 1);
         };
 
-        $local._formatFilters = function() {
+        /**
+         * manage the filter condition values
+         * format in case of between on in operator to an array of value 
+         */
+        $local.formatFilters = function() {
             for(var i = 0; i < $local.filters.length; i++)
                 if($local.filters[i].conditions)
                     for(var j = 0; j < $local.filters[i].conditions.length; j++) {
@@ -169,7 +230,10 @@ angular.module('Dashboard').
                     }
         }
 
-        $local._save = function() {
+        /**
+         * save the export configuration in to order to send it later
+         */
+        $local.save = function() {
             var configuration = {filters: []}
             ,   options;
             configuration.metrics = [];
@@ -185,7 +249,7 @@ angular.module('Dashboard').
                         configuration.segments.push(options);
                 }
 
-            $local._formatFilters();
+            $local.formatFilters();
 
             for(var i = 0; i < $local.filters.length; i++) {
                 configuration.filters.push({});
@@ -207,17 +271,15 @@ angular.module('Dashboard').
                 if(!configuration.filters[i].conditions || !configuration.filters[i].conditions.length)
                     configuration.filters.splice(i, 1);
 
-            return configuration;
-
-        };
-
-        $local.save = function() {
-            $local.configuration = $local._save();
+            $local.configuration = configuration;
             angular.element('form input').val(JSON.stringify($local.configuration));
 
             $scope.$broadcast('start_post_download');
         };
 
+        /**
+         * call the capturing service and generate a screen shot of the current dashboard
+         */
         $local.capture = function() {
             var $board = angular.element('.dd-board');
             $scope.Dashboard.exportModalLocked = true;

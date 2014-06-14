@@ -10,6 +10,12 @@ angular.module('Authentication').
 
         $local.errorLogin = false;
 
+        /**
+         * called when submitting form
+         * call the authenticate method from the authentication factory
+         * and save the current user in the chossen storage
+         * @param  {Boolean} isValid form validity
+         */
         $local.authenticate = function(isValid) {
             localStorage.removeItem("user");
             sessionStorage.removeItem("user");

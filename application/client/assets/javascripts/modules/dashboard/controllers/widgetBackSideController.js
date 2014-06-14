@@ -12,6 +12,10 @@ angular.module('Dashboard').
         $local.metrics = {};
 
         if($scope._flip)
+            /**
+             * override the active function of the flip directive
+             * manage back widget activation and the first tab initializing
+             */
             $scope._flip.active = function() {
                 $local.tab = 'data';
                 $scope._flip._active = !$scope._flip._active;
@@ -46,6 +50,9 @@ angular.module('Dashboard').
             }
         }
 
+        /**
+         * save the new widget configuration and disable the flip
+         */
         $local.save = function() {
             $scope._flip._active = !$scope._flip._active;
             $local.tab = '';
@@ -54,6 +61,11 @@ angular.module('Dashboard').
             $scope._dashydash.serialize();
         }
 
+        /**
+         * resize the current widget and update the dashydash widget definition
+         * @param  {Object} size            widget size
+         * @param  {Boolean} resizeKpisArray manage the amount of kpis selectable
+         */
         $local.resize = function(size, resizeKpisArray) {
             resizeKpisArray = resizeKpisArray || false;
             size = size || {};
@@ -75,10 +87,16 @@ angular.module('Dashboard').
             }
         }
 
+        /**
+         * delete a widget
+         */
         $local.delete = function() {
             $widgetScope.widget.delete();
         }
 
+        /**
+         * add a new filter to the current widget
+         */
         $local.addFilter = function() {
             $widgetScope.widget.filters[0].conditions.push({
                 kpi: QUERY_BUILDER['count.user'],
@@ -86,6 +104,13 @@ angular.module('Dashboard').
                 value: ['0', '0']
             })
         }
+
+        /**
+         * format the value in order to display it in the managed view
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         * @return {string}             formatted string
+         */
         $local.getValueToShow = function(filterIndex, valueIndex) {
             var value = $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex];
             var valueToShow = value;
@@ -96,6 +121,13 @@ angular.module('Dashboard').
             }
             return valueToShow;
         }
+
+        /**
+         * [switchDateNow description]
+         * @param  {[type]} filterIndex [description]
+         * @param  {[type]} valueIndex  [description]
+         * @return {[type]}             [description]
+         */
         $local.switchDateNow = function(filterIndex, valueIndex) {
             if($widgetScope.widget.filters[0].conditions[filterIndex] && $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] !== undefined) {
                 if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] == 'object')

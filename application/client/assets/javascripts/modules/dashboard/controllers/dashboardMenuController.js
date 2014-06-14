@@ -4,6 +4,10 @@ angular.module('Dashboard').
 
         $local.icons = DASHBOARD_ICONS;
 
+        /**
+         * location routing - navigate to an other dashboard
+         * @param  {string} location path
+         */
         $local.location = function(location) {
             $scope.Dashboard.lockRouteChange = false;
             $location.path('/' + location);
