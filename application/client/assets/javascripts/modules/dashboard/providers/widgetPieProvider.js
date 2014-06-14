@@ -11,6 +11,9 @@ angular.module('Dashboard').
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
 
                 var self = this
@@ -77,6 +80,9 @@ angular.module('Dashboard').
                 this.refresh();
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {
                 var self = this;
                 this.node.find('.widget-front-body').highcharts(this.chartOptions);

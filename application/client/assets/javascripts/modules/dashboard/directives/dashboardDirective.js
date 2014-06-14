@@ -9,6 +9,9 @@ angular.module('Dashboard').
                 var $local = $scope._dashboard = {}
                 ,   self = this;
 
+                /**
+                 * manage the dashboard edit mode
+                 */
                 $local.edit = function() {
                     if($local.isSelected) {
                         $local.dashboard.editMode = true;
@@ -17,11 +20,20 @@ angular.module('Dashboard').
                     }
                 }
 
+                /**
+                 * return true if the current widget is selected
+                 * @return {Boolean} isSelected
+                 */
                 $local.isSelected = function() {
                     return $scope.Dashboard.currentDashboard.id == $local.dashboard.id
                 }
 
-                $local.validEdit = function(event) {
+                /**
+                 * create or update a new dashboard
+                 * managed in the dashboard left menu
+                 * @param  {Object} $event Angular Event
+                 */
+                $local.validEdit = function($event) {
                     var keyCode = event ? event.keyCode : -1;
                     if(keyCode == 13 || keyCode == -1) {
                         $local.dashboard.editMode = false;
@@ -50,6 +62,9 @@ angular.module('Dashboard').
                     }
                 };
 
+                /**
+                 * cancel the edition mode of the current dashboard
+                 */
                 $local.cancelEdit = function() {
                     $local.dashboard.editMode = false;
                     $local.dashboard.title = $local.oldTitle;
@@ -74,6 +89,9 @@ angular.module('Dashboard').
                         break;
                     }
 
+                /**
+                 * LISTENER - triggered when tu current dashboard is update or initialized
+                 */
                 $scope.$watch('Dashboard.currentDashboard', function() {
                     if(!$local.isSelected() && $local.dashboard.editMode) {
                         $local.dashboard.editMode = false;

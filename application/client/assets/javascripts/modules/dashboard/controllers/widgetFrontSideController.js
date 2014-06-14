@@ -6,6 +6,11 @@ angular.module('Dashboard').
 
 		$local.inLoading = false;
 
+        /**
+         * LISTENER - triggered when the widget is loaded
+         * update the inLoading attribute in order to display or not the loader
+         * @param  {Boolean} value inLoading status
+         */
 		$scope.$watch(widgetScopeName + '.widget.inLoading', function(value) {
 			$local.inLoading = !!value;
 		})

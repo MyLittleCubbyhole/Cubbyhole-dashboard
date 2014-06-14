@@ -27,6 +27,9 @@ angular.module('Dashboard').
 				var $local = $scope._formPostDownloader
 				,	template = '<iframe name="downloadFrame" id="downloadIFrame" style="display: none;" src="" />';
 
+				/**
+				 * download the targeted export thanks to the current generate form
+				 */
 				$local.download = function() {
 					angular.element('#downloadIFrame').remove();
 					angular.element('body').append(template);

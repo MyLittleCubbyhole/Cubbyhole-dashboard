@@ -2,6 +2,11 @@ angular.module('Tools').
     service('CaptureService', function(){
 
         var $body = angular.element('body');
+
+        /**
+         * manage the activation of the capturing class
+         * @param  {Boolean} activate 
+         */
         function contextualizeCss(activate) {
 
             if(activate === false)
@@ -10,6 +15,11 @@ angular.module('Tools').
                 $body.addClass('capturing');
         }
 
+        /**
+         * convert all svgs node into canvas
+         * @param  {Object} $node Angular node
+         * @return {Array}       converted elements
+         */
         function convertSVGs($node) {
             var SVGs = $node.find('svg')
             ,   elements = {
@@ -43,6 +53,10 @@ angular.module('Tools').
 
         }
 
+        /**
+         * recover the svgs elements
+         * @param  {Array} elements array of svgs node
+         */
         function recover(elements) {
 
             for(var i = 0; i<elements.toRemove.length; i++)

@@ -12,6 +12,9 @@ angular.module('Dashboard').
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
                 var self = this
                 ,   datatype
@@ -80,6 +83,9 @@ angular.module('Dashboard').
 
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype._save = function() {
                 var configuration = {}
                 ,   options
@@ -121,6 +127,9 @@ angular.module('Dashboard').
                 return configuration;
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {}
 
             Widget.prototype.toString = function() {

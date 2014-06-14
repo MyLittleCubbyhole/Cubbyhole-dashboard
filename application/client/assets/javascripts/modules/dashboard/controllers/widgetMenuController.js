@@ -4,6 +4,11 @@ angular.module('Dashboard').
 
         $local.widgets = WIDGET_TYPE;
 
+        /**
+         * create a new widget and append it to the current dashboard
+         * @param  {Object} widget Widget configuration
+         * @param  {integer} width  base width
+         */
         $local.create = function(widget, width) {
             var definition = {
                 size: {

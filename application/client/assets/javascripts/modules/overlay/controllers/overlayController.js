@@ -7,6 +7,9 @@ angular.module('Overlay').
 
         $local.locked = false;
 
+        /**
+         * LISTNER - active the overlay when triggered
+         */
         $scope.$on('enable_overlay', function() { $local.activated = true; });
 
         $local.clickout = function() {

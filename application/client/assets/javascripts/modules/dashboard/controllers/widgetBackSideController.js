@@ -157,11 +157,22 @@ angular.module('Dashboard').
                         $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply = 'ADD';
             }
         }
+
+        /**
+         * initialize all value defined as object with a type different from date
+         * @param  {integer} filterIndex filter index
+         * @param  {Object} kpi         Kpi
+         */
         $local.transformDateValues = function(filterIndex, kpi) {
             for(var i = 0; i < $widgetScope.widget.filters[0].conditions[filterIndex].value.length; i++)
                 if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[i] == 'object' && kpi.format != 'date')
                     $widgetScope.widget.filters[0].conditions[filterIndex].value[i] = '0';
         }
+
+        /**
+         * add a new metric to the current configuration
+         * @param {Object} options Kpi Options
+         */
         $local.addMetric = function(options) {
             options = angular.extend({ name: QUERY_BUILDER['count.user'].index}, options);
             $widgetScope.widget.metrics.push({
@@ -169,6 +180,11 @@ angular.module('Dashboard').
                 options: options
             })
         }
+
+        /**
+         * add a new segment to current configuration
+         * @param {Object} options Kpi options
+         */
         $local.addSegment = function(options) {
             options = angular.extend({ name: QUERY_BUILDER['user.country'].index}, options);
             $widgetScope.widget.segments.push({
@@ -176,6 +192,11 @@ angular.module('Dashboard').
                 options: options
             })
         }
+
+        /**
+         * add a new kpi to the current configuration
+         * @param {Object} options Kpi Options
+         */
         $local.addKpi = function(kpiIndex) {
             options = { name: QUERY_BUILDER['count.user'].index};
             $widgetScope.widget.kpis[kpiIndex] = {
@@ -184,6 +205,12 @@ angular.module('Dashboard').
             }
             $local.addMetric();
         }
+
+        /**
+         * add the selected kpi to the good array
+         * @param  {integer} kpiIndex kpi index
+         * @param  {Object} kpi      Kpi
+         */
         $local.changeKpi = function(kpiIndex, kpi) {
             if(kpi.type == "metric")
                 $widgetScope.widget.metrics.push({
@@ -199,6 +226,12 @@ angular.module('Dashboard').
             $local.removeKpi(kpiIndex, false);
             $widgetScope.widget.kpis[kpiIndex].kpi = kpi;
         }
+
+        /**
+         * remove the kpi from the current configuration
+         * @param  {integer} kpiIndex kpi index
+         * @param  {Boolean} clean    remove all option
+         */
         $local.removeKpi = function(kpiIndex, clean) {
             clean = clean || false;
             for(var i = $widgetScope.widget.metrics.length - 1; i >= 0 ; i--)

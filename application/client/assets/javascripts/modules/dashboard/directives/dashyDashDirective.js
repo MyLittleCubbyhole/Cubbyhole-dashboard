@@ -26,8 +26,13 @@ angular.module('Dashboard').
                 self.options = {};
 
 
-                //**************** gestion d'event ****************//
+                //**************** Events management ****************//
 
+                /**
+                 * LISTENER - create a new widget when triggered
+                 * @param  {Object} scope      Angular scope
+                 * @param  {Object} definition widget definition
+                 */
                 $scope.$on('create_widget', function(scope, definition) {
                     var options = {};
                     _.merge(options, WIDGET_DEFAULT_DEFINITION, definition);
@@ -37,17 +42,30 @@ angular.module('Dashboard').
                     })
                 });
 
+                /**
+                 * LISTENER - delete the selected widget
+                 * @param  {Object} scope   Angular Scope
+                 * @param  {Object} options widget options
+                 */
                 $scope.$on('delete_widget', function(scope, options) {
                     delete $local.widgets[options.id];
                     self.deleteWidget(options.node);
                 });
 
+                /**
+                 * LISTENER - resize the selected widget
+                 * @param  {Object} scope   Angular Scope
+                 * @param  {Object} options widget options
+                 */
                 $scope.$on('resize_widget', function(scope, options) {
                     self.resizeWidget(options.node, options.size, options.callback);
                 });
 
                 //**************** dashydash management ****************//
 
+                /**
+                 * serialize the current dashboard configuration
+                 */
                 $local.serialize = function() {
                     var currentAmountOfColumn = DashboardOptimizeService.amountOfColumn()
                     if(DASHYDASH_SETTINGS.columns.xs != currentAmountOfColumn) {
@@ -57,11 +75,21 @@ angular.module('Dashboard').
                     }
                 }
 
+                /**
+                 * remove the widget node
+                 * @param  {Object} $node angular node
+                 */
                 self.deleteWidget = function($node) {
                     self.dashydash.remove_widget($node);
                     $local.serialize();
                 }
 
+                /**
+                 * resize the widget selected
+                 * @param  {Object}   node     Angular node
+                 * @param  {Object}   size     widget size - width & height
+                 * @param  {Function} callback 
+                 */
                 self.resizeWidget = function(node, size, callback) {
                     self.dashydash.resize_widget( node, size.width, size.height, function() {
                         $local.serialize();
@@ -69,6 +97,11 @@ angular.module('Dashboard').
                     });
                 }
 
+                /**
+                 * instanciate and add a new widget to the current dashboard
+                 * @param {Object}   definition widget definition
+                 * @param {Function} callback 
+                 */
                 self.addWidget = function(definition, callback) {
                     var options = {}
                     ,   currentAmountOfColumn = DashboardOptimizeService.amountOfColumn();
@@ -115,6 +148,10 @@ angular.module('Dashboard').
                 if(!attributes.dashydash)
                     throw 'dashydash property cannot be empty';
 
+                /**
+                 * LISTNER - called when a dashboard is selected
+                 * @param  {Object} definition dashboard definition
+                 */
                 $scope.$watch(attributes.dashydash, function(definition) {
                     if(!definition.id)
                         return false;
@@ -136,8 +173,14 @@ angular.module('Dashboard').
 
                 //**************** widgets management ****************//
 
+                /**
+                 * destroy the current instance of dashyDash
+                 */
                 function destroy() { self.dashydash && self.dashydash.destroy(true, true, false); }
 
+                /**
+                 * generate a new dashydash grid
+                 */
                 function build() {
                     if($node.width() == self.options.width)
                         return true;
@@ -164,11 +207,18 @@ angular.module('Dashboard').
                     linked = true;
                 }
 
+                /**
+                 * throttle the dashydash grid building
+                 */
                 function buildDelayed() {
                     window.clearTimeout(self.throttleTimer);
                     self.throttleTimer = window.setTimeout(build, 500);
                 }
 
+                /**
+                 * dump all currents dashboard widgets into a pool node 
+                 * in order to save them from the dashydash destruction
+                 */
                 function copyWidgetInPool() {
                     $board.find('.dd-widget').each(function() {
                         var $this = angular.element(this);
@@ -183,6 +233,9 @@ angular.module('Dashboard').
                     })
                 }
 
+                /**
+                 * retrieve all widget nodes from the pool
+                 */
                 function reloadFromPool() {
 
                     $pool.find('.dd-widget').each(function() {

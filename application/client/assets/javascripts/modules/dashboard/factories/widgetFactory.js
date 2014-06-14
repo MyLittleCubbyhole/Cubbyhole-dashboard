@@ -12,6 +12,12 @@ angular.module('Dashboard').
             ,   $local = context.local || {}
             ,   controller = context.controller || {};
 
+            /**
+             * create a new widget and append it to the selected dashboard
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {Object}   definition  widget definition
+             * @param  {Function} callback    
+             */
             prototype.create = function(dashboardId, definition, callback) {
 
                 $http({ method: 'POST', url: '/api/dashboards/' + dashboardId + '/widgets', data: definition }).
@@ -19,6 +25,12 @@ angular.module('Dashboard').
                     error(function() { console.error('an error occured during the widget creation'); });
             };
 
+            /**
+             * remove the widget from the dashboard
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {integer}   widgetId    wdiget id
+             * @param  {Function} callback    
+             */
             prototype.remove = function(dashboardId, widgetId, callback) {
 
                 $http({ method: 'DELETE', url: '/api/dashboards/' + dashboardId + '/widgets/' + widgetId}).
@@ -27,6 +39,12 @@ angular.module('Dashboard').
 
             };
 
+            /**
+             * retrieve a widget from the database
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {integer}   widgetId    widget id
+             * @param  {Function} callback    
+             */
             prototype.get = function(dashboardId, widgetId, callback) {
 
                 $http({ method: 'GET', url: '/api/dashboards/' + dashboardId + '/widgets/' + widgetId }).
@@ -34,6 +52,11 @@ angular.module('Dashboard').
                     error(function() { console.error('an error occured during the widget recuperation'); });
             };
 
+            /**
+             * retrieve a widget from the database thanks to the dashboard id
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {Function} callback    
+             */
             prototype.getByDashboardId = function(dashboardId, callback) {
 
                 $http({ method: 'GET', url: '/api/dashboards/' + dashboardId + '/widgets' }).
@@ -41,6 +64,12 @@ angular.module('Dashboard').
                     error(function() { console.error('an error occured during the widget recuperation'); });
             };
 
+            /**
+             * retrieve statistics linked to a widget from the database
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {integer}   widgetId    widget id
+             * @param  {Function} callback    
+             */
             prototype.getData = function(dashboardId, widgetId, callback) {
 
                 $http({ method: 'GET', url: '/api/dashboards/' + dashboardId + '/widgets/' + widgetId + '/data' }).
@@ -48,6 +77,12 @@ angular.module('Dashboard').
                     error(function() { console.error('an error occured during the data recuperation'); });
             };
 
+            /**
+             * update the widget position
+             * @param  {integer}   dashboardId   dashboard id
+             * @param  {Object}   serialization widget serialization
+             * @param  {Function} callback      
+             */
             prototype.updatePosition = function(dashboardId, serialization, callback) {
 
                 $http({method: 'PUT', url: '/api/dashboards/' + dashboardId + '/widgets/position', data: JSON.stringify(serialization)}).
@@ -55,6 +90,11 @@ angular.module('Dashboard').
                     error(function() { console.error('an error occured when trying to save widgets position'); })
             }
 
+            /**
+             * update the selected widget
+             * @param  {Object}   definition widget definition
+             * @param  {Function} callback   
+             */
             prototype.update = function(definition, callback) {
 
                 $http({method: 'PUT', url: '/api/dashboards/' + definition.dashboardid + '/widgets/' + definition.id, data: JSON.stringify(definition)}).

@@ -12,6 +12,9 @@ angular.module('Dashboard').
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
                 var self = this
                 ,   series = {}
@@ -109,6 +112,9 @@ angular.module('Dashboard').
                 this.refresh();
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {
                 var self = this
 

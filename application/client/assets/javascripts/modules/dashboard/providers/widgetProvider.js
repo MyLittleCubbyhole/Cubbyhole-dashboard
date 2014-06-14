@@ -69,8 +69,17 @@ angular.module('Dashboard').
                 self.scope.$on('widget_refresh', function() { self.refresh(); })
             };
 
+            /**
+             * must be overriden
+             * called after data loading
+             * used to create the widget content
+             */
             Widget.prototype.init = function() { throw 'init method must be overriden'; };
 
+            /**
+             * PRIVATE
+             * format filter values in order to use them in the widget configuration
+             */
             Widget.prototype._formatFilters = function() {
                 var self = this;
 
@@ -115,6 +124,11 @@ angular.module('Dashboard').
                 }
             }
 
+            /**
+             * PRIVATE
+             * generate a widget configuration
+             * @return {Object} widget data configuration
+             */
             Widget.prototype._save = function() {
                 var configuration = {}
                 ,   options
@@ -161,6 +175,9 @@ angular.module('Dashboard').
 
             };
 
+            /**
+             * update the current widget with the new configuration
+             */
             Widget.prototype.save = function() {
                 var self = this
                 ,   definition = {}
@@ -181,6 +198,9 @@ angular.module('Dashboard').
 
             }
 
+            /**
+             * get the datas linked to the current widget and call the init method
+             */
             Widget.prototype.load = function() {
                 var self = this;
                 self.inLoading = true;
@@ -190,8 +210,14 @@ angular.module('Dashboard').
                 })
             };
 
+            /**
+             * must be overriden
+             */
             Widget.prototype.refresh = function() { };
 
+            /**
+             * delete the current widget
+             */
             Widget.prototype.delete = function() {
                 var self = this;
 
@@ -200,6 +226,11 @@ angular.module('Dashboard').
                 })
             };
 
+            /**
+             * resize the current widget
+             * @param  {Object}   size     {width: .., height: ..}
+             * @param  {Function} callback 
+             */
             Widget.prototype.resize = function(size, callback) {
                 var self = this;
                 callback = callback || angular.noop;
@@ -210,6 +241,13 @@ angular.module('Dashboard').
                 }});
             };
 
+            /**
+             * format the value passed through paramters
+             * @param  {MULTI} val   value
+             * @param  {string} type  
+             * @param  {integer} round decimal amount
+             * @return {MULTI}       formatted value
+             */
             Widget.prototype.getFormatedValue = function(val, type, round) {
                 switch(type) {
                     case 'date':

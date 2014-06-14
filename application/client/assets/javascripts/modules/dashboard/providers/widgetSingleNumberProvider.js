@@ -11,6 +11,9 @@ angular.module('Dashboard').
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
                 var self = this
                 ,   axisType = self.metrics[0].kpi.format;
@@ -19,6 +22,9 @@ angular.module('Dashboard').
                 self.alias = self.metrics[0].kpi.formattedAlias;
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {}
 
             Widget.prototype.toString = function() {

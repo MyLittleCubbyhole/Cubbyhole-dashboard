@@ -13,6 +13,9 @@ angular.module('Dashboard').
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
                 var self = this
                 ,   $node = self.node.find('.widget-front-body')
@@ -290,6 +293,9 @@ angular.module('Dashboard').
                 self.refresh();
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.save = function() {
                 var self = this
                 ,   definition = {}
@@ -310,6 +316,9 @@ angular.module('Dashboard').
                 self.load();
             }
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {
                 var self = this;
                 self.node.find('.widget-front-body').highcharts(self.chartOptions);
