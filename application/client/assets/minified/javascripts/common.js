@@ -1,12 +1,44 @@
 angular.module('Config', []);;angular.module('Config').
-	//*/
-	constant('API_URL', 'http://127.0.0.1:5150/api/').
+    //*/
+    constant('API_URL', 'http://127.0.0.1:5150/api/').
     constant('WEBSOCKET_URL', 'http://127.0.0.1:5150').
     /*/
-	constant('API_URL', 'https://api.trouducube.com/api/').
-	constant('WEBSOCKET_URL', 'https://api.trouducube.com').
+    constant('API_URL', 'https://api.trouducube.com/api/').
+    constant('WEBSOCKET_URL', 'https://api.trouducube.com').
+    /*
+    constant('API_URL', 'http://www.pillowrc.com/api/').
+    constant('WEBSOCKET_URL', 'http://www.pillowrc.com:80').
     //*/
-	constant('socketRoom', '/cubbyhole');;angular.module('Tools', ['Grumpy-ui']);;angular.module('Tools').
+    constant('socketRoom', '/cubbyhole');;angular.module('Tools', ['Grumpy-ui']);;angular.module('Tools').
+    directive('datePicker', [function() {
+        return {
+            scope: true,
+            controller: function($scope) {
+                var $local = $scope._datePicker = {}
+                ,   self = this;
+
+                $scope.toString = function() {
+                    return '_datePicker';
+                };
+            },
+            require: 'datePicker',
+            restrict: 'A',
+            link: function($scope, $node, attributes, self) {
+                var $local = $scope._datePicker;
+
+                $node.datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    minDate: null,
+                    maxDate: null,
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-10:+5",
+                    prevText: '<i class="icon-chevron-left"></i>',
+                    nextText: '<i class="icon-chevron-right"></i>'
+                });
+            }
+        };
+    }]);;angular.module('Tools').
     directive('ngAutoFocus', function(){
         return {
             scope: {},
@@ -16,32 +48,206 @@ angular.module('Config', []);;angular.module('Config').
             }
         };
     });;angular.module('Tools').
-	directive('scrollBar', function(){
-		return {
-			scope: true,
-			restrict: 'A',
-			link: function($scope, $node, attributes) {			
-				$node.mCustomScrollbar({
-					theme: attributes.theme || 'light',
-					scrollEasing:"easeOutCirc",  
-					mouseWheel:"auto",   
-					autoDraggerLength:true,   
-					advanced:{  
-						updateOnBrowserResize:true,   
-						updateOnContentResize:true   
-					}
-				});
-			}
-		};
-	});;angular.module('Tools').
-	service('ClassService', function(){
-		this.extend = 	function(parent, child){
-			child.prototype = new parent();
-			child.constructor = child;
-		}
-	});;angular.module('Authentication', ['Navigation', 'Config']);;angular.module('Authentication').
-	controller('AuthenticationController', ['$scope', 'UserFactory', 'API_URL', function($scope, UserFactory, API_URL){
-		var $local = $scope.Authentication = {};
+    directive('modal', [function() {
+        return {
+            scope: true,
+            controller: function($scope) {
+                var $local = $scope._modal = {}
+                ,   self = this;
+
+                $local.close = function() {
+                    $scope.Overlay.clickout();
+                }
+
+                $scope.toString = function() {
+                    return '_modal';
+                }
+            },
+            require: 'modal',
+            restrict: 'A',
+            link: function($scope, $node, attributes, self) {
+                var $local = $scope._modal;
+
+                $local.node = $node;
+                $node.appendTo(angular.element('body'));
+            }
+        };
+    }]);;angular.module('Tools').
+    directive('scrollBar', function(){
+        return {
+            scope: true,
+            restrict: 'A',
+            link: function($scope, $node, attributes) {
+                $node.mCustomScrollbar({
+                    theme: attributes.theme || 'light',
+                    scrollEasing:"easeOutCirc",
+                    mouseWheel:"auto",
+                    autoDraggerLength:true,
+                    advanced:{
+                        updateOnBrowserResize:true,
+                        updateOnContentResize:true
+                    }
+                });
+            }
+        };
+    });;angular.module('Tools').
+    service('ClassService', function(){
+        this.extend =   function(parent, child){
+            child.prototype = new parent();
+            child.constructor = child;
+        }
+    });;angular.module('Tools').
+    service('CaptureService', function(){
+
+        var $body = angular.element('body');
+        function contextualizeCss(activate) {
+
+            if(activate === false)
+                $body.removeClass('capturing');
+            else
+                $body.addClass('capturing');
+        }
+
+        function convertSVGs($node) {
+            var SVGs = $node.find('svg')
+            ,   elements = {
+                toRemove : [],
+                toRecover : []
+            }
+
+            SVGs.each(function(index, node) {
+                var parent = node.parentNode
+                ,   svg = parent.innerHTML
+                ,   canvas = document.createElement('canvas');
+
+                canvg(canvas, svg);
+
+                elements.toRecover.push({
+                    parent: parent,
+                    child: node
+                });
+                parent.removeChild(node);
+
+                elements.toRemove.push({
+                    parent: parent,
+                    child: canvas
+                });
+
+                parent.appendChild(canvas);
+
+            })
+
+            return elements;
+
+        }
+
+        function recover(elements) {
+
+            for(var i = 0; i<elements.toRemove.length; i++)
+                elements.toRemove[i].child.remove();
+
+            for(var i = 0; i<elements.toRecover.length; i++)
+                elements.toRecover[i].parent.appendChild(elements.toRecover[i].child);
+
+            contextualizeCss(false);
+        }
+
+		return function($node, name, callback) {
+			var elements;
+			name = name || '';
+
+			contextualizeCss(true);
+			elements = convertSVGs($node);
+
+			html2canvas($node, {
+				onrendered: function(canvas) {
+
+					var pdf = new jsPDF('p', 'mm', 'a3');
+
+					//taille pdf px - 794, 1122
+					var image = canvas.toDataURL("image/jpeg", 1.0);
+
+					var capture = new Image();
+					capture.src = image;
+
+					var MARGIN = 10;
+					var WIDTH = 1122 - MARGIN*4;//794;
+					var HEIGHT = 794 - MARGIN*4;
+					//ratio
+					HEIGHT = (WIDTH/HEIGHT) * WIDTH;
+
+					var cropCanvas = document.createElement('canvas')
+
+					var maxHeight = capture.height;
+					var projectionMaxHeight = (capture.height * WIDTH) / capture.width;
+					var increment = (HEIGHT * capture.height) / ( (capture.height * WIDTH) / capture.width );
+					var projectionIncrement = HEIGHT;
+					var currentHeight = increment;
+					var part;
+					var y = 0;
+
+
+					var width = document.createAttribute("width");
+					width.value = WIDTH;//794//capture.width;
+					var height = document.createAttribute("height");
+					height.value = currentHeight;//HEIGHT;//1122;//capture.height;
+					cropCanvas.setAttributeNode(width);
+					cropCanvas.setAttributeNode(height);
+					var context = cropCanvas.getContext("2d");
+
+					var canvasHeight = currentHeight;
+
+					var logo = new Image();
+					logo.src = '/images/design/logo-big.png';
+
+					logo.onload = function() {
+						context.fillStyle = "#fff";
+						context.fillRect(0,0,WIDTH,canvasHeight);
+
+						context.drawImage(logo, (WIDTH - 230)/2 , 250, 230, 286);
+						part = cropCanvas.toDataURL("image/jpeg", 1.0);
+						pdf.addImage(part,'JPEG', 0, 0)
+
+						while(maxHeight > 0) {
+							context.clearRect(0, 0, WIDTH, canvasHeight);
+							context.fillStyle = "#fff";
+							context.fillRect(0,0,WIDTH,canvasHeight);
+
+                            currentHeight = maxHeight - increment < 0 ? maxHeight : currentHeight;
+
+                            context.drawImage(capture, 0, y, capture.width, increment, 0, 0, WIDTH, HEIGHT);
+
+                            part = cropCanvas.toDataURL("image/jpeg", 1.0);
+                            pdf.addPage();
+                            pdf.addImage(part,'JPEG', MARGIN/2, MARGIN/2)
+
+                            y += currentHeight;
+                            maxHeight -= increment;
+                        }
+
+                        pdf.save('export_'+ name +'.pdf')
+                        recover(elements);
+                        callback.call(this);
+                    }
+                }
+            });
+
+        }
+
+    })
+;angular.module('Tools').
+    filter('numeraljs', function () {
+        return function (input, format) {
+            if (input == null || format == null)
+                return input;
+            if (format === '')
+                return '';
+
+            return numeral(input).format(format);
+        };
+    });;angular.module('Authentication', ['Navigation', 'Config']);;angular.module('Authentication').
+    controller('AuthenticationController', ['$scope', 'UserFactory', 'API_URL', function($scope, UserFactory, API_URL){
+        var $local = $scope.Authentication = {};
 
         var user = localStorage.getItem('user');
         if(!user)
@@ -80,7 +286,7 @@ angular.module('Config', []);;angular.module('Config').
         $scope.toString = function() {
             return 'Authentication';
         };
-	}]);angular.module('Authentication').
+    }]);angular.module('Authentication').
     controller('LoginController', ['$scope', '$location', 'UserFactory', function($scope, $location, UserFactory) {
         var $local = $scope.Login = {};
 
@@ -108,27 +314,6 @@ angular.module('Config', []);;angular.module('Config').
 
         $scope.toString = function() {
             return 'Login';
-        };
-    }]);;angular.module('Authentication').
-    directive('userCard', [function(){
-        return {
-            scope: true,
-            replace: false,
-            require: 'userCard',
-            restrict: 'A',
-            controller: ['$scope', '$attrs', function($scope, $attrs) {
-                var $local = $scope._userCard = {}
-                ,   self = this;
-
-                $scope.toString = function() {
-                    return '_userCard';
-                }
-            }],
-            link: function($scope, $node, attributes, self) {
-                var $local = $scope._userCard;
-
-                $node.appendTo(angular.element('body'));
-            }
         };
     }]);;angular.module('Authentication').
     factory('AuthenticationFactory', ['$window', '$q', function($window, $q) {
@@ -220,41 +405,45 @@ angular.module('Config', []);;angular.module('Config').
             return prototype;
         };
     }]);;angular.module('Overlay', []);;angular.module('Overlay').
-	controller('OverlayController', ['$scope', function($scope){
-		var $local = $scope.Overlay = {};
+    controller('OverlayController', ['$scope', function($scope){
+        var $local = $scope.Overlay = {};
 
-		$local.activated = false;
-		$local.pusherOpen = false;
+        $local.activated = false;
+        $local.pusherOpen = false;
 
-		$scope.$on('enable_overlay', function() { $local.activated = true; });
+        $local.locked = false;
 
-		$local.clickout = function() {
-			$local.activated = false;
-			$local.pusherOpen = false;
-			$scope.$broadcast('hide');
-		}
+        $scope.$on('enable_overlay', function() { $local.activated = true; });
 
-		$scope.toString = function() {
-			return 'Overlay';
-		}
-	}]);angular.module('Navigation', []);;angular.module('Navigation').
-	controller('NavigationController', ['$scope', '$window', '$location', 'UserFactory', function($scope, $window, $location, UserFactory){
-		var $local = $scope.Navigation = {};
+        $local.clickout = function() {
+            if(!$local.locked) {
+                $local.activated = false;
+                $local.pusherOpen = false;
+                $scope.$broadcast('hide');
+            }
+        }
 
-		$local.goto = function(path) {
-			path += (path == '/dashboard' && UserFactory($scope).get()) ? "?token=" + UserFactory($scope).get().token : "";
+        $scope.toString = function() {
+            return 'Overlay';
+        }
+    }]);angular.module('Navigation', []);;angular.module('Navigation').
+    controller('NavigationController', ['$scope', '$window', '$location', 'UserFactory', function($scope, $window, $location, UserFactory){
+        var $local = $scope.Navigation = {};
 
-			$window.location = path;
-		};
+        $local.goto = function(path) {
+            path += (path == '/dashboard' && UserFactory($scope).get()) ? "?token=" + UserFactory($scope).get().token : "";
 
-		$local.isSelected = function(pathname) {
-			return $window.location.pathname == pathname;
-		}
+            $window.location = path;
+        };
 
-		if($window.location.pathname == '/home' && $location.$$path.length>0)
-			$local.goto('/home#' + $location.$$path.substring(1), '#bloc-container')
+        $local.isSelected = function(pathname) {
+            return $window.location.pathname == pathname;
+        }
 
-		$scope.toString = function() {
-			return 'Navigation';
-		}
-	}])
+        if($window.location.pathname == '/home' && $location.$$path.length>0)
+            $local.goto('/home#' + $location.$$path.substring(1), '#bloc-container')
+
+        $scope.toString = function() {
+            return 'Navigation';
+        }
+    }])
