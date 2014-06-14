@@ -117,7 +117,6 @@ module.exports = function(grunt) {
                 dest: 'application/client/assets/minified/javascripts/dashboard.js'
             }
 
-
         },
 
         cssmin: {
