@@ -250,6 +250,7 @@ MysqlTools.query.generate = function(options) {
 	for(var i = 0; i<queries.length; i++)
 		queries[i] = queries[i].request + (queries[i].union ? ' UNION ' + queries[i].unionQuery + queries[i].unionOrderer : '' );
 
+	// console.log(queries)
 	return queries.length > 1 ? queries : queries[0];
 }
 
