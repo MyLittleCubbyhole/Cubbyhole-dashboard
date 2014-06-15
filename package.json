@@ -24,7 +24,6 @@
   "license": "MIT",
   "dependencies": {
     "express": "~3.5.1",
-    "socket.io": "~0.9.16",
     "lodash": "^2.4.1",
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.4.0",
@@ -34,6 +33,8 @@
     "grunt-contrib-cssmin": "^0.9.0",
     "moment": "~2.6.0",
     "json2csv": "^2.2.1",
-    "js2xmlparser": "^0.1.3"
+    "js2xmlparser": "^0.1.3",
+    "mysql": "~2.1.1",
+    "mongodb": "~1.4.0"
   }
 }

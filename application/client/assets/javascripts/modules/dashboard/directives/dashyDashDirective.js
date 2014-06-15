@@ -88,7 +88,7 @@ angular.module('Dashboard').
                  * resize the widget selected
                  * @param  {Object}   node     Angular node
                  * @param  {Object}   size     widget size - width & height
-                 * @param  {Function} callback 
+                 * @param  {Function} callback
                  */
                 self.resizeWidget = function(node, size, callback) {
                     self.dashydash.resize_widget( node, size.width, size.height, function() {
@@ -100,7 +100,7 @@ angular.module('Dashboard').
                 /**
                  * instanciate and add a new widget to the current dashboard
                  * @param {Object}   definition widget definition
-                 * @param {Function} callback 
+                 * @param {Function} callback
                  */
                 self.addWidget = function(definition, callback) {
                     var options = {}
@@ -216,7 +216,7 @@ angular.module('Dashboard').
                 }
 
                 /**
-                 * dump all currents dashboard widgets into a pool node 
+                 * dump all currents dashboard widgets into a pool node
                  * in order to save them from the dashydash destruction
                  */
                 function copyWidgetInPool() {
@@ -246,7 +246,6 @@ angular.module('Dashboard').
                         ,   widgetWidth = $local.widgets[widgetId].size.width ? $local.widgets[widgetId].size.width : dashydashWidth
                         ,   parameters = [ $this, ( widgetWidth > self.options.col ? 1 : widgetWidth ), dashydashHeight ];
 
-                        console.log($local.widgets[widgetId].size.width)
                         if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
                             $local.locked = false;
                             parameters.push(
