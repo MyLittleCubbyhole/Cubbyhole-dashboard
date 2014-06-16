@@ -92,6 +92,12 @@ angular.module('Config', []);;angular.module('Config').
         };
     });;angular.module('Tools').
     service('ClassService', function(){
+
+    	/**
+    	 * prototypal inheritence
+    	 * @param  {Object} parent 
+    	 * @param  {Object} child  
+    	 */
         this.extend =   function(parent, child){
             child.prototype = new parent();
             child.constructor = child;
@@ -100,6 +106,11 @@ angular.module('Config', []);;angular.module('Config').
     service('CaptureService', function(){
 
         var $body = angular.element('body');
+
+        /**
+         * manage the activation of the capturing class
+         * @param  {Boolean} activate 
+         */
         function contextualizeCss(activate) {
 
             if(activate === false)
@@ -108,6 +119,11 @@ angular.module('Config', []);;angular.module('Config').
                 $body.addClass('capturing');
         }
 
+        /**
+         * convert all svgs node into canvas
+         * @param  {Object} $node Angular node
+         * @return {Array}       converted elements
+         */
         function convertSVGs($node) {
             var SVGs = $node.find('svg')
             ,   elements = {
@@ -141,6 +157,10 @@ angular.module('Config', []);;angular.module('Config').
 
         }
 
+        /**
+         * recover the svgs elements
+         * @param  {Array} elements array of svgs node
+         */
         function recover(elements) {
 
             for(var i = 0; i<elements.toRemove.length; i++)
@@ -247,9 +267,9 @@ angular.module('Config', []);;angular.module('Config').
         };
     });;angular.module('Authentication', ['Navigation', 'Config']);;angular.module('Authentication').
     controller('AuthenticationController', ['$scope', 'UserFactory', 'API_URL', function($scope, UserFactory, API_URL){
-        var $local = $scope.Authentication = {};
+        var $local = $scope.Authentication = {}
+        ,   user = localStorage.getItem('user');
 
-        var user = localStorage.getItem('user');
         if(!user)
             user = sessionStorage.getItem('user');
 
@@ -261,24 +281,32 @@ angular.module('Config', []);;angular.module('Config').
         UserFactory($scope).set(user);
 
         $local.stylePhoto = {};
-
+        
         if(user.photo && user.photo != 'null')
             $local.stylePhoto = {'background-image': 'url(' + API_URL + 'download/1/userPhotos/' + user.photo + '?token=' + user.token + '&run)'};
 
         $local.user = user;
         $local.authenticated = false;
-
         $local.opened = false;
 
+        /**
+         * LISTENER - hide the profile popup when called
+         */
         $scope.$on('hide', function() {
             $local.opened = false;
         });
 
+        /**
+         * open the profile popup
+         */
         $local.open = function() {
             $local.opened = !$local.opened;
             $scope.Overlay.activated = true;
         };
 
+        /**
+         * call the logout method of the authenticationfactory and disconnect the current user
+         */
         $local.logout = function() {
             UserFactory($scope).logout();
         };
@@ -298,6 +326,12 @@ angular.module('Config', []);;angular.module('Config').
 
         $local.errorLogin = false;
 
+        /**
+         * called when submitting form
+         * call the authenticate method from the authentication factory
+         * and save the current user in the chossen storage
+         * @param  {Boolean} isValid form validity
+         */
         $local.authenticate = function(isValid) {
             localStorage.removeItem("user");
             sessionStorage.removeItem("user");
@@ -316,6 +350,7 @@ angular.module('Config', []);;angular.module('Config').
             return 'Login';
         };
     }]);;angular.module('Authentication').
+    //manage all the client-server queries and add to them some params like token 
     factory('AuthenticationFactory', ['$window', '$q', function($window, $q) {
         return {
             request: function(config) {
@@ -335,9 +370,7 @@ angular.module('Config', []);;angular.module('Config').
                 return config || $q.when(config);
             },
             responseError: function(response) {
-                if (response.status === 401) {
-                    //$window.location = $window.location.protocol + "//" + $window.location.host + "/authentication#/login";
-                }
+                if (response.status === 401) {}
                 return response || $q.when(response);
             }
         };
@@ -353,14 +386,30 @@ angular.module('Config', []);;angular.module('Config').
 
             var prototype = {};
 
+            /**
+             * get the current loaded user
+             * @return {Object} User
+             */
             prototype.get = function() {
                 return _user;
             };
 
+            /**
+             * set new informations to the current user
+             * @param {Object} user User
+             */
             prototype.set = function(user) {
                 angular.extend(_user, user);
             };
 
+            /**
+             * Authenticate the user to the web Api
+             * and set the loaded user to the local storage|session storage
+             * in order to use it later
+             * @param  {Object}   user       User
+             * @param  {Boolean}   rememberMe manage the saving container - session or local
+             * @param  {Function} callback  
+             */
             prototype.login = function(user, rememberMe, callback) {
                 $http.post('/api/auth', user).
                 success(function(data, status, headers, config) {
@@ -384,6 +433,9 @@ angular.module('Config', []);;angular.module('Config').
                 });
             };
 
+            /**
+             * disconnect the user and remove him from the storages
+             */
             prototype.logout = function() {
                 var user = prototype.get();
                 if(user.token) {
@@ -413,6 +465,9 @@ angular.module('Config', []);;angular.module('Config').
 
         $local.locked = false;
 
+        /**
+         * LISTNER - active the overlay when triggered
+         */
         $scope.$on('enable_overlay', function() { $local.activated = true; });
 
         $local.clickout = function() {
@@ -430,12 +485,20 @@ angular.module('Config', []);;angular.module('Config').
     controller('NavigationController', ['$scope', '$window', '$location', 'UserFactory', function($scope, $window, $location, UserFactory){
         var $local = $scope.Navigation = {};
 
+        /**
+         * navigate to the selected path
+         * @param  {string} path path to go
+         */
         $local.goto = function(path) {
             path += (path == '/dashboard' && UserFactory($scope).get()) ? "?token=" + UserFactory($scope).get().token : "";
 
             $window.location = path;
         };
 
+        /**
+         * check if the pathname is the current path
+         * @param  {string}  pathname path name
+         */
         $local.isSelected = function(pathname) {
             return $window.location.pathname == pathname;
         }

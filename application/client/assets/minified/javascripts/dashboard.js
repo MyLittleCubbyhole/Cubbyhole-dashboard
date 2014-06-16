@@ -19,7 +19,8 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
            API_URL + '**'
         ]);
 
-    }]);;angular.module('Dashboard').constant('COUNTRIES', [{"code":"AF","value":0,"name":"Afghanistan"},{"code":"AL","value":0,"name":"Albania"},{"code":"DZ","value":0,"name":"Algeria"},{"code":"AS","value":0,"name":"American Samoa"},{"code":"AD","value":0,"name":"Andorra"},{"code":"AO","value":0,"name":"Angola"},{"code":"AI","value":0,"name":"Antigua and Barbuda"},{"code":"AR","value":0,"name":"Argentina"},{"code":"AM","value":0,"name":"Armenia"},{"code":"AW","value":0,"name":"Aruba"},{"code":"AU","value":0,"name":"Australia"},{"code":"AT","value":0,"name":"Austria"},{"code":"AZ","value":0,"name":"Azerbaijan"},{"code":"BS","value":0,"name":"Bahamas, The"},{"code":"BH","value":0,"name":"Bahrain"},{"code":"BD","value":0,"name":"Bangladesh"},{"code":"BB","value":0,"name":"Barbados"},{"code":"BY","value":0,"name":"Belarus"},{"code":"BE","value":0,"name":"Belgium"},{"code":"BZ","value":0,"name":"Belize"},{"code":"BJ","value":0,"name":"Benin"},{"code":"BM","value":0,"name":"Bermuda"},{"code":"BT","value":0,"name":"Bhutan"},{"code":"BO","value":0,"name":"Bolivia"},{"code":"BA","value":0,"name":"Bosnia and Herzegovina"},{"code":"BW","value":0,"name":"Botswana"},{"code":"BR","value":0,"name":"Brazil"},{"code":"BN","value":0,"name":"Brunei Darussalam"},{"code":"BG","value":0,"name":"Bulgaria"},{"code":"BF","value":0,"name":"Burkina Faso"},{"code":"BI","value":0,"name":"Burundi"},{"code":"KH","value":0,"name":"Cambodia"},{"code":"CM","value":0,"name":"Cameroon"},{"code":"CA","value":0,"name":"Canada"},{"code":"CV","value":0,"name":"Cape Verde"},{"code":"KY","value":0,"name":"Cayman Islands"},{"code":"CF","value":0,"name":"Central African Republic"},{"code":"TD","value":0,"name":"Chad"},{"code":"CL","value":0,"name":"Chile"},{"code":"CN","value":0,"name":"China"},{"code":"CO","value":0,"name":"Colombia"},{"code":"KM","value":0,"name":"Comoros"},{"code":"CD","value":0,"name":"Congo, Dem. Rep."},{"code":"CG","value":0,"name":"Congo, Rep."},{"code":"CR","value":0,"name":"Costa Rica"},{"code":"CI","value":0,"name":"Cote d'Ivoire"},{"code":"HR","value":0,"name":"Croatia"},{"code":"CU","value":0,"name":"Cuba"},{"code":"CW","value":0,"name":"Curacao"},{"code":"CY","value":0,"name":"Cyprus"},{"code":"CZ","value":0,"name":"Czech Republic"},{"code":"DK","value":0,"name":"Denmark"},{"code":"DJ","value":0,"name":"Djibouti"},{"code":"DM","value":0,"name":"Dominica"},{"code":"DO","value":0,"name":"Dominican Republic"},{"code":"EC","value":0,"name":"Ecuador"},{"code":"EG","value":0,"name":"Egypt, Arab Rep."},{"code":"SV","value":0,"name":"El Salvador"},{"code":"GQ","value":0,"name":"Equatorial Guinea"},{"code":"ER","value":0,"name":"Eritrea"},{"code":"EE","value":0,"name":"Estonia"},{"code":"ET","value":0,"name":"Ethiopia"},{"code":"FO","value":0,"name":"Faeroe Islands"},{"code":"FJ","value":0,"name":"Fiji"},{"code":"FI","value":0,"name":"Finland"},{"code":"FR","value":0,"name":"France"},{"code":"PF","value":0,"name":"French Polynesia"},{"code":"GA","value":0,"name":"Gabon"},{"code":"GM","value":0,"name":"Gambia, The"},{"code":"GE","value":0,"name":"Georgia"},{"code":"DE","value":0,"name":"Germany"},{"code":"GH","value":0,"name":"Ghana"},{"code":"GR","value":0,"name":"Greece"},{"code":"GL","value":0,"name":"Greenland"},{"code":"GD","value":0,"name":"Grenada"},{"code":"GU","value":0,"name":"Guam"},{"code":"GT","value":0,"name":"Guatemala"},{"code":"GN","value":0,"name":"Guinea"},{"code":"GW","value":0,"name":"Guinea-Bissau"},{"code":"GY","value":0,"name":"Guyana"},{"code":"HT","value":0,"name":"Haiti"},{"code":"HN","value":0,"name":"Honduras"},{"code":"HK","value":0,"name":"Hong Kong SAR, China"},{"code":"HU","value":0,"name":"Hungary"},{"code":"IS","value":0,"name":"Iceland"},{"code":"IN","value":0,"name":"India"},{"code":"ID","value":0,"name":"Indonesia"},{"code":"IR","value":0,"name":"Iran, Islamic Rep."},{"code":"IQ","value":0,"name":"Iraq"},{"code":"IE","value":0,"name":"Ireland"},{"code":"IM","value":0,"name":"Isle of Man"},{"code":"IL","value":0,"name":"Israel"},{"code":"IT","value":0,"name":"Italy"},{"code":"JM","value":0,"name":"Jamaica"},{"code":"JP","value":0,"name":"Japan"},{"code":"JO","value":0,"name":"Jordan"},{"code":"KZ","value":0,"name":"Kazakhstan"},{"code":"KE","value":0,"name":"Kenya"},{"code":"KI","value":0,"name":"Kiribati"},{"code":"KP","value":0,"name":"Korea, Dem. Rep."},{"code":"KR","value":0,"name":"Korea, Rep."},{"code":"XK","value":0,"name":"Kosovo"},{"code":"KW","value":0,"name":"Kuwait"},{"code":"KG","value":0,"name":"Kyrgyz Republic"},{"code":"LA","value":0,"name":"Lao PDR"},{"code":"LV","value":0,"name":"Latvia"},{"code":"LB","value":0,"name":"Lebanon"},{"code":"LS","value":0,"name":"Lesotho"},{"code":"LR","value":0,"name":"Liberia"},{"code":"LY","value":0,"name":"Libya"},{"code":"LI","value":0,"name":"Liechtenstein"},{"code":"LT","value":0,"name":"Lithuania"},{"code":"LU","value":0,"name":"Luxembourg"},{"code":"MO","value":0,"name":"Macao SAR, China"},{"code":"MK","value":0,"name":"Macedonia, FYR"},{"code":"MG","value":0,"name":"Madagascar"},{"code":"MW","value":0,"name":"Malawi"},{"code":"MY","value":0,"name":"Malaysia"},{"code":"MV","value":0,"name":"Maldives"},{"code":"ML","value":0,"name":"Mali"},{"code":"MT","value":0,"name":"Malta"},{"code":"MH","value":0,"name":"Marshall Islands"},{"code":"MR","value":0,"name":"Mauritania"},{"code":"MU","value":0,"name":"Mauritius"},{"code":"YT","value":0,"name":"Mayotte"},{"code":"MX","value":0,"name":"Mexico"},{"code":"FM","value":0,"name":"Micronesia, Fed. Sts."},{"code":"MD","value":0,"name":"Moldova"},{"code":"MC","value":0,"name":"Monaco"},{"code":"MN","value":0,"name":"Mongolia"},{"code":"ME","value":0,"name":"Montenegro"},{"code":"MA","value":0,"name":"Morocco"},{"code":"MZ","value":0,"name":"Mozambique"},{"code":"MM","value":0,"name":"Myanmar"},{"code":"NA","value":0,"name":"Namibia"},{"code":"NP","value":0,"name":"Nepal"},{"code":"NL","value":0,"name":"Netherlands"},{"code":"NC","value":0,"name":"New Caledonia"},{"code":"NZ","value":0,"name":"New Zealand"},{"code":"NI","value":0,"name":"Nicaragua"},{"code":"NE","value":0,"name":"Niger"},{"code":"NG","value":0,"name":"Nigeria"},{"code":"MP","value":0,"name":"Northern Mariana Islands"},{"code":"NO","value":0,"name":"Norway"},{"code":"OM","value":0,"name":"Oman"},{"code":"PK","value":0,"name":"Pakistan"},{"code":"PW","value":0,"name":"Palau"},{"code":"PA","value":0,"name":"Panama"},{"code":"PG","value":0,"name":"Papua New Guinea"},{"code":"PY","value":0,"name":"Paraguay"},{"code":"PE","value":0,"name":"Peru"},{"code":"PH","value":0,"name":"Philippines"},{"code":"PL","value":0,"name":"Poland"},{"code":"PT","value":0,"name":"Portugal"},{"code":"PR","value":0,"name":"Puerto Rico"},{"code":"WA","value":0,"name":"Qatar"},{"code":"RO","value":0,"name":"Romania"},{"code":"RU","value":0,"name":"Russian Federation"},{"code":"RW","value":0,"name":"Rwanda"},{"code":"WS","value":0,"name":"Samoa"},{"code":"SM","value":0,"name":"San Marino"},{"code":"ST","value":0,"name":"Sao Tome and Principe"},{"code":"SA","value":0,"name":"Saudi Arabia"},{"code":"SN","value":0,"name":"Senegal"},{"code":"RS","value":0,"name":"Serbia"},{"code":"SC","value":0,"name":"Seychelles"},{"code":"SL","value":0,"name":"Sierra Leone"},{"code":"SG","value":0,"name":"Singapore"},{"code":"SK","value":0,"name":"Slovak Republic"},{"code":"SI","value":0,"name":"Slovenia"},{"code":"SB","value":0,"name":"Solomon Islands"},{"code":"SO","value":0,"name":"Somalia"},{"code":"ZA","value":0,"name":"South Africa"},{"code":"SS","value":0,"name":"South Sudan"},{"code":"ES","value":0,"name":"Spain"},{"code":"LK","value":0,"name":"Sri Lanka"},{"code":"KN","value":0,"name":"St. Kitts and Nevis"},{"code":"LC","value":0,"name":"St. Lucia"},{"code":"MF","value":0,"name":"St. Martin (French part)"},{"code":"VC","value":0,"name":"St. Vincent and the Grenadines"},{"code":"SD","value":0,"name":"Sudan"},{"code":"SR","value":0,"name":"Suriname"},{"code":"SZ","value":0,"name":"Swaziland"},{"code":"SE","value":0,"name":"Sweden"},{"code":"CH","value":0,"name":"Switzerland"},{"code":"SY","value":0,"name":"Syrian Arab Republic"},{"code":"TJ","value":0,"name":"Tajikistan"},{"code":"TZ","value":0,"name":"Tanzania"},{"code":"TH","value":0,"name":"Thailand"},{"code":"TP","value":0,"name":"Timor-Leste"},{"code":"TG","value":0,"name":"Togo"},{"code":"TO","value":0,"name":"Tonga"},{"code":"TT","value":0,"name":"Trinidad and Tobago"},{"code":"TN","value":0,"name":"Tunisia"},{"code":"TR","value":0,"name":"Turkey"},{"code":"TM","value":0,"name":"Turkmenistan"},{"code":"TC","value":0,"name":"Turks and Caicos Islands"},{"code":"TV","value":0,"name":"Tuvalu"},{"code":"UG","value":0,"name":"Uganda"},{"code":"UA","value":0,"name":"Ukraine"},{"code":"AE","value":0,"name":"United Arab Emirates"},{"code":"UK","value":0,"name":"United Kingdom"},{"code":"US","value":0,"name":"United States"},{"code":"UY","value":0,"name":"Uruguay"},{"code":"UZ","value":0,"name":"Uzbekistan"},{"code":"VU","value":0,"name":"Vanuatu"},{"code":"VE","value":0,"name":"Venezuela, RB"},{"code":"VN","value":0,"name":"Vietnam"},{"code":"VI","value":0,"name":"Virgin Islands (U.S.)"},{"code":"PS","value":0,"name":"West Bank and Gaza"},{"code":"EH","value":0,"name":"Western Sahara"},{"code":"YE","value":0,"name":"Yemen, Rep."},{"code":"ZM","value":0,"name":"Zambia"},{"code":"ZW","value":0,"name":"Zimbabwe"}]);;angular.module('Dashboard').
+    }]);;angular.module('Dashboard').
+	constant('COUNTRIES', [{"code":"AF","value":0,"name":"Afghanistan"},{"code":"AL","value":0,"name":"Albania"},{"code":"DZ","value":0,"name":"Algeria"},{"code":"AS","value":0,"name":"American Samoa"},{"code":"AD","value":0,"name":"Andorra"},{"code":"AO","value":0,"name":"Angola"},{"code":"AI","value":0,"name":"Antigua and Barbuda"},{"code":"AR","value":0,"name":"Argentina"},{"code":"AM","value":0,"name":"Armenia"},{"code":"AW","value":0,"name":"Aruba"},{"code":"AU","value":0,"name":"Australia"},{"code":"AT","value":0,"name":"Austria"},{"code":"AZ","value":0,"name":"Azerbaijan"},{"code":"BS","value":0,"name":"Bahamas, The"},{"code":"BH","value":0,"name":"Bahrain"},{"code":"BD","value":0,"name":"Bangladesh"},{"code":"BB","value":0,"name":"Barbados"},{"code":"BY","value":0,"name":"Belarus"},{"code":"BE","value":0,"name":"Belgium"},{"code":"BZ","value":0,"name":"Belize"},{"code":"BJ","value":0,"name":"Benin"},{"code":"BM","value":0,"name":"Bermuda"},{"code":"BT","value":0,"name":"Bhutan"},{"code":"BO","value":0,"name":"Bolivia"},{"code":"BA","value":0,"name":"Bosnia and Herzegovina"},{"code":"BW","value":0,"name":"Botswana"},{"code":"BR","value":0,"name":"Brazil"},{"code":"BN","value":0,"name":"Brunei Darussalam"},{"code":"BG","value":0,"name":"Bulgaria"},{"code":"BF","value":0,"name":"Burkina Faso"},{"code":"BI","value":0,"name":"Burundi"},{"code":"KH","value":0,"name":"Cambodia"},{"code":"CM","value":0,"name":"Cameroon"},{"code":"CA","value":0,"name":"Canada"},{"code":"CV","value":0,"name":"Cape Verde"},{"code":"KY","value":0,"name":"Cayman Islands"},{"code":"CF","value":0,"name":"Central African Republic"},{"code":"TD","value":0,"name":"Chad"},{"code":"CL","value":0,"name":"Chile"},{"code":"CN","value":0,"name":"China"},{"code":"CO","value":0,"name":"Colombia"},{"code":"KM","value":0,"name":"Comoros"},{"code":"CD","value":0,"name":"Congo, Dem. Rep."},{"code":"CG","value":0,"name":"Congo, Rep."},{"code":"CR","value":0,"name":"Costa Rica"},{"code":"CI","value":0,"name":"Cote d'Ivoire"},{"code":"HR","value":0,"name":"Croatia"},{"code":"CU","value":0,"name":"Cuba"},{"code":"CW","value":0,"name":"Curacao"},{"code":"CY","value":0,"name":"Cyprus"},{"code":"CZ","value":0,"name":"Czech Republic"},{"code":"DK","value":0,"name":"Denmark"},{"code":"DJ","value":0,"name":"Djibouti"},{"code":"DM","value":0,"name":"Dominica"},{"code":"DO","value":0,"name":"Dominican Republic"},{"code":"EC","value":0,"name":"Ecuador"},{"code":"EG","value":0,"name":"Egypt, Arab Rep."},{"code":"SV","value":0,"name":"El Salvador"},{"code":"GQ","value":0,"name":"Equatorial Guinea"},{"code":"ER","value":0,"name":"Eritrea"},{"code":"EE","value":0,"name":"Estonia"},{"code":"ET","value":0,"name":"Ethiopia"},{"code":"FO","value":0,"name":"Faeroe Islands"},{"code":"FJ","value":0,"name":"Fiji"},{"code":"FI","value":0,"name":"Finland"},{"code":"FR","value":0,"name":"France"},{"code":"PF","value":0,"name":"French Polynesia"},{"code":"GA","value":0,"name":"Gabon"},{"code":"GM","value":0,"name":"Gambia, The"},{"code":"GE","value":0,"name":"Georgia"},{"code":"DE","value":0,"name":"Germany"},{"code":"GH","value":0,"name":"Ghana"},{"code":"GR","value":0,"name":"Greece"},{"code":"GL","value":0,"name":"Greenland"},{"code":"GD","value":0,"name":"Grenada"},{"code":"GU","value":0,"name":"Guam"},{"code":"GT","value":0,"name":"Guatemala"},{"code":"GN","value":0,"name":"Guinea"},{"code":"GW","value":0,"name":"Guinea-Bissau"},{"code":"GY","value":0,"name":"Guyana"},{"code":"HT","value":0,"name":"Haiti"},{"code":"HN","value":0,"name":"Honduras"},{"code":"HK","value":0,"name":"Hong Kong SAR, China"},{"code":"HU","value":0,"name":"Hungary"},{"code":"IS","value":0,"name":"Iceland"},{"code":"IN","value":0,"name":"India"},{"code":"ID","value":0,"name":"Indonesia"},{"code":"IR","value":0,"name":"Iran, Islamic Rep."},{"code":"IQ","value":0,"name":"Iraq"},{"code":"IE","value":0,"name":"Ireland"},{"code":"IM","value":0,"name":"Isle of Man"},{"code":"IL","value":0,"name":"Israel"},{"code":"IT","value":0,"name":"Italy"},{"code":"JM","value":0,"name":"Jamaica"},{"code":"JP","value":0,"name":"Japan"},{"code":"JO","value":0,"name":"Jordan"},{"code":"KZ","value":0,"name":"Kazakhstan"},{"code":"KE","value":0,"name":"Kenya"},{"code":"KI","value":0,"name":"Kiribati"},{"code":"KP","value":0,"name":"Korea, Dem. Rep."},{"code":"KR","value":0,"name":"Korea, Rep."},{"code":"XK","value":0,"name":"Kosovo"},{"code":"KW","value":0,"name":"Kuwait"},{"code":"KG","value":0,"name":"Kyrgyz Republic"},{"code":"LA","value":0,"name":"Lao PDR"},{"code":"LV","value":0,"name":"Latvia"},{"code":"LB","value":0,"name":"Lebanon"},{"code":"LS","value":0,"name":"Lesotho"},{"code":"LR","value":0,"name":"Liberia"},{"code":"LY","value":0,"name":"Libya"},{"code":"LI","value":0,"name":"Liechtenstein"},{"code":"LT","value":0,"name":"Lithuania"},{"code":"LU","value":0,"name":"Luxembourg"},{"code":"MO","value":0,"name":"Macao SAR, China"},{"code":"MK","value":0,"name":"Macedonia, FYR"},{"code":"MG","value":0,"name":"Madagascar"},{"code":"MW","value":0,"name":"Malawi"},{"code":"MY","value":0,"name":"Malaysia"},{"code":"MV","value":0,"name":"Maldives"},{"code":"ML","value":0,"name":"Mali"},{"code":"MT","value":0,"name":"Malta"},{"code":"MH","value":0,"name":"Marshall Islands"},{"code":"MR","value":0,"name":"Mauritania"},{"code":"MU","value":0,"name":"Mauritius"},{"code":"YT","value":0,"name":"Mayotte"},{"code":"MX","value":0,"name":"Mexico"},{"code":"FM","value":0,"name":"Micronesia, Fed. Sts."},{"code":"MD","value":0,"name":"Moldova"},{"code":"MC","value":0,"name":"Monaco"},{"code":"MN","value":0,"name":"Mongolia"},{"code":"ME","value":0,"name":"Montenegro"},{"code":"MA","value":0,"name":"Morocco"},{"code":"MZ","value":0,"name":"Mozambique"},{"code":"MM","value":0,"name":"Myanmar"},{"code":"NA","value":0,"name":"Namibia"},{"code":"NP","value":0,"name":"Nepal"},{"code":"NL","value":0,"name":"Netherlands"},{"code":"NC","value":0,"name":"New Caledonia"},{"code":"NZ","value":0,"name":"New Zealand"},{"code":"NI","value":0,"name":"Nicaragua"},{"code":"NE","value":0,"name":"Niger"},{"code":"NG","value":0,"name":"Nigeria"},{"code":"MP","value":0,"name":"Northern Mariana Islands"},{"code":"NO","value":0,"name":"Norway"},{"code":"OM","value":0,"name":"Oman"},{"code":"PK","value":0,"name":"Pakistan"},{"code":"PW","value":0,"name":"Palau"},{"code":"PA","value":0,"name":"Panama"},{"code":"PG","value":0,"name":"Papua New Guinea"},{"code":"PY","value":0,"name":"Paraguay"},{"code":"PE","value":0,"name":"Peru"},{"code":"PH","value":0,"name":"Philippines"},{"code":"PL","value":0,"name":"Poland"},{"code":"PT","value":0,"name":"Portugal"},{"code":"PR","value":0,"name":"Puerto Rico"},{"code":"WA","value":0,"name":"Qatar"},{"code":"RO","value":0,"name":"Romania"},{"code":"RU","value":0,"name":"Russian Federation"},{"code":"RW","value":0,"name":"Rwanda"},{"code":"WS","value":0,"name":"Samoa"},{"code":"SM","value":0,"name":"San Marino"},{"code":"ST","value":0,"name":"Sao Tome and Principe"},{"code":"SA","value":0,"name":"Saudi Arabia"},{"code":"SN","value":0,"name":"Senegal"},{"code":"RS","value":0,"name":"Serbia"},{"code":"SC","value":0,"name":"Seychelles"},{"code":"SL","value":0,"name":"Sierra Leone"},{"code":"SG","value":0,"name":"Singapore"},{"code":"SK","value":0,"name":"Slovak Republic"},{"code":"SI","value":0,"name":"Slovenia"},{"code":"SB","value":0,"name":"Solomon Islands"},{"code":"SO","value":0,"name":"Somalia"},{"code":"ZA","value":0,"name":"South Africa"},{"code":"SS","value":0,"name":"South Sudan"},{"code":"ES","value":0,"name":"Spain"},{"code":"LK","value":0,"name":"Sri Lanka"},{"code":"KN","value":0,"name":"St. Kitts and Nevis"},{"code":"LC","value":0,"name":"St. Lucia"},{"code":"MF","value":0,"name":"St. Martin (French part)"},{"code":"VC","value":0,"name":"St. Vincent and the Grenadines"},{"code":"SD","value":0,"name":"Sudan"},{"code":"SR","value":0,"name":"Suriname"},{"code":"SZ","value":0,"name":"Swaziland"},{"code":"SE","value":0,"name":"Sweden"},{"code":"CH","value":0,"name":"Switzerland"},{"code":"SY","value":0,"name":"Syrian Arab Republic"},{"code":"TJ","value":0,"name":"Tajikistan"},{"code":"TZ","value":0,"name":"Tanzania"},{"code":"TH","value":0,"name":"Thailand"},{"code":"TP","value":0,"name":"Timor-Leste"},{"code":"TG","value":0,"name":"Togo"},{"code":"TO","value":0,"name":"Tonga"},{"code":"TT","value":0,"name":"Trinidad and Tobago"},{"code":"TN","value":0,"name":"Tunisia"},{"code":"TR","value":0,"name":"Turkey"},{"code":"TM","value":0,"name":"Turkmenistan"},{"code":"TC","value":0,"name":"Turks and Caicos Islands"},{"code":"TV","value":0,"name":"Tuvalu"},{"code":"UG","value":0,"name":"Uganda"},{"code":"UA","value":0,"name":"Ukraine"},{"code":"AE","value":0,"name":"United Arab Emirates"},{"code":"UK","value":0,"name":"United Kingdom"},{"code":"US","value":0,"name":"United States"},{"code":"UY","value":0,"name":"Uruguay"},{"code":"UZ","value":0,"name":"Uzbekistan"},{"code":"VU","value":0,"name":"Vanuatu"},{"code":"VE","value":0,"name":"Venezuela, RB"},{"code":"VN","value":0,"name":"Vietnam"},{"code":"VI","value":0,"name":"Virgin Islands (U.S.)"},{"code":"PS","value":0,"name":"West Bank and Gaza"},{"code":"EH","value":0,"name":"Western Sahara"},{"code":"YE","value":0,"name":"Yemen, Rep."},{"code":"ZM","value":0,"name":"Zambia"},{"code":"ZW","value":0,"name":"Zimbabwe"}]);;angular.module('Dashboard').
     constant('WIDGET_DEFAULT_DEFINITION', {
         title: 'new widget',
         size: { width: 1, height: 1 },
@@ -260,10 +261,20 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
     ]);angular.module('Dashboard').
     service('DashboardOptimizeService', ['DASHYDASH_SETTINGS', '$window', function(DASHYDASH_SETTINGS, $window){
 
+        /**
+         * get the widget width from the window width
+         * @param  {Object} widthContainer angular node
+         * @param  {integer} nbCols         mac amount of column
+         * @return {float}                widget width
+         */
         this.widgetWidth = function(widthContainer, nbCols) {
             return (widthContainer / nbCols) - DASHYDASH_SETTINGS.margin * 2;
         }
 
+        /**
+         * get the current displayable amount of color
+         * @return {integer} amount of column
+         */
         this.amountOfColumn = function() {
             var width = angular.element($window).width()
             ,   amount = DASHYDASH_SETTINGS.columns.xl;
@@ -291,6 +302,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
         $local.exportModalVisible = false;
         $local.exportModalLocked = false;
 
+        /**
+         * LISTENER - Hide the export popup when triggered
+         */
         $scope.$on('hide', function() {
             if(!$local.exportModalLocked) {
                 $local.exportModalVisible = false;
@@ -298,6 +312,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             }
         });
 
+        /**
+         * initialize the dashboard list and the current dashboard
+         * in order to use them in the managed view
+         * @param  {Function} callback
+         */
         function getDashboards(callback) {
             DashboardFactory($scope).all(function(data) {
                 for(var i = 0; i < data.length; i++)
@@ -308,6 +327,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             })
         }
 
+        /**
+         * LISTENER - triggered when a route angular is setted
+         * - if the routing doesnt contains the dashboard id, the angular view is reloaded
+         * - else juste set the current user and load the angular view
+         */
         $scope.$on('$routeChangeSuccess', function() {
 
             var next = function() {
@@ -348,6 +372,10 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
         });
 
+        /**
+         * delete the selected dashboard and all his widgets
+         * @param  {Object} $event Angular Event
+         */
         $local.delete = function($event) {
             if($event) {
                 $event.stopPropagation();
@@ -365,6 +393,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             })
         }
 
+        /**
+         * display the export modal
+         */
         $local.showExportModal = function() {
             $scope.Overlay.activated = true;
             $local.exportModalVisible = true;
@@ -379,6 +410,10 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
         $local.icons = DASHBOARD_ICONS;
 
+        /**
+         * location routing - navigate to an other dashboard
+         * @param  {string} location path
+         */
         $local.location = function(location) {
             $scope.Dashboard.lockRouteChange = false;
             $location.path('/' + location);
@@ -429,15 +464,26 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 $scope._flip._active = !$scope._flip._active;
             };
 
+        /**
+         * LISTNER - Hide the export modal when called
+         */
         $scope.$on('hide_export_modal', function() {
             if($scope._flip)
                 $scope._flip._active = false;
         });
 
+        /**
+         * set the export url 
+         * @param  {string} fileType
+         */
         $local.showExportDetails = function(fileType) {
             $local.exportUrl = '/api/export/' + fileType;
         };
 
+        /**
+         * add a condition to the selected export filter
+         * @param {integer} index index of the targeted filter
+         */
         $local.addCondition = function(index) {
             if(!$local.filters[index].conditions)
                 $local.filters[index].conditions = [];
@@ -448,6 +494,12 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             });
         };
 
+        /**
+         * format the value in order to display it in the managed view
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         * @return {string}             formatted string
+         */
         $local.getValueToShow = function(filterIndex, valueIndex) {
             var value = $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex];
             var valueToShow = value;
@@ -458,6 +510,13 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             }
             return valueToShow;
         }
+
+        /**
+         * manage the formatting value string to object - object to string
+         * Date case
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         */
         $local.switchDateNow = function(filterIndex, valueIndex) {
             if($local.filters[$local.currentFilter].conditions[filterIndex] && $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex] !== undefined) {
                 if(typeof $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex] == 'object')
@@ -470,6 +529,15 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     };
             }
         }
+
+
+        /**
+         * manage the day manipulation in case of complexe value
+         * Date case 
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         * @param  {string} type        manipulation type {ADD | SUB}
+         */
         $local.switchDateAdd = function(filterIndex, valueIndex, type) {
             if($local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].name) {
                 if($local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].apply == type)
@@ -481,12 +549,22 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                         $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].apply = 'ADD';
             }
         }
+
+        /**
+         * initialize the object value into 0 when a native kpi is selected
+         * @param  {integer} filterIndex filter index
+         * @param  {Object} kpi         Kpi
+         */
         $local.transformDateValues = function(filterIndex, kpi) {
             for(var i = 0; i < $local.filters[$local.currentFilter].conditions[filterIndex].value.length; i++)
                 if(typeof $local.filters[$local.currentFilter].conditions[filterIndex].value[i] == 'object' && kpi.format != 'date')
                     $local.filters[$local.currentFilter].conditions[filterIndex].value[i] = '0';
         }
 
+        /**
+         * remove a filter
+         * @param  {integer} index index
+         */
         $local.removeFilter = function(index) {
             if(index == $local.currentFilter)
                 $local.currentFilter = index - 1;
@@ -494,6 +572,10 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             $local.filters.splice(index, 1);
         }
 
+        /**
+         * [addKpi description]
+         * @param {[type]} kpiIndex [description]
+         */
         $local.addKpi = function(kpiIndex) {
             options = { name: QUERY_BUILDER['count.user'].index};
             $local.selectedKpis[kpiIndex] = {
@@ -505,16 +587,30 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
         $local.addKpi(0);
 
+        /**
+         * select a new kpi
+         * @param  {integer} kpiIndex kpi index
+         * @param  {integer} kpi      Kpi
+         */
         $local.changeKpi = function(kpiIndex, kpi) {
             $local.selectedKpis[kpiIndex] = {};
             $local.selectedKpis[kpiIndex].kpi = kpi;
             $local.selectedKpis[kpiIndex].options = {};
         };
+
+        /**
+         * remove a Kpi
+         * @param  {integer} kpiIndex Kpi index
+         */
         $local.removeKpi = function(kpiIndex) {
             $local.selectedKpis.splice(kpiIndex, 1);
         };
 
-        $local._formatFilters = function() {
+        /**
+         * manage the filter condition values
+         * format in case of between on in operator to an array of value 
+         */
+        $local.formatFilters = function() {
             for(var i = 0; i < $local.filters.length; i++)
                 if($local.filters[i].conditions)
                     for(var j = 0; j < $local.filters[i].conditions.length; j++) {
@@ -558,7 +654,10 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     }
         }
 
-        $local._save = function() {
+        /**
+         * save the export configuration in to order to send it later
+         */
+        $local.save = function() {
             var configuration = {filters: []}
             ,   options;
             configuration.metrics = [];
@@ -574,7 +673,7 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                         configuration.segments.push(options);
                 }
 
-            $local._formatFilters();
+            $local.formatFilters();
 
             for(var i = 0; i < $local.filters.length; i++) {
                 configuration.filters.push({});
@@ -596,17 +695,15 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 if(!configuration.filters[i].conditions || !configuration.filters[i].conditions.length)
                     configuration.filters.splice(i, 1);
 
-            return configuration;
-
-        };
-
-        $local.save = function() {
-            $local.configuration = $local._save();
+            $local.configuration = configuration;
             angular.element('form input').val(JSON.stringify($local.configuration));
 
             $scope.$broadcast('start_post_download');
         };
 
+        /**
+         * call the capturing service and generate a screen shot of the current dashboard
+         */
         $local.capture = function() {
             var $board = angular.element('.dd-board');
             $scope.Dashboard.exportModalLocked = true;
@@ -631,6 +728,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
         $local.widgets = WIDGET_TYPE;
 
+        /**
+         * create a new widget and append it to the current dashboard
+         * @param  {Object} widget Widget configuration
+         * @param  {integer} width  base width
+         */
         $local.create = function(widget, width) {
             var definition = {
                 size: {
@@ -661,6 +763,10 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
         $local.metrics = {};
 
         if($scope._flip)
+            /**
+             * override the active function of the flip directive
+             * manage back widget activation and the first tab initializing
+             */
             $scope._flip.active = function() {
                 $local.tab = 'data';
                 $scope._flip._active = !$scope._flip._active;
@@ -695,6 +801,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             }
         }
 
+        /**
+         * save the new widget configuration and disable the flip
+         */
         $local.save = function() {
             $scope._flip._active = !$scope._flip._active;
             $local.tab = '';
@@ -703,6 +812,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             $scope._dashydash.serialize();
         }
 
+        /**
+         * resize the current widget and update the dashydash widget definition
+         * @param  {Object} size            widget size
+         * @param  {Boolean} resizeKpisArray manage the amount of kpis selectable
+         */
         $local.resize = function(size, resizeKpisArray) {
             resizeKpisArray = resizeKpisArray || false;
             size = size || {};
@@ -724,10 +838,16 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             }
         }
 
+        /**
+         * delete a widget
+         */
         $local.delete = function() {
             $widgetScope.widget.delete();
         }
 
+        /**
+         * add a new filter to the current widget
+         */
         $local.addFilter = function() {
             $widgetScope.widget.filters[0].conditions.push({
                 kpi: QUERY_BUILDER['count.user'],
@@ -735,6 +855,13 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 value: ['0', '0']
             })
         }
+
+        /**
+         * format the value in order to display it in the managed view
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         * @return {string}             formatted string
+         */
         $local.getValueToShow = function(filterIndex, valueIndex) {
             var value = $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex];
             var valueToShow = value;
@@ -745,6 +872,12 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             }
             return valueToShow;
         }
+
+        /**
+         * date type case => use the sql now function
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         */
         $local.switchDateNow = function(filterIndex, valueIndex) {
             if($widgetScope.widget.filters[0].conditions[filterIndex] && $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] !== undefined) {
                 if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] == 'object')
@@ -757,6 +890,13 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     };
             }
         }
+
+        /**
+         * date type case => use sql date sub and date add
+         * @param  {integer} filterIndex filter index
+         * @param  {integer} valueIndex  value index
+         * @param  {string} type  method
+         */
         $local.switchDateAdd = function(filterIndex, valueIndex, type) {
             if($widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].name) {
                 if($widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply == type)
@@ -768,11 +908,22 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                         $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply = 'ADD';
             }
         }
+
+        /**
+         * initialize all value defined as object with a type different from date
+         * @param  {integer} filterIndex filter index
+         * @param  {Object} kpi         Kpi
+         */
         $local.transformDateValues = function(filterIndex, kpi) {
             for(var i = 0; i < $widgetScope.widget.filters[0].conditions[filterIndex].value.length; i++)
                 if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[i] == 'object' && kpi.format != 'date')
                     $widgetScope.widget.filters[0].conditions[filterIndex].value[i] = '0';
         }
+
+        /**
+         * add a new metric to the current configuration
+         * @param {Object} options Kpi Options
+         */
         $local.addMetric = function(options) {
             options = angular.extend({ name: QUERY_BUILDER['count.user'].index}, options);
             $widgetScope.widget.metrics.push({
@@ -780,6 +931,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 options: options
             })
         }
+
+        /**
+         * add a new segment to current configuration
+         * @param {Object} options Kpi options
+         */
         $local.addSegment = function(options) {
             options = angular.extend({ name: QUERY_BUILDER['user.country'].index}, options);
             $widgetScope.widget.segments.push({
@@ -787,6 +943,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 options: options
             })
         }
+
+        /**
+         * add a new kpi to the current configuration
+         * @param {Object} options Kpi Options
+         */
         $local.addKpi = function(kpiIndex) {
             options = { name: QUERY_BUILDER['count.user'].index};
             $widgetScope.widget.kpis[kpiIndex] = {
@@ -795,6 +956,12 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             }
             $local.addMetric();
         }
+
+        /**
+         * add the selected kpi to the good array
+         * @param  {integer} kpiIndex kpi index
+         * @param  {Object} kpi      Kpi
+         */
         $local.changeKpi = function(kpiIndex, kpi) {
             if(kpi.type == "metric")
                 $widgetScope.widget.metrics.push({
@@ -810,6 +977,12 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             $local.removeKpi(kpiIndex, false);
             $widgetScope.widget.kpis[kpiIndex].kpi = kpi;
         }
+
+        /**
+         * remove the kpi from the current configuration
+         * @param  {integer} kpiIndex kpi index
+         * @param  {Boolean} clean    remove all option
+         */
         $local.removeKpi = function(kpiIndex, clean) {
             clean = clean || false;
             for(var i = $widgetScope.widget.metrics.length - 1; i >= 0 ; i--)
@@ -837,6 +1010,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
 		$local.inLoading = false;
 
+        /**
+         * LISTENER - triggered when the widget is loaded
+         * update the inLoading attribute in order to display or not the loader
+         * @param  {Boolean} value inLoading status
+         */
 		$scope.$watch(widgetScopeName + '.widget.inLoading', function(value) {
 			$local.inLoading = !!value;
 		})
@@ -858,6 +1036,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             ,   $local = context.local || {}
             ,   controller = context.controller || {};
 
+            /**
+             * call the api in order to create a new dashboard
+             * @param  {Object}   dashboard { name:.., icon:..}
+             * @param  {Function} callback 
+             */
             prototype.create = function(dashboard, callback) {
 
                 $http({ method: 'POST', url: '/api/dashboards/', data: dashboard }).
@@ -865,6 +1048,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     error(function() { callback.call(this, null); console.error('an error occured during the dashboard creation'); });
             };
 
+            /**
+             * call the api in order to update the selected dashboard
+             * @param  {Object}   dashboard { name: .., icon: ..}
+             * @param  {Function} callback 
+             */
             prototype.update = function(dashboard, callback) {
 
                 $http({ method: 'PUT', url: '/api/dashboards/' + dashboard.id, data: dashboard }).
@@ -872,6 +1060,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     error(function() { callback.call(this, null); console.error('an error occured during the dashboard update'); });
             };
 
+            /**
+             * remove the dashboard from the database
+             * @param  {integer}   dashboardId 
+             * @param  {Function} callback    
+             */
             prototype.remove = function(dashboardId, callback) {
 
                 $http({ method: 'DELETE', url: '/api/dashboards/' + dashboardId }).
@@ -879,6 +1072,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     error(function() { callback.call(this, null); console.error('an error occured during the dashboard deletion'); });
             };
 
+            /**
+             * retrieve a dashboard from the database
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {Function} callback    
+             */
             prototype.get = function(dashboardId, callback) {
 
                 $http({ method: 'GET', url: '/api/dashboards/' + dashboardId }).
@@ -886,6 +1084,10 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     error(function() { callback.call(this, null); console.error('an error occured during the dashboard recuperation'); });
             };
 
+            /**
+             * retrieve all the dashboards
+             * @param  {Function} callback 
+             */
             prototype.all = function(callback) {
 
                 $http({ method: 'GET', url: '/api/dashboards' }).
@@ -909,6 +1111,12 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             ,   $local = context.local || {}
             ,   controller = context.controller || {};
 
+            /**
+             * create a new widget and append it to the selected dashboard
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {Object}   definition  widget definition
+             * @param  {Function} callback    
+             */
             prototype.create = function(dashboardId, definition, callback) {
 
                 $http({ method: 'POST', url: '/api/dashboards/' + dashboardId + '/widgets', data: definition }).
@@ -916,6 +1124,12 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     error(function() { console.error('an error occured during the widget creation'); });
             };
 
+            /**
+             * remove the widget from the dashboard
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {integer}   widgetId    wdiget id
+             * @param  {Function} callback    
+             */
             prototype.remove = function(dashboardId, widgetId, callback) {
 
                 $http({ method: 'DELETE', url: '/api/dashboards/' + dashboardId + '/widgets/' + widgetId}).
@@ -924,6 +1138,12 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
             };
 
+            /**
+             * retrieve a widget from the database
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {integer}   widgetId    widget id
+             * @param  {Function} callback    
+             */
             prototype.get = function(dashboardId, widgetId, callback) {
 
                 $http({ method: 'GET', url: '/api/dashboards/' + dashboardId + '/widgets/' + widgetId }).
@@ -931,6 +1151,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     error(function() { console.error('an error occured during the widget recuperation'); });
             };
 
+            /**
+             * retrieve a widget from the database thanks to the dashboard id
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {Function} callback    
+             */
             prototype.getByDashboardId = function(dashboardId, callback) {
 
                 $http({ method: 'GET', url: '/api/dashboards/' + dashboardId + '/widgets' }).
@@ -938,6 +1163,12 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     error(function() { console.error('an error occured during the widget recuperation'); });
             };
 
+            /**
+             * retrieve statistics linked to a widget from the database
+             * @param  {integer}   dashboardId dashboard id
+             * @param  {integer}   widgetId    widget id
+             * @param  {Function} callback    
+             */
             prototype.getData = function(dashboardId, widgetId, callback) {
 
                 $http({ method: 'GET', url: '/api/dashboards/' + dashboardId + '/widgets/' + widgetId + '/data' }).
@@ -945,6 +1176,12 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     error(function() { console.error('an error occured during the data recuperation'); });
             };
 
+            /**
+             * update the widget position
+             * @param  {integer}   dashboardId   dashboard id
+             * @param  {Object}   serialization widget serialization
+             * @param  {Function} callback      
+             */
             prototype.updatePosition = function(dashboardId, serialization, callback) {
 
                 $http({method: 'PUT', url: '/api/dashboards/' + dashboardId + '/widgets/position', data: JSON.stringify(serialization)}).
@@ -952,6 +1189,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     error(function() { console.error('an error occured when trying to save widgets position'); })
             }
 
+            /**
+             * update the selected widget
+             * @param  {Object}   definition widget definition
+             * @param  {Function} callback   
+             */
             prototype.update = function(definition, callback) {
 
                 $http({method: 'PUT', url: '/api/dashboards/' + definition.dashboardid + '/widgets/' + definition.id, data: JSON.stringify(definition)}).
@@ -1014,6 +1256,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 				var $local = $scope._formPostDownloader
 				,	template = '<iframe name="downloadFrame" id="downloadIFrame" style="display: none;" src="" />';
 
+				/**
+				 * download the targeted export thanks to the current generate form
+				 */
 				$local.download = function() {
 					angular.element('#downloadIFrame').remove();
 					angular.element('body').append(template);
@@ -1032,6 +1277,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 var $local = $scope._dashboard = {}
                 ,   self = this;
 
+                /**
+                 * manage the dashboard edit mode
+                 */
                 $local.edit = function() {
                     if($local.isSelected) {
                         $local.dashboard.editMode = true;
@@ -1040,11 +1288,20 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     }
                 }
 
+                /**
+                 * return true if the current widget is selected
+                 * @return {Boolean} isSelected
+                 */
                 $local.isSelected = function() {
                     return $scope.Dashboard.currentDashboard.id == $local.dashboard.id
                 }
 
-                $local.validEdit = function(event) {
+                /**
+                 * create or update a new dashboard
+                 * managed in the dashboard left menu
+                 * @param  {Object} $event Angular Event
+                 */
+                $local.validEdit = function($event) {
                     var keyCode = event ? event.keyCode : -1;
                     if(keyCode == 13 || keyCode == -1) {
                         $local.dashboard.editMode = false;
@@ -1073,6 +1330,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     }
                 };
 
+                /**
+                 * cancel the edition mode of the current dashboard
+                 */
                 $local.cancelEdit = function() {
                     $local.dashboard.editMode = false;
                     $local.dashboard.title = $local.oldTitle;
@@ -1097,6 +1357,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                         break;
                     }
 
+                /**
+                 * LISTENER - triggered when tu current dashboard is update or initialized
+                 */
                 $scope.$watch('Dashboard.currentDashboard', function() {
                     if(!$local.isSelected() && $local.dashboard.editMode) {
                         $local.dashboard.editMode = false;
@@ -1137,8 +1400,13 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 self.options = {};
 
 
-                //**************** gestion d'event ****************//
+                //**************** Events management ****************//
 
+                /**
+                 * LISTENER - create a new widget when triggered
+                 * @param  {Object} scope      Angular scope
+                 * @param  {Object} definition widget definition
+                 */
                 $scope.$on('create_widget', function(scope, definition) {
                     var options = {};
                     _.merge(options, WIDGET_DEFAULT_DEFINITION, definition);
@@ -1148,17 +1416,30 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     })
                 });
 
+                /**
+                 * LISTENER - delete the selected widget
+                 * @param  {Object} scope   Angular Scope
+                 * @param  {Object} options widget options
+                 */
                 $scope.$on('delete_widget', function(scope, options) {
                     delete $local.widgets[options.id];
                     self.deleteWidget(options.node);
                 });
 
+                /**
+                 * LISTENER - resize the selected widget
+                 * @param  {Object} scope   Angular Scope
+                 * @param  {Object} options widget options
+                 */
                 $scope.$on('resize_widget', function(scope, options) {
                     self.resizeWidget(options.node, options.size, options.callback);
                 });
 
                 //**************** dashydash management ****************//
 
+                /**
+                 * serialize the current dashboard configuration
+                 */
                 $local.serialize = function() {
                     var currentAmountOfColumn = DashboardOptimizeService.amountOfColumn()
                     if(DASHYDASH_SETTINGS.columns.xs != currentAmountOfColumn) {
@@ -1168,11 +1449,21 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     }
                 }
 
+                /**
+                 * remove the widget node
+                 * @param  {Object} $node angular node
+                 */
                 self.deleteWidget = function($node) {
                     self.dashydash.remove_widget($node);
                     $local.serialize();
                 }
 
+                /**
+                 * resize the widget selected
+                 * @param  {Object}   node     Angular node
+                 * @param  {Object}   size     widget size - width & height
+                 * @param  {Function} callback
+                 */
                 self.resizeWidget = function(node, size, callback) {
                     self.dashydash.resize_widget( node, size.width, size.height, function() {
                         $local.serialize();
@@ -1180,6 +1471,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     });
                 }
 
+                /**
+                 * instanciate and add a new widget to the current dashboard
+                 * @param {Object}   definition widget definition
+                 * @param {Function} callback
+                 */
                 self.addWidget = function(definition, callback) {
                     var options = {}
                     ,   currentAmountOfColumn = DashboardOptimizeService.amountOfColumn();
@@ -1226,6 +1522,10 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 if(!attributes.dashydash)
                     throw 'dashydash property cannot be empty';
 
+                /**
+                 * LISTNER - called when a dashboard is selected
+                 * @param  {Object} definition dashboard definition
+                 */
                 $scope.$watch(attributes.dashydash, function(definition) {
                     if(!definition.id)
                         return false;
@@ -1247,8 +1547,14 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
                 //**************** widgets management ****************//
 
+                /**
+                 * destroy the current instance of dashyDash
+                 */
                 function destroy() { self.dashydash && self.dashydash.destroy(true, true, false); }
 
+                /**
+                 * generate a new dashydash grid
+                 */
                 function build() {
                     if($node.width() == self.options.width)
                         return true;
@@ -1275,11 +1581,18 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     linked = true;
                 }
 
+                /**
+                 * throttle the dashydash grid building
+                 */
                 function buildDelayed() {
                     window.clearTimeout(self.throttleTimer);
                     self.throttleTimer = window.setTimeout(build, 500);
                 }
 
+                /**
+                 * dump all currents dashboard widgets into a pool node
+                 * in order to save them from the dashydash destruction
+                 */
                 function copyWidgetInPool() {
                     $board.find('.dd-widget').each(function() {
                         var $this = angular.element(this);
@@ -1294,6 +1607,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                     })
                 }
 
+                /**
+                 * retrieve all widget nodes from the pool
+                 */
                 function reloadFromPool() {
 
                     $pool.find('.dd-widget').each(function() {
@@ -1304,7 +1620,6 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                         ,   widgetWidth = $local.widgets[widgetId].size.width ? $local.widgets[widgetId].size.width : dashydashWidth
                         ,   parameters = [ $this, ( widgetWidth > self.options.col ? 1 : widgetWidth ), dashydashHeight ];
 
-                        console.log($local.widgets[widgetId].size.width)
                         if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
                             $local.locked = false;
                             parameters.push(
@@ -1491,27 +1806,6 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
             }
         };
     }]);;angular.module('Dashboard').
-    provider('ExportProvider', function(){
-
-        this.$get = ['ClassService', '$window', function(ClassService, $window) {
-
-            var Export = function(options, context) {
-                var self = this;
-
-                self.kpis = [{}];
-            };
-
-            Export.prototype.save = function() {
-
-            };
-
-            Export.prototype.toString = function() {
-                return 'Export';
-            };
-
-            return Export;
-        }]
-    });angular.module('Dashboard').
     provider('WidgetProvider', function(){
 
         this.$get = ['WIDGET_DEFAULT_SETTINGS', 'QUERY_BUILDER', 'WidgetFactory', '$window', '$timeout', function(WIDGET_DEFAULT_SETTINGS, QUERY_BUILDER, WidgetFactory, $window, $timeout) {
@@ -1582,8 +1876,17 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 self.scope.$on('widget_refresh', function() { self.refresh(); })
             };
 
+            /**
+             * must be overriden
+             * called after data loading
+             * used to create the widget content
+             */
             Widget.prototype.init = function() { throw 'init method must be overriden'; };
 
+            /**
+             * PRIVATE
+             * format filter values in order to use them in the widget configuration
+             */
             Widget.prototype._formatFilters = function() {
                 var self = this;
 
@@ -1628,6 +1931,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 }
             }
 
+            /**
+             * PRIVATE
+             * generate a widget configuration
+             * @return {Object} widget data configuration
+             */
             Widget.prototype._save = function() {
                 var configuration = {}
                 ,   options
@@ -1674,6 +1982,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
             };
 
+            /**
+             * update the current widget with the new configuration
+             */
             Widget.prototype.save = function() {
                 var self = this
                 ,   definition = {}
@@ -1694,6 +2005,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
             }
 
+            /**
+             * get the datas linked to the current widget and call the init method
+             */
             Widget.prototype.load = function() {
                 var self = this;
                 self.inLoading = true;
@@ -1703,8 +2017,14 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 })
             };
 
+            /**
+             * must be overriden
+             */
             Widget.prototype.refresh = function() { };
 
+            /**
+             * delete the current widget
+             */
             Widget.prototype.delete = function() {
                 var self = this;
 
@@ -1713,6 +2033,11 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 })
             };
 
+            /**
+             * resize the current widget
+             * @param  {Object}   size     {width: .., height: ..}
+             * @param  {Function} callback 
+             */
             Widget.prototype.resize = function(size, callback) {
                 var self = this;
                 callback = callback || angular.noop;
@@ -1723,6 +2048,13 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 }});
             };
 
+            /**
+             * format the value passed through paramters
+             * @param  {MULTI} val   value
+             * @param  {string} type  
+             * @param  {integer} round decimal amount
+             * @return {MULTI}       formatted value
+             */
             Widget.prototype.getFormatedValue = function(val, type, round) {
                 switch(type) {
                     case 'date':
@@ -1765,6 +2097,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
                 var self = this
                 ,   $node = self.node.find('.widget-front-body')
@@ -2042,6 +2377,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 self.refresh();
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.save = function() {
                 var self = this
                 ,   definition = {}
@@ -2062,6 +2400,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 self.load();
             }
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {
                 var self = this;
                 self.node.find('.widget-front-body').highcharts(self.chartOptions);
@@ -2087,6 +2428,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
                 var self = this
                 ,   series = {}
@@ -2184,6 +2528,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 this.refresh();
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {
                 var self = this
 
@@ -2210,6 +2557,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
                 var self = this
                 ,   axisType = self.metrics[0].kpi.format;
@@ -2218,6 +2568,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 self.alias = self.metrics[0].kpi.formattedAlias;
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {}
 
             Widget.prototype.toString = function() {
@@ -2239,6 +2592,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
 
                 var self = this
@@ -2305,6 +2661,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 this.refresh();
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {
                 var self = this;
                 this.node.find('.widget-front-body').highcharts(this.chartOptions);
@@ -2330,6 +2689,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
             ClassService.extend(WidgetProvider, Widget);
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.init = function(data) {
                 var self = this
                 ,   datatype
@@ -2398,6 +2760,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
 
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype._save = function() {
                 var configuration = {}
                 ,   options
@@ -2439,6 +2804,9 @@ angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);;
                 return configuration;
             };
 
+            /**
+             * OVERRIDE
+             */
             Widget.prototype.refresh = function() {}
 
             Widget.prototype.toString = function() {
