@@ -28,6 +28,7 @@ article.dashboard-title i {
     color: #9E9E9E;
     position: absolute;
     right: -25px;
+    top: 0;
     cursor: pointer;
 }
 article.dashboard-title i:hover {
