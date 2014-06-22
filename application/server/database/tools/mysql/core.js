@@ -323,8 +323,10 @@ MysqlTools.query.compare = function(options, callback) {
 	if(typeof queries == 'string')
 		queries = [queries];
 
-	if(!options.filters || options.filters.length <= 0)
-		options.filters = { name: (options.filters[0] && options.filters[0].name ? options.filters[0].name : 'BASE') };
+	if(!options.filters || options.filters.length <= 0) {
+		options.filters = [];
+		options.filters[0] = { name: (options.filters[0] && options.filters[0].name ? options.filters[0].name : 'BASE') };
+	}
 
 	for(var aliasIndex = 0; aliasIndex<options.filters.length; aliasIndex++) {
 		names = [];
