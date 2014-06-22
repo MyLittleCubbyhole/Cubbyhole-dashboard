@@ -79,7 +79,7 @@ MysqlTools.query.generate = function(options) {
 		name = options.segments[i].name;
 		if(!!names[name])
 			continue;
-		
+
 		names[name] = true;
 		if(i > 0)
 			request += ',';
@@ -195,7 +195,7 @@ MysqlTools.query.generate = function(options) {
 
 
 	for(var i = 0; i<queries.length; i++) {
-		queryOperator =  options.filters[i] && options.filters[i].operator == 'OR' ? 'AND': 'OR'; 
+		queryOperator =  options.filters[i] && options.filters[i].operator == 'OR' ? 'AND': 'OR';
 		queries[i].union = queryOperator == 'OR' && !!queries[i].having && queries[i].having.length > 0 && queries[i].where && queries[i].where.length > 0;
 		if(queries[i].union)
 			queries[i].unionQuery = queries[i].request;
@@ -224,7 +224,7 @@ MysqlTools.query.generate = function(options) {
 	for(var i = 0; i<queries.length; i++)
 		if(!!queries[i].having && queries[i].having.length > 0) {
 			havingQuery = 'HAVING ' + queries[i].having.join(' ' + options.filters[i].operator + ' ') + ' ';
- 
+
 				if(queries[i].unionQuery)
 					queries[i].unionQuery += havingQuery;
 				else
@@ -324,7 +324,7 @@ MysqlTools.query.compare = function(options, callback) {
 		queries = [queries];
 
 	if(!options.filters || options.filters.length <= 0)
-		options.filters = [ { name: options.filters[0].name || 'BASE' } ];
+		options.filters = options.filters[0] && options.filters[0].name ? name: options.filters[0].name : 'BASE';
 
 	for(var aliasIndex = 0; aliasIndex<options.filters.length; aliasIndex++) {
 		names = [];
@@ -339,7 +339,7 @@ MysqlTools.query.compare = function(options, callback) {
 			name = options.metrics[i].name;
 			if(names[name])
 				continue;
-			
+
 			names[name] = true;
 			if(i > 0)
 				query += ',';
@@ -354,7 +354,7 @@ MysqlTools.query.compare = function(options, callback) {
 			name = options.segments[i].name;
 			if(names[name])
 				continue;
-			
+
 			names[name] = true;
 			if(i > 0)
 				query += ',';
