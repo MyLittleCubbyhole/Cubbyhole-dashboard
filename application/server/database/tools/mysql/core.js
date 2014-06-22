@@ -190,18 +190,20 @@ MysqlTools.query.generate = function(options) {
 	var havingQuery = ''
 	,	orderbyQuery =  ''
 	,	limit = ''
+	,	queryOperator = 'AND'
 	,	groupbyQuery = '';
 
 
 	for(var i = 0; i<queries.length; i++) {
-		queries[i].union = options.operator == 'OR' && !!queries[i].having && queries[i].having.length > 0 && queries[i].where && queries[i].where.length > 0;
+		queryOperator =  options.filters[i] && options.filters[i].operator == 'OR' ? 'AND': 'OR'; 
+		queries[i].union = queryOperator == 'OR' && !!queries[i].having && queries[i].having.length > 0 && queries[i].where && queries[i].where.length > 0;
 		if(queries[i].union)
 			queries[i].unionQuery = queries[i].request;
 	}
 
 	for(var i = 0; i<queries.length; i++)
 		if(!!queries[i].where && queries[i].where.length > 0)
-			queries[i].request += 'WHERE ' + queries[i].where.join(' ' + options.operator + ' ') + ' ';
+			queries[i].request += 'WHERE ' + queries[i].where.join(' ' + options.filters[i].operator + ' ') + ' ';
 
 	if(options.metrics.length > 0 && options.segments.length > 0) {
 		groupbyQuery += 'GROUP BY ';
@@ -221,8 +223,8 @@ MysqlTools.query.generate = function(options) {
 
 	for(var i = 0; i<queries.length; i++)
 		if(!!queries[i].having && queries[i].having.length > 0) {
-			havingQuery = 'HAVING ' + queries[i].having.join(' ' + options.operator + ' ') + ' ';
-
+			havingQuery = 'HAVING ' + queries[i].having.join(' ' + options.filters[i].operator + ' ') + ' ';
+ 
 				if(queries[i].unionQuery)
 					queries[i].unionQuery += havingQuery;
 				else
@@ -309,7 +311,6 @@ MysqlTools.query.makeJoin = function(tables) {
 }
 
 MysqlTools.query.compare = function(options, callback) {
-
 	var queries = MysqlTools.query.generate(options)
 	,	datas = []
 	,	query = 'SELECT '
@@ -323,9 +324,10 @@ MysqlTools.query.compare = function(options, callback) {
 		queries = [queries];
 
 	if(!options.filters || options.filters.length <= 0)
-		options.filters = [ { name: 'BASE' } ];
+		options.filters = [ { name: options.filters[0].name || 'BASE' } ];
 
 	for(var aliasIndex = 0; aliasIndex<options.filters.length; aliasIndex++) {
+		names = [];
 		currentAlias = options.filters[aliasIndex].name || aliasIndex;
 		currentAlias = currentAlias.toString().replace(' ', '');
 		alias.push( currentAlias );
