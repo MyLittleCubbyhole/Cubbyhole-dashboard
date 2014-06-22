@@ -1,3 +1,7 @@
+// PillowTAG : Export ne marche pas. Choix de 3 data et 2 filtres (avec un countrycode = XX dans chacun). 2 virgulles en trop à la fin des COALESCE, avant le from
+// PillowTAG : Export ne marche pas. Le deuxième filtre n'est pas pris en compte dans la comparaison, on se retrouve avec une valeur undefined
+// PillowTAG : OR non pris en compte sur les filtres d'un widget. Toujours en valeur AND.
+
 var MysqlTools = { query: {} }
 ,	Mysql = require(global.paths.server + '/database/mysql/core')
 ,	crypto = require('crypto')
