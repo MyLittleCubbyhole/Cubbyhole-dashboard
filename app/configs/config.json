@@ -1,0 +1,11 @@
+{
+	"server": {
+		"version": "v0",
+		"port": 6001,
+		"parallelizeInitialization": true
+	},
+	"databases": {},
+	"apidoc": {
+		"url": "/api/doc"
+	}
+}
