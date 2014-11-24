@@ -1,0 +1,1 @@
+angular.module('Home', ['jm.i18next']);
