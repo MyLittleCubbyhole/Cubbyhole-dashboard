@@ -1,1 +1,153 @@
-{}
+{
+	"query-builder": {
+		"kpi_definition": {
+			"special.firstpayment" : { "name": "id", "tables": ["user", "subscribe"], "apply": "DATEDIFF( MIN(s.datestart) , u.inscriptiondate )", "dependency": false, "alias": "first_payment_day", "group": false, "selectable": true },
+			"count.user": { "name": "count", "tables": ["user"], "apply": "count(distinct u.id)", "dependency": false, "alias": "count_user", "group": true, "selectable": true },
+			"count.plan": { "name": "count", "tables": ["plan"], "apply": "count(distinct p.id)", "dependency": false, "alias": "count_plan", "group": true, "selectable": true },
+			"count.payment": { "name": "count", "tables": ["payment"], "apply": "count(distinct pa.id)", "dependency": false, "alias": "count_payment", "group": true, "selectable": true },
+			"object.plan": { "name": "id", "tables": ["plan"], "apply": "p.id", "dependency": "plan.name", "alias": "plan_id", "group": false, "selectable": true },
+			"object.payment": { "name": "id", "tables": ["payment"], "apply": "pa.id", "dependency": false, "alias": "payment_id", "group": false, "selectable": true },
+			"object.dailyquota": { "name": "id", "tables": ["daily_quota"], "apply": "d.id", "dependency": false, "alias": "dailyquota_id", "group": false, "selectable": true },
+			"user.age": { "name": "age", "tables": ["user"], "apply": "ROUND(YEAR(NOW()) - YEAR(u.birthdate))", "dependency":false, "alias": "age", "group": false, "selectable": true },
+			"user.age.avg": { "name": "age", "tables": ["user"], "apply": "ROUND(AVG(YEAR(NOW()) - YEAR(u.birthdate)))", "dependency":false, "alias": "average_age", "group": false, "selectable": true },
+			"user.birthdate.year.number": { "name": "birthyear", "tables": ["user"], "apply": "YEAR(u.birthdate)", "dependency":false, "alias": "birthyear_number", "group": false, "selectable": true },
+			"user.birthdate.month.number": { "name": "birthmonth", "tables": ["user"], "apply": "MONTH(u.birthdate)", "dependency":false, "alias": "birthmonth_number", "group": true, "selectable": true },
+			"user.birthdate.day.number": { "name": "birthday", "tables": ["user"], "apply": "DAY(u.birthdate)", "dependency":false, "alias": "birthday_number", "group": false, "selectable": true },
+			"user.inscriptiondate.year.number": { "name": "inscriptiondate", "tables": ["user"], "apply": "YEAR(u.inscriptiondate)", "dependency":false, "alias": "inscriptionyear_number", "group": false, "selectable": true },
+			"user.inscriptiondate.month.number": { "name": "inscriptiondate", "tables": ["user"], "apply": "MONTH(u.inscriptiondate)", "dependency":false, "alias": "inscriptionmonth_number", "group": false, "selectable": true },
+			"user.inscriptiondate.day.number": { "name": "inscriptiondate", "tables": ["user"], "apply": "DAY(u.inscriptiondate)", "dependency":false, "alias": "inscriptionday_number", "group": false, "selectable": true },
+			"user.country": { "name": "country", "tables": ["user"], "apply": "u.country", "dependency":false, "alias": "country", "group": false, "selectable": true },
+			"user.countrycode": { "name": "countrycode", "tables": ["user"], "apply": "u.countrycode", "dependency":false, "alias": "countrycode", "group": false, "selectable": true },
+			"user.role": { "name": "role", "tables": ["user"], "apply": "u.roleid", "dependency":false, "alias": "role", "group": false, "selectable": true },
+			"user.storage.avg": { "name": "storage", "tables": ["user"], "apply": "ROUND(AVG(u.storage))", "dependency":false, "alias": "average_user_storage", "group": true, "selectable": true },
+			"user.storage": { "name": "storage", "tables": ["storage"], "apply": "SUM(st.value)", "dependency":false, "alias": "user_storage", "group": true, "selectable": true },
+			"user.storage.daily.avg": { "name": "storage", "tables": ["storage"], "apply": "ROUND(AVG(st.value))", "dependency":false, "alias": "average_daily_user_storage", "group": true, "selectable": true },
+			"plan.name": { "name": "name", "tables": ["plan"], "apply": "p.name", "dependency":false, "alias": "plan_name", "group": false, "selectable": true },
+			"plan.storage": { "name": "storage", "tables": ["plan"], "apply": "p.storage", "dependency":false, "alias": "plan_storage", "group": false, "selectable": true },
+			"plan.storage.avg": { "name": "storage", "tables": ["plan"], "apply": "ROUND(AVG(p.storage))", "dependency":false, "alias": "average_plan_storage", "group": true, "selectable": true },
+			"plan.uploadbandwidth": { "name": "uploadbandwidth", "tables": ["plan"], "apply": "SUM(p.uploadbandwidth)", "dependency":false, "alias": "uploadbandwidth", "group": true, "selectable": true },
+			"plan.uploadbandwidth.avg": { "name": "uploadbandwidth", "tables": ["plan"], "apply": "AVG(p.uploadbandwidth)", "dependency":false, "alias": "average_uploadbandwidth", "group": true, "selectable": true },
+			"plan.downloadbandwidth": { "name": "downloadbandwidth", "tables": ["plan"], "apply": "SUM(p.downloadbandwidth)", "dependency":false, "alias": "downloadbandwidth", "group": true, "selectable": true },
+			"plan.downloadbandwidth.avg": { "name": "downloadbandwidth", "tables": ["plan"], "apply": "AVG(p.downloadbandwidth)", "dependency":false, "alias": "average_downloadbandwidth", "group": true, "selectable": true },
+			"plan.quota": { "name": "quota", "tables": ["plan"], "apply": "p.quota", "dependency":false, "alias": "plan_quota", "group": false, "selectable": true },
+			"plan.quota.avg": { "name": "quota", "tables": ["plan"], "apply": "AVG(p.quota)", "dependency":false, "alias": "average_plan_quota", "group": true, "selectable": true },
+			"plan.price": { "name": "price", "tables": ["plan"], "apply": "p.price", "dependency":false, "alias": "plan_price", "group": false, "selectable": true },
+			"plan.price.avg": { "name": "price", "tables": ["plan"], "apply": "AVG(p.price)", "dependency":false, "alias": "average_plan_price", "group": true, "selectable": true },
+			"payment.amount": { "name": "amount", "tables": ["payment"], "apply": "SUM(pa.amount)", "dependency":false, "alias": "payment", "group": true, "selectable": true },
+			"payment.amount.avg": { "name": "amount", "tables": ["payment"], "apply": "AVG(pa.amount)", "dependency":false, "alias": "average_payment", "group": true, "selectable": true },
+			"payment.duration": { "name": "duration", "tables": ["payment"], "apply": "pa.duration", "dependency":false, "alias": "payment_duration", "group": false, "selectable": true },
+			"payment.duration.avg": { "name": "duration", "tables": ["payment"], "apply": "AVG(pa.duration)", "dependency":false, "alias": "average_payment_duration", "group": true, "selectable": true },
+			"payment.date.year.number": { "name": "date", "tables": ["payment"], "apply": "YEAR(pa.date)", "dependency":false, "alias": "payment_year_number", "group": false, "selectable": true },
+			"payment.date.month.number": { "name": "date", "tables": ["payment"], "apply": "MONTH(pa.date)", "dependency":false, "alias": "payment_month_number", "group": false, "selectable": true },
+			"payment.date.day.number": { "name": "date", "tables": ["payment"], "apply": "DAY(pa.date)", "dependency":false, "alias": "payment_day_number", "group": false, "selectable": true },
+			"dailyquota.quota": { "name": "quotaused", "tables": ["daily_quota"], "apply": "SUM(d.quotaused)", "dependency":false, "alias": "quota_used", "group": true, "selectable": true },
+			"dailyquota.quota.avg": { "name": "quotaused", "tables": ["daily_quota"], "apply": "AVG(d.quotaused)", "dependency":false, "alias": "average_quota_used", "group": true, "selectable": true },
+			"dailyquota.date.year.number": { "name": "day", "tables": ["daily_quota"], "apply": "YEAR(d.day)", "dependency":false, "alias": "quota_year_number", "group": false, "selectable": true },
+			"dailyquota.date.month.number": { "name": "day", "tables": ["daily_quota"], "apply": "MONTH(d.day)", "dependency":false, "alias": "quota_month_number", "group": false, "selectable": true },
+			"dailyquota.date.day.number": { "name": "day", "tables": ["daily_quota"], "apply": "DAY(d.day)", "dependency":false, "alias": "quota_day_number", "group": false, "selectable": true },
+			"subscribe.datestart.year.number": { "name": "datestart", "tables": ["subscribe"], "apply": "YEAR(s.datestart)", "dependency": false, "alias": "subscribe_datestart_year_number", "group": false, "selectable": true },
+			"subscribe.datestart.month.number": { "name": "datestart", "tables": ["subscribe"], "apply": "MONTH(s.datestart)", "dependency": false, "alias": "subscribe_datestart_month_number", "group": false, "selectable": true },
+			"subscribe.datestart.day.number": { "name": "datestart", "tables": ["subscribe"], "apply": "DAY(s.datestart)", "dependency": false, "alias": "subscribe_datestart_day_number", "group": false, "selectable": true },
+			"subscribe.dateend.year.number": { "name": "dateend", "tables": ["subscribe"], "apply": "YEAR(s.dateend)", "dependency": false, "alias": "subscribe_dateend_year_number", "group": false, "selectable": true },
+			"subscribe.dateend.month.number": { "name": "dateend", "tables": ["subscribe"], "apply": "MONTH(s.dateend)", "dependency": false, "alias": "subscribe_dateend_month_number", "group": false, "selectable": true },
+			"subscribe.dateend.day.number": { "name": "dateend", "tables": ["subscribe"], "apply": "DAY(s.dateend)", "dependency": false, "alias": "subscribe_dateend_day_number", "group": false, "selectable": true },
+			"subscribe.paused": { "name": "paused", "tables": ["subscribe"], "apply": "s.paused", "dependency": false, "alias": "subscribe_paused", "group": false, "selectable": true },
+			"subscribe.renew": { "name": "renew", "tables": ["subscribe"], "apply": "s.renew", "dependency": false, "alias": "subscribe_renew", "group": false, "selectable": true },
+
+			"user.birthdate": { "name": "birthdate", "tables": ["user"], "apply": "u.birthdate", "dependency":false, "alias": "birthdate", "group": false, "selectable": true },
+			"user.birthdate.year": { "name": "birthyear", "tables": ["user"], "apply": "DATE_SUB((DATE_SUB(u.birthdate, INTERVAL MONTH(u.birthdate)-1 MONTH )), INTERVAL DAY(u.birthdate)-1 DAY)", "dependency":false, "alias": "birthyear", "group": false, "selectable": true },
+
+
+			"user.birthdate.month": { "name": "birthmonth", "tables": ["user"], "apply": "DATE_SUB(DATE_SUB(u.birthdate, INTERVAL DAY(u.birthdate)-1 DAY), INTERVAL HOUR(u.birthdate) HOUR) ", "dependency":false, "alias": "birthmonth", "group": true, "selectable": true },
+			"user.inscriptiondate": { "name": "inscriptiondate", "tables": ["user"], "apply": "u.inscriptiondate", "dependency":false, "alias": "inscriptiondate", "group": false, "selectable": true },
+			"user.inscriptiondate.year": { "name": "inscriptiondate", "tables": ["user"], "apply": "DATE_SUB((DATE_SUB(u.inscriptiondate, INTERVAL MONTH(u.inscriptiondate)-1 MONTH )), INTERVAL DAY(u.inscriptiondate)-1 DAY)", "dependency":false, "alias": "inscriptionyear", "group": false, "selectable": true },
+
+			"user.inscriptiondate.month": { "name": "inscriptiondate", "tables": ["user"], "apply": "DATE_SUB(DATE_SUB(u.inscriptiondate, INTERVAL DAY(u.inscriptiondate)-1 DAY), INTERVAL HOUR(u.inscriptiondate) HOUR)", "dependency":false, "alias": "inscriptionmonth", "group": false, "selectable": true },
+			"payment.date": { "name": "date", "tables": ["payment"], "apply": "pa.date", "dependency":false, "alias": "payment_date", "group": false, "selectable": true },
+			"payment.date.year": { "name": "date", "tables": ["payment"], "apply": "DATE_SUB((DATE_SUB(u.birthdate, INTERVAL MONTH(u.birthdate)-1 MONTH )), INTERVAL DAY(u.birthdate)-1 DAY)", "dependency":false, "alias": "payment_year", "group": false, "selectable": true },
+
+			"payment.date.month": { "name": "date", "tables": ["payment"], "apply": "DATE_SUB(DATE_SUB(pa.date, INTERVAL DAY(pa.date)-1 DAY), INTERVAL HOUR(pa.date) HOUR)", "dependency":false, "alias": "payment_month", "group": false, "selectable": true },
+			"dailyquota.date": { "name": "day", "tables": ["daily_quota"], "apply": "d.day", "dependency":false, "alias": "quota_date", "group": false, "selectable": true },
+			"dailyquota.date.year": { "name": "day", "tables": ["daily_quota"], "apply": "DATE_SUB((DATE_SUB(d.day, INTERVAL MONTH(d.day)-1 MONTH )), INTERVAL DAY(d.day)-1 DAY)", "dependency":false, "alias": "quota_year", "group": false, "selectable": true },
+
+			"dailyquota.date.month": { "name": "day", "tables": ["daily_quota"], "apply": "DATE_SUB(DATE_SUB(d.day, INTERVAL DAY(d.day)-1 DAY), INTERVAL HOUR(d.day) HOUR)", "dependency":false, "alias": "quota_month", "group": false, "selectable": true },
+			"subscribe.datestart": { "name": "datestart", "tables": ["subscribe"], "apply": "s.datestart", "dependency": false, "alias": "subscribe_datestart", "group": false, "selectable": true },
+			"subscribe.datestart.year": { "name": "datestart", "tables": ["subscribe"], "apply": "DATE_SUB((DATE_SUB(s.datestart, INTERVAL MONTH(s.datestart)-1 MONTH )), INTERVAL DAY(s.datestart)-1 DAY)", "dependency": false, "alias": "subscribe_datestart_year", "group": false, "selectable": true },
+
+			"subscribe.datestart.month": { "name": "datestart", "tables": ["subscribe"], "apply": "DATE_SUB(DATE_SUB(s.datestart, INTERVAL DAY(s.datestart)-1 DAY), INTERVAL HOUR(s.datestart) HOUR)", "dependency": false, "alias": "subscribe_datestart_month", "group": false, "selectable": true },
+			"subscribe.dateend": { "name": "dateend", "tables": ["subscribe"], "apply": "s.dateend", "dependency": false, "alias": "subscribe_dateend", "group": false, "selectable": true },
+			"subscribe.dateend.year": { "name": "dateend", "tables": ["subscribe"], "apply": "DATE_SUB((DATE_SUB(s.dateend, INTERVAL MONTH(s.dateend)-1 MONTH )), INTERVAL DAY(s.dateend)-1 DAY)", "dependency": false, "alias": "subscribe_dateend_year", "group": false, "selectable": true },
+
+			"subscribe.dateend.month": { "name": "dateend", "tables": ["subscribe"], "apply": "DATE_SUB(DATE_SUB(s.dateend, INTERVAL DAY(s.dateend)-1 DAY), INTERVAL HOUR(s.dateend) HOUR)", "dependency": false, "alias": "subscribe_dateend_month", "group": false, "selectable": true }
+
+		},
+		"table_definition": {
+			"plan" : {
+				"name": "plan",
+				"alias": "p",
+				"join": {
+					"user": { "dependency": "subscribe" },
+					"subscribe": { "dependency": false, "on": ["id","planid"] },
+					"daily_quota": { "dependency": "subscribe" },
+					"payment": { "dependency": "subscribe" },
+					"storage": { "dependency": "subscribe" }
+				}
+			},
+			"user": {
+				"name": "user",
+				"alias": "u",
+				"join": {
+					"plan": { "dependency": "subscribe" },
+					"subscribe": { "dependency": false, "on": ["id","userid"] },
+					"daily_quota": { "dependency": "subscribe" },
+					"payment": { "dependency": "subscribe" },
+					"storage": { "dependency": "subscribe" }
+				}
+			},
+			"daily_quota": {
+				"name": "daily_quota",
+				"alias": "d",
+				"join": {
+					"plan": { "dependency": "subscribe" },
+					"subscribe": { "dependency": false, "on": ["subscribeid","id"] },
+					"user": { "dependency": "subscribe" },
+					"payment": { "dependency": "subscribe" },
+					"storage": { "dependency": "subscribe" }
+				}
+			},
+			"subscribe": {
+				"name": "subscribe",
+				"alias": "s",
+				"join": {
+					"plan": { "dependency": false, "on": ["planid", "id"] },
+					"daily_quota": { "dependency": false, "on": ["id", "subscribeid"] },
+					"user": { "dependency": false, "on": ["userid", "id"] },
+					"payment": { "dependency": false, "on": ["id", "subscribeid"] },
+					"storage": { "dependency": false, "on": ["id", "subscribeid"] }
+				}
+			},
+			"payment": {
+				"name": "payment",
+				"alias": "pa",
+				"join": {
+					"subscribe": { "dependency": "subscribe", "on": ["subscribeid","id"] },
+					"plan": { "dependency": "subscribe" },
+					"daily_quota": { "dependency": "subscribe" },
+					"user": { "dependency": "subscribe" },
+					"storage": { "dependency": "subscribe" }
+				}
+			},
+			"storage": {
+				"name": "storage",
+				"alias": "st",
+				"join": {
+					"subscribe": { "dependency": "subscribe", "on": ["subscribeid","id"] },
+					"plan": { "dependency": "subscribe" },
+					"daily_quota": { "dependency": "subscribe" },
+					"user": { "dependency": "subscribe" },
+					"payment": { "dependency": "subscribe" }
+				}
+			}
+		}
+	}
+}

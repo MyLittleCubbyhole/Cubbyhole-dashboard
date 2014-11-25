@@ -1,10 +1,22 @@
 {
 	"server": {
 		"version": "v0",
-		"port": 6001,
+		"port": 1337,
 		"parallelizeInitialization": true
 	},
-	"databases": {},
+	"databases": {
+		"mysql": {
+			"path": "/drivers/mysql.js",
+			"module": false,
+			"auth": {
+				"host": "localhost",
+				"port": 3306,
+				"database": "cubbyholedb",
+				"user": "cubbyholeuser",
+				"password": "cubbyholepassword"
+			}
+		}
+	},
 	"apidoc": {
 		"url": "/api/doc"
 	}
