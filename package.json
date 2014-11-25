@@ -15,8 +15,11 @@
 	},
 	"keywords": [
 		"Cubbyhole",
-		"Dashboard",
-		"Data"
+		"dashboard",
+		"data",
+		"box",
+		"storage",
+		"webapp"
 	],
 	"author": "PillowPillow, Jul13nT",
 	"license": "MIT",
