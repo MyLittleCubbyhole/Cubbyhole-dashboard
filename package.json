@@ -32,10 +32,12 @@
 		"express": "^4.10.1",
 		"jade": "^1.7.0",
 		"kanto-patterns": "latest",
+		"kanto-patterns-mysql": "latest",
+		"kanto-tools-fs": "latest",
 		"lodash": "^2.4.1",
 		"moment": "~2.8.4",
 		"json2csv": "^2.2.1",
-		"js2xmlparser": "^0.1.6"
+		"js2xmlparser": "0.1.5"
 	},
 	"devDependencies": {
 		"grunt": "^0.4.5",
