@@ -414,12 +414,11 @@ module.exports = Service;
 
 		query = comparison + ' FROM (' + query + ') as comparison';
 
-		return query;
-		/*return WidgetFactory.query(query)
+		return WidgetFactory.query(query)
 			.then((result) => {
 				return {
 					head: head,
 					data: result
 				};
-			});*/
+			});
 	}
