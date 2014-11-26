@@ -4,7 +4,7 @@
 
 /*Attributes definitions*/
 
-	Routing._prefix = '/';
+	Routing._prefix = '/api';
 	Routing._versioning = true;
 
 /*Overridden methods declarations*/
@@ -16,4 +16,6 @@ module.exports = Routing;
 /*Overridden methods definitions*/
 
 	function declare(router) {
+		router.get('/logout', this.controllers.auth.logout);
+		router.post('/auth', this.controllers.auth.post.login);
 	}
