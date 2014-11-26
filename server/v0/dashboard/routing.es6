@@ -4,16 +4,29 @@
 
 /*Attributes definitions*/
 
-	Routing._prefix = '/';
+	Routing._prefix = '/api/dashboards';
 	Routing._versioning = true;
 
 /*Overridden methods declarations*/
 
+	Routing.init = init;
 	Routing.declare = declare;
 
 module.exports = Routing;
 
 /*Overridden methods definitions*/
 
+	function init() {
+		this.loadDepsFilters('auth');
+	}
+
 	function declare(router) {
+		router.get('/', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.get.all);
+		router.get('/:id', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.get.byId);
+
+		router.post('/', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.post.create);
+
+		router.put('/:id', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.put.update);
+
+		router.delete('/:id', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.delete.byId);
 	}
