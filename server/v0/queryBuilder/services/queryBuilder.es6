@@ -19,8 +19,6 @@
 
 /*Private methods declarations*/
 
-	Service._getDefinition = _getDefinition;
-
 /*Public methods declarations*/
 
 	Service.generate = generate;
@@ -33,25 +31,6 @@ module.exports = Service;
 /*Overridden methods definitions*/
 
 /*Private methods definitions*/
-
-	function _getDefinition(widget) {
-		var definition = {};
-		definition.id = widget.id;
-		definition.config = JSON.parse(widget.config);
-		definition.title = widget.title;
-		definition.backgroundColor = widget.backgroundColor;
-		definition.fontColor = widget.fontColor;
-		definition.size = {};
-		definition.size.height = widget.height;
-		definition.size.width = widget.width;
-		definition.position = {};
-		definition.position.x = widget.positionX;
-		definition.position.y = widget.positionY;
-		definition.type = widget.type;
-		definition.dashboardId = widget.dashboardId;
-
-		return definition;
-	}
 
 /*Public methods definitions*/
 
@@ -342,7 +321,7 @@ module.exports = Service;
 			alias.push(currentAlias);
 
 			if(aliasIndex > 0)
-				query += ','
+				query += ',';
 
 			for(let i = 0; i < options.metrics.length; i++) {
 				name = options.metrics[i].name;
