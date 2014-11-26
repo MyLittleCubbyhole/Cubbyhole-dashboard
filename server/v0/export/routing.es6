@@ -4,7 +4,7 @@
 
 /*Attributes definitions*/
 
-	Routing._prefix = '/';
+	Routing._prefix = '/api/export';
 	Routing._versioning = true;
 
 /*Overridden methods declarations*/
@@ -16,4 +16,6 @@ module.exports = Routing;
 /*Overridden methods definitions*/
 
 	function declare(router) {
+		router.post('/xml', this.controllers.export.post.exportXML);
+		router.post('/csv', this.controllers.export.post.exportCSV);
 	}
