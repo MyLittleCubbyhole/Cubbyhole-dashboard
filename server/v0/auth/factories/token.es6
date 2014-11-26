@@ -22,7 +22,6 @@
 /*Public methods declarations*/
 
 	MysqlFactory.get.byIdWithUser = getByIdWithUser;
-	MysqlFactory.delete.byId = deleteById;
 
 	MysqlFactory.create = createToken;
 
@@ -48,8 +47,4 @@ module.exports = MysqlFactory;
 			"' + (token.fileId || null) + '")';
 
 		return MysqlFactory.query(query);
-	}
-
-	function deleteById(id) {
-		MysqlFactory.query('DELETE FROM `token` WHERE `id`="'+ id + '";');
 	}
