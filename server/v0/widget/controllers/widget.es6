@@ -54,8 +54,8 @@ module.exports = Controller;
 	}
 
 	function getByDashboardId(request, response) {
-		var id = request.params.id;
-		WidgetFactory.get.byDashboardId(id)
+		var dashboardId = request.params.id;
+		WidgetFactory.get.byDashboardId(dashboardId)
 			.then((widgets) => {
 				if(widgets.length === 0)
 					throw Error('No widget found');
@@ -90,7 +90,7 @@ module.exports = Controller;
 			    positionX: body.position.x,
 			    positionY: body.position.y,
 			    type: body.type,
-			    dashboardId: request.params.id
+			    dashboardId: request.params.dashboardId
 		    };
 		WidgetFactory.create(options)
 			.then((insertedObject) => WidgetFactory.get.byId(insertedObject.insertId, options.dashboardId))
@@ -105,7 +105,7 @@ module.exports = Controller;
 	}
 
 	function updatePosition(request, response) {
-		var id = request.params.id,
+		var dashboardId = request.params.dashboardId,
 		    body = request.body;
 
 		for(var i = 0; i < body.length; i++) {
@@ -115,7 +115,7 @@ module.exports = Controller;
 				y: body[i].row,
 				width: body[i].width,
 				height: body[i].height,
-				dashboardId: id
+				dashboardId: dashboardId
 			})
 				.then(() => response.json({'information': 'Position updated' }))
 				.catch((error) => response.json({'information': 'An error has occurred - ' + error }));
