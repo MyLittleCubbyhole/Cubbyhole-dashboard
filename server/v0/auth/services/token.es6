@@ -4,7 +4,8 @@
 
 /*Services requiring*/
 
-	var TokenFactory = require(__dirname + '/../factories/token');
+	var TokenFactory = require(__dirname + '/../factories/token'),
+		UserFactory = require(__dirname + '/../factories/user');
 
 /*Attributes definitions*/
 
@@ -14,9 +15,13 @@
 
 /*Private methods declarations*/
 
+	Service._verifyOrigin = _verifyOrigin;
+	Service._isValidForAuthentication = _isValidForAuthentication;
+
 /*Public methods declarations*/
 
-	Service.isValidForAuthentication = isValidForAuthentication;
+	Service.verifyToken = verifyToken;
+	Service.isAdminToken = isAdminToken;
 
 module.exports = Service;
 
@@ -24,13 +29,11 @@ module.exports = Service;
 
 /*Private methods definitions*/
 
-	function verifyOrigin(origin) {
+	function _verifyOrigin(origin) {
 		return origin && origin.match(/CubbyHole/i);
 	}
 
-/*Public methods definitions*/
-
-	function isValidForAuthentication(id) {
+	function _isValidForAuthentication(id) {
 
 		return TokenFactory.get.byIdWithUser(id)
 			.then((tokens) => {
@@ -40,11 +43,37 @@ module.exports = Service;
 				var token = tokens[0],
 				    expirationDate = new Date(token.expirationDate);
 
-				if((!verifyOrigin(token.origin) && expirationDate < new Date()) || token.type !== 'AUTHENTICATION') {
+				if((!Service._verifyOrigin(token.origin) && expirationDate < new Date()) || token.type !== 'AUTHENTICATION') {
 					TokenFactory.delete.byId(id);
 					throw Error('Bad token');
 				}
 
 				return token;
+			});
+	}
+
+/*Public methods definitions*/
+
+	function verifyToken(token = 0) {
+
+		token = encodeURIComponent(token);
+
+		return Service._isValidForAuthentication(token).
+			then((tokenFetched) => {
+				if(tokenFetched.userId)
+					return {
+						userId: tokenFetched.userId,
+						userName: tokenFetched.firstname + ' ' + tokenFetched.lastname
+					};
+				else
+					throw Error('unauthorized token');
+			});
+	}
+
+	function isAdminToken(userId = 0) {
+		UserFactory.get.byId(userId)
+			.then((users) => {
+				if(users.length === 0 || users[0].roleId !== 2)
+					throw Error('unauthorized user');
 			});
 	}
