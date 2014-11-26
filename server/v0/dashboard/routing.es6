@@ -21,12 +21,12 @@ module.exports = Routing;
 	}
 
 	function declare(router) {
-		router.get('/', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.get.all);
-		router.get('/:id', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.get.byId);
+		router.get('/', this.deps.auth.filters.token.verifyToken, this.deps.auth.filters.token.isAdmin, this.controllers.dashboard.get.all);
+		router.get('/:id', this.deps.auth.filters.token.verifyToken, this.deps.auth.filters.token.isAdmin, this.controllers.dashboard.get.byId);
 
-		router.post('/', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.post.create);
+		router.post('/', this.deps.auth.filters.token.verifyToken, this.deps.auth.filters.token.isAdmin, this.controllers.dashboard.post.create);
 
-		router.put('/:id', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.put.update);
+		router.put('/:id', this.deps.auth.filters.token.verifyToken, this.deps.auth.filters.token.isAdmin, this.controllers.dashboard.put.update);
 
-		router.delete('/:id', this.deps.auth.filters.token.tokenInterceptor, this.deps.auth.filters.token.adminInterceptor, this.controllers.dashboard.delete.byId);
+		router.delete('/:id', this.deps.auth.filters.token.verifyToken, this.deps.auth.filters.token.isAdmin, this.controllers.dashboard.delete.byId);
 	}
