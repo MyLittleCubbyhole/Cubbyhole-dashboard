@@ -21,6 +21,7 @@
 /*Public methods declarations*/
 
 	Service.getData = getData;
+	Service.format = format;
 
 module.exports = Service;
 
@@ -39,4 +40,23 @@ module.exports = Service;
 				var mysqlQuery = QueryBuilder.generate(JSON.parse(widgets[0].config));
 				return WidgetFactory.query(mysqlQuery);
 			});
+	}
+
+	function format(widget) {
+		var definition = {};
+		definition.id = widget.id;
+		definition.config = JSON.parse(widget.config);
+		definition.title = widget.title;
+		definition.backgroundColor = widget.backgroundColor;
+		definition.fontColor = widget.fontColor;
+		definition.size = {};
+		definition.size.height = widget.height;
+		definition.size.width = widget.width;
+		definition.position = {};
+		definition.position.x = widget.positionX;
+		definition.position.y = widget.positionY;
+		definition.type = widget.type;
+		definition.dashboardId = widget.dashboardId;
+
+		return definition;
 	}
