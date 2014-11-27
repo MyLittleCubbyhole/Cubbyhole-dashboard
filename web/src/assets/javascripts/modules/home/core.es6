@@ -1,1 +1,1 @@
-angular.module('Home', ['jm.i18next']);
+angular.module('Home', ['Overlay', 'Authentication', 'Tools']);
