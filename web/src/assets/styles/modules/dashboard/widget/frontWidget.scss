@@ -1,0 +1,36 @@
+section.widget-content .widget-side {
+    overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px rgba(189, 189, 189, 0.27);
+}
+
+section.widget-content .widget-side .widget-front-body {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+section.widget-content .widget-side .widget-title {
+    color: #274b6d;
+    font-size: 17px;
+    padding-top: 10px;
+    position: absolute;
+}
+section.widget-content .widget-side > .widget-title {
+    padding-top: 8px;
+    padding-left: 10px;
+}
+section.widget-content .widget-side > .widget-alias {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 15px;
+    color: #274b6d;
+}
+section.widget-content .widget-side .widget-front-head {
+    min-height: 80px;
+    width: 100%;
+    position: absolute;
+    z-index: 5;
+}
