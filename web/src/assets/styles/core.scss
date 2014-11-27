@@ -1,1 +1,25 @@
 @import 'consts';
+
+@import 'libraries/animate/animate';
+@import 'libraries/bootstrap/bootstrap.min';
+@import 'libraries/customScrollBar/customScrollBar';
+@import 'libraries/fonts/font';
+@import 'libraries/grumpy-ui/grumpy-accordion';
+@import 'libraries/grumpy-ui/grumpy-ui';
+@import 'libraries/modalWindowEffects/component';
+@import 'libraries/dashydash';
+
+@import 'components/buttons';
+@import 'components/forms';
+@import 'components/header';
+@import 'components/modale';
+@import 'components/overlay';
+@import 'components/userCard';
+
+@import 'modules/dashboard/dashboard';
+@import 'modules/dashboard/dashboardExport';
+@import 'modules/dashboard/dashboardMenu';
+@import 'modules/dashboard/widget/backWidget';
+@import 'modules/dashboard/widget/customWidgets';
+@import 'modules/dashboard/widget/frontWidget';
+@import 'modules/dashboard/widget/widget';
