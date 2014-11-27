@@ -38,8 +38,8 @@ angular.module('Dashboard').
                     _.merge(options, WIDGET_DEFAULT_DEFINITION, definition);
 
                     WidgetFactory($scope).create(self.dashboardDefinition.id, options, function(definition) {
-                        self.addWidget(definition, function() { $local.serialize(); })
-                    })
+                        self.addWidget(definition, function() { $local.serialize(); });
+                    });
                 });
 
                 /**
@@ -67,13 +67,13 @@ angular.module('Dashboard').
                  * serialize the current dashboard configuration
                  */
                 $local.serialize = function() {
-                    var currentAmountOfColumn = DashboardOptimizeService.amountOfColumn()
-                    if(DASHYDASH_SETTINGS.columns.xs != currentAmountOfColumn) {
+                    var currentAmountOfColumn = DashboardOptimizeService.amountOfColumn();
+                    if(DASHYDASH_SETTINGS.columns.xs !== currentAmountOfColumn) {
                         var serialization = self.dashydash.serialize();
 
                         WidgetFactory($scope).updatePosition(self.dashboardDefinition.id, serialization, angular.noop);
                     }
-                }
+                };
 
                 /**
                  * remove the widget node
@@ -82,7 +82,7 @@ angular.module('Dashboard').
                 self.deleteWidget = function($node) {
                     self.dashydash.remove_widget($node);
                     $local.serialize();
-                }
+                };
 
                 /**
                  * resize the widget selected
@@ -95,7 +95,7 @@ angular.module('Dashboard').
                         $local.serialize();
                         callback && callback.call(this);
                     });
-                }
+                };
 
                 /**
                  * instanciate and add a new widget to the current dashboard
@@ -116,21 +116,21 @@ angular.module('Dashboard').
                     $widget.attr('widget-id', options.id);
 
                     var compiled = $compile($widget)($scope)
-                    ,   configuration = DASHYDASH_SETTINGS.columns.xl == currentAmountOfColumn ? [compiled, options.size.width, options.size.height] : [compiled, 1, options.size.height];
+                    ,   configuration = DASHYDASH_SETTINGS.columns.xl === currentAmountOfColumn ? [compiled, options.size.width, options.size.height] : [compiled, 1, options.size.height];
 
-                    if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
+                    if(DASHYDASH_SETTINGS.columns.xl === self.options.col) {
                         $widget.attr('dd-col', options.position.x);
                         $widget.attr('dd-row', options.position.y);
-                        configuration.push(options.position.x, options.position.y)
+                        configuration.push(options.position.x, options.position.y);
                     }
 
                     self.dashydash.add_widget.apply( self.dashydash, configuration );
                     callback && callback.call(this);
-                }
+                };
 
                 $scope.toString = function() {
                     return '_dashydash';
-                }
+                };
             }],
             link: function($scope, $node, attributes, self) {
                 var $local = $scope._dashydash
@@ -164,7 +164,7 @@ angular.module('Dashboard').
                             for(var i = 0; i<widgets.length; i++)
                                 self.addWidget(widgets[i]);
                         });
-                })
+                });
 
 
                 $window.onresize = _.throttle(buildDelayed, 240);
@@ -182,7 +182,7 @@ angular.module('Dashboard').
                  * generate a new dashydash grid
                  */
                 function build() {
-                    if($node.width() == self.options.width)
+                    if($node.width() === self.options.width)
                         return true;
 
                     copyWidgetInPool();
@@ -201,7 +201,7 @@ angular.module('Dashboard').
 
                     reloadFromPool();
 
-                    $local.locked = !( DASHYDASH_SETTINGS.columns.xl == self.options.col );
+                    $local.locked = !( DASHYDASH_SETTINGS.columns.xl === self.options.col );
 
                     linked && $scope.$apply();
                     linked = true;
@@ -223,14 +223,14 @@ angular.module('Dashboard').
                     $board.find('.dd-widget').each(function() {
                         var $this = angular.element(this);
 
-                        if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
+                        if(DASHYDASH_SETTINGS.columns.xl === self.options.col) {
                             $this.attr('dd-row-saved', $this.attr('dd-row'));
                             $this.attr('dd-col-saved', $this.attr('dd-col'));
                         }
 
                         delete $this.data().coords;
                         $this.appendTo($pool);
-                    })
+                    });
                 }
 
                 /**
@@ -246,7 +246,7 @@ angular.module('Dashboard').
                         ,   widgetWidth = $local.widgets[widgetId].size.width ? $local.widgets[widgetId].size.width : dashydashWidth
                         ,   parameters = [ $this, ( widgetWidth > self.options.col ? 1 : widgetWidth ), dashydashHeight ];
 
-                        if(DASHYDASH_SETTINGS.columns.xl == self.options.col) {
+                        if(DASHYDASH_SETTINGS.columns.xl === self.options.col) {
                             $local.locked = false;
                             parameters.push(
                                 parseInt($this.attr('dd-col-saved'), 10),

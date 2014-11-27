@@ -1,6 +1,6 @@
 angular.module('Dashboard').
     controller('WidgetMenuController', ['$scope', 'WIDGET_TYPE', '$rootScope', function($scope, WIDGET_TYPE, $rootScope){
-        var $local = $scope.WidgetMenu = {}
+        var $local = $scope.WidgetMenu = {};
 
         $local.widgets = WIDGET_TYPE;
 
@@ -17,12 +17,12 @@ angular.module('Dashboard').
                 },
                 config: widget.config,
                 type: widget.type
-            }
+            };
 
             $rootScope.$broadcast('create_widget', definition);
-        }
+        };
 
         $scope.toString = function() {
             return 'WidgetMenu';
-        }
-    }])
+        };
+    }]);

@@ -25,12 +25,12 @@ angular.module('Dashboard').
             /**
              * OVERRIDE
              */
-            Widget.prototype.refresh = function() {}
+            Widget.prototype.refresh = function() {};
 
             Widget.prototype.toString = function() {
                 return 'Widget Single Number';
             };
 
-            return Widget
-        }]
-    })
+            return Widget;
+        }];
+    });

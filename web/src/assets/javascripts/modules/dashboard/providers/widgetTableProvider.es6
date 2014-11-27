@@ -45,10 +45,10 @@ angular.module('Dashboard').
                         format = self.metrics[j].kpi.format;
                         switch(format) {
                             case 'date':
-                                row.push( moment( new Date(data[i][index]) ).format("MMM Do YYYY") );
+                                row.push( moment( new Date(data[i][index]) ).format('MMM Do YYYY') );
                             break;
                             case 'monthyear':
-                                row.push( moment( new Date(data[i][index]) ).format("MMM YYYY") );
+                                row.push( moment( new Date(data[i][index]) ).format('MMM YYYY') );
                             break;
                             case 'month':
                                 row.push( moment().month(data[i][index] - 1).format('MMMM'));
@@ -64,10 +64,10 @@ angular.module('Dashboard').
                         format = self.segments[j].kpi.format;
                         switch(format) {
                             case 'date':
-                                row.push( moment( new Date(data[i][index]) ).format("MMM Do YYYY") );
+                                row.push( moment( new Date(data[i][index]) ).format('MMM Do YYYY') );
                             break;
                             case 'monthyear':
-                                row.push( moment( new Date(data[i][index]) ).format("MMM YYYY") );
+                                row.push( moment( new Date(data[i][index]) ).format('MMM YYYY') );
                             break;
                             case 'month':
                                 row.push( moment().month(data[i][index] - 1).format('MMMM'));
@@ -101,9 +101,9 @@ angular.module('Dashboard').
                     if(self.kpis[i].kpi) {
                         options = self.kpis[i].options;
                         options.name = self.kpis[i].kpi.index;
-                        if(self.kpis[i].kpi.type == "metric")
+                        if(self.kpis[i].kpi.type === 'metric')
                             configuration.metrics.push(options);
-                        else if(self.kpis[i].kpi.type == "segment")
+                        else if(self.kpis[i].kpi.type === 'segment')
                             configuration.segments.push(options);
                     }
 
@@ -121,7 +121,7 @@ angular.module('Dashboard').
                         name: self.filters[0].conditions[i].kpi.index,
                         operator: self.filters[0].conditions[i].operator,
                         value: self.filters[0].conditions[i].value
-                    })
+                    });
                 }
 
                 return configuration;
@@ -130,12 +130,12 @@ angular.module('Dashboard').
             /**
              * OVERRIDE
              */
-            Widget.prototype.refresh = function() {}
+            Widget.prototype.refresh = function() {};
 
             Widget.prototype.toString = function() {
                 return 'Widget Table';
             };
 
-            return Widget
-        }]
-    })
+            return Widget;
+        }];
+    });

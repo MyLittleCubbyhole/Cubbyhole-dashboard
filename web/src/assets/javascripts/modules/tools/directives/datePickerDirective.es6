@@ -21,7 +21,7 @@ angular.module('Tools').
                     maxDate: null,
                     changeMonth: true,
                     changeYear: true,
-                    yearRange: "-10:+5",
+                    yearRange: '-10:+5',
                     prevText: '<i class="icon-chevron-left"></i>',
                     nextText: '<i class="icon-chevron-right"></i>'
                 });

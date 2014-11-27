@@ -18,9 +18,9 @@ angular.module('Overlay').
                 $local.pusherOpen = false;
                 $scope.$broadcast('hide');
             }
-        }
+        };
 
         $scope.toString = function() {
             return 'Overlay';
-        }
-    }])
+        };
+    }]);

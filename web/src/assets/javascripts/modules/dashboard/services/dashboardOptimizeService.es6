@@ -9,7 +9,7 @@ angular.module('Dashboard').
          */
         this.widgetWidth = function(widthContainer, nbCols) {
             return (widthContainer / nbCols) - DASHYDASH_SETTINGS.margin * 2;
-        }
+        };
 
         /**
          * get the current displayable amount of color
@@ -29,6 +29,6 @@ angular.module('Dashboard').
                         amount = DASHYDASH_SETTINGS.columns.l;
 
             return amount;
-        }
+        };
 
-    }])
+    }]);

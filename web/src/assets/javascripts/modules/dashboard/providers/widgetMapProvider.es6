@@ -57,7 +57,7 @@ angular.module('Dashboard').
                     minColor: '#FFFFFF',
                     labels: {
                         formatter: function() {
-                            return this.value != 0 ? self.getFormatedValue(this.value, axisType, true) : 0;
+                            return this.value !== 0 ? self.getFormatedValue(this.value, axisType, true) : 0;
                         }
                     }
                 };
@@ -91,19 +91,19 @@ angular.module('Dashboard').
 
                 var dataTemp = [];
                 for(var i = 0; i<data.length; i++)
-                    dataTemp.push({"value": data[i][metricName], "code": data[i]["countrycode"], "name": data[i]["country"]});
+                    dataTemp.push({'value': data[i][metricName], 'code': data[i]['countrycode'], 'name': data[i]['country']});
 
                 dataFinal = dataTemp.slice(0);
                 for(var i = 0; i < COUNTRIES.length; i++) {
                     var witness = false;
                     for(var j = 0; j < dataTemp.length; j++)
-                        if(COUNTRIES[i].code == dataTemp[j].code) {
+                        if(COUNTRIES[i].code === dataTemp[j].code) {
                             witness = true;
                             break;
                         }
 
                     if(!witness)
-                        dataFinal.push(COUNTRIES[i])
+                        dataFinal.push(COUNTRIES[i]);
                 }
 
                 serie.data = dataFinal;
@@ -116,16 +116,16 @@ angular.module('Dashboard').
              * OVERRIDE
              */
             Widget.prototype.refresh = function() {
-                var self = this
+                var self = this;
 
                 self.chartOptions.series = self.series;
-                self.node.find('.widget-front-body').highcharts("Map", self.chartOptions);
-            }
+                self.node.find('.widget-front-body').highcharts('Map', self.chartOptions);
+            };
 
             Widget.prototype.toString = function() {
                 return 'Widget Map';
             };
 
-            return Widget
-        }]
-    })
+            return Widget;
+        }];
+    });

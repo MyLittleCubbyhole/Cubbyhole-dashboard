@@ -45,7 +45,7 @@ angular.module('Dashboard').
                     column: { stacking: 'normal' },
                     area: { stacking: 'normal' },
                     line: { stacking: 'normal' }
-                }
+                };
 
                 for(var i = 0; i<self.segments.length; i++) {
                     index = self.segments[i].kpi.alias;
@@ -54,7 +54,7 @@ angular.module('Dashboard').
                     for(var j = 0; j<data.length; j++)
                         series.data.push(data[j][index]);
 
-                    if(self.segments[i].options.axis == 'abs' || self.segments.length == 1) {
+                    if(self.segments[i].options.axis === 'abs' || self.segments.length == 1) {
                         axisType = self.segments[i].kpi.format;
                         absName = index;
                         self.chartOptions.xAxis = { ordinal: false };
@@ -209,7 +209,7 @@ angular.module('Dashboard').
                             witness = false;
                             for(var k = 0; k<data.length; k++) {
                                 value = self.getFormatedValue(data[k][absName], axisType);
-                                if(value == axis[j] && data[k][segmentName] == index) {
+                                if(value === axis[j] && data[k][segmentName] === index) {
                                     witness = true;
                                     series.data.push([axis[j], data[k][alias]]);
                                 }
@@ -222,7 +222,7 @@ angular.module('Dashboard').
                             }
                         }
 
-                        self.chartOptions.series.push(series)
+                        self.chartOptions.series.push(series);
                     }
                 else {
 
@@ -258,7 +258,7 @@ angular.module('Dashboard').
                             for(var k = 0; k<data.length; k++) {
                                 value = self.getFormatedValue(data[k][absName], axisType);
 
-                                if(value == axis[j]) {
+                                if(value === axis[j]) {
                                     witness = true;
                                     series.data.push([axis[j], data[k][index]]);
                                 }
@@ -285,9 +285,9 @@ angular.module('Dashboard').
                                 };
                             break;
                         }
-                        self.chartOptions.yAxis.push(yaxis)
+                        self.chartOptions.yAxis.push(yaxis);
 
-                        self.chartOptions.series.push(series)
+                        self.chartOptions.series.push(series);
                     }
                 }
                 self.refresh();
@@ -314,7 +314,7 @@ angular.module('Dashboard').
                 WidgetFactory(self.scope).update(definition, angular.noop);
 
                 self.load();
-            }
+            };
 
             /**
              * OVERRIDE
@@ -322,12 +322,12 @@ angular.module('Dashboard').
             Widget.prototype.refresh = function() {
                 var self = this;
                 self.node.find('.widget-front-body').highcharts(self.chartOptions);
-            }
+            };
 
             Widget.prototype.toString = function() {
                 return 'Widget Graph';
             };
 
-            return Widget
-        }]
-    })
+            return Widget;
+        }];
+    });

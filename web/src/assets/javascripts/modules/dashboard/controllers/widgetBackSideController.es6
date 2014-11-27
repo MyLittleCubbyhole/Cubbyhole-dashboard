@@ -30,20 +30,20 @@ angular.module('Dashboard').
                 index: QUERY_BUILDER[i].index,
                 type: QUERY_BUILDER[i].type,
                 format: QUERY_BUILDER[i].format
-            }
+            };
 
             if(!$local.kpis[QUERY_BUILDER[i].category])
                 $local.kpis[QUERY_BUILDER[i].category] = [];
 
             $local.kpis[QUERY_BUILDER[i].category].push(kpi);
 
-            if(QUERY_BUILDER[i].type == 'segment' || QUERY_BUILDER[i].type == 'meta') {
+            if(QUERY_BUILDER[i].type === 'segment' || QUERY_BUILDER[i].type === 'meta') {
                 if(!$local.segments[QUERY_BUILDER[i].category])
                     $local.segments[QUERY_BUILDER[i].category] = [];
                 $local.segments[QUERY_BUILDER[i].category].push(kpi);
             }
 
-            if(QUERY_BUILDER[i].type == 'metric' || QUERY_BUILDER[i].type == 'meta') {
+            if(QUERY_BUILDER[i].type === 'metric' || QUERY_BUILDER[i].type === 'meta') {
                 if(!$local.metrics[QUERY_BUILDER[i].category])
                     $local.metrics[QUERY_BUILDER[i].category] = [];
                 $local.metrics[QUERY_BUILDER[i].category].push(kpi);
@@ -56,10 +56,10 @@ angular.module('Dashboard').
         $local.save = function() {
             $scope._flip._active = !$scope._flip._active;
             $local.tab = '';
-            $timeout(function() { $widgetScope.edit() }, 250);
+            $timeout(function() { $widgetScope.edit(); }, 250);
             $widgetScope.widget.save();
             $scope._dashydash.serialize();
-        }
+        };
 
         /**
          * resize the current widget and update the dashydash widget definition
@@ -85,14 +85,14 @@ angular.module('Dashboard').
                 while($widgetScope.widget.kpis.length < size.width * 2 + 1)
                     $widgetScope.widget.kpis.push({});
             }
-        }
+        };
 
         /**
          * delete a widget
          */
         $local.delete = function() {
             $widgetScope.widget.delete();
-        }
+        };
 
         /**
          * add a new filter to the current widget
@@ -102,8 +102,8 @@ angular.module('Dashboard').
                 kpi: QUERY_BUILDER['count.user'],
                 operator: '>',
                 value: ['0', '0']
-            })
-        }
+            });
+        };
 
         /**
          * format the value in order to display it in the managed view
@@ -114,13 +114,13 @@ angular.module('Dashboard').
         $local.getValueToShow = function(filterIndex, valueIndex) {
             var value = $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex];
             var valueToShow = value;
-            if(typeof value == 'object') {
+            if(typeof value === 'object') {
                 valueToShow = value.name;
-                if(value.apply != '')
-                    valueToShow += (value.apply == 'SUB' ? '-' : '+') + value.value + 'DAYS';
+                if(value.apply !== '')
+                    valueToShow += (value.apply === 'SUB' ? '-' : '+') + value.value + 'DAYS';
             }
             return valueToShow;
-        }
+        };
 
         /**
          * date type case => use the sql now function
@@ -129,7 +129,7 @@ angular.module('Dashboard').
          */
         $local.switchDateNow = function(filterIndex, valueIndex) {
             if($widgetScope.widget.filters[0].conditions[filterIndex] && $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] !== undefined) {
-                if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] == 'object')
+                if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] === 'object')
                     $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] = '0';
                 else
                     $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex] = {
@@ -138,7 +138,7 @@ angular.module('Dashboard').
                         value: '0'
                     };
             }
-        }
+        };
 
         /**
          * date type case => use sql date sub and date add
@@ -148,15 +148,15 @@ angular.module('Dashboard').
          */
         $local.switchDateAdd = function(filterIndex, valueIndex, type) {
             if($widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].name) {
-                if($widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply == type)
+                if($widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply === type)
                     $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply = '';
                 else
-                    if(type == 'SUB')
+                    if(type === 'SUB')
                         $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply = 'SUB';
                     else
                         $widgetScope.widget.filters[0].conditions[filterIndex].value[valueIndex].apply = 'ADD';
             }
-        }
+        };
 
         /**
          * initialize all value defined as object with a type different from date
@@ -165,9 +165,9 @@ angular.module('Dashboard').
          */
         $local.transformDateValues = function(filterIndex, kpi) {
             for(var i = 0; i < $widgetScope.widget.filters[0].conditions[filterIndex].value.length; i++)
-                if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[i] == 'object' && kpi.format != 'date')
+                if(typeof $widgetScope.widget.filters[0].conditions[filterIndex].value[i] === 'object' && kpi.format !== 'date')
                     $widgetScope.widget.filters[0].conditions[filterIndex].value[i] = '0';
-        }
+        };
 
         /**
          * add a new metric to the current configuration
@@ -178,8 +178,8 @@ angular.module('Dashboard').
             $widgetScope.widget.metrics.push({
                 kpi: QUERY_BUILDER['count.user'],
                 options: options
-            })
-        }
+            });
+        };
 
         /**
          * add a new segment to current configuration
@@ -190,21 +190,21 @@ angular.module('Dashboard').
             $widgetScope.widget.segments.push({
                 kpi: QUERY_BUILDER['user.country'],
                 options: options
-            })
-        }
+            });
+        };
 
         /**
          * add a new kpi to the current configuration
-         * @param {Object} options Kpi Options
+         * @param {Object} kpiIndex kpi index
          */
         $local.addKpi = function(kpiIndex) {
-            options = { name: QUERY_BUILDER['count.user'].index};
+	        var options = {name: QUERY_BUILDER['count.user'].index};
             $widgetScope.widget.kpis[kpiIndex] = {
                 kpi: QUERY_BUILDER['count.user'],
                 options: options
-            }
+            };
             $local.addMetric();
-        }
+        };
 
         /**
          * add the selected kpi to the good array
@@ -212,20 +212,20 @@ angular.module('Dashboard').
          * @param  {Object} kpi      Kpi
          */
         $local.changeKpi = function(kpiIndex, kpi) {
-            if(kpi.type == "metric")
+            if(kpi.type === 'metric')
                 $widgetScope.widget.metrics.push({
                     kpi: kpi,
                     options: {}
-                })
-            if(kpi.type == "segment")
+                });
+            if(kpi.type === 'segment')
                 $widgetScope.widget.segments.push({
                     kpi: kpi,
                     options: {}
-                })
+                });
 
             $local.removeKpi(kpiIndex, false);
             $widgetScope.widget.kpis[kpiIndex].kpi = kpi;
-        }
+        };
 
         /**
          * remove the kpi from the current configuration
@@ -240,15 +240,15 @@ angular.module('Dashboard').
                     break;
                 }
             for(var i = $widgetScope.widget.segments.length - 1; i >= 0 ; i--)
-                if($widgetScope.widget.segments[i].kpi.index == $widgetScope.widget.kpis[kpiIndex].kpi.index) {
+                if($widgetScope.widget.segments[i].kpi.index === $widgetScope.widget.kpis[kpiIndex].kpi.index) {
                     $widgetScope.widget.segments.splice(i, 1);
                     break;
                 }
 
             if(clean) $widgetScope.widget.kpis[kpiIndex] = {};
-        }
+        };
 
         $scope.toString = function() {
             return 'WidgetBackSide';
-        }
-    }])
+        };
+    }]);

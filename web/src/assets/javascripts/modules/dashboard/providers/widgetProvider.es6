@@ -66,7 +66,7 @@ angular.module('Dashboard').
                         }
                     }
 
-                self.scope.$on('widget_refresh', function() { self.refresh(); })
+                self.scope.$on('widget_refresh', function() { self.refresh(); });
             };
 
             /**
@@ -85,41 +85,41 @@ angular.module('Dashboard').
 
                 for(var i = 0; i<self.filters[0].conditions.length; i++) {
                     var lengthMax = 0;
-                    if(self.filters[0].conditions[i].operator == 'BETWEEN' || self.filters[0].conditions[i].operator == 'NOT BETWEEN') {
+                    if(self.filters[0].conditions[i].operator === 'BETWEEN' || self.filters[0].conditions[i].operator === 'NOT BETWEEN') {
                         lengthMax = 2;
-                        if(self.filters[0].conditions[i].value[0] == '' || self.filters[0].conditions[i].value[1] == '')
-                            if(self.filters[0].conditions[i].value[0] != '')
+                        if(self.filters[0].conditions[i].value[0] === '' || self.filters[0].conditions[i].value[1] === '')
+                            if(self.filters[0].conditions[i].value[0] !== '')
                                 self.filters[0].conditions[i].value[1] = self.filters[0].conditions[i].value[0];
-                            else if(self.filters[0].conditions[i].value[1] != '')
+                            else if(self.filters[0].conditions[i].value[1] !== '')
                                 self.filters[0].conditions[i].value[0] = self.filters[0].conditions[i].value[1];
                             else {
                                 self.filters[0].conditions[i].value[0] = '0';
                                 self.filters[0].conditions[i].value[1] = '0';
                             }
                     }
-                    else if(self.filters[0].conditions[i].operator == 'IN' || self.filters[0].conditions[i].operator == 'NOT IN') {
+                    else if(self.filters[0].conditions[i].operator === 'IN' || self.filters[0].conditions[i].operator === 'NOT IN') {
                         for(var j = self.filters[0].conditions[i].value.length - 1; j >= 0 ; j--)
-                            if(self.filters[0].conditions[i].value[j] == '')
+                            if(self.filters[0].conditions[i].value[j] === '')
                                 self.filters[0].conditions[i].value.splice(j, 1);
 
-                        if(self.filters[0].conditions[i].value.length == 0)
+                        if(self.filters[0].conditions[i].value.length === 0)
                             self.filters[0].conditions[i].value.push('0');
 
                         if(self.filters[0].conditions[i].value.length < 2) {
-                            if(self.filters[0].conditions[i].value[0] != '')
+                            if(self.filters[0].conditions[i].value[0] !== '')
                                 self.filters[0].conditions[i].value[1] = self.filters[0].conditions[i].value[0];
-                            else if(self.filters[0][i].value[1] != '')
+                            else if(self.filters[0][i].value[1] !== '')
                                 self.filters[0].conditions[i].value[0] = self.filters[0].conditions[i].value[1];
                         }
                     }
                     else
                         lengthMax = 1;
 
-                    if(lengthMax != 0)
+                    if(lengthMax !== 0)
                         while(self.filters[0].conditions[i].value.length > lengthMax)
                                 self.filters[0].conditions[i].value.splice(self.filters[0].conditions[i].value.length - 1, 1);
 
-                    if(self.filters[0].conditions[i].value.length == 1 && self.filters[0].conditions[i].value[0] == '')
+                    if(self.filters[0].conditions[i].value.length === 1 && self.filters[0].conditions[i].value[0] === '')
                         self.filters[0].conditions[i].value[0] = '0';
                 }
             }
@@ -145,13 +145,13 @@ angular.module('Dashboard').
                 for(var i = 0; i<self.metrics.length; i++) {
                     options = self.metrics[i].options;
                     options.name = self.metrics[i].kpi.index;
-                    configuration.metrics.push(options)
+                    configuration.metrics.push(options);
                 }
 
                 for(var i = 0; i<self.segments.length; i++) {
                     options = self.segments[i].options;
                     options.name = self.segments[i].kpi.index;
-                    configuration.segments.push(options)
+                    configuration.segments.push(options);
                 }
 
                 self._formatFilters();
@@ -168,7 +168,7 @@ angular.module('Dashboard').
                         name: self.filters[0].conditions[i].kpi.index,
                         operator: self.filters[0].conditions[i].operator,
                         value: self.filters[0].conditions[i].value
-                    })
+                    });
                 }
 
                 return configuration;
@@ -196,7 +196,7 @@ angular.module('Dashboard').
                     self.load();
                 });
 
-            }
+            };
 
             /**
              * get the datas linked to the current widget and call the init method
@@ -207,7 +207,7 @@ angular.module('Dashboard').
                 WidgetFactory(self.scope).getData(self.dashboardId, self.id, function(data) {
                     self.init(data);
                     self.inLoading = false;
-                })
+                });
             };
 
             /**
@@ -223,7 +223,7 @@ angular.module('Dashboard').
 
                 WidgetFactory(self.scope).remove(self.dashboardId, self.id, function() {
                     self.scope.$emit('delete_widget', { id: self.id, node: self.node });
-                })
+                });
             };
 
             /**
@@ -267,12 +267,12 @@ angular.module('Dashboard').
                 }
 
                 return val;
-            }
+            };
 
             Widget.prototype.toString = function() {
                 return 'Widget';
             };
 
-            return Widget
-        }]
-    })
+            return Widget;
+        }];
+    });

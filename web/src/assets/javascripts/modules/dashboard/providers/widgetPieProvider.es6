@@ -38,14 +38,14 @@ angular.module('Dashboard').
                         },
                         showInLegend: true
                     }
-                }
+                };
 
                 var serie = {
                     type: 'pie',
                     name: self.metrics[0].kpi.formattedAlias,
                     data: [],
                     serieType: self.metrics[0].kpi.format
-                }
+                };
 
                 self.chartOptions.tooltip = {};
                 self.chartOptions.tooltip.formatter = function() {
@@ -86,12 +86,12 @@ angular.module('Dashboard').
             Widget.prototype.refresh = function() {
                 var self = this;
                 this.node.find('.widget-front-body').highcharts(this.chartOptions);
-            }
+            };
 
             Widget.prototype.toString = function() {
                 return 'Widget Pie';
             };
 
-            return Widget
-        }]
-    })
+            return Widget;
+        }];
+    });

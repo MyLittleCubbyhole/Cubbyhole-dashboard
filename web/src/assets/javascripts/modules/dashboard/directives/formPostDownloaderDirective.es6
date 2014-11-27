@@ -34,7 +34,7 @@ angular.module('Dashboard').
 					angular.element('#downloadIFrame').remove();
 					angular.element('body').append(template);
 					$node.submit();
-				}
+				};
 			}
 		};
 	});

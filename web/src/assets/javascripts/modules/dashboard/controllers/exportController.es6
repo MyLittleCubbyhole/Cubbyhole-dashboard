@@ -79,13 +79,13 @@ angular.module('Dashboard').
         $local.getValueToShow = function(filterIndex, valueIndex) {
             var value = $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex];
             var valueToShow = value;
-            if(typeof value == 'object') {
+            if(typeof value === 'object') {
                 valueToShow = value.name;
-                if(value.apply != '')
-                    valueToShow += (value.apply == 'SUB' ? '-' : '+') + value.value + 'DAYS';
+                if(value.apply !== '')
+                    valueToShow += (value.apply === 'SUB' ? '-' : '+') + value.value + 'DAYS';
             }
             return valueToShow;
-        }
+        };
 
         /**
          * manage the formatting value string to object - object to string
@@ -95,7 +95,7 @@ angular.module('Dashboard').
          */
         $local.switchDateNow = function(filterIndex, valueIndex) {
             if($local.filters[$local.currentFilter].conditions[filterIndex] && $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex] !== undefined) {
-                if(typeof $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex] == 'object')
+                if(typeof $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex] === 'object')
                     $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex] = '0';
                 else
                     $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex] = {
@@ -104,7 +104,7 @@ angular.module('Dashboard').
                         value: '0'
                     };
             }
-        }
+        };
 
 
         /**
@@ -116,15 +116,15 @@ angular.module('Dashboard').
          */
         $local.switchDateAdd = function(filterIndex, valueIndex, type) {
             if($local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].name) {
-                if($local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].apply == type)
+                if($local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].apply === type)
                     $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].apply = '';
                 else
-                    if(type == 'SUB')
+                    if(type === 'SUB')
                         $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].apply = 'SUB';
                     else
                         $local.filters[$local.currentFilter].conditions[filterIndex].value[valueIndex].apply = 'ADD';
             }
-        }
+        };
 
         /**
          * initialize the object value into 0 when a native kpi is selected
@@ -133,27 +133,27 @@ angular.module('Dashboard').
          */
         $local.transformDateValues = function(filterIndex, kpi) {
             for(var i = 0; i < $local.filters[$local.currentFilter].conditions[filterIndex].value.length; i++)
-                if(typeof $local.filters[$local.currentFilter].conditions[filterIndex].value[i] == 'object' && kpi.format != 'date')
+                if(typeof $local.filters[$local.currentFilter].conditions[filterIndex].value[i] === 'object' && kpi.format !== 'date')
                     $local.filters[$local.currentFilter].conditions[filterIndex].value[i] = '0';
-        }
+        };
 
         /**
          * remove a filter
          * @param  {integer} index index
          */
         $local.removeFilter = function(index) {
-            if(index == $local.currentFilter)
+            if(index === $local.currentFilter)
                 $local.currentFilter = index - 1;
 
             $local.filters.splice(index, 1);
-        }
+        };
 
         /**
          * [addKpi description]
          * @param {[type]} kpiIndex [description]
          */
         $local.addKpi = function(kpiIndex) {
-            options = { name: QUERY_BUILDER['count.user'].index};
+	        var options = {name: QUERY_BUILDER['count.user'].index};
             $local.selectedKpis[kpiIndex] = {
                 kpi: QUERY_BUILDER['count.user'],
                 options: options
@@ -191,44 +191,44 @@ angular.module('Dashboard').
                 if($local.filters[i].conditions)
                     for(var j = 0; j < $local.filters[i].conditions.length; j++) {
                         var lengthMax = 0;
-                        if($local.filters[i].conditions[j].operator == 'BETWEEN' || $local.filters[i].conditions[j].operator == 'NOT BETWEEN') {
+                        if($local.filters[i].conditions[j].operator === 'BETWEEN' || $local.filters[i].conditions[j].operator === 'NOT BETWEEN') {
                             lengthMax = 2;
-                            if($local.filters[i].conditions[j].value[0] == '' || $local.filters[i].conditions[j].value[1] == '')
-                                if($local.filters[i].conditions[j].value[0] != '')
+                            if($local.filters[i].conditions[j].value[0] === '' || $local.filters[i].conditions[j].value[1] === '')
+                                if($local.filters[i].conditions[j].value[0] !== '')
                                     $local.filters[i].conditions[j].value[1] = $local.filters[i].conditions[j].value[0];
-                                else if($local.filters[i].conditions[j].value[1] != '')
+                                else if($local.filters[i].conditions[j].value[1] !== '')
                                     $local.filters[i].conditions[j].value[0] = $local.filters[i].conditions[j].value[1];
                                 else {
                                     $local.filters[i].conditions[j].value[0] = '0';
                                     $local.filters[i].conditions[j].value[1] = '0';
                                 }
                         }
-                        else if($local.filters[i].conditions[j].operator == 'IN' || $local.filters[i].conditions[j].operator == 'NOT IN') {
+                        else if($local.filters[i].conditions[j].operator === 'IN' || $local.filters[i].conditions[j].operator === 'NOT IN') {
                             for(var k = $local.filters[i].conditions[j].value.length - 1; k >= 0 ; k--)
-                                if($local.filters[i].conditions[j].value[k] == '')
+                                if($local.filters[i].conditions[j].value[k] === '')
                                     $local.filters[i].conditions[j].value.splice(k, 1);
 
-                            if($local.filters[i].conditions[j].value.length == 0)
+                            if($local.filters[i].conditions[j].value.length === 0)
                                 $local.filters[i].conditions[j].value.push('0');
 
                             if($local.filters[i].conditions[j].value.length < 2) {
-                                if($local.filters[i].conditions[j].value[0] != '')
+                                if($local.filters[i].conditions[j].value[0] !== '')
                                     $local.filters[i].conditions[j].value[1] = $local.filters[i].conditions[j].value[0];
-                                else if($local.filters[i][i].value[1] != '')
+                                else if($local.filters[i][i].value[1] !== '')
                                     $local.filters[i].conditions[j].value[0] = $local.filters[i].conditions[j].value[1];
                             }
                         }
                         else
                             lengthMax = 1;
 
-                        if(lengthMax != 0)
+                        if(lengthMax !== 0)
                             while($local.filters[i].conditions[j].value.length > lengthMax)
                                     $local.filters[i].conditions[j].value.splice($local.filters[i].conditions[j].value.length - 1, 1);
 
-                        if($local.filters[i].conditions[j].value.length == 1 && $local.filters[i].conditions[j].value[0] == '')
+                        if($local.filters[i].conditions[j].value.length === 1 && $local.filters[i].conditions[j].value[0] === '')
                             $local.filters[i].conditions[j].value[0] = '0';
                     }
-        }
+        };
 
         /**
          * save the export configuration in to order to send it later
@@ -243,9 +243,9 @@ angular.module('Dashboard').
                 if($local.selectedKpis[i].kpi) {
                     options = $local.selectedKpis[i].options;
                     options.name = $local.selectedKpis[i].kpi.index;
-                    if($local.selectedKpis[i].kpi.type == "metric")
+                    if($local.selectedKpis[i].kpi.type === 'metric')
                         configuration.metrics.push(options);
-                    else if($local.selectedKpis[i].kpi.type == "segment")
+                    else if($local.selectedKpis[i].kpi.type === 'segment')
                         configuration.segments.push(options);
                 }
 
@@ -263,7 +263,7 @@ angular.module('Dashboard').
                             name: $local.filters[i].conditions[j].kpi.index,
                             operator: $local.filters[i].conditions[j].operator,
                             value: $local.filters[i].conditions[j].value
-                        })
+                        });
                 }
             }
 
@@ -293,9 +293,9 @@ angular.module('Dashboard').
                     $local.inProgress = false;
                 }, 2000);
             });
-        }
+        };
 
         $scope.toString = function() {
             return 'Export';
         };
-    }])
+    }]);

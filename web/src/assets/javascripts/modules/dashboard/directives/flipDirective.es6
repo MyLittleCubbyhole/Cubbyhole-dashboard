@@ -17,7 +17,7 @@ angular.module('Dashboard').
 
                 $scope.$on('stop_edit', function() {
                     $local._active = false;
-                })
+                });
 
             }
         };

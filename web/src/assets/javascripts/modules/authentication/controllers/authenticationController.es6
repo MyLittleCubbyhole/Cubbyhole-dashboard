@@ -1,7 +1,7 @@
 angular.module('Authentication').
     controller('AuthenticationController', ['$scope', 'UserFactory', 'API_URL', function($scope, UserFactory, API_URL){
-        var $local = $scope.Authentication = {}
-        ,   user = localStorage.getItem('user');
+        var $local = $scope.Authentication = {},
+            user = localStorage.getItem('user');
 
         if(!user)
             user = sessionStorage.getItem('user');
@@ -15,7 +15,7 @@ angular.module('Authentication').
 
         $local.stylePhoto = {};
         
-        if(user.photo && user.photo != 'null')
+        if(user.photo && user.photo !== 'null')
             $local.stylePhoto = {'background-image': 'url(' + API_URL + 'download/1/userPhotos/' + user.photo + '?token=' + user.token + '&run)'};
 
         $local.user = user;
@@ -47,4 +47,4 @@ angular.module('Authentication').
         $scope.toString = function() {
             return 'Authentication';
         };
-    }])
+    }]);

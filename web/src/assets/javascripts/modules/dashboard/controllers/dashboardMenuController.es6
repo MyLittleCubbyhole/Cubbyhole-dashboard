@@ -1,6 +1,6 @@
 angular.module('Dashboard').
     controller('DashboardMenuController', ['$scope', '$location', 'DASHBOARD_ICONS', function($scope, $location, DASHBOARD_ICONS){
-        var $local = $scope.DashboardMenu = {}
+        var $local = $scope.DashboardMenu = {};
 
         $local.icons = DASHBOARD_ICONS;
 
@@ -15,5 +15,5 @@ angular.module('Dashboard').
 
         $scope.toString = function() {
             return 'DashboardMenu';
-        }
-    }])
+        };
+    }]);

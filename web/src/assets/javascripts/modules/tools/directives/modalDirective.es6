@@ -8,11 +8,11 @@ angular.module('Tools').
 
                 $local.close = function() {
                     $scope.Overlay.clickout();
-                }
+                };
 
                 $scope.toString = function() {
                     return '_modal';
-                }
+                };
             },
             require: 'modal',
             restrict: 'A',

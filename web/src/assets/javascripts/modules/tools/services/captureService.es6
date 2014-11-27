@@ -25,7 +25,7 @@ angular.module('Tools').
             ,   elements = {
                 toRemove : [],
                 toRecover : []
-            }
+            };
 
             SVGs.each(function(index, node) {
                 var parent = node.parentNode
@@ -47,7 +47,7 @@ angular.module('Tools').
 
                 parent.appendChild(canvas);
 
-            })
+            });
 
             return elements;
 
@@ -81,7 +81,7 @@ angular.module('Tools').
 					var pdf = new jsPDF('p', 'mm', 'a3');
 
 					//taille pdf px - 794, 1122
-					var image = canvas.toDataURL("image/jpeg", 1.0);
+					var image = canvas.toDataURL('image/jpeg', 1.0);
 
 					var capture = new Image();
 					capture.src = image;
@@ -92,7 +92,7 @@ angular.module('Tools').
 					//ratio
 					HEIGHT = (WIDTH/HEIGHT) * WIDTH;
 
-					var cropCanvas = document.createElement('canvas')
+					var cropCanvas = document.createElement('canvas');
 
 					var maxHeight = capture.height;
 					var projectionMaxHeight = (capture.height * WIDTH) / capture.width;
@@ -103,13 +103,13 @@ angular.module('Tools').
 					var y = 0;
 
 
-					var width = document.createAttribute("width");
+					var width = document.createAttribute('width');
 					width.value = WIDTH;//794//capture.width;
-					var height = document.createAttribute("height");
+					var height = document.createAttribute('height');
 					height.value = currentHeight;//HEIGHT;//1122;//capture.height;
 					cropCanvas.setAttributeNode(width);
 					cropCanvas.setAttributeNode(height);
-					var context = cropCanvas.getContext("2d");
+					var context = cropCanvas.getContext('2d');
 
 					var canvasHeight = currentHeight;
 
@@ -117,37 +117,37 @@ angular.module('Tools').
 					logo.src = '/images/design/logo-big.png';
 
 					logo.onload = function() {
-						context.fillStyle = "#fff";
+						context.fillStyle = '#fff';
 						context.fillRect(0,0,WIDTH,canvasHeight);
 
 						context.drawImage(logo, (WIDTH - 230)/2 , 250, 230, 286);
-						part = cropCanvas.toDataURL("image/jpeg", 1.0);
-						pdf.addImage(part,'JPEG', 0, 0)
+						part = cropCanvas.toDataURL('image/jpeg', 1.0);
+						pdf.addImage(part,'JPEG', 0, 0);
 
 						while(maxHeight > 0) {
 							context.clearRect(0, 0, WIDTH, canvasHeight);
-							context.fillStyle = "#fff";
+							context.fillStyle = '#fff';
 							context.fillRect(0,0,WIDTH,canvasHeight);
 
                             currentHeight = maxHeight - increment < 0 ? maxHeight : currentHeight;
 
                             context.drawImage(capture, 0, y, capture.width, increment, 0, 0, WIDTH, HEIGHT);
 
-                            part = cropCanvas.toDataURL("image/jpeg", 1.0);
+                            part = cropCanvas.toDataURL('image/jpeg', 1.0);
                             pdf.addPage();
-                            pdf.addImage(part,'JPEG', MARGIN/2, MARGIN/2)
+                            pdf.addImage(part,'JPEG', MARGIN/2, MARGIN/2);
 
                             y += currentHeight;
                             maxHeight -= increment;
                         }
 
-                        pdf.save('export_'+ name +'.pdf')
+                        pdf.save('export_'+ name +'.pdf');
                         recover(elements);
                         callback.call(this);
-                    }
+                    };
                 }
             });
 
-        }
+        };
 
-    })
+    });

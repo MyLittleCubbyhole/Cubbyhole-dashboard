@@ -46,7 +46,7 @@ angular.module('Authentication').
 
                         callback.call(this, null);
 
-                        $window.location = $window.location.protocol + "//" + $window.location.host + "/dashboard?token=" + data.user.token;
+                        $window.location = $window.location.protocol + '//' + $window.location.host + '/dashboard?token=' + data.user.token;
                     } else {
                         callback.call(this, 'authentication failed');
                     }

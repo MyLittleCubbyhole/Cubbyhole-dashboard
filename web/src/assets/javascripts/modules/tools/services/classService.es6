@@ -9,5 +9,5 @@ angular.module('Tools').
         this.extend =   function(parent, child){
             child.prototype = new parent();
             child.constructor = child;
-        }
+        };
     });

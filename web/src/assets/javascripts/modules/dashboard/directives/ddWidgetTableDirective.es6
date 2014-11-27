@@ -17,7 +17,7 @@ angular.module('Dashboard').
 
                 $scope.toString = function() {
                     return '_ddWidgetTable';
-                }
+                };
             }],
             link: function($scope, $node, attributes, self) {
                 var $local = $scope._ddWidgetTable;
@@ -25,10 +25,10 @@ angular.module('Dashboard').
                 $local.edit = function() {
                     self.edit = !self.edit;
                     $node.css('z-index', ( self.edit ? ++$scope._dashydash.zIndex : 2 ) );
-                }
+                };
 
                 $local.widget = new WidgetTableProvider($scope._dashydash.widgets[$local.id], {scope: $scope, node: $node});
-                $local.widget.load()
+                $local.widget.load();
             }
         };
     }]);

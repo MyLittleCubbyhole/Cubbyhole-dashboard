@@ -4,5 +4,5 @@ angular.module('Home').
 
         $scope.toString = function() {
             return 'Home';
-        }
-    }])
+        };
+    }]);

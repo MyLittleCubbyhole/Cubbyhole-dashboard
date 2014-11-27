@@ -1,6 +1,6 @@
 angular.module('Dashboard').
     controller('DashboardController', ['$scope', '$location', '$routeParams', 'DashboardFactory', function($scope, $location, $routeParams, DashboardFactory){
-        var $local = $scope.Dashboard = {}
+        var $local = $scope.Dashboard = {};
 
         $local.dashboards = [];
         $local.currentDashboard = {};
@@ -31,7 +31,7 @@ angular.module('Dashboard').
 
                 $local.currentDashboard = $local.dashboards[0];
                 callback.call(this);
-            })
+            });
         }
 
         /**
@@ -43,7 +43,7 @@ angular.module('Dashboard').
 
             var next = function() {
 
-                if($location.path() == '/add') {
+                if($location.path() === '/add') {
                     var dashboard = {
                         id: 0,
                         title: '',
@@ -57,7 +57,7 @@ angular.module('Dashboard').
                     var idToFound = $routeParams.id || null;
 
                     for(var i = 0; i < $local.dashboards.length; i++)
-                        if(idToFound == $local.dashboards[i].id || idToFound == null) {
+                        if(idToFound === $local.dashboards[i].id || idToFound === null) {
                             $local.currentDashboard = $local.dashboards[i];
                             break;
                         }
@@ -71,7 +71,7 @@ angular.module('Dashboard').
             if(!$local.lockRouteChange) {
                 $local.lockRouteChange = true;
                 $local.currentDashboard = {};
-                if($local.dashboards === null || $local.dashboards.length == 0)
+                if($local.dashboards === null || $local.dashboards.length === 0)
                     getDashboards(next);
                 else
                     next();
@@ -89,7 +89,7 @@ angular.module('Dashboard').
                 $event.preventDefault();
             }
             DashboardFactory($scope).remove($local.currentDashboard.id, function(data) {
-                if(data.information && data.information.indexOf('error') == -1) {
+                if(data.information && data.information.indexOf('error') === -1) {
 
                     var index = $local.dashboards.indexOf($local.currentDashboard);
                     if(index > -1)
@@ -97,8 +97,8 @@ angular.module('Dashboard').
 
                     $local.currentDashboard = $local.dashboards[0];
                 }
-            })
-        }
+            });
+        };
 
         /**
          * display the export modal
@@ -106,9 +106,9 @@ angular.module('Dashboard').
         $local.showExportModal = function() {
             $scope.Overlay.activated = true;
             $local.exportModalVisible = true;
-        }
+        };
 
         $scope.toString = function() {
             return 'Dashboard';
-        }
-    }])
+        };
+    }]);

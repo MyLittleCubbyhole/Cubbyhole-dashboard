@@ -87,8 +87,8 @@ angular.module('Dashboard').
 
                 $http({method: 'PUT', url: '/api/dashboards/' + dashboardId + '/widgets/position', data: JSON.stringify(serialization)}).
                     success(function(data) { callback && callback.call(this); }).
-                    error(function() { console.error('an error occured when trying to save widgets position'); })
-            }
+                    error(function() { console.error('an error occured when trying to save widgets position'); });
+            };
 
             /**
              * update the selected widget
@@ -99,8 +99,8 @@ angular.module('Dashboard').
 
                 $http({method: 'PUT', url: '/api/dashboards/' + definition.dashboardid + '/widgets/' + definition.id, data: JSON.stringify(definition)}).
                     success(function(data) { callback && callback.call(this); }).
-                    error(function() { console.error('an error occured when trying to update widget'); })
-            }
+                    error(function() { console.error('an error occured when trying to update widget'); });
+            };
 
 
             return prototype;

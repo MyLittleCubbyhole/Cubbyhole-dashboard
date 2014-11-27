@@ -6,8 +6,8 @@ angular.module('Tools').
             link: function($scope, $node, attributes) {
                 $node.mCustomScrollbar({
                     theme: attributes.theme || 'light',
-                    scrollEasing:"easeOutCirc",
-                    mouseWheel:"auto",
+                    scrollEasing:'easeOutCirc',
+                    mouseWheel:'auto',
                     autoDraggerLength:true,
                     advanced:{
                         updateOnBrowserResize:true,

@@ -4,22 +4,21 @@ angular.module('Authentication').
         return {
             request: function(config) {
 
-                if(config.url.indexOf('token') == -1) {
+                if(config.url.indexOf('token') === -1) {
                     config.url += config.url.indexOf('?') > -1 ? '&' : '?';
 
-                    config.url += "token=";
+                    config.url += 'token=';
 
                     var user = localStorage.getItem('user');
                     if(!user)
                         user = sessionStorage.getItem('user');
                     if(user)
-                        config.url += JSON.parse(user).token || "";
+                        config.url += JSON.parse(user).token || '';
                 }
 
                 return config || $q.when(config);
             },
             responseError: function(response) {
-                if (response.status === 401) {}
                 return response || $q.when(response);
             }
         };
