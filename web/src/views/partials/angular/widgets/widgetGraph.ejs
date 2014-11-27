@@ -1,0 +1,209 @@
+<% layout('../../../layout/widget-core') %>
+
+<section class="widget-side widget-frontside" ng-controller="WidgetFrontSideController" ng-class="{loader: WidgetFrontSide.inLoading}">
+    <article class="widget-front-head">
+        <article class="corner edit" ng-click="_flip.active(); _ddWidgetGraph.edit()">
+            <article class="corner-text">EDIT</article>
+        </article>
+    </article>
+    <article class="widget-front-body nodrag"></article>
+</section>
+<section class="widget-side widget-backside" ng-controller="WidgetBackSideController">
+    <article class="widget-back-head nodrag">
+        <nav class="nav-pills">
+            <article ng-click="WidgetBackSide.tab = 'data'" ng-class="{active: WidgetBackSide.tab == 'data'}" class="pill">
+                <i class="icon-earth"></i><span class="pill-name">DATA</span>
+            </article>
+            <article ng-click="WidgetBackSide.tab = 'filters'" ng-class="{active: WidgetBackSide.tab == 'filters'}" class="pill">
+                <i class="icon-filter"></i><span class="pill-name">FILTERS</span>
+            </article>
+            <article ng-click="WidgetBackSide.tab = 'configuration'" ng-class="{active: WidgetBackSide.tab == 'configuration'}" class="pill">
+                <i class="icon-cogs"></i><span class="pill-name">CONFIGURATION</span>
+            </article>
+        </nav>
+        <article class="corner edit" ng-click="WidgetBackSide.save();">
+            <article class="corner-text">SAVE</article>
+        </article>
+    </article>
+    <article class="widget-back-body nodrag">
+        <section id="widget-back-switch" ng-switch on="WidgetBackSide.tab">
+            <article class="widget-back-tab nodrag" ng-switch-when="data">
+                <section class="bloc-tab">
+                    <article class="bloc-title">Abscisse</article>
+                    <article class="bloc-content">
+                        <article class="bloc-content-option">
+                            <span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
+                                <span>{{_ddWidgetGraph.widget.segments[0].kpi.formattedAlias}}</span>
+                                <grumpy-virgin class="bounceIn">
+                                    <section class="filter-kpi-box" scroll-bar>
+                                        <section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
+                                            <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+                                            <section class="kpi-list" ng-class="{ open: kpistatus}">
+                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[0].kpi = kpi; _ddWidgetGraph.widget.sort.name = kpi.index; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[0].kpi }">
+                                                    {{kpi.formattedAlias}}
+                                                </article>
+                                            </section>
+                                        </section>
+                                    </section>
+                                </grumpy-virgin>
+                            </span>
+                            <article class="sort-button" ng-click="_ddWidgetGraph.widget.sort.order = _ddWidgetGraph.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetGraph.widget.sort.name = _ddWidgetGraph.widget.segments[0].kpi.index" ng-class="{ active: !!_ddWidgetGraph.widget.sort.name && _ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.segments[0].kpi.index}"><i class="icon-sort-amount-{{_ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.segments[0].kpi.index ? (_ddWidgetGraph.widget.sort.order || 'asc') : 'asc'}}"></i></article>
+                        </article>
+                    </article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="bloc-title">Ordinate</article>
+                    <article class="bloc-content">
+                        <article class="bloc-content-option">
+                            <span grumpy-ui grumpy-position="right" grumpy-align="top" class="no-close">
+                                <span>{{_ddWidgetGraph.widget.metrics[0].kpi.formattedAlias}}</span>
+                                <grumpy-virgin class="bounceIn">
+                                    <section class="filter-kpi-box" scroll-bar>
+                                        <section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
+                                            <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+                                            <section class="kpi-list" ng-class="{ open: kpistatus}">
+                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[0].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[0].kpi }">
+                                                    {{kpi.formattedAlias}}
+                                                </article>
+                                            </section>
+                                        </section>
+                                    </section>
+                                </grumpy-virgin>
+                            </span>
+                            <section class="graph-selector">
+                                <article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[0].options.shape = 'line';" ng-class="{ active:  !_ddWidgetGraph.widget.metrics[0].options.shape || _ddWidgetGraph.widget.metrics[0].options.shape == 'line'}"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
+                                <article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[0].options.shape = 'area';" ng-class="{ active: _ddWidgetGraph.widget.metrics[0].options.shape == 'area'}"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
+                                <article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[0].options.shape = 'column';" ng-class="{ active: _ddWidgetGraph.widget.metrics[0].options.shape == 'column'}"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
+                            </section>
+                            <article class="sort-button" ng-click="_ddWidgetGraph.widget.sort.order = _ddWidgetGraph.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetGraph.widget.sort.name = _ddWidgetGraph.widget.metrics[0].kpi.index" ng-class="{ active: !!_ddWidgetGraph.widget.sort.name && _ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.metrics[0].kpi.index}"><i class="icon-sort-amount-{{_ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.metrics[0].kpi.index ? (_ddWidgetGraph.widget.sort.order || 'asc') : 'asc'}}"></i></article>
+                        </article>
+                        <article class="bloc-content-option" ng-class="{ disabled: !_ddWidgetGraph.widget.metrics[1] }">
+                            <span ng-if="!_ddWidgetGraph.widget.metrics[1]" ng-click="WidgetBackSide.addMetric();_ddWidgetGraph.widget.segments.splice(1,1);">&nbsp</span>
+                            <span grumpy-ui grumpy-position="right" grumpy-align="top" ng-if="!!_ddWidgetGraph.widget.metrics[1]">
+                                <span>{{_ddWidgetGraph.widget.metrics[1].kpi.formattedAlias}}<i class="icon-cross" ng-click="_ddWidgetGraph.widget.metrics.splice(1,1);"></i></span>
+                                <grumpy-virgin class="bounceIn">
+                                    <section class="filter-kpi-box" scroll-bar>
+                                        <section ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index" ng-init="kpistatus = false">
+                                            <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+                                            <section class="kpi-list" ng-class="{ open: kpistatus}">
+                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.metrics[1].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[1].kpi }">
+                                                    {{kpi.formattedAlias}}
+                                                </article>
+                                            </section>
+                                        </section>
+                                    </section>
+                                </grumpy-virgin>
+                            </span>
+                            <section class="graph-selector" ng-if="!!_ddWidgetGraph.widget.metrics[1]">
+                                <article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[1].options.shape = 'line';" ng-class="{ active:  !_ddWidgetGraph.widget.metrics[1].options.shape || _ddWidgetGraph.widget.metrics[1].options.shape == 'line'}"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
+                                <article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[1].options.shape = 'area';" ng-class="{ active: _ddWidgetGraph.widget.metrics[1].options.shape == 'area'}"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
+                                <article class="graph-type" ng-click="_ddWidgetGraph.widget.metrics[1].options.shape = 'column';" ng-class="{ active: _ddWidgetGraph.widget.metrics[1].options.shape == 'column'}"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
+                            </section>
+                            <section class="graph-selector" ng-if="!_ddWidgetGraph.widget.metrics[1]">
+                                <article class="graph-type"><img src="/images/widget-icons/tiny-icochart-line.png"></article>
+                                <article class="graph-type"><img src="/images/widget-icons/tiny-icochart-area.png"></article>
+                                <article class="graph-type"><img src="/images/widget-icons/tiny-icochart-bar.png"></article>
+                            </section>
+                            <article class="sort-button" ng-click="_ddWidgetGraph.widget.sort.order = _ddWidgetGraph.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetGraph.widget.sort.name = _ddWidgetGraph.widget.metrics[1].kpi.index" ng-class="{ active: !!_ddWidgetGraph.widget.sort.name && _ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.metrics[1].kpi.index}"><i class="icon-sort-amount-{{_ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.metrics[1].kpi.index ? (_ddWidgetGraph.widget.sort.order || 'asc') : 'asc'}}"></i></article>
+                        </article>
+                        <section class="graph-option">
+                            Stacked
+                            <label class="toggle">
+                                <input type="checkbox" name="checkbox-toggle" ng-model="_ddWidgetGraph.widget.stacked">
+                                <i data-swchon-text="ON" data-swchoff-text="OFF"></i>
+                            </label>
+                        </section>
+                    </article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="bloc-title">Segment</article>
+                    <article class="bloc-content">
+                        <article class="bloc-content-option" ng-class="{ disabled: !_ddWidgetGraph.widget.segments[1] }">
+                            <span ng-if="!_ddWidgetGraph.widget.segments[1]" ng-click="WidgetBackSide.addSegment({axis: ''});_ddWidgetGraph.widget.metrics.splice(1,1);">&nbsp</span>
+                            <span grumpy-ui grumpy-position="right" grumpy-align="top" ng-if="!!_ddWidgetGraph.widget.segments[1]">
+                                <span>{{_ddWidgetGraph.widget.segments[1].kpi.formattedAlias}}<i class="icon-cross" ng-click="_ddWidgetGraph.widget.segments.splice(1,1);"></i></span>
+                                <grumpy-virgin class="bounceIn">
+                                    <section class="filter-kpi-box" scroll-bar>
+                                        <section ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index" ng-init="kpistatus = false">
+                                            <article class="kpi-category" ng-click="kpistatus = !kpistatus">{{category}}</article>
+                                            <section class="kpi-list" ng-class="{ open: kpistatus}">
+                                                <article ng-repeat="kpi in kpis track by $index" class="kpi" ng-click="_ddWidgetGraph.widget.segments[1].kpi = kpi; _grumpyUi.close();" ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[1].kpi }">
+                                                    {{kpi.formattedAlias}}
+                                                </article>
+                                            </section>
+                                        </section>
+                                    </section>
+                                </grumpy-virgin>
+                            </span>
+                        </article>
+                    </article>
+                </section>
+            </article>
+
+            <article class="widget-back-tab nodrag" ng-switch-when="filters">
+                <section class="bloc-tab">
+                    <article class="bloc-title">
+                        Filters
+                        <label class="toggle float-right">
+                            <input type="checkbox" name="checkbox-toggle" ng-change="_ddWidgetGraph.widget.filters[0].operator = _ddWidgetGraph.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';" ng-checked="_ddWidgetGraph.widget.filters[0].operator == 'OR'" ng-model="operator">
+                            <i data-swchon-text="OR" data-swchoff-text="AND"></i>
+                        </label>
+                    </article>
+                    <article class="bloc-content">
+                        <article class="bloc-content-option filter" ng-repeat="(filterIndex, filter) in _ddWidgetGraph.widget.filters[0].conditions track by $index">
+
+                            <%- include components/filters.ejs %>
+
+                        <article class="del-btn" ng-click="_ddWidgetGraph.widget.filters[0].conditions.splice($index, 1);"><i class="icon-cross"></i></article>
+                        </article>
+                    </article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="add-filter btn cubby-btn" ng-click="WidgetBackSide.addFilter();">ADD</article>
+                </section>
+            </article>
+
+            <article class="widget-back-tab nodrag" ng-switch-when="configuration">
+                <section class="bloc-tab">
+                    <article class="bloc-title">Title</article>
+                    <article class="bloc-content"><input type="text" class="config-title" placeholder="title" ng-model="_ddWidgetGraph.widget.title"></article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="bloc-title">Width</article>
+                    <article class="bloc-content">
+                        <section class="bloc-selector">
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.width == 1 }" ng-click="WidgetBackSide.resize({ width: 1 });">25%</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.width == 2 }" ng-click="WidgetBackSide.resize({ width: 2 });">50%</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.width == 3 }" ng-click="WidgetBackSide.resize({ width: 3 });">75%</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.width == 4 }" ng-click="WidgetBackSide.resize({ width: 4 });">100%</article>
+                        </section>
+                    </article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="bloc-title">Height</article>
+                    <article class="bloc-content">
+                        <section class="bloc-selector">
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.height == 3 }" ng-click="WidgetBackSide.resize({ height: 3 });">3</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.height == 5 }" ng-click="WidgetBackSide.resize({ height: 5 });">5</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.size.height == 7 }" ng-click="WidgetBackSide.resize({ height: 7 });">7</article>
+                        </section>
+                    </article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="bloc-title">LIMIT</article>
+                    <article class="bloc-content">
+                        <section class="bloc-selector">
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.limit == 5 }" ng-click="_ddWidgetGraph.widget.limit=5">5</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.limit == 10 }" ng-click="_ddWidgetGraph.widget.limit=10">10</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.limit == 20 }" ng-click="_ddWidgetGraph.widget.limit=20">20</article>
+                            <article class="bloc-option" ng-class="{ active: _ddWidgetGraph.widget.limit == 0 }" ng-click="_ddWidgetGraph.widget.limit=0">&infin;</article>
+                        </section>
+                    </article>
+                </section>
+                <section class="bloc-tab">
+                    <article class="bloc-button" ng-click="WidgetBackSide.delete()">DELETE WIDGET</article>
+                </section>
+            </article>
+        </section>
+    </article>
+</section>

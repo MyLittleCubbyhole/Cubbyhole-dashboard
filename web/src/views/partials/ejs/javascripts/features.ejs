@@ -1,0 +1,42 @@
+<%if (environment == 'dev') { %>
+
+    <!-- Configuration -->
+    <script src="/javascripts/modules/config/core.js"></script>
+    <script src="/javascripts/modules/config/constants/configConstants.js"></script>
+    <!-- Configuration -->
+
+    <!-- Tools -->
+    <script src="/javascripts/modules/tools/core.js"></script>
+    <script src="/javascripts/modules/tools/directives/datePickerDirective.js"></script>
+    <script src="/javascripts/modules/tools/directives/focusDirective.js"></script>
+    <script src="/javascripts/modules/tools/directives/modalDirective.js"></script>
+    <script src="/javascripts/modules/tools/directives/scrollBarDirective.js"></script>
+    <script src="/javascripts/modules/tools/services/classService.js"></script>
+    <script src="/javascripts/modules/tools/services/captureService.js"></script>
+    <script src="/javascripts/modules/tools/filters/numeraljsFilter.js"></script>
+    <!-- Tools -->
+
+    <!-- Authentication -->
+    <script src="/javascripts/modules/authentication/core.js"></script>
+    <script src="/javascripts/modules/authentication/controllers/authenticationController.js"></script>
+    <script src="/javascripts/modules/authentication/controllers/loginController.js"></script>
+    <script src="/javascripts/modules/authentication/factories/authenticationFactory.js"></script>
+    <script src="/javascripts/modules/authentication/factories/userFactory.js"></script>
+    <!-- Authentication -->
+
+    <!-- overlay -->
+    <script src="/javascripts/modules/overlay/core.js"></script>
+    <script src="/javascripts/modules/overlay/controllers/overlayController.js"></script>
+    <!-- overlay -->
+
+    <!-- Navigation -->
+    <script src="/javascripts/modules/navigation/core.js"></script>
+    <script src="/javascripts/modules/navigation/controllers/navigationController.js"></script>
+    <!-- Navigation -->
+
+<% } %>
+<% if(environment == 'prod') { %>
+
+    <script src="/minified/javascripts/common.js"></script>
+
+<% } %>

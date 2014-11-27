@@ -1,0 +1,39 @@
+<%if (environment == 'dev') { %>
+
+    <script src="/javascripts/modules/dashboard/core.js"></script>
+    <script src="/javascripts/modules/dashboard/config/dashboardConfig.js"></script>
+    <script src="/javascripts/modules/dashboard/constants/countriesConstant.js"></script>
+    <script src="/javascripts/modules/dashboard/constants/widgetConstants.js"></script>
+    <script src="/javascripts/modules/dashboard/constants/settingsConstant.js"></script>
+    <script src="/javascripts/modules/dashboard/constants/queryBuilderConstant.js"></script>
+    <script src="/javascripts/modules/dashboard/services/dashboardOptimizeService.js"></script>
+    <script src="/javascripts/modules/dashboard/controllers/dashboardController.js"></script>
+    <script src="/javascripts/modules/dashboard/controllers/dashboardMenuController.js"></script>
+    <script src="/javascripts/modules/dashboard/controllers/exportController.js"></script>
+    <script src="/javascripts/modules/dashboard/controllers/widgetMenuController.js"></script>
+    <script src="/javascripts/modules/dashboard/controllers/widgetBackSideController.js"></script>
+    <script src="/javascripts/modules/dashboard/controllers/widgetFrontSideController.js"></script>
+    <script src="/javascripts/modules/dashboard/factories/dashboardFactory.js"></script>
+    <script src="/javascripts/modules/dashboard/factories/widgetFactory.js"></script>
+    <script src="/javascripts/modules/dashboard/directives/flipDirective.js"></script>
+    <script src="/javascripts/modules/dashboard/directives/formPostDownloaderDirective.js"></script>
+    <script src="/javascripts/modules/dashboard/directives/dashboardDirective.js"></script>
+    <script src="/javascripts/modules/dashboard/directives/dashyDashDirective.js"></script>
+    <script src="/javascripts/modules/dashboard/directives/ddWidgetGraphDirective.js"></script>
+    <script src="/javascripts/modules/dashboard/directives/ddWidgetSingleNumberDirective.js"></script>
+    <script src="/javascripts/modules/dashboard/directives/ddWidgetPieDirective.js"></script>
+    <script src="/javascripts/modules/dashboard/directives/ddWidgetTableDirective.js"></script>
+    <script src="/javascripts/modules/dashboard/directives/ddWidgetMapDirective.js"></script>
+    <script src="/javascripts/modules/dashboard/providers/widgetProvider.js"></script>
+    <script src="/javascripts/modules/dashboard/providers/widgetGraphProvider.js"></script>
+    <script src="/javascripts/modules/dashboard/providers/widgetMapProvider.js"></script>
+    <script src="/javascripts/modules/dashboard/providers/widgetSingleNumberProvider.js"></script>
+    <script src="/javascripts/modules/dashboard/providers/widgetPieProvider.js"></script>
+    <script src="/javascripts/modules/dashboard/providers/widgetTableProvider.js"></script>
+
+<% } %>
+<% if(environment == 'prod') { %>
+
+    <script src="/minified/javascripts/dashboard.js"></script>
+
+<% } %>
