@@ -54,7 +54,7 @@ module.exports = Controller;
 	}
 
 	function getByDashboardId(request, response) {
-		var dashboardId = request.params.id;
+		var dashboardId = request.params.dashboardId;
 		WidgetFactory.get.byDashboardId(dashboardId)
 			.then((widgets) => {
 				if(widgets.length === 0)
