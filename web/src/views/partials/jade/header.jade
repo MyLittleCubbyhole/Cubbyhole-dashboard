@@ -1,0 +1,34 @@
+header(ng-class="{preventClick: Overlay.activated}")
+	section#global-nav(ng-controller="NavigationController", du-scroll-container="bloc-container")
+
+		section#logo-container.pull-left(ng-click="Navigation.goto('/home')")
+			article#logo: img(src="/images/design/logo.png", alt="logo")
+			article#logo-title.google-font.hidden-xs Cubbyhole
+
+		section.menu.pull-right(ng-controller="AuthenticationController", ng-cloak)
+			article.option.authentication(ng-if="Authentication.user.firstname")
+				section.button-profile(ng-click="Authentication.open();")
+					article.img-circle.image-target(ng-style="Authentication.stylePhoto", ng-class="{'form-file-preview': Authentication.user.photo && Authentication.user.photo != 'null'}")
+						i.icon-profile-male.form-file-hide
+					article.label.hidden-xs {{Authentication.user.firstname}}
+
+				section#user-card.bounceIn.animated(ng-class="{ open: Authentication.opened }", modal)
+					article.card-arrow
+					section#user-profile
+						article.user-picture
+							article.border-circle-blue
+								article.img-circle.image-target(ng-style="Authentication.stylePhoto", ng-class="{'form-file-preview': Authentication.user.photo && Authentication.user.photo != 'null'}")
+									i.icon-profile-male.form-file-hide
+						article.user-info
+							article.user-firstname.google-font {{Authentication.user.firstname}}
+							article.user-lastname.google-font {{Authentication.user.lastname}}
+					section#user-disconnect.big-font.google-font(ng-click="Authentication.logout()")
+						span Log out
+
+		nav.navigation.pull-left.hidden-xs.hidden-sm
+			article.option.nav.google-font.big-font(ng-class="{selected: Navigation.isSelected('/home')}", ng-click="Navigation.goto('/home')")
+				span.label HOME
+
+		section.redirect-zone.pull-left
+			article.option.nav(ng-class="{selected: Navigation.isSelected('/dashboard')}", ng-click="Navigation.goto('/dashboard')")
+				span.label DASHBOARD

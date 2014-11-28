@@ -1,0 +1,50 @@
+section#modal-login.md-modal.google-font.md-show(ng-controller="LoginController", ng-cloak)
+	section.md-content
+		article
+			section
+				section.login-container(scroll-bar)
+					form.form(name="form", ng-submit="Login.authenticate(form.$valid)", novalidate)
+
+						header LOGIN
+
+						article.user-picture
+							article.border-circle-blue
+								article.img-circle
+									i.icon-profile-male
+
+						fieldset
+							section
+								article.row
+									label.label.col.col-4(for="input-email-login") E-mail
+									article.col.col-8
+										label.input
+											input#input-email-login.form-control(type="email", name="email", ng-model="Login.user.email", autofocus, required)
+											i.icon-append.icon-envelope(ng-class="{'state-error': ((form.email.$dirty || Login.isFormSubmited) && form.email.$invalid)}")
+										section.error-form(ng-show="(form.email.$dirty || Login.isFormSubmited) && form.email.$invalid")
+											article.note.note-error(ng-show="form.email.$error.required") Fill your e-mail.
+											article.note.note-error(ng-show="form.email.$error.email") Invalid e-mail.
+
+							section
+								article.row
+									label.label.col.col-4(for="input-password-login") Password
+									article.col.col-8
+										label.input
+											input#input-password-login.form-control(type="password", name="password", ng-model="Login.user.password", required)
+											i.icon-append.icon-lock(ng-class="{'state-error': ((form.password.$dirty || Login.isFormSubmited) && form.password.$invalid)}")
+										section.error-form(ng-show="(form.password.$dirty || Login.isFormSubmited) && form.password.$invalid")
+											article.note.note-error(ng-show="form.password.$error.required") Renseignez votre mot de passe.
+
+							section
+								article.row
+									article.col.col-4
+									article.col.col-8
+										label.checkbox
+											input(type="checkbox", name="checkbox-inline", ng-model="Login.rememberMe", checked="")
+											i
+											| Remember me
+
+							section
+								article.note.note-error.message(ng-show="Login.errorLogin") Bad credentials.
+
+						section.buttons
+							button.button.green.register.google-font(type="submit") LOGIN

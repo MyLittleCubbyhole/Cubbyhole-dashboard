@@ -1,0 +1,44 @@
+extends ../../layouts/overlay-core
+
+block page_definition
+	title= "CubbyHole - Dashboard"
+	meta(name="description" content="Cub'BI - Dashboard")
+
+block append body
+	include dashboard-content
+	include export-menu
+
+
+block append javascripts
+	//-<!-- build:js /javascripts/dashboard.js -->
+	script(src="/javascripts/modules/dashboard/core.js")
+	script(src="/javascripts/modules/dashboard/config/dashboardConfig.js")
+	script(src="/javascripts/modules/dashboard/constants/countriesConstant.js")
+	script(src="/javascripts/modules/dashboard/constants/widgetConstants.js")
+	script(src="/javascripts/modules/dashboard/constants/settingsConstant.js")
+	script(src="/javascripts/modules/dashboard/constants/queryBuilderConstant.js")
+	script(src="/javascripts/modules/dashboard/services/dashboardOptimizeService.js")
+	script(src="/javascripts/modules/dashboard/controllers/dashboardController.js")
+	script(src="/javascripts/modules/dashboard/controllers/dashboardMenuController.js")
+	script(src="/javascripts/modules/dashboard/controllers/exportController.js")
+	script(src="/javascripts/modules/dashboard/controllers/widgetMenuController.js")
+	script(src="/javascripts/modules/dashboard/controllers/widgetBackSideController.js")
+	script(src="/javascripts/modules/dashboard/controllers/widgetFrontSideController.js")
+	script(src="/javascripts/modules/dashboard/factories/dashboardFactory.js")
+	script(src="/javascripts/modules/dashboard/factories/widgetFactory.js")
+	script(src="/javascripts/modules/dashboard/directives/flipDirective.js")
+	script(src="/javascripts/modules/dashboard/directives/formPostDownloaderDirective.js")
+	script(src="/javascripts/modules/dashboard/directives/dashboardDirective.js")
+	script(src="/javascripts/modules/dashboard/directives/dashyDashDirective.js")
+	script(src="/javascripts/modules/dashboard/directives/ddWidgetGraphDirective.js")
+	script(src="/javascripts/modules/dashboard/directives/ddWidgetSingleNumberDirective.js")
+	script(src="/javascripts/modules/dashboard/directives/ddWidgetPieDirective.js")
+	script(src="/javascripts/modules/dashboard/directives/ddWidgetTableDirective.js")
+	script(src="/javascripts/modules/dashboard/directives/ddWidgetMapDirective.js")
+	script(src="/javascripts/modules/dashboard/providers/widgetProvider.js")
+	script(src="/javascripts/modules/dashboard/providers/widgetGraphProvider.js")
+	script(src="/javascripts/modules/dashboard/providers/widgetMapProvider.js")
+	script(src="/javascripts/modules/dashboard/providers/widgetSingleNumberProvider.js")
+	script(src="/javascripts/modules/dashboard/providers/widgetPieProvider.js")
+	script(src="/javascripts/modules/dashboard/providers/widgetTableProvider.js")
+	//-<!-- endbuild -->

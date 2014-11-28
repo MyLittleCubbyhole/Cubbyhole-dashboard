@@ -1,0 +1,176 @@
+extends ../../../layouts/widget-core
+
+block content
+	section.widget-side.widget-frontside(ng-controller="WidgetFrontSideController", ng-class="{loader: WidgetFrontSide.inLoading}")
+
+	article.widget-front-head
+		article.corner.edit(ng-click="_flip.active(); _ddWidgetGraph.edit()")
+			article.corner-text EDIT
+
+	article.widget-front-body.nodrag
+
+	section.widget-side.widget-backside(ng-controller="WidgetBackSideController")
+		article.widget-back-head.nodrag
+			nav.nav-pills
+				article.pill(ng-click="WidgetBackSide.tab = 'data'", ng-class="{active: WidgetBackSide.tab == 'data'}")
+					i.icon-earth
+					span.pill-name DATA
+				article.pill(ng-click="WidgetBackSide.tab = 'filters'", ng-class="{active: WidgetBackSide.tab == 'filters'}")
+					i.icon-filter
+					span.pill-name FILTERS
+				article.pill(ng-click="WidgetBackSide.tab = 'configuration'", ng-class="{active: WidgetBackSide.tab == 'configuration'}")
+					i.icon-cogs
+					span.pill-name CONFIGURATION
+
+			article.corner.edit(ng-click="WidgetBackSide.save();")
+				article.corner-text SAVE
+
+		article.widget-back-body.nodrag
+			section#widget-back-switch(ng-switch, on="WidgetBackSide.tab")
+				article.widget-back-tab.nodrag(ng-switch-when="data")
+					section.bloc-tab
+						article.bloc-title Abscisse
+						article.bloc-content
+							article.bloc-content-option
+								span.no-close(grumpy-ui, grumpy-position="right", grumpy-align="top")
+									span {{_ddWidgetGraph.widget.segments[0].kpi.formattedAlias}}
+									grumpy-virgin.bounceIn
+										section.filter-kpi-box(scroll-bar)
+											section(ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index", ng-init="kpistatus = false")
+												article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+												section.kpi-list(ng-class="{ open: kpistatus}")
+													article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="_ddWidgetGraph.widget.segments[0].kpi = kpi; _ddWidgetGraph.widget.sort.name = kpi.index; _grumpyUi.close();", ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[0].kpi }")
+														| {{kpi.formattedAlias}}
+
+								article.sort-button(ng-click="_ddWidgetGraph.widget.sort.order = _ddWidgetGraph.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetGraph.widget.sort.name = _ddWidgetGraph.widget.segments[0].kpi.index", ng-class="{ active: !!_ddWidgetGraph.widget.sort.name && _ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.segments[0].kpi.index}")
+									i(class="icon-sort-amount-{{_ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.segments[0].kpi.index ? (_ddWidgetGraph.widget.sort.order || 'asc') : 'asc'}}")
+
+					section.bloc-tab
+						article.bloc-title Ordinate
+						article.bloc-content
+							article.bloc-content-option
+								span.no-close(grumpy-ui, grumpy-position="right", grumpy-align="top")
+									span {{_ddWidgetGraph.widget.metrics[0].kpi.formattedAlias}}
+									grumpy-virgin.bounceIn
+										section.filter-kpi-box(scroll-bar)
+											section(ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index", ng-init="kpistatus = false")
+												article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+												section.kpi-list(ng-class="{ open: kpistatus}")
+													article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="_ddWidgetGraph.widget.metrics[0].kpi = kpi; _grumpyUi.close();", ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[0].kpi }")
+														| {{kpi.formattedAlias}}
+
+								section.graph-selector
+									article.graph-type(ng-click="_ddWidgetGraph.widget.metrics[0].options.shape = 'line';", ng-class="{ active:  !_ddWidgetGraph.widget.metrics[0].options.shape || _ddWidgetGraph.widget.metrics[0].options.shape == 'line'}")
+										img(src="/images/widget-icons/tiny-icochart-line.png")
+									article.graph-type(ng-click="_ddWidgetGraph.widget.metrics[0].options.shape = 'area';", ng-class="{ active: _ddWidgetGraph.widget.metrics[0].options.shape == 'area'}")
+										img(src="/images/widget-icons/tiny-icochart-area.png")
+									article.graph-type(ng-click="_ddWidgetGraph.widget.metrics[0].options.shape = 'column';", ng-class="{ active: _ddWidgetGraph.widget.metrics[0].options.shape == 'column'}")
+										img(src="/images/widget-icons/tiny-icochart-bar.png")
+
+								article.sort-button(ng-click="_ddWidgetGraph.widget.sort.order = _ddWidgetGraph.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetGraph.widget.sort.name = _ddWidgetGraph.widget.metrics[0].kpi.index", ng-class="{ active: !!_ddWidgetGraph.widget.sort.name && _ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.metrics[0].kpi.index}")
+									i(class="icon-sort-amount-{{_ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.metrics[0].kpi.index ? (_ddWidgetGraph.widget.sort.order || 'asc') : 'asc'}}")
+
+							article.bloc-content-option(ng-class="{ disabled: !_ddWidgetGraph.widget.metrics[1] }")
+								span(ng-if="!_ddWidgetGraph.widget.metrics[1]", ng-click="WidgetBackSide.addMetric();_ddWidgetGraph.widget.segments.splice(1,1);") &nbsp
+								span(grumpy-ui, grumpy-position="right", grumpy-align="top", ng-if="!!_ddWidgetGraph.widget.metrics[1]")
+									span
+										| {{_ddWidgetGraph.widget.metrics[1].kpi.formattedAlias}}
+										i.icon-cross(ng-click="_ddWidgetGraph.widget.metrics.splice(1,1);")
+									grumpy-virgin.bounceIn
+										section.filter-kpi-box(scroll-bar)
+											section(ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index", ng-init="kpistatus = false")
+												article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+												section.kpi-list(ng-class="{ open: kpistatus}")
+													article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="_ddWidgetGraph.widget.metrics[1].kpi = kpi; _grumpyUi.close();", ng-class="{ active: kpi.index == _ddWidgetGraph.widget.metrics[1].kpi }")
+														| {{kpi.formattedAlias}}
+
+								section.graph-selector(ng-if="!!_ddWidgetGraph.widget.metrics[1]")
+									article.graph-type(ng-click="_ddWidgetGraph.widget.metrics[1].options.shape = 'line';", ng-class="{ active:  !_ddWidgetGraph.widget.metrics[1].options.shape || _ddWidgetGraph.widget.metrics[1].options.shape == 'line'}")
+										img(src="/images/widget-icons/tiny-icochart-line.png")
+									article.graph-type(ng-click="_ddWidgetGraph.widget.metrics[1].options.shape = 'area';", ng-class="{ active: _ddWidgetGraph.widget.metrics[1].options.shape == 'area'}")
+										img(src="/images/widget-icons/tiny-icochart-area.png")
+									article.graph-type(ng-click="_ddWidgetGraph.widget.metrics[1].options.shape = 'column';", ng-class="{ active: _ddWidgetGraph.widget.metrics[1].options.shape == 'column'}")
+										img(src="/images/widget-icons/tiny-icochart-bar.png")
+
+								section.graph-selector(ng-if="!_ddWidgetGraph.widget.metrics[1]")
+									article.graph-type
+										img(src="/images/widget-icons/tiny-icochart-line.png")
+									article.graph-type
+										img(src="/images/widget-icons/tiny-icochart-area.png")
+									article.graph-type
+										img(src="/images/widget-icons/tiny-icochart-bar.png")
+
+								article.sort-button(ng-click="_ddWidgetGraph.widget.sort.order = _ddWidgetGraph.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetGraph.widget.sort.name = _ddWidgetGraph.widget.metrics[1].kpi.index", ng-class="{ active: !!_ddWidgetGraph.widget.sort.name && _ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.metrics[1].kpi.index}")
+									i(class="icon-sort-amount-{{_ddWidgetGraph.widget.sort.name == _ddWidgetGraph.widget.metrics[1].kpi.index ? (_ddWidgetGraph.widget.sort.order || 'asc') : 'asc'}}")
+
+							section.graph-option
+								| Stacked
+								label.toggle
+									input(type="checkbox", name="checkbox-toggle", ng-model="_ddWidgetGraph.widget.stacked")
+									i(data-swchon-text="ON", data-swchoff-text="OFF")
+
+							section.bloc-tab
+								article.bloc-title Segment
+								article.bloc-content
+									article.bloc-content-option(ng-class="{ disabled: !_ddWidgetGraph.widget.segments[1] }")
+										span(ng-if="!_ddWidgetGraph.widget.segments[1]", ng-click="WidgetBackSide.addSegment({axis: ''});_ddWidgetGraph.widget.metrics.splice(1,1);") &nbsp
+										span(grumpy-ui, grumpy-position="right", grumpy-align="top", ng-if="!!_ddWidgetGraph.widget.segments[1]")
+											span
+												| {{_ddWidgetGraph.widget.segments[1].kpi.formattedAlias}}
+												i.icon-cross(ng-click="_ddWidgetGraph.widget.segments.splice(1,1);")
+											grumpy-virgin.bounceIn
+												section.filter-kpi-box(scroll-bar)
+													section(ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index", ng-init="kpistatus = false")
+														article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+														section.kpi-list(ng-class="{ open: kpistatus}")
+															article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="_ddWidgetGraph.widget.segments[1].kpi = kpi; _grumpyUi.close();", ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[1].kpi }")
+																| {{kpi.formattedAlias}}
+
+			article.widget-back-tab.nodrag(ng-switch-when="filters")
+				section.bloc-tab
+					article.bloc-title
+						| Filters
+						label.toggle.float-right
+							input(type="checkbox", name="checkbox-toggle", ng-change="_ddWidgetGraph.widget.filters[0].operator = _ddWidgetGraph.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';", ng-checked="_ddWidgetGraph.widget.filters[0].operator == 'OR'", ng-model="operator")
+							i(data-swchon-text="OR", data-swchoff-text="AND")
+
+					article.bloc-content
+						article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in _ddWidgetGraph.widget.filters[0].conditions track by $index")
+
+				section.bloc-tab
+					article.add-filter.btn.cubby-btn(ng-click="WidgetBackSide.addFilter();") ADD
+
+			article.widget-back-tab.nodrag(ng-switch-when="configuration")
+				section.bloc-tab
+					article.bloc-title Title
+					article.bloc-content
+						input.config-title(type="text", placeholder="title", ng-model="_ddWidgetGraph.widget.title")
+
+				section.bloc-tab
+					article.bloc-title Width
+					article.bloc-content
+						section.bloc-selector
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 1 }", ng-click="WidgetBackSide.resize({ width: 1 });") 25%
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 2 }", ng-click="WidgetBackSide.resize({ width: 2 });") 50%
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 3 }", ng-click="WidgetBackSide.resize({ width: 3 });") 75%
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 4 }", ng-click="WidgetBackSide.resize({ width: 4 });") 100%
+
+				section.bloc-tab
+					article.bloc-title Height
+					article.bloc-content
+						section.bloc-selector
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.height == 3 }", ng-click="WidgetBackSide.resize({ height: 3 });") 3
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.height == 5 }", ng-click="WidgetBackSide.resize({ height: 5 });") 5
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.height == 7 }", ng-click="WidgetBackSide.resize({ height: 7 });") 7
+
+				section.bloc-tab
+					article.bloc-title LIMIT
+					article.bloc-content
+						section.bloc-selector
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 5 }", ng-click="_ddWidgetGraph.widget.limit=5") 5
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 10 }", ng-click="_ddWidgetGraph.widget.limit=10") 10
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 20 }", ng-click="_ddWidgetGraph.widget.limit=20") 20
+							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 0 }", ng-click="_ddWidgetGraph.widget.limit=0") ∞
+
+				section.bloc-tab
+					article.bloc-button(ng-click="WidgetBackSide.delete()") DELETE WIDGET

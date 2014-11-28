@@ -1,0 +1,129 @@
+section#box-export(ng-show="Dashboard.exportModalVisible", ng-cloak, modal)
+	section.widget-content.export-content(flip, ng-class="{rotated: _flip._active}")
+		section(ng-controller="ExportController")
+
+			section.widget-side.widget-frontside
+				section.export-head CHOOSE YOUR EXPORT METHOD
+				i.close-icon.icon-cross(ng-click="Dashboard.exportModalLocked || _modal.close();")
+				section#logo-bouncing: img(src="/images/design/snuffen.png", alt="logo")
+				section.export-container
+					article.export.export-pdf(ng-click="Dashboard.exportModalLocked || _flip.active() && Dashboard.exportModalLocked || Export.capture();")
+						span.export-text PDF
+					article.export.export-xml(ng-click="Dashboard.exportModalLocked || _flip.active() && Dashboard.exportModalLocked || Export.showExportDetails('xml')")
+						span.export-text XML
+					article.export.export-csv(ng-click="Dashboard.exportModalLocked || _flip.active() && Dashboard.exportModalLocked || Export.showExportDetails('csv')")
+						span.export-text CSV
+
+			section.widget-side.widget-backside.loader(ng-show="Export.inProgress")
+
+			section.widget-side.widget-backside(ng-if="!Export.inProgress")
+				section.export-container-details
+					article.widget-back-head
+						nav.nav-pills
+							article.pill.back(ng-click="_flip.active();")
+								i.icon-back
+								span.pill-name
+							article.pill(ng-click="Export.tab = 'data'", ng-class="{active: Export.tab == 'data'}")
+								i.icon-earth
+								span.pill-name DATA
+							article.pill(ng-click="Export.tab = 'filters'", ng-class="{active: Export.tab == 'filters'}")
+								i.icon-filter
+								span.pill-name FILTERS
+						article.corner-text-save(ng-click="Export.save();") EXPORT
+
+					article.widget-back-body
+						section#widget-back-switch(ng-switch, on="Export.tab")
+							article.widget-back-tab.nodrag(ng-switch-when="data", scroll-bar="scroll-bar")
+								section.bloc-tab
+									article.bloc-title Data
+									article.bloc-content
+										article.bloc-content-option(ng-repeat="(indexKpi, selectedKpi) in Export.selectedKpis track by $index", ng-class="{ disabled: !selectedKpi.kpi }")
+											span(ng-if="!selectedKpi.kpi", ng-click="Export.addKpi(indexKpi);") &nbsp
+											span(grumpy-ui="grumpy-ui", grumpy-position="right", grumpy-align="top", ng-if="!!selectedKpi.kpi", ng-class="{'no-close': $index == 0}")
+												span
+													| {{selectedKpi.kpi.formattedAlias}}
+													i.icon-cross(ng-click="Export.removeKpi(indexKpi)", ng-if="$index > 0")
+												grumpy-virgin.bounceIn
+													section.filter-kpi-box(scroll-bar)
+														section(ng-repeat="(category, kpis) in Export.kpis track by $index", ng-init="kpistatus = false")
+															article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+															section.kpi-list(ng-class="{ open: kpistatus}")
+																article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="Export.changeKpi(indexKpi, kpi); _grumpyUi.close();", ng-class="{ active: kpi.index == selectedKpi.kpi }")
+																	| {{kpi.formattedAlias}}
+
+							article.widget-back-tab.widget-back-tab-filters.nodrag(ng-switch-when="filters")
+								article.bloc-panel
+									article.filter-select(ng-class="{'filter-select-active': Export.currentFilter == $index}", ng-repeat="filter in Export.filters track by $index", ng-click="Export.currentFilter = $index")
+										article.filter-number {{$index + 1}}
+										article.del-btn(ng-if="$index > 0" ng-click="Export.removeFilter($index)")
+											i.icon-cross
+									article.filter-select(ng-if="Export.filters.length < 2", ng-click="Export.filters.push({operator: 'AND', name: 'Filter ' + (Export.filters.length + 1)})")
+
+								section.bloc-tab-container
+									section.bloc-tab.bloc-tab-filter(scroll-bar)
+										article.bloc-title
+											input(type="text", ng-model="Export.filters[Export.currentFilter].name")
+											label.toggle.float-right
+												input(type="checkbox", name="checkbox-toggle", ng-change="Export.filters[Export.currentFilter].operator = Export.filters[Export.currentFilter].operator == 'AND' ? 'OR' : 'AND';", ng-checked="Export.filters[Export.currentFilter].operator == 'OR'", ng-model="operator")
+												i(data-swchon-text="OR", data-swchoff-text="AND")
+
+										article.bloc-content
+											article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in Export.filters[Export.currentFilter].conditions track by $index")
+												span(grumpy-ui, grumpy-position="bottom", grumpy-align="left")
+													| {{filter.kpi.formattedAlias}}
+													grumpy-virgin.bounceIn
+														section.filter-kpi-box(scroll-bar)
+															section(ng-repeat="(category, kpis) in Export.kpis track by $index", ng-init="kpistatus = false")
+																article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+																section.kpi-list(ng-class="{ open: kpistatus}")
+																	article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="filter.kpi = kpi; Export.transformDateValues(filterIndex, kpi); _grumpyUi.close();", ng-class="{ active: kpi.index == filter.kpi.index }")
+																		| {{kpi.formattedAlias}}
+
+												span(grumpy-ui, grumpy-position="bottom", grumpy-align="center")
+													| {{Export.operatorsName[filter.operator]}}
+													grumpy-virgin.bounceIn
+														section.filter-kpi-box.operators(scroll-bar)
+															article.operator-row(ng-repeat="(index, operator) in Export.operators track by $index", ng-class="{ active: index == filter.operator }", ng-init="inflection = false")
+																article.kpi-category
+																	article.operator-title(ng-click="filter.operator = operator.op; _grumpyUi.close();")
+																		| {{operator.name}}
+																	i.open-sub-dir.icon-arrow-down(ng-class="{ 'icon-arrow-up': inflection, 'icon-arrow-down': !inflection }", ng-click="inflection = !inflection")
+																section.kpi-list(ng-class="{ open: inflection}")
+																	article.kpi(ng-repeat="inflection in operator.inflections track by $index", ng-click="filter.operator = inflection.op; _grumpyUi.close();", ng-class="{ active: inflection.op == filter.operator }")
+																		| {{inflection.name}}
+
+												span(grumpy-ui="grumpy-ui", grumpy-position="bottom", grumpy-align="right")
+													span(ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'")
+														| {{filter.value[0] == "" && filter.value[1] == "" ? "VALUE" : Export.getValueToShow(filterIndex, 0) + " AND " + Export.getValueToShow(filterIndex, 1)}}
+													span(ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'") {{filter.value[0] == "" && filter.value[1] == "" ? "VALUE" : "ARRAY"}}
+													span(ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'")
+														| {{ typeof(filter.value[0]) != "undefined" && filter.value[0] != "" ? Export.getValueToShow(filterIndex, 0) : "VALUE" }}
+													grumpy-virgin.bounceIn
+														section.filter-value-box
+															section.input-boxes(scroll-bar)
+																article.values-in(ng-class="{'input-date': filter.kpi.format == 'date'}" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="((filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex < 5) || (filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN' && valueIndex < 1) || filter.operator == 'IN' || filter.operator == 'NOT IN'")
+																	article.separator
+																	span(ng-if="(filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex == 1") AND
+																	input(type="text", placeholder="value", ng-class="{'input-date': filter.kpi.format != 'date'}", ng-model="filter.value[valueIndex]", ng-if="!filter.value[valueIndex].name && filter.kpi.format != 'date'")
+																	input(type="text", placeholder="value", date-picker="date-picker", ng-class="{'input-date': filter.kpi.format == 'date'}", ng-model="filter.value[valueIndex]", ng-if="!filter.value[valueIndex].name && filter.kpi.format == 'date'")
+																	input(type="text", placeholder="value", ng-class="{'input-date': filter.kpi.format == 'date'}", ng-disabled="filter.value[valueIndex].name", value="{{Export.getValueToShow(filterIndex, valueIndex)}}", ng-if="filter.value[valueIndex].name")
+																	article.del-btn(ng-click="filter.value.splice(valueIndex, 1);", ng-if="valueIndex > 1")
+																		i.icon-cross
+																	article.cal-btn(ng-class="{'cal-btn-only': valueIndex < 2, 'cal-btn-between': (filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex == 1}" ng-if="filter.kpi.format == 'date'" grumpy-ui grumpy-position="right" grumpy-align="center")
+																		i.icon-calendar
+																		grumpy-virgin.bounceIn
+																			section.calendar-relative-picker
+																				article.btn.cubby-btn.button-calendar(ng-class="{active: filter.value[valueIndex].name}", ng-click="Export.switchDateNow(filterIndex, valueIndex)") NOW
+																				article.btn.cubby-btn.button-calendar(ng-class="{disabled: !filter.value[valueIndex].name || filter.value[valueIndex].name == '', active: filter.value[valueIndex].apply == 'SUB'}", ng-click="Export.switchDateAdd(filterIndex, valueIndex, 'SUB')") SUB
+																				article.btn.cubby-btn.button-calendar(ng-class="{disabled: !filter.value[valueIndex].name || filter.value[valueIndex].name == '', active: filter.value[valueIndex].apply == 'ADD'}", ng-click="Export.switchDateAdd(filterIndex, valueIndex, 'ADD')") ADD
+																				input(type="text", placeholder="value", ng-model="value.value", ng-disabled="!filter.value[valueIndex].apply")
+
+															article.btn.cubby-btn.button-add(ng-click="filter.value.push('')", ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN')") ADD
+
+												article.del-btn(ng-click="Export.filters[Export.currentFilter].conditions.splice($index, 1);")
+													i.icon-cross
+
+									section.bloc-tab.bloc-tab-filter
+										article.add-filter.btn.cubby-btn(ng-click="Export.addCondition(Export.currentFilter);") ADD
+
+			form-post-downloader

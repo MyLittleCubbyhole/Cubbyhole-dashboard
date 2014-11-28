@@ -1,0 +1,11 @@
+extends core
+
+block body
+	section#container.ng-scope(ng-controller="", ng-class="{open: Overlay.pusherOpen}")
+		section#pusher
+			section#body
+				include ../partials/jade/header.jade
+
+		section#overlay(ng-class="{ activated: Overlay.activated || Overlay.pusherOpen }" ng-click="Overlay.clickout();")
+		section#overlay-pusher
+			include ../partials/jade/widget-menu.jade

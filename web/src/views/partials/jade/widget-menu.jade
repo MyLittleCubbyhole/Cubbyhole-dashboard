@@ -1,0 +1,14 @@
+section#widget-menu(ng-controller="WidgetMenuController")
+	h2.switch
+		span.widget_menu
+			i.icon-cogs
+		| Choose your widget
+
+	ul.container
+		li(ng-repeat="widget in WidgetMenu.widgets track by $index")
+			span.btn
+				img(ng-src="{{widget.icon}}")
+				span {{widget.name}}
+			span.widgsize
+				span  Widget size 
+				button.btn.btn-danger(ng-click="WidgetMenu.create(widget, size)", ng-repeat="size in widget.width") {{25 * size}}%

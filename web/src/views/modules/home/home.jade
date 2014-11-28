@@ -1,0 +1,14 @@
+extends ../../layouts/core
+
+block page_definition
+	title= "CubbyHole - Cub'BI"
+	meta(name="description" content="Cub'BI - Home")
+
+block append body
+	include modal-login.jade
+
+block append javascripts
+	//-<!-- build:js /javascripts/home.js -->
+	script(src="/javascripts/modules/home/core.js")
+	script(src="/javascripts/modules/home/controllers/homeController.js")
+	//-<!-- endbuild -->

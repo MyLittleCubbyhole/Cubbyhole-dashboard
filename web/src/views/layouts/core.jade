@@ -1,0 +1,91 @@
+doctype html
+html(ng-app="")
+	head
+		block page_definition
+			title title
+			meta(name="description" content="description")
+
+		meta(http-equiv="Content-Type", content="text/html; charset=UTF8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+		meta(http-equiv="Pragma", content="no-store")
+		meta(http-equiv="Cache-Control", content="no-store")
+		meta(http-equiv="Lang", content="en")
+		meta(charset="UTF-8")
+		meta(name="author" content="MyLittleCubbyhole")
+		link(rel="icon", href="/images/design/favicon.ico")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+		//- if partials used
+		meta(name="fragment" content="!")
+
+		block styles
+			//-<!-- build:css /styles/core.css -->
+			link(rel="stylesheet", href="/styles/core.css")
+			//-<!-- endbuild -->
+
+		block fonts
+			link(href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css")
+			link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css")
+
+	body(ng-controller="OverlayController")
+		block body
+			section#body(ng-controller="")
+				include ../partials/jade/header.jade
+
+			section#overlay(ng-class="{ activated: Overlay.activated }" ng-click="Overlay.clickout();")
+
+		block javascripts-common
+			//-<!-- build:js /javascripts/common.js -->
+			script(src="/javascripts/libraries/polyfills/promise.js")
+			script(src="/javascripts/libraries/jquery/jquery.js")
+			script(src="/javascripts/libraries/jquery/jquery-ui.js")
+			script(src="/javascripts/libraries/angular/angular.js")
+			script(src="/javascripts/libraries/angular/angular-route.js")
+			script(src="/javascripts/libraries/lodash/lodash.js")
+			script(src="/javascripts/libraries/highcharts/highcharts.js")
+			script(src="/javascripts/libraries/highcharts/theme.js")
+			script(src="/javascripts/libraries/highmaps/highmaps.js")
+			script(src="/javascripts/libraries/highmaps/world.js")
+			script(src="/javascripts/libraries/numeral/numeral.min.js")
+			script(src="/javascripts/libraries/numeral/languages.min.js")
+			script(src="/javascripts/libraries/highcharts-ng/highcharts-ng.js")
+			script(src="/javascripts/libraries/customScrollBar/customScrollBar.js")
+			script(src="/javascripts/libraries/jspdf/jspdf.js")
+			script(src="/javascripts/libraries/moment/moment.js")
+			script(src="/javascripts/libraries/html2canvas/html2canvas.js")
+			script(src="/javascripts/libraries/canvg/canvg.js")
+			script(src="/javascripts/libraries/canvg/rgbcolor.js")
+			script(src="/javascripts/libraries/canvg/StackBlur.js")
+			script(src="/javascripts/libraries/dashydash/dependencies/draggable.js")
+			script(src="/javascripts/libraries/dashydash/dependencies/coords.js")
+			script(src="/javascripts/libraries/dashydash/dependencies/collision.js")
+			script(src="/javascripts/libraries/dashydash/dashydash.0.0.4.js")
+			script(src="/javascripts/libraries/grumpy-ui/core.js")
+			script(src="/javascripts/libraries/grumpy-ui/constants/grumpyConfigConstants.js")
+			script(src="/javascripts/libraries/grumpy-ui/directives/grumpyAccordionDirective.js")
+			script(src="/javascripts/libraries/grumpy-ui/directives/grumpyUiDirective.js")
+			script(src="/javascripts/libraries/grumpy-ui/directives/grumpyVirginDirective.js")
+			script(src="/javascripts/libraries/grumpy-ui/services/grumpyPositionService.js")
+			script(src="/javascripts/libraries/grumpy-ui/services/grumpyScrollingService.js")
+
+			script(src="/javascripts/modules/config/core.js")
+			script(src="/javascripts/modules/config/constants/configConstants.js")
+			script(src="/javascripts/modules/tools/core.js")
+			script(src="/javascripts/modules/tools/directives/datePickerDirective.js")
+			script(src="/javascripts/modules/tools/directives/focusDirective.js")
+			script(src="/javascripts/modules/tools/directives/modalDirective.js")
+			script(src="/javascripts/modules/tools/directives/scrollBarDirective.js")
+			script(src="/javascripts/modules/tools/services/classService.js")
+			script(src="/javascripts/modules/tools/services/captureService.js")
+			script(src="/javascripts/modules/tools/filters/numeraljsFilter.js")
+			script(src="/javascripts/modules/authentication/core.js")
+			script(src="/javascripts/modules/authentication/controllers/authenticationController.js")
+			script(src="/javascripts/modules/authentication/controllers/loginController.js")
+			script(src="/javascripts/modules/authentication/factories/authenticationFactory.js")
+			script(src="/javascripts/modules/authentication/factories/userFactory.js")
+			script(src="/javascripts/modules/overlay/core.js")
+			script(src="/javascripts/modules/overlay/controllers/overlayController.js")
+			script(src="/javascripts/modules/navigation/core.js")
+			script(src="/javascripts/modules/navigation/controllers/navigationController.js")
+			//-<!-- endbuild -->
+
+		block javascripts
