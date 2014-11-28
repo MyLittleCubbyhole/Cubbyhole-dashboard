@@ -97,7 +97,7 @@ angular.module('Dashboard').
              */
             prototype.update = function(definition, callback) {
 
-                $http({method: 'PUT', url: '/api/dashboards/' + definition.dashboardid + '/widgets/' + definition.id, data: JSON.stringify(definition)}).
+                $http({method: 'PUT', url: '/api/dashboards/' + definition.dashboardId + '/widgets/' + definition.id, data: JSON.stringify(definition)}).
                     success(function(data) { callback && callback.call(this); }).
                     error(function() { console.error('an error occured when trying to update widget'); });
             };

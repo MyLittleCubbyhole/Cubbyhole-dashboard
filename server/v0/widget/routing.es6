@@ -21,6 +21,9 @@ module.exports = Routing;
 	}
 
 	function declare(router) {
+		router.param('id', /\d+/);
+		router.param('dashboardId', /\d+/);
+
 		router.get('/:dashboardId/widgets', this.deps.auth.filters.token.verifyToken, this.deps.auth.filters.token.isAdmin, this.controllers.widget.get.byDashboardId);
 		router.get('/:dashboardId/widgets/:id', this.deps.auth.filters.token.verifyToken, this.deps.auth.filters.token.isAdmin, this.controllers.widget.get.byId);
 		router.get('/:dashboardId/widgets/:id/data', this.deps.auth.filters.token.verifyToken, this.deps.auth.filters.token.isAdmin, this.controllers.widget.get.data);

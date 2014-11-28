@@ -56,7 +56,7 @@ module.exports = MysqlFactory;
 	function createWidget(widget) {
 		var query = 'INSERT INTO `widget` (`config`, `title`, `backgroundColor`, `fontColor`, \
 				`height`, `width`, `positionX`, `positionY`, `type`, `dashboardId`) \
-				VALUES ("' + JSON.stringify(widget.config) + '", \
+				VALUES (\'' + JSON.stringify(widget.config) + '\', \
 				"' + widget.title + '", \
 				"' + widget.backgroundColor + '", \
 				"' + widget.fontColor + '", \
@@ -72,16 +72,14 @@ module.exports = MysqlFactory;
 
 	function updateWidget(widget) {
 		var query = 'UPDATE `widget` set \
-				`config` = "' + JSON.stringify(widget.config) + '", \
+				`config` = \'' + JSON.stringify(widget.config) + '\', \
 				`title` = "' + widget.title + '", \
 				`backgroundColor` = "' + widget.backgroundColor + '", \
 				`fontColor` = "' + widget.fontColor + '", \
 				`height` = ' + parseInt(widget.height, 10) + ', \
 				`width` = ' + parseInt(widget.width, 10) + ', \
 				`positionX` = ' + parseInt(widget.positionX, 10) + ', \
-				`positionY` = ' + parseInt(widget.positionY, 10) + ', \
-				`type` = "' + widget.type + '", \
-				`dashboardId` = ' + parseInt(widget.dashboardId, 10) + ' \
+				`positionY` = ' + parseInt(widget.positionY, 10) + ' \
 				 WHERE `dashboardId` = ' + parseInt(widget.dashboardId, 10) + ' \
 				 AND `id` = ' + parseInt(widget.id, 10) + ';';
 
@@ -90,10 +88,10 @@ module.exports = MysqlFactory;
 
 	function updatePosition(widget) {
 		var query = 'UPDATE `widget` set \
-				`height` = ' + parseInt(widget.height, 10) + ', \
-				`width` = ' + parseInt(widget.width, 10) + ', \
-				`positionX` = ' + parseInt(widget.x, 10) + ', \
-				`positionY` = ' + parseInt(widget.y, 10) + ', \
+				`height` =' + parseInt(widget.height, 10) + ', \
+				`width` =' + parseInt(widget.width, 10) + ', \
+				`positionX` =' + parseInt(widget.x, 10) + ', \
+				`positionY` =' + parseInt(widget.y, 10) + ' \
 				 WHERE `dashboardId` = ' + parseInt(widget.dashboardId, 10) + ' \
 				 AND `id` = ' + parseInt(widget.id, 10) + ';';
 

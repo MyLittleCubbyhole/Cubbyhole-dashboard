@@ -39,8 +39,8 @@ module.exports = MysqlFactory;
 	}
 
 	function updateDashboard(dashboard) {
-		var query = 'UPDATE `dashboard` set ' +
-			'`title` = "' + dashboard.title + '", \
+		var query = 'UPDATE `dashboard` set \
+			`title` = "' + dashboard.title + '", \
 			`icon` = "' + dashboard.icon + '" \
 			WHERE `id` = ' + parseInt(dashboard.id, 10) + ';';
 
