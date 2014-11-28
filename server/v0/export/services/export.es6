@@ -4,7 +4,7 @@
 
 /*Services requiring*/
 
-	var QueryBuilder = require(__dirname + '/../../queryBuilder/services/widget'),
+	var QueryBuilder = require(__dirname + '/../../queryBuilder/services/queryBuilder'),
 		json2csv = require('json2csv'),
 		js2xmlparser = require('js2xmlparser');
 
@@ -18,6 +18,7 @@
 
 /*Public methods declarations*/
 
+	Service.export = {};
 	Service.export.CSV = exportCSV;
 	Service.export.XML = exportXML;
 

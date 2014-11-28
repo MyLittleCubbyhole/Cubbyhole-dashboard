@@ -39,6 +39,7 @@
 		"kanto-tools-fs": "latest",
 		"kanto-tools-security": "latest",
 		"lodash": "^2.4.1",
+		"mysql": "^2.5.3",
 		"moment": "~2.8.4",
 		"json2csv": "^2.2.1",
 		"js2xmlparser": "0.1.5"

@@ -8,7 +8,7 @@
 
 /*Services requiring*/
 
-	var QueryBuilder = require(__dirname + '/../../queryBuilder/services/widget');
+	var QueryBuilder = require(__dirname + '/../../queryBuilder/services/queryBuilder');
 
 /*Attributes definitions*/
 
