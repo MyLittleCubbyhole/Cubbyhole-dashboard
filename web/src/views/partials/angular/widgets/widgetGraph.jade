@@ -3,11 +3,10 @@ extends ../../../layouts/widget-core
 block content
 	section.widget-side.widget-frontside(ng-controller="WidgetFrontSideController", ng-class="{loader: WidgetFrontSide.inLoading}")
 
-	article.widget-front-head
-		article.corner.edit(ng-click="_flip.active(); _ddWidgetGraph.edit()")
-			article.corner-text EDIT
-
-	article.widget-front-body.nodrag
+		article.widget-front-head
+			article.corner.edit(ng-click="_flip.active(); _ddWidgetGraph.edit()")
+				article.corner-text EDIT
+		article.widget-front-body.nodrag
 
 	section.widget-side.widget-backside(ng-controller="WidgetBackSideController")
 		article.widget-back-head.nodrag
@@ -26,7 +25,7 @@ block content
 				article.corner-text SAVE
 
 		article.widget-back-body.nodrag
-			section#widget-back-switch(ng-switch, on="WidgetBackSide.tab")
+			section#widget-back-switch(ng-switch="WidgetBackSide.tab")
 				article.widget-back-tab.nodrag(ng-switch-when="data")
 					section.bloc-tab
 						article.bloc-title Abscisse
@@ -126,56 +125,56 @@ block content
 															article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="_ddWidgetGraph.widget.segments[1].kpi = kpi; _grumpyUi.close();", ng-class="{ active: kpi.index == _ddWidgetGraph.widget.segments[1].kpi }")
 																| {{kpi.formattedAlias}}
 
-			article.widget-back-tab.nodrag(ng-switch-when="filters")
-				section.bloc-tab
-					article.bloc-title
-						| Filters
-						label.toggle.float-right
-							input(type="checkbox", name="checkbox-toggle", ng-change="_ddWidgetGraph.widget.filters[0].operator = _ddWidgetGraph.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';", ng-checked="_ddWidgetGraph.widget.filters[0].operator == 'OR'", ng-model="operator")
-							i(data-swchon-text="OR", data-swchoff-text="AND")
+				article.widget-back-tab.nodrag(ng-switch-when="filters")
+					section.bloc-tab
+						article.bloc-title
+							| Filters
+							label.toggle.float-right
+								input(type="checkbox", name="checkbox-toggle", ng-change="_ddWidgetGraph.widget.filters[0].operator = _ddWidgetGraph.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';", ng-checked="_ddWidgetGraph.widget.filters[0].operator == 'OR'", ng-model="operator")
+								i(data-swchon-text="OR", data-swchoff-text="AND")
 
-					article.bloc-content
-						article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in _ddWidgetGraph.widget.filters[0].conditions track by $index")
+						article.bloc-content
+							article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in _ddWidgetGraph.widget.filters[0].conditions track by $index")
 
-							include components/filters
+								include components/filters
 
-							article.del-btn(ng-click="_ddWidgetGraph.widget.filters[0].conditions.splice($index, 1);")
-								i.icon-cross
+								article.del-btn(ng-click="_ddWidgetGraph.widget.filters[0].conditions.splice($index, 1);")
+									i.icon-cross
 
-				section.bloc-tab
-					article.add-filter.btn.cubby-btn(ng-click="WidgetBackSide.addFilter();") ADD
+					section.bloc-tab
+						article.add-filter.btn.cubby-btn(ng-click="WidgetBackSide.addFilter();") ADD
 
-			article.widget-back-tab.nodrag(ng-switch-when="configuration")
-				section.bloc-tab
-					article.bloc-title Title
-					article.bloc-content
-						input.config-title(type="text", placeholder="title", ng-model="_ddWidgetGraph.widget.title")
+				article.widget-back-tab.nodrag(ng-switch-when="configuration")
+					section.bloc-tab
+						article.bloc-title Title
+						article.bloc-content
+							input.config-title(type="text", placeholder="title", ng-model="_ddWidgetGraph.widget.title")
 
-				section.bloc-tab
-					article.bloc-title Width
-					article.bloc-content
-						section.bloc-selector
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 1 }", ng-click="WidgetBackSide.resize({ width: 1 });") 25%
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 2 }", ng-click="WidgetBackSide.resize({ width: 2 });") 50%
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 3 }", ng-click="WidgetBackSide.resize({ width: 3 });") 75%
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 4 }", ng-click="WidgetBackSide.resize({ width: 4 });") 100%
+					section.bloc-tab
+						article.bloc-title Width
+						article.bloc-content
+							section.bloc-selector
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 1 }", ng-click="WidgetBackSide.resize({ width: 1 });") 25%
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 2 }", ng-click="WidgetBackSide.resize({ width: 2 });") 50%
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 3 }", ng-click="WidgetBackSide.resize({ width: 3 });") 75%
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.width == 4 }", ng-click="WidgetBackSide.resize({ width: 4 });") 100%
 
-				section.bloc-tab
-					article.bloc-title Height
-					article.bloc-content
-						section.bloc-selector
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.height == 3 }", ng-click="WidgetBackSide.resize({ height: 3 });") 3
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.height == 5 }", ng-click="WidgetBackSide.resize({ height: 5 });") 5
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.height == 7 }", ng-click="WidgetBackSide.resize({ height: 7 });") 7
+					section.bloc-tab
+						article.bloc-title Height
+						article.bloc-content
+							section.bloc-selector
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.height == 3 }", ng-click="WidgetBackSide.resize({ height: 3 });") 3
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.height == 5 }", ng-click="WidgetBackSide.resize({ height: 5 });") 5
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.size.height == 7 }", ng-click="WidgetBackSide.resize({ height: 7 });") 7
 
-				section.bloc-tab
-					article.bloc-title LIMIT
-					article.bloc-content
-						section.bloc-selector
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 5 }", ng-click="_ddWidgetGraph.widget.limit=5") 5
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 10 }", ng-click="_ddWidgetGraph.widget.limit=10") 10
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 20 }", ng-click="_ddWidgetGraph.widget.limit=20") 20
-							article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 0 }", ng-click="_ddWidgetGraph.widget.limit=0") ∞
+					section.bloc-tab
+						article.bloc-title LIMIT
+						article.bloc-content
+							section.bloc-selector
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 5 }", ng-click="_ddWidgetGraph.widget.limit=5") 5
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 10 }", ng-click="_ddWidgetGraph.widget.limit=10") 10
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 20 }", ng-click="_ddWidgetGraph.widget.limit=20") 20
+								article.bloc-option(ng-class="{ active: _ddWidgetGraph.widget.limit == 0 }", ng-click="_ddWidgetGraph.widget.limit=0") ∞
 
-				section.bloc-tab
-					article.bloc-button(ng-click="WidgetBackSide.delete()") DELETE WIDGET
+					section.bloc-tab
+						article.bloc-button(ng-click="WidgetBackSide.delete()") DELETE WIDGET

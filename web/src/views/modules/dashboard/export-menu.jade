@@ -32,7 +32,7 @@ section#box-export(ng-show="Dashboard.exportModalVisible", ng-cloak, modal)
 						article.corner-text-save(ng-click="Export.save();") EXPORT
 
 					article.widget-back-body
-						section#widget-back-switch(ng-switch, on="Export.tab")
+						section#widget-back-switch(ng-switch="Export.tab")
 							article.widget-back-tab.nodrag(ng-switch-when="data", scroll-bar="scroll-bar")
 								section.bloc-tab
 									article.bloc-title Data
