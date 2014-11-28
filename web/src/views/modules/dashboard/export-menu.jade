@@ -58,6 +58,7 @@ section#box-export(ng-show="Dashboard.exportModalVisible", ng-cloak, modal)
 										article.del-btn(ng-if="$index > 0" ng-click="Export.removeFilter($index)")
 											i.icon-cross
 									article.filter-select(ng-if="Export.filters.length < 2", ng-click="Export.filters.push({operator: 'AND', name: 'Filter ' + (Export.filters.length + 1)})")
+										article.filter-number +
 
 								section.bloc-tab-container
 									section.bloc-tab.bloc-tab-filter(scroll-bar)
