@@ -57,7 +57,7 @@ angular.module('Dashboard').
                     var idToFound = $routeParams.id || null;
 
                     for(var i = 0; i < $local.dashboards.length; i++)
-                        if(idToFound === $local.dashboards[i].id || idToFound === null) {
+                        if(idToFound == $local.dashboards[i].id || idToFound === null) {
                             $local.currentDashboard = $local.dashboards[i];
                             break;
                         }

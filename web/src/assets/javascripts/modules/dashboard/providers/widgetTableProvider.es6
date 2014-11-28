@@ -17,9 +17,9 @@ angular.module('Dashboard').
              */
             Widget.prototype.init = function(data) {
                 var self = this
-                ,   datatype
                 ,   index
-                ,   row;
+                ,   row
+                ,   format;
                 self.kpis = [];
                 self.head = [];
 
