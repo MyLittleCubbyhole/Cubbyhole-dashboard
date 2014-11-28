@@ -5,7 +5,7 @@ angular.module('Dashboard').
             replace: false,
             require: 'ddWidgetMap',
             restrict: 'A',
-            templateUrl: '/templates/widgets/widgetMap',
+            templateUrl: 'widgets/widgetMap.jade',
             controller: ['$scope', '$attrs', function($scope, $attrs) {
                 var $local = $scope._ddWidgetMap = {}
                 ,   self = this;

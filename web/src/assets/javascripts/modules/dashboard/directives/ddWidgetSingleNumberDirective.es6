@@ -5,7 +5,7 @@ angular.module('Dashboard').
             replace: false,
             require: 'ddWidgetSingleNumber',
             restrict: 'A',
-            templateUrl: '/templates/widgets/widgetSingleNumber',
+            templateUrl: 'widgets/widgetSingleNumber.jade',
             controller: ['$scope', '$attrs', function($scope, $attrs) {
                 var $local = $scope._ddWidgetSingleNumber = {}
                 ,   self = this;

@@ -5,7 +5,7 @@ angular.module('Dashboard').
             replace: false,
             require: 'ddWidgetPie',
             restrict: 'A',
-            templateUrl: '/templates/widgets/widgetPie',
+            templateUrl: 'widgets/widgetPie.jade',
             controller: ['$scope', '$attrs', function($scope, $attrs) {
                 var $local = $scope._ddWidgetPie = {}
                 ,   self = this;

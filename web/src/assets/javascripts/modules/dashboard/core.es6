@@ -1,1 +1,1 @@
-angular.module('Dashboard', ['Overlay', 'Authentication', 'Tools', 'ngRoute']);
+angular.module('Dashboard', ['templates-app', 'Overlay', 'Authentication', 'Tools', 'ngRoute']);

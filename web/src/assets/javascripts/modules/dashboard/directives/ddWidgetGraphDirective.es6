@@ -5,7 +5,7 @@ angular.module('Dashboard').
             replace: false,
             require: 'ddWidgetGraph',
             restrict: 'A',
-            templateUrl: '/templates/widgets/widgetGraph',
+            templateUrl: 'widgets/widgetGraph.jade',
             controller: ['$scope', '$attrs', function($scope, $attrs) {
                 var $local = $scope._ddWidgetGraph = {}
                 ,   self = this;
