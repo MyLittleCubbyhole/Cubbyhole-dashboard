@@ -104,7 +104,8 @@ section#box-export(ng-show="Dashboard.exportModalVisible", ng-cloak, modal)
 															section.input-boxes(scroll-bar)
 																article.values-in(ng-class="{'input-date': filter.kpi.format == 'date'}" ng-repeat="(valueIndex, value) in filter.value track by $index" ng-if="((filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex < 5) || (filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN' && valueIndex < 1) || filter.operator == 'IN' || filter.operator == 'NOT IN'")
 																	article.separator
-																	span(ng-if="(filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex == 1") AND
+																		span(ng-if="(filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex == 1") AND
+
 																	input(type="text", placeholder="value", ng-class="{'input-date': filter.kpi.format != 'date'}", ng-model="filter.value[valueIndex]", ng-if="!filter.value[valueIndex].name && filter.kpi.format != 'date'")
 																	input(type="text", placeholder="value", date-picker="date-picker", ng-class="{'input-date': filter.kpi.format == 'date'}", ng-model="filter.value[valueIndex]", ng-if="!filter.value[valueIndex].name && filter.kpi.format == 'date'")
 																	input(type="text", placeholder="value", ng-class="{'input-date': filter.kpi.format == 'date'}", ng-disabled="filter.value[valueIndex].name", value="{{Export.getValueToShow(filterIndex, valueIndex)}}", ng-if="filter.value[valueIndex].name")
