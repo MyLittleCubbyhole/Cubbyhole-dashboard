@@ -1,0 +1,212 @@
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: black;
+}
+
+html,
+body,
+#container,
+#pusher,
+#body {
+    height: 100%;
+}
+
+#body {
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #eaedf1;
+}
+
+.google-font {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.big-font {
+    font-weight: 400;
+}
+
+[ng-cloak], .ng-cloak {
+    display: none;
+}
+
+.float-right {
+    float: right;
+}
+
+
+.pull-left {
+    float: left;
+    text-align: left;
+}
+
+.pull-right {
+    float: right;
+    text-align: right;
+}
+
+#container {
+    position: relative;
+    overflow: hidden;
+}
+#container.open #body {
+    /*z-index: 8;*/
+    cursor: pointer !important;
+}
+
+section#body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    /*padding-top: 46px;*/
+}
+
+section#body-content {
+    display: block;
+    position: relative;
+    margin-left: 230px;
+    padding: 0;
+    height: 100%;
+    padding-bottom: 70px;
+    overflow: hidden;
+}
+
+.capturing * {
+    overflow: visible!important;
+}
+.capturing .widget-backside {
+    display: none!important;
+}
+.capturing .corner {
+    display: none!important;
+}
+.capturing .dd-board {
+    background-color: white!important;
+}
+.capturing .dd-widget {
+    border: 2px solid #eaedf1!important;
+}
+
+
+@media screen and (max-width: 775px) {
+
+    aside#left-panel {
+        display: none;
+    }
+
+    section#body-content {
+        margin-left: 0px;
+    }
+
+}
+
+
+
+
+
+
+/* MODAL - NOUVEAU MODEL*/
+section#box-export {
+    height: 350px;
+    width: 700px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+section.export-container {
+    height: 80px;
+    position: absolute;
+    bottom: 40px;
+    margin: auto;
+    width: 638px;
+    right: 0;
+    left: 0;
+}
+section.export-header {
+    line-height: 60px;
+    text-align: center;
+    font-size: 25px;
+    border-bottom: 1px solid #ebebeb;
+    height: 60px;
+    background-color: #DFDFDF;
+    font-family: Lato;
+    color: #949494;
+}
+
+.export-container .export {
+    height: 80px;
+    width: 200px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    line-height: 80px;
+    background: #262626;
+    font-family: Lato;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #DADADA;
+}
+.export-container .export-text {
+    font-size: 40px;
+}
+#box-export section.widget-side.widget-frontside {
+    background-color: #F0F0F0;
+}
+
+section#logo-bouncing {
+    height: 190px;
+    width: 125px;
+    margin: 21px auto;
+}
+#logo-bouncing img {
+    height: 100%;
+}
+section.export-head {
+    font-family: Lato;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: rgb(110, 110, 110);
+    font-size: 25px;
+    background-color: rgb(247, 247, 247);
+}
+
+
+/** LOADER **/
+section.widget-side.widget-frontside.loader *,
+section.widget-side.widget-backside.loader *  {
+    opacity: 0;
+}
+section.widget-side.widget-frontside.loader::before,
+section.widget-side.widget-backside.loader::before  {
+    content: 'loading...';
+    background-image: url(/images/design/loader.gif);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 64px;
+    height: 64px;
+    background-repeat: no-repeat;
+    right: 0px;
+    padding-top: 60px;
+    margin: auto;
+    text-align: center;
+    color: #262338;
+    font-family: Lato;
+}
