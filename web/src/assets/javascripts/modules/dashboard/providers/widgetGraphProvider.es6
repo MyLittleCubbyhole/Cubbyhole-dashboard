@@ -28,7 +28,7 @@ angular.module('Dashboard').
                 ,   axisType = ''
                 ,   index = '';
 
-                if(!data || data.length == 0)
+                if(!data || data.length === 0)
                     return true;
 
                 self.chartOptions = {};
@@ -306,9 +306,9 @@ angular.module('Dashboard').
                 definition.size = self.size;
                 definition.position = self.position;
                 definition.id = self.id;
-                definition.backgroundcolor = self.backgroundColor;
-                definition.fontcolor = self.fontColor;
-                definition.dashboardid = self.dashboardId;
+                definition.backgroundColor = self.backgroundColor;
+                definition.fontColor = self.fontColor;
+                definition.dashboardId = self.dashboardId;
                 definition.config = configuration;
 
                 WidgetFactory(self.scope).update(definition, angular.noop);

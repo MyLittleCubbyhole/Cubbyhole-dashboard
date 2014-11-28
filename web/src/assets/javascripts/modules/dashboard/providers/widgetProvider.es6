@@ -22,12 +22,12 @@ angular.module('Dashboard').
                 };
                 self.id = self.options.id;
                 self.title = self.options.title;
-                self.backgroundColor = self.options.backgroundcolor;
-                self.fontColor = self.options.fontcolor;
+                self.backgroundColor = self.options.backgroundColor;
+                self.fontColor = self.options.fontColor;
                 self.metrics = self.options.metrics;
                 self.segments = self.options.segments;
                 self.filters = self.options.filters;
-                self.dashboardId = self.options.dashboardid;
+                self.dashboardId = self.options.dashboardId;
 
                 self.scope = context.scope;
                 self.node = context.node;
@@ -187,9 +187,9 @@ angular.module('Dashboard').
                 definition.size = self.size;
                 definition.position = self.position;
                 definition.id = self.id;
-                definition.backgroundcolor = self.backgroundColor;
-                definition.fontcolor = self.fontColor;
-                definition.dashboardid = self.dashboardId;
+                definition.backgroundColor = self.backgroundColor;
+                definition.fontColor = self.fontColor;
+                definition.dashboardId = self.dashboardId;
                 definition.config = configuration;
 
                 WidgetFactory(self.scope).update(definition, function() {

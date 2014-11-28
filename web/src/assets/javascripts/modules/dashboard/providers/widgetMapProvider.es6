@@ -93,7 +93,7 @@ angular.module('Dashboard').
                 for(var i = 0; i<data.length; i++)
                     dataTemp.push({'value': data[i][metricName], 'code': data[i]['countrycode'], 'name': data[i]['country']});
 
-                dataFinal = dataTemp.slice(0);
+	            var dataFinal = dataTemp.slice(0);
                 for(var i = 0; i < COUNTRIES.length; i++) {
                     var witness = false;
                     for(var j = 0; j < dataTemp.length; j++)
