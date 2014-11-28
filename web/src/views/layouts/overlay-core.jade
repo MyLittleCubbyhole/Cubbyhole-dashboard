@@ -1,7 +1,7 @@
 extends core
 
 block body
-	section#container.ng-scope(ng-controller="", ng-class="{open: Overlay.pusherOpen}")
+	section#container.ng-scope(ng-controller="#{controller}", ng-class="{open: Overlay.pusherOpen}")
 		section#pusher
 			section#body
 				include ../partials/jade/header.jade

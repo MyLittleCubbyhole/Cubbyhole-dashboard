@@ -1,5 +1,10 @@
 doctype html
-html(ng-app="")
+
+- var module = '';
+- var controller = '';
+block vars
+
+html(ng-app="#{module}")
 	head
 		block page_definition
 			title title
@@ -28,7 +33,7 @@ html(ng-app="")
 
 	body(ng-controller="OverlayController")
 		block body
-			section#body(ng-controller="")
+			section#body(ng-controller="#{controller}")
 				include ../partials/jade/header.jade
 
 			section#overlay(ng-class="{ activated: Overlay.activated }" ng-click="Overlay.clickout();")

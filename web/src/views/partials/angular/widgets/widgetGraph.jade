@@ -137,6 +137,11 @@ block content
 					article.bloc-content
 						article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in _ddWidgetGraph.widget.filters[0].conditions track by $index")
 
+							include components/filters
+
+							article.del-btn(ng-click="_ddWidgetGraph.widget.filters[0].conditions.splice($index, 1);")
+								i.icon-cross
+
 				section.bloc-tab
 					article.add-filter.btn.cubby-btn(ng-click="WidgetBackSide.addFilter();") ADD
 

@@ -45,8 +45,15 @@ block content
 							label.toggle.float-right
 								input(type="checkbox", name="checkbox-toggle", ng-change="_ddWidgetMap.widget.filters[0].operator = _ddWidgetMap.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';", ng-checked="_ddWidgetMap.widget.filters[0].operator == 'OR'", ng-model="operator")
 								i(data-swchon-text="OR", data-swchoff-text="AND")
+
 						article.bloc-content
 							article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in _ddWidgetMap.widget.filters[0].conditions track by $index")
+
+								include components/filters
+
+								article.del-btn(ng-click="_ddWidgetMap.widget.filters[0].conditions.splice($index, 1);")
+									i.icon-cross
+
 					section.bloc-tab
 						article.add-filter.btn.cubby-btn(ng-click="WidgetBackSide.addFilter();") ADD
 
