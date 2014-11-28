@@ -21,10 +21,7 @@ module.exports = Routing;
 	}
 
 	function declare(router) {
-		router.get('/', this.controllers.navigation.redirect.home);
+		router.get('/', this.controllers.navigation.redirect);
 		router.get('/home', this.controllers.navigation.get.index);
 		router.get('/dashboard', this.deps.auth.filters.token.redirect, this.controllers.navigation.get.dashboard);
-
-		router.get(/partials\/(.+)/, this.controllers.navigation.get.partial);
-		router.get(/templates\/(.+)/, this.controllers.navigation.get.template);
 	}
