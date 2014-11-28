@@ -5,7 +5,7 @@
 /*Attributes definitions*/
 
 	MysqlFactory._name = 'Widget';
-	MysqlFactory._table = 'dashboard';
+	MysqlFactory._table = 'widget';
 
 /*Model definition*/
 
