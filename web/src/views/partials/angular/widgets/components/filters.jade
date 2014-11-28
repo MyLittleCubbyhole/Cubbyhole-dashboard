@@ -1,0 +1,51 @@
+span(grumpy-ui, grumpy-position="bottom", grumpy-align="left")
+	| {{filter.kpi.formattedAlias}}
+	grumpy-virgin.bounceIn
+		section.filter-kpi-box(scroll-bar)
+			section(ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index", ng-init="kpistatus = false")
+				article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+				section.kpi-list(ng-class="{ open: kpistatus}")
+					article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="filter.kpi = kpi; WidgetBackSide.transformDateValues(filterIndex, kpi);_grumpyUi.close();", ng-class="{ active: kpi.index == filter.kpi.index }")
+						| {{kpi.formattedAlias}}
+
+	span(grumpy-ui, grumpy-position="bottom", grumpy-align="center")
+		| {{WidgetBackSide.operatorsName[filter.operator]}}
+		grumpy-virgin.bounceIn
+			section.filter-kpi-box.operators(scroll-bar)
+				article.operator-row(ng-repeat="(index, operator) in WidgetBackSide.operators track by $index", ng-class="{ active: index == filter.operator }", ng-init="inflection = false")
+					article.kpi-category
+						article.operator-title(ng-click="filter.operator = operator.op; _grumpyUi.close();")
+							| {{operator.name}}
+						i.open-sub-dir.icon-arrow-down(ng-class="{ 'icon-arrow-up': inflection, 'icon-arrow-down': !inflection }", ng-click="inflection = !inflection")
+
+					section.kpi-list(ng-class="{ open: inflection}")
+						article.kpi(ng-repeat="inflection in operator.inflections track by $index", ng-click="filter.operator = inflection.op; _grumpyUi.close();", ng-class="{ active: inflection.op == filter.operator }")
+							| {{inflection.name}}
+
+	span(grumpy-ui, grumpy-position="bottom", grumpy-align="right")
+		span(ng-if="filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN'")
+			| {{filter.value[0] == "" && filter.value[1] == "" ? "VALUE" : WidgetBackSide.getValueToShow(filterIndex, 0) + " AND " + WidgetBackSide.getValueToShow(filterIndex, 1)}}
+		span(ng-if="filter.operator == 'IN' || filter.operator == 'NOT IN'") {{filter.value[0] == "" && filter.value[1] == "" ? "VALUE" : "ARRAY"}}
+		span(ng-if="filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN'")
+			| {{filter.value[0] != "" ? WidgetBackSide.getValueToShow(filterIndex, 0) : "VALUE" }}
+		grumpy-virgin.bounceIn
+			section.filter-value-box
+				section.input-boxes(scroll-bar)
+					article.values-in(ng-class="{'input-date': filter.kpi.format == 'date'}", ng-repeat="(valueIndex, value) in filter.value track by $index", ng-if="((filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex < 5) || (filter.operator != 'BETWEEN' && filter.operator != 'NOT BETWEEN' && filter.operator != 'IN' && filter.operator != 'NOT IN' && valueIndex < 1) || filter.operator == 'IN' || filter.operator == 'NOT IN'")
+						article.separator
+							span(ng-if="(filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex == 1") AND
+						input(type="text", placeholder="value", ng-class="{'input-date': filter.kpi.format != 'date'}", ng-model="filter.value[valueIndex]", ng-if="!filter.value[valueIndex].name && filter.kpi.format != 'date'")
+						input(type="text", placeholder="value", date-picker="date-picker", ng-class="{'input-date': filter.kpi.format == 'date'}", ng-model="filter.value[valueIndex]", ng-if="!filter.value[valueIndex].name && filter.kpi.format == 'date'")
+						input(type="text", placeholder="value", ng-class="{'input-date': filter.kpi.format == 'date'}", ng-disabled="filter.value[valueIndex].name", value="{{WidgetBackSide.getValueToShow(filterIndex, valueIndex)}}", ng-if="filter.value[valueIndex].name")
+						article.del-btn(ng-click="filter.value.splice(valueIndex, 1);", ng-if="valueIndex > 1")
+							i.icon-cross
+						article.cal-btn(ng-class="{'cal-btn-only': valueIndex < 2, 'cal-btn-between': (filter.operator == 'BETWEEN' || filter.operator == 'NOT BETWEEN') && valueIndex == 1}", ng-if="filter.kpi.format == 'date'", grumpy-ui, grumpy-position='right', grumpy-align='center')
+							i.icon-calendar
+							grumpy-virgin.bounceIn
+								section.calendar-relative-picker
+									article.btn.cubby-btn.button-calendar(ng-class="{active: filter.value[valueIndex].name}", ng-click="WidgetBackSide.switchDateNow(filterIndex, valueIndex)") NOW
+									article.btn.cubby-btn.button-calendar(ng-class="{disabled: !filter.value[valueIndex].name || filter.value[valueIndex].name == '', active: filter.value[valueIndex].apply == 'SUB'}", ng-click="WidgetBackSide.switchDateAdd(filterIndex, valueIndex, 'SUB')") SUB
+									article.btn.cubby-btn.button-calendar(ng-class="{disabled: !filter.value[valueIndex].name || filter.value[valueIndex].name == '', active: filter.value[valueIndex].apply == 'ADD'}", ng-click="WidgetBackSide.switchDateAdd(filterIndex, valueIndex, 'ADD')") ADD
+									input(type="text", placeholder="value", ng-model="value.value", ng-disabled="!filter.value[valueIndex].apply")
+
+				article.btn.cubby-btn.button-add(ng-click="filter.value.push('')", ng-if="(filter.operator == 'IN' || filter.operator == 'NOT IN')") ADD

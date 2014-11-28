@@ -1,0 +1,74 @@
+extends ../../../layouts/widget-core
+block content
+	section.widget-side.widget-frontside(ng-controller="WidgetFrontSideController", ng-class="{loader: WidgetFrontSide.inLoading}")
+		article.widget-front-head
+			article.corner.edit(ng-click="_flip.active();")
+				article.corner-text EDIT
+		article.widget-front-body.nodrag front
+
+	section.widget-side.widget-backside(ng-controller="WidgetBackSideController")
+		article.widget-back-head.nodrag
+			nav.nav-pills
+				article.pill(ng-click="WidgetBackSide.tab = 'data'", ng-class="{active: WidgetBackSide.tab == 'data'}")
+					i.icon-earth
+					span.pill-name DATA
+				article.pill(ng-click="WidgetBackSide.tab = 'filters'", ng-class="{active: WidgetBackSide.tab == 'filters'}")
+					i.icon-filter
+					span.pill-name FILTERS
+				article.pill(ng-click="WidgetBackSide.tab = 'configuration'", ng-class="{active: WidgetBackSide.tab == 'configuration'}")
+					i.icon-cogs
+					span.pill-name CONFIGURATION
+			article.corner.edit(ng-click="WidgetBackSide.save();")
+				article.corner-text SAVE
+
+		article.widget-back-body.nodrag
+			section#widget-back-switch(ng-switch, on="WidgetBackSide.tab")
+				article.widget-back-tab.nodrag(ng-switch-when="data")
+					section.bloc-tab
+						article.bloc-title Metric
+						article.bloc-content
+							article.bloc-content-option
+								span.no-close(grumpy-ui, grumpy-position="right", grumpy-align="top")
+									span {{_ddWidgetMap.widget.metrics[0].kpi.formattedAlias}}
+									grumpy-virgin.bounceIn
+										section.filter-kpi-box(scroll-bar="scroll-bar")
+											section(ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index", ng-init="kpistatus = false")
+												article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+												section.kpi-list(ng-class="{ open: kpistatus}")
+													article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="_ddWidgetMap.widget.metrics[0].kpi = kpi; _grumpyUi.close();", ng-class="{ active: kpi.index == _ddWidgetMap.widget.metrics[0].kpi }")
+														| {{kpi.formattedAlias}}
+
+				article.widget-back-tab.nodrag(ng-switch-when="filters")
+					section.bloc-tab
+						article.bloc-title
+							| Filters
+							label.toggle.float-right
+								input(type="checkbox", name="checkbox-toggle", ng-change="_ddWidgetMap.widget.filters[0].operator = _ddWidgetMap.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';", ng-checked="_ddWidgetMap.widget.filters[0].operator == 'OR'", ng-model="operator")
+								i(data-swchon-text="OR", data-swchoff-text="AND")
+						article.bloc-content
+							article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in _ddWidgetMap.widget.filters[0].conditions track by $index")
+					section.bloc-tab
+						article.add-filter.btn.cubby-btn(ng-click="WidgetBackSide.addFilter();") ADD
+
+				article.widget-back-tab.nodrag(ng-switch-when="configuration")
+					section.bloc-tab
+						article.bloc-title Title
+						article.bloc-content
+							input.config-title(type="text", placeholder="title", ng-model="_ddWidgetMap.widget.title")
+					section.bloc-tab
+						article.bloc-title Width
+						article.bloc-content
+							section.bloc-selector
+								article.bloc-option(ng-class="{ active: _ddWidgetMap.widget.size.width == 1 }", ng-click="WidgetBackSide.resize({ width: 1 });") 25%
+								article.bloc-option(ng-class="{ active: _ddWidgetMap.widget.size.width == 2 }", ng-click="WidgetBackSide.resize({ width: 2 });") 50%
+								article.bloc-option(ng-class="{ active: _ddWidgetMap.widget.size.width == 3 }", ng-click="WidgetBackSide.resize({ width: 3 });") 75%
+								article.bloc-option(ng-class="{ active: _ddWidgetMap.widget.size.width == 4 }", ng-click="WidgetBackSide.resize({ width: 4 });") 100%
+					section.bloc-tab
+						article.bloc-title Height
+						article.bloc-content
+							section.bloc-selector
+								article.bloc-option(ng-class="{ active: _ddWidgetMap.widget.size.height == 3 }", ng-click="WidgetBackSide.resize({ height: 3 });") 3
+								article.bloc-option(ng-class="{ active: _ddWidgetMap.widget.size.height == 5 }", ng-click="WidgetBackSide.resize({ height: 5 });") 5
+								article.bloc-option(ng-class="{ active: _ddWidgetMap.widget.size.height == 7 }", ng-click="WidgetBackSide.resize({ height: 7 });") 7
+					section.bloc-tab
+						article.bloc-button(ng-click="WidgetBackSide.delete()") DELETE WIDGET

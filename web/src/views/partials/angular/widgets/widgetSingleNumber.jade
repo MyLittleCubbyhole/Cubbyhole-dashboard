@@ -1,0 +1,62 @@
+extends ../../../layouts/widget-core
+
+block content
+	section.widget-side.widget-frontside(ng-controller="WidgetFrontSideController", ng-class="{loader: WidgetFrontSide.inLoading}")
+		article.widget-front-head
+			article.corner.edit(ng-click="_flip.active(); _ddWidgetSingleNumber.edit()")
+				article.corner-text EDIT
+		article.widget-title {{_ddWidgetSingleNumber.widget.title}}
+		article.widget-front-body {{_ddWidgetSingleNumber.widget.value}}
+		article.widget-alias {{_ddWidgetSingleNumber.widget.alias}}
+
+	section.widget-side.widget-backside(ng-controller="WidgetBackSideController")
+		article.widget-back-head.nodrag
+			nav.nav-pills
+				article.pill(ng-click="WidgetBackSide.tab = 'data'", ng-class="{active: WidgetBackSide.tab == 'data'}")
+					i.icon-earth
+					span.pill-name DATA
+				article.pill(ng-click="WidgetBackSide.tab = 'filters'", ng-class="{active: WidgetBackSide.tab == 'filters'}")
+					i.icon-filter
+					span.pill-name FILTERS
+				article.pill(ng-click="WidgetBackSide.tab = 'configuration'", ng-class="{active: WidgetBackSide.tab == 'configuration'}")
+					i.icon-cogs
+					span.pill-name CONFIGURATION
+			article.corner.edit(ng-click="WidgetBackSide.save();")
+				article.corner-text SAVE
+
+		article.widget-back-body.nodrag
+			section#widget-back-switch(ng-switch, on="WidgetBackSide.tab")
+				article.widget-back-tab.nodrag(ng-switch-when="data")
+					section.bloc-tab
+						article.bloc-title Metric
+						article.bloc-content
+							article.bloc-content-option
+								span.no-close(grumpy-ui, grumpy-position="right", grumpy-align="top")
+									span {{_ddWidgetSingleNumber.widget.metrics[0].kpi.formattedAlias}}
+									grumpy-virgin.bounceIn
+										section.filter-kpi-box(scroll-bar)
+											section(ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index", ng-init="kpistatus = false")
+												article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+												section.kpi-list(ng-class="{ open: kpistatus}")
+													article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="_ddWidgetSingleNumber.widget.metrics[0].kpi = kpi; _grumpyUi.close();", ng-class="{ active: kpi.index == _ddWidgetSingleNumber.widget.metrics[0].kpi }")
+														| {{kpi.formattedAlias}}
+
+				article.widget-back-tab.nodrag(ng-switch-when="filters")
+					section.bloc-tab
+						article.bloc-title
+							| Filters
+							label.toggle.float-right
+								input(type="checkbox", name="checkbox-toggle", ng-change="_ddWidgetSingleNumber.widget.filters[0].operator = _ddWidgetSingleNumber.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';", ng-checked="_ddWidgetSingleNumber.widget.filters[0].operator == 'OR'", ng-model="operator")
+								i(data-swchon-text="OR", data-swchoff-text="AND")
+						article.bloc-content
+							article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in _ddWidgetSingleNumber.widget.filters[0].conditions track by $index")
+					section.bloc-tab
+						article.add-filter.btn.cubby-btn(ng-click="WidgetBackSide.addFilter();") ADD
+
+				article.widget-back-tab.nodrag(ng-switch-when="configuration")
+					section.bloc-tab
+						article.bloc-title Title
+						article.bloc-content
+							input.config-title(type="text", placeholder="title", ng-model="_ddWidgetSingleNumber.widget.title")
+					section.bloc-tab
+						article.bloc-button(ng-click="WidgetBackSide.delete()") DELETE WIDGET

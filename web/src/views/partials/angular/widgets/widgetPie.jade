@@ -1,0 +1,85 @@
+extends ../../../layouts/widget-core
+
+block content
+	section.widget-side.widget-frontside(ng-controller="WidgetFrontSideController", ng-class="{loader: WidgetFrontSide.inLoading}")
+		article.widget-front-head
+			article.corner.edit(ng-click="_flip.active(); _ddWidgetPie.edit()")
+				article.corner-text EDIT
+		article.widget-front-body.nodrag
+
+	section.widget-side.widget-backside(ng-controller="WidgetBackSideController")
+		article.widget-back-head.nodrag
+			nav.nav-pills
+				article.pill(ng-click="WidgetBackSide.tab = 'data'", ng-class="{active: WidgetBackSide.tab == 'data'}")
+					i.icon-earth
+					span.pill-name DATA
+				article.pill(ng-click="WidgetBackSide.tab = 'filters'", ng-class="{active: WidgetBackSide.tab == 'filters'}")
+					i.icon-filter
+					span.pill-name FILTERS
+				article.pill(ng-click="WidgetBackSide.tab = 'configuration'", ng-class="{active: WidgetBackSide.tab == 'configuration'}")
+					i.icon-cogs
+					span.pill-name CONFIGURATION
+			article.corner.edit(ng-click="WidgetBackSide.save();")
+				article.corner-text SAVE
+
+		article.widget-back-body.nodrag
+			section#widget-back-switch(ng-switch, on="WidgetBackSide.tab")
+				article.widget-back-tab.nodrag(ng-switch-when="data")
+					section.bloc-tab
+						article.bloc-title Segment
+						article.bloc-content
+							article.bloc-content-option
+								span.no-close(grumpy-ui, grumpy-position="right", grumpy-align="top")
+									span {{_ddWidgetPie.widget.segments[0].kpi.formattedAlias}}
+									grumpy-virgin.bounceIn
+										section.filter-kpi-box(scroll-bar)
+											section(ng-repeat="(category, kpis) in WidgetBackSide.segments track by $index", ng-init="kpistatus = false")
+												article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+												section.kpi-list(ng-class="{ open: kpistatus}")
+													article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="_ddWidgetPie.widget.segments[0].kpi = kpi; _grumpyUi.close();", ng-class="{ active: kpi.index == _ddWidgetPie.widget.segments[0].kpi }")
+														| {{kpi.formattedAlias}}
+					section.bloc-tab
+						article.bloc-title Metric
+						article.bloc-content
+							article.bloc-content-option
+								span.no-close(grumpy-ui, grumpy-position="right", grumpy-align="top")
+									span {{_ddWidgetPie.widget.metrics[0].kpi.formattedAlias}}
+									grumpy-virgin.bounceIn
+										section.filter-kpi-box(scroll-bar="scroll-bar")
+											section(ng-repeat="(category, kpis) in WidgetBackSide.metrics track by $index", ng-init="kpistatus = false")
+												article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+												section.kpi-list(ng-class="{ open: kpistatus}")
+													article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="_ddWidgetPie.widget.metrics[0].kpi = kpi; _grumpyUi.close();", ng-class="{ active: kpi.index == _ddWidgetPie.widget.metrics[0].kpi }")
+														| {{kpi.formattedAlias}}
+								article.sort-button(ng-click="_ddWidgetPie.widget.sort.order = _ddWidgetPie.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetPie.widget.sort.name = _ddWidgetPie.widget.metrics[0].kpi.index", ng-class="{ active: !!_ddWidgetPie.widget.sort.name }")
+									i(class="icon-sort-amount-{{_ddWidgetPie.widget.sort.order || 'asc'}}")
+
+				article.widget-back-tab.nodrag(ng-switch-when="filters")
+					section.bloc-tab
+						article.bloc-title
+							| Filters
+							label.toggle.float-right
+								input(type="checkbox", name="checkbox-toggle", ng-change="_ddWidgetPie.widget.filters[0].operator = _ddWidgetPie.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';", ng-checked="_ddWidgetPie.widget.filters[0].operator == 'OR'", ng-model="operator")
+								i(data-swchon-text="OR", data-swchoff-text="AND")
+						article.bloc-content
+							article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in _ddWidgetPie.widget.filters[0].conditions track by $index")
+					section.bloc-tab
+						article.add-filter.btn.cubby-btn(ng-click="WidgetBackSide.addFilter();") ADD
+
+				article.widget-back-tab.nodrag(ng-switch-when="configuration")
+					section.bloc-tab
+						article.bloc-title Title
+						article.bloc-content
+							input.config-title(type="text", placeholder="title", ng-model="_ddWidgetPie.widget.title")
+
+					section.bloc-tab
+						article.bloc-title LIMIT
+						article.bloc-content
+							section.bloc-selector
+								article.bloc-option(ng-class="{ active: _ddWidgetPie.widget.limit == 5 }", ng-click="_ddWidgetPie.widget.limit=5") 5
+								article.bloc-option(ng-class="{ active: _ddWidgetPie.widget.limit == 10 }", ng-click="_ddWidgetPie.widget.limit=10") 10
+								article.bloc-option(ng-class="{ active: _ddWidgetPie.widget.limit == 20 }", ng-click="_ddWidgetPie.widget.limit=20") 20
+								article.bloc-option(ng-class="{ active: _ddWidgetPie.widget.limit == 0 }", ng-click="_ddWidgetPie.widget.limit=0") ∞
+
+					section.bloc-tab
+						article.bloc-button(ng-click="WidgetBackSide.delete()") DELETE WIDGET

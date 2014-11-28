@@ -1,0 +1,95 @@
+extends ../../../layouts/widget-core
+
+block content
+	section.widget-side.widget-frontside(ng-controller="WidgetFrontSideController", ng-class="{loader: WidgetFrontSide.inLoading}")
+		article.widget-front-head
+			article.corner.edit(ng-click="_flip.active();")
+				article.corner-text EDIT
+		article.widget-front-body.nodrag
+			article.widget-title {{_ddWidgetTable.widget.title}}
+			table
+				thead
+					tr
+						th(ng-repeat="col in _ddWidgetTable.widget.head track by $index")
+							| {{col}}
+				tbody
+					tr(ng-repeat="row in _ddWidgetTable.widget.body track by $index")
+						td(ng-repeat="col in row track by $index")
+							| {{col}}
+	
+	section.widget-side.widget-backside(ng-controller="WidgetBackSideController")
+		article.widget-back-head.nodrag
+			nav.nav-pills
+				article.pill(ng-click="WidgetBackSide.tab = 'data'", ng-class="{active: WidgetBackSide.tab == 'data'}")
+					i.icon-earth
+					span.pill-name DATA
+				article.pill(ng-click="WidgetBackSide.tab = 'filters'", ng-class="{active: WidgetBackSide.tab == 'filters'}")
+					i.icon-filter
+					span.pill-name FILTERS
+				article.pill(ng-click="WidgetBackSide.tab = 'configuration'", ng-class="{active: WidgetBackSide.tab == 'configuration'}")
+					i.icon-cogs
+					span.pill-name CONFIGURATION
+			article.corner.edit(ng-click="WidgetBackSide.save();")
+				article.corner-text SAVE
+
+		article.widget-back-body.nodrag
+			section#widget-back-switch(ng-switch, on="WidgetBackSide.tab")
+				article.widget-back-tab.nodrag(ng-switch-when="data")
+					section.bloc-tab
+						article.bloc-title Data
+						article.bloc-content
+							article.bloc-content-option(ng-repeat="(indexKpi, widgetKpi) in _ddWidgetTable.widget.kpis track by $index", ng-class="{ disabled: !widgetKpi.kpi }")
+								span(ng-if="!widgetKpi.kpi", ng-click="WidgetBackSide.addKpi(indexKpi);") &nbsp
+								span(grumpy-ui="grumpy-ui", grumpy-position="right", grumpy-align="top", ng-if="!!widgetKpi.kpi", ng-class="{'no-close': $index == 0}")
+									span
+										| {{widgetKpi.kpi.formattedAlias}}
+										i.icon-cross(ng-click="WidgetBackSide.removeKpi(indexKpi, true)", ng-if="$index > 0")
+									grumpy-virgin.bounceIn
+										section.filter-kpi-box(scroll-bar)
+											section(ng-repeat="(category, kpis) in WidgetBackSide.kpis track by $index", ng-init="kpistatus = false")
+												article.kpi-category(ng-click="kpistatus = !kpistatus") {{category}}
+												section.kpi-list(ng-class="{ open: kpistatus}")
+													article.kpi(ng-repeat="kpi in kpis track by $index", ng-click="WidgetBackSide.changeKpi(indexKpi, kpi); _grumpyUi.close();", ng-class="{ active: kpi.index == widgetKpi.kpi }")
+														| {{kpi.formattedAlias}}
+								article.sort-button(ng-if="indexKpi < _ddWidgetTable.widget.kpis.length - 1 " ng-click="_ddWidgetTable.widget.sort.order = _ddWidgetTable.widget.sort.order == 'asc' ? 'desc' : 'asc'; _ddWidgetTable.widget.sort.name = widgetKpi.kpi.index" ng-class="{ active: !!_ddWidgetTable.widget.sort.name && _ddWidgetTable.widget.sort.name == widgetKpi.kpi.index}")
+									i(class="icon-sort-amount-{{_ddWidgetTable.widget.sort.name == widgetKpi.kpi.index ? (_ddWidgetTable.widget.sort.order || 'asc') : 'asc'}}")
+
+				article.widget-back-tab.nodrag(ng-switch-when="filters")
+					section.bloc-tab
+						article.bloc-title
+							| Filters
+							label.toggle.float-right
+								input(type="checkbox", name="checkbox-toggle", ng-change="_ddWidgetTable.widget.filters[0].operator = _ddWidgetTable.widget.filters[0].operator == 'AND' ? 'OR' : 'AND';", ng-checked="_ddWidgetTable.widget.filters[0].operator == 'OR'", ng-model="operator")
+								i(data-swchon-text="OR", data-swchoff-text="AND")
+						article.bloc-content
+							article.bloc-content-option.filter(ng-repeat="(filterIndex, filter) in _ddWidgetTable.widget.filters[0].conditions track by $index")
+
+					section.bloc-tab
+						article.add-filter.btn.cubby-btn(ng-click="WidgetBackSide.addFilter();") ADD
+
+				article.widget-back-tab.nodrag(ng-switch-when="configuration")
+					section.bloc-tab
+						article.bloc-title Title
+						article.bloc-content
+							input.config-title(type="text", placeholder="title", ng-model="_ddWidgetTable.widget.title")
+
+					section.bloc-tab
+						article.bloc-title Width
+						article.bloc-content
+							section.bloc-selector
+								article.bloc-option(ng-class="{ active: _ddWidgetTable.widget.size.width == 1 }", ng-click="WidgetBackSide.resize({ width: 1 }, true);") 25%
+								article.bloc-option(ng-class="{ active: _ddWidgetTable.widget.size.width == 2 }", ng-click="WidgetBackSide.resize({ width: 2 }, true);") 50%
+								article.bloc-option(ng-class="{ active: _ddWidgetTable.widget.size.width == 3 }", ng-click="WidgetBackSide.resize({ width: 3 }, true);") 75%
+								article.bloc-option(ng-class="{ active: _ddWidgetTable.widget.size.width == 4 }", ng-click="WidgetBackSide.resize({ width: 4 }, true);") 100%
+
+					section.bloc-tab
+						article.bloc-title ROWS
+						article.bloc-content
+							section.bloc-selector
+								article.bloc-option(ng-class="{ active: _ddWidgetTable.widget.limit == 10 }", ng-click="WidgetBackSide.resize({ height: 5 });_ddWidgetTable.widget.limit=10") 10
+								article.bloc-option(ng-class="{ active: _ddWidgetTable.widget.limit == 20 }", ng-click="WidgetBackSide.resize({ height: 8 });_ddWidgetTable.widget.limit=20") 20
+								article.bloc-option(ng-class="{ active: _ddWidgetTable.widget.limit == 30 }", ng-click="WidgetBackSide.resize({ height: 12 });_ddWidgetTable.widget.limit=30") 30
+								article.bloc-option(ng-class="{ active: _ddWidgetTable.widget.limit == 50 }", ng-click="WidgetBackSide.resize({ height: 19 });_ddWidgetTable.widget.limit=50") 50
+
+					section.bloc-tab
+						article.bloc-button(ng-click="WidgetBackSide.delete()") DELETE WIDGET
