@@ -34,7 +34,8 @@ html(ng-app="#{module}")
 	body(ng-controller="OverlayController")
 		block body
 			section#body(ng-controller="#{controller}")
-				include ../partials/jade/header.jade
+				block content
+					include ../partials/jade/header.jade
 
 			section#overlay(ng-class="{ activated: Overlay.activated }" ng-click="Overlay.clickout();")
 

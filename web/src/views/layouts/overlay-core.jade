@@ -4,7 +4,8 @@ block body
 	section#container.ng-scope(ng-controller="#{controller}", ng-class="{open: Overlay.pusherOpen}")
 		section#pusher
 			section#body
-				include ../partials/jade/header.jade
+				block content
+					include ../partials/jade/header.jade
 
 		section#overlay(ng-class="{ activated: Overlay.activated || Overlay.pusherOpen }" ng-click="Overlay.clickout();")
 		section#overlay-pusher
