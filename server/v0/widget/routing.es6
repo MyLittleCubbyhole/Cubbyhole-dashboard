@@ -4,7 +4,7 @@
 
 /*Attributes definitions*/
 
-	Routing._prefix = '/api/dashboards/';
+	Routing._prefix = '/api/dashboards';
 	Routing._versioning = true;
 
 /*Overridden methods declarations*/

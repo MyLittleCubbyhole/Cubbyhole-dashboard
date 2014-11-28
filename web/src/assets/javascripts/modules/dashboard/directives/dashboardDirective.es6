@@ -80,13 +80,14 @@ angular.module('Dashboard').
             link: function($scope, $node, attributes, self) {
                 var $local = $scope._dashboard;
 
-                for(var i = 0; i < $scope.Dashboard.dashboards.length; i++)
-                    if($scope.Dashboard.dashboards[i].id === attributes.dashboardId) {
-                        $local.dashboard = $scope.Dashboard.dashboards[i];
-                        $local.oldTitle = $local.dashboard.title;
-                        $local.oldIcon = $local.dashboard.icon;
-                        break;
-                    }
+                for(var i = 0; i < $scope.Dashboard.dashboards.length; i++) {
+	                if($scope.Dashboard.dashboards[i].id == attributes.dashboardId) {
+		                $local.dashboard = $scope.Dashboard.dashboards[i];
+		                $local.oldTitle = $local.dashboard.title;
+		                $local.oldIcon = $local.dashboard.icon;
+		                break;
+	                }
+                }
 
                 /**
                  * LISTENER - triggered when tu current dashboard is update or initialized
