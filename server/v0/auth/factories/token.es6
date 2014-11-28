@@ -21,8 +21,6 @@
 
 /*Public methods declarations*/
 
-	MysqlFactory.get.byIdWithUser = getByIdWithUser;
-
 	MysqlFactory.create = createToken;
 
 module.exports = MysqlFactory;
@@ -32,10 +30,6 @@ module.exports = MysqlFactory;
 /*Private methods definitions*/
 
 /*Public methods definitions*/
-
-	function getByIdWithUser(id) {
-		return MysqlFactory.query('SELECT * FROM `token` t JOIN `user` u ON t.`userid` = u.`id` WHERE t.`id` = ' + parseInt(id, 10) + ';');
-	}
 
 	function createToken(token) {
 		var query = 'INSERT INTO `token` (`id`, `expirationdate`, `type`, `origin`, `userid`, `fileid`) \

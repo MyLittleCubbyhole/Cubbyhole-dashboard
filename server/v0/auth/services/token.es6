@@ -5,6 +5,7 @@
 /*Services requiring*/
 
 	var TokenFactory = require(__dirname + '/../factories/token'),
+		TokenManager = require(__dirname + '/../managers/token'),
 		UserFactory = require(__dirname + '/../factories/user');
 
 /*Attributes definitions*/
@@ -35,7 +36,7 @@ module.exports = Service;
 
 	function _isValidForAuthentication(id) {
 
-		return TokenFactory.get.byIdWithUser(id)
+		return TokenManager.get.byIdWithUser(id)
 			.then((tokens) => {
 				if(tokens.length === 0)
 					throw Error('Token not found');
