@@ -4,7 +4,7 @@
 
 /*Services requiring*/
 
-	var ExportService = (__dirname + '/../services/export');
+	var ExportService = require(__dirname + '/../services/export');
 
 /*Attributes definitions*/
 
@@ -39,7 +39,8 @@ module.exports = Controller;
 				header['Content-Disposition'] = 'attachment; filename="export.csv"';
 				header['Content-Length'] = csv.length;
 				response.writeHead(200, header);
-				response.write(csv).end();
+				response.write(csv);
+				response.end();
 			})
 			.catch(() => response.write('BAD REQUEST').end());
 	}
@@ -56,7 +57,8 @@ module.exports = Controller;
 				header['Content-Disposition'] = 'attachment; filename="export.xml"';
 				header['Content-Length'] = xml.length;
 				response.writeHead(200, header);
-				response.write(xml).end();
+				response.write(xml);
+				response.end();
 			})
 			.catch(() => response.write('BAD REQUEST').end());
 	}

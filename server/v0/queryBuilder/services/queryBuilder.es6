@@ -4,7 +4,7 @@
 
 /*Factory requiring*/
 
-	var WidgetFactory = (__dirname + '/../factories/widget');
+	var WidgetFactory = require(__dirname + '/../../widget/factories/widget');
 
 /*Services requiring*/
 
