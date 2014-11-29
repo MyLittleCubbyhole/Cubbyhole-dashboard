@@ -33,21 +33,16 @@ module.exports = Service;
 
 /*Private methods definitions*/
 
-	function _connectFlow(users, password, origin) {
-		var userFetched;
-		if(users.length === 0)
-			throw Error('User does not exist');
-
-		userFetched = users[0];
-		return Security.verify(userFetched.password, password, userFetched.salt)
+	function _connectFlow(user, password, origin) {
+		return Security.verify(user.password, password, user.salt)
 			.then(() => {
-				if(!userFetched.activated)
+				if(!user.activated)
 					throw Error('bad credentials');
 
-				return userFetched;
+				return user;
 			})
 			.then(() => {
-				if(userFetched.roleId !== 2)
+				if(user.roleId !== 2)
 					throw Error('not allowed to log in');
 
 				var tokenId = Security.aesEncryption(new Date().getTime(), 'Lorem ipsum Non laboris id nulla magna do consequat ut Duis aliquip tempor magna ut ullamco');
@@ -57,13 +52,13 @@ module.exports = Service;
 					expirationDate: moment().add('days', 1).format('YYYY-MM-DD HH:mm:ss'),
 					type: 'AUTHENTICATION',
 					origin: origin,
-					userId: userFetched.id
+					userId: user.id
 				};
 				return TokenFactory.create(token);
 			})
 			.then((token) => {
-				userFetched.token = token.id;
-				return userFetched;
+				user.token = token.id;
+				return user;
 			})
 			.catch(() => {
 				throw Error('bad credentials');
@@ -73,12 +68,26 @@ module.exports = Service;
 /*Public methods definitions*/
 
 	function connect(email, password, origin) {
-		return UserFactory.get.byEmail(email)
-			.then((users) => this._connectFlow(users, password, origin));
+		return new Promise((resolve, reject) => {
+			UserFactory.get.byEmail(email)
+				.then((users) =>  {
+					if(users.length === 0)
+						reject('User does not exist');
+					return this._connectFlow(users[0], password, origin);
+				})
+				.then((user) => resolve(user));
+		});
 	}
 
 	function connectById(id, password, origin) {
-		return UserFactory.get.byId(id)
-			.then((users) => this._connectFlow(users, password, origin));
+		return new Promise((resolve, reject) => {
+			UserFactory.get.byId(id)
+				.then((users) => {
+					if(users.length === 0)
+						reject('User does not exist');
+					return this._connectFlow(users[0], password, origin);
+				})
+				.then((user) => resolve(user));
+		});
 	}
 

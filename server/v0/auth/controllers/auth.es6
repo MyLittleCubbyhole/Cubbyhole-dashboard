@@ -46,24 +46,7 @@ module.exports = Controller;
 		var body = request.body;
 
 		Controller.isDefined({ 'email': body.email, 'password': body.password })
-			//.then(() => UserService.connect(body.email, body.password, request.header('User-Agent')))
-			.then(() => {
-				return {
-					id: 2,
-					photo: '',
-					storage: 12548484,
-					firstname: 'Julien',
-					lastname: 'Torrielli',
-					inscriptionDate: new Date(),
-					birthdate: new Date(),
-					email: '94153@supinfo.com',
-					country: 'France',
-					countryCode: 'FR',
-					activated: true,
-					token: '1234',
-					roleId: 2
-				};
-			})
+			.then(() => UserService.connect(body.email, body.password, request.header('User-Agent')))
 			.then((user) => {
 				delete(user.password);
 				delete(user.salt);
