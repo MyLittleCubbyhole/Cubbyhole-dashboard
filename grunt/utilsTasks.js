@@ -337,6 +337,16 @@ function UtilsTasks(grunt) {
 				}
 			]
 		};
+		configuration.copy.webSrcImagesToWebDist = {
+			files: [
+				{
+					expand: true,
+					cwd: global.paths.webSrc + '/assets/images',
+					src: ['**', '!**/sprite_sources/**'],
+					dest: global.paths.webDist + '/assets/images'
+				}
+			]
+		};
 
 	return configuration;
 }

@@ -79,9 +79,9 @@ function Grunt(grunt) {
 	grunt.registerTask('es6:sublimebuild', ['clean:generatedFromTarget', '6to5:targeted', 'johto_require:generatedFromTarget', 'add_comment:generatedFromTarget']);
 	grunt.registerTask('generate:doc', ['es6', 'clean:doc', 'apidoc:app']);
 	grunt.registerTask('deploy:web:dev', ['clean:webSrcGeneratedFiles','sprite:dev','sass:app','html2js:app','6to5:clientEs6Files','add_comment:webSrcGeneratedFiles']);
-	grunt.registerTask('deploy:web:dist', ['clean:webSrcGeneratedFiles','clean:webDist','clean:doc','6to5:clientEs6Files','copy:webSrcFontsToWebDist','sprite:dist','sass:app','html2js:app','jadeUsemin:dist','imagemin:dist','add_comment:dist','apidoc:app','clean:webSrcGeneratedFiles']);
+	grunt.registerTask('deploy:web:dist', ['clean:webSrcGeneratedFiles','clean:webDist','clean:doc','6to5:clientEs6Files','copy:webSrcFontsToWebDist','copy:webSrcImagesToWebDist','sprite:dist','sass:app','html2js:app','jadeUsemin:dist','imagemin:dist','add_comment:dist','apidoc:app','clean:webSrcGeneratedFiles']);
 	grunt.registerTask('deploy:dev', ['clean:allGeneratedFiles','6to5:allEs6Files','johto_require:allGeneratedFiles','sprite:dev','sass:app','html2js:app','add_comment:allGeneratedFiles']);
-	grunt.registerTask('deploy:dist', ['clean:allGeneratedFiles','6to5:allEs6Files', 'johto_require:allGeneratedFiles','copy:webSrcFontsToWebDist','sprite:dist','sass:app','html2js:app','jadeUsemin:dist','imagemin:dist','apidoc:app','clean:webSrcGeneratedFiles','add_comment:allGeneratedFiles']);
+	grunt.registerTask('deploy:dist', ['clean:allGeneratedFiles','6to5:allEs6Files', 'johto_require:allGeneratedFiles','copy:webSrcFontsToWebDist','copy:webSrcImagesToWebDist','sprite:dist','sass:app','html2js:app','jadeUsemin:dist','imagemin:dist','apidoc:app','clean:webSrcGeneratedFiles','add_comment:allGeneratedFiles']);
 	grunt.registerTask('watch:dev', ['deploy:dev', 'watch:app']);
 
 }	
