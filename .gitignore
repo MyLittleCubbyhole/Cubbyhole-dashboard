@@ -10,6 +10,7 @@
 /web/src/assets/javascripts/spec/**/*.js
 /web/src/assets/styles/**/*.css
 /web/src/assets/styles/imgConsts.scss
+/web/src/assets/images/sprite.png
 /web/dist
 /**/Thumbs.db
 npm-debug.log
