@@ -8,13 +8,13 @@ angular.module('Grumpy-ui').
 			priority: 2,
 			restrict: 'E',
 			replace: true,
-			controller: function($scope) {
+			controller: ['$scope', function($scope) {
 				var $local = $scope._grumpyVirgin = {};
 
 				$scope.toString = function() {
 					return '_grumpyVirgin';
 				}
-			},
+			}],
 			compile: function($node, attributes, transcluder) {
 				return function linking($scope, $node, attributes, self){
 					var $local = $scope._grumpyVirgin

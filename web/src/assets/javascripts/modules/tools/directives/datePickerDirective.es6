@@ -2,14 +2,14 @@ angular.module('Tools').
     directive('datePicker', [function() {
         return {
             scope: true,
-            controller: function($scope) {
+            controller: ['$scope', function($scope) {
                 var $local = $scope._datePicker = {}
                 ,   self = this;
 
                 $scope.toString = function() {
                     return '_datePicker';
                 };
-            },
+            }],
             require: 'datePicker',
             restrict: 'A',
             link: function($scope, $node, attributes, self) {

@@ -2,7 +2,7 @@ angular.module('Tools').
     directive('modal', [function() {
         return {
             scope: true,
-            controller: function($scope) {
+            controller: ['$scope', function($scope) {
                 var $local = $scope._modal = {}
                 ,   self = this;
 
@@ -13,7 +13,7 @@ angular.module('Tools').
                 $scope.toString = function() {
                     return '_modal';
                 };
-            },
+            }],
             require: 'modal',
             restrict: 'A',
             link: function($scope, $node, attributes, self) {
